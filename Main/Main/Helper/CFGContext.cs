@@ -17,5 +17,11 @@ namespace Main.Helper
         public int _height { get; set; }
         public bool _full_screen { get; set; } = false;
         public string _modoOperacao { get; set; } = "false";
+
+
+        public string balanca_1 { get; set; } = "";
+        public string balanca_2 { get; set; } = "";
+
+
     }
 }

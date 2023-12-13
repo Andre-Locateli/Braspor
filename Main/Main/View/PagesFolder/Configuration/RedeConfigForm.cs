@@ -135,7 +135,7 @@ namespace Main.View.PagesFolder.Configuration
                     txtPorta.Text = itemRede.porta.ToString();
                     if(itemRede.casasDecimais != null)
                     {
-                        cbDecimais.Text = itemRede.casasDecimais.ToString();
+                        //cbDecimais.Text = itemRede.casasDecimais.ToString();
                     }
                     
                 }else if (itemRede.tipo == "Impressora")
@@ -190,44 +190,26 @@ namespace Main.View.PagesFolder.Configuration
         {
             cbModelo.Items.Clear();
             cbProtocolo.Items.Clear();
-            if (cbFabricante.Text == "Toledo do Brasil")
-            {
-                cbModelo.Items.Add("TI500");
-                cbModelo.Items.Add("PS6000");
-            }else if (cbFabricante.Text == "AEPH do Brasil")
+            
+            if (cbFabricante.Text == "AEPH do Brasil")
             {
                 cbModelo.Items.Add("Matrix");
                 cbModelo.Items.Add("Orion");
                 cbModelo.Items.Add("Onix");
-            }else if (cbFabricante.Text == "Alfa Instrumentos")
-            {
-                cbModelo.Items.Add("3100C");
-                cbModelo.Items.Add("3101C");
-                cbModelo.Items.Add("3103C");
-                cbModelo.Items.Add("3104C");
-                cbModelo.Items.Add("3105C");
-                cbModelo.Items.Add("3107C");
+                cbModelo.Items.Add("Egeo");
             }
+
         }
 
         private void cbModelo_SelectedIndexChanged(object sender, EventArgs e)
         {
             cbProtocolo.Items.Clear();
-            if (cbModelo.Text == "TI500")
-            {
-                cbProtocolo.Items.Add("P03");
-            }else if (cbModelo.Text == "PS6000")
-            {
-                cbProtocolo.Items.Add("-");
-            }
-            else if (cbFabricante.Text == "AEPH do Brasil")
+            if (cbFabricante.Text == "AEPH do Brasil")
             {
                 cbProtocolo.Items.Add("TCA");
+                cbProtocolo.Items.Add("RTU");
             }
-            else if (cbFabricante.Text == "Alfa Instrumentos")
-            {
-                cbProtocolo.Items.Add("TRC");
-            }
+
         }
 
         private void TextChanged(object sender, EventArgs e)
@@ -255,7 +237,7 @@ namespace Main.View.PagesFolder.Configuration
             string IP = txtIP1.Text + "." + txtIP2.Text + "." + txtIP3.Text + "." + txtIP4.Text;
             IP = IP.Replace(" ", "");
             //if (cbFabricante.Text != "" && cbProtocolo.Text != "" && cbModelo.Text != "" && txtNome.Text != "" && IP != "" && txtPorta.Text != "" && cbDecimais.Text != "")
-            if (cbFabricante.Text != "" && cbProtocolo.Text != "" && cbModelo.Text != "" && txtNome.Text != "" && cbDecimais.Text != "")
+            if (cbFabricante.Text != "" && cbProtocolo.Text != "" && cbModelo.Text != "" && txtNome.Text != "")
                 {
                    /*if (ValidarCampoIP(txtIP1.Text, txtIP2.Text, txtIP3.Text, txtIP4.Text) == false)
                    {
@@ -277,19 +259,24 @@ namespace Main.View.PagesFolder.Configuration
                         parametros.Add("@nome", txtNome.Text);
                         parametros.Add("@parent", selectedNode.Text);
                         parametros.Add("@full_name", cbModelo.Text + "-" + txtNome.Text);
+                        parametros.Add("@addr", txtEndereco.Text);
                         parametros.Add("@num_parent", 0);
                         parametros.Add("@IP", IP);
                         parametros.Add("@porta", 0);
-                        parametros.Add("@casasDecimais", cbDecimais.Text);
+                        //parametros.Add("@casasDecimais", cbDecimais.Text);
                         parametros.Add("@dateinsert", DateTime.Today);
-                        bool result = Program.SQL.CRUDCommand("insert into Rede (tipo, fabricante, modelo, protocolo, nome, parent, full_name, num_parent, IP, porta, casasDecimais, dateinsert) values (@tipo, @fabricante, @modelo, @protocolo, @nome, @parent, @full_name, @num_parent, @IP, @porta, @casasDecimais, @dateinsert)", "Rede", parametros);
+                        bool result = Program.SQL.CRUDCommand("insert into Rede (tipo, fabricante, modelo, protocolo, nome, parent, full_name, num_parent, IP, porta,addr, dateinsert) values (@tipo, @fabricante, @modelo, @protocolo, @nome, @parent, @full_name, @num_parent, @IP, @porta, @addr, @dateinsert)", "Rede", parametros);
+                        
                         if (result)
                         {
-                            MessageBox.Show("Balança adicionada com sucesso!", "VC Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            InfoPopup info = new InfoPopup("Balança cadastrada com sucesso.", "A balança foi cadastrada e inserida no banco de dados.");
+                            info.ShowDialog();
+                            //MessageBox.Show("Balança adicionada com sucesso!", "VC Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             pnBalança.Visible = false;
                             CleanInfoBalancas();
                             TreeNodeLoad();
-                        } 
+                        }
+
                     }
                 }
                 else if(tvRede.SelectedNode.Tag.GetType() == typeof(RedeClass))
@@ -312,7 +299,7 @@ namespace Main.View.PagesFolder.Configuration
                         parametros.Add("@num_parent", 0);
                         parametros.Add("@IP", IP);
                         parametros.Add("@porta", 0);
-                        parametros.Add("@casasDecimais", cbDecimais.Text);
+                        //parametros.Add("@casasDecimais", cbDecimais.Text);
                         parametros.Add("@dateupdate", DateTime.Today);
                         bool result = Program.SQL.CRUDCommand("update Rede set fabricante = @fabricante, modelo = @modelo, protocolo = @protocolo, nome = @nome, parent = @parent, full_name = @full_name, num_parent = @num_parent, IP = @IP, porta = @porta, casasDecimais = @casasDecimais, dateupdate = @dateupdate where Id=@Id", "Rede", parametros);
                         if (result)
@@ -453,8 +440,8 @@ namespace Main.View.PagesFolder.Configuration
             cbModelo.SelectedIndex = -1;
             cbProtocolo.Text = "";
             cbProtocolo.SelectedIndex = -1;
-            cbDecimais.Text = "";
-            cbDecimais.SelectedIndex = -1;
+            //cbDecimais.Text = "";
+            //cbDecimais.SelectedIndex = -1;
             txtNome.Text = "";
             txtIP1.Text = "";
             txtIP2.Text = "";

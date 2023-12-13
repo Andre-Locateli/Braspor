@@ -40,7 +40,6 @@ namespace Main.Helper
                     SerialForm serialForm = new SerialForm();
                     serialForm.ShowDialog();
                 }
-                
             }
             return false;
         }

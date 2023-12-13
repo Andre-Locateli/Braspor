@@ -37,8 +37,6 @@
             this.btnEditar = new System.Windows.Forms.ToolStripMenuItem();
             this.btnExcluir = new System.Windows.Forms.ToolStripMenuItem();
             this.pnBalança = new System.Windows.Forms.GroupBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.cbDecimais = new System.Windows.Forms.ComboBox();
             this.txtIP4 = new System.Windows.Forms.TextBox();
             this.txtIP3 = new System.Windows.Forms.TextBox();
             this.txtIP2 = new System.Windows.Forms.TextBox();
@@ -87,6 +85,8 @@
             this.label14 = new System.Windows.Forms.Label();
             this.cbProtocoloImp = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
+            this.txtEndereco = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
             this.MenuItem.SuspendLayout();
             this.pnBalança.SuspendLayout();
             this.pnImpressora.SuspendLayout();
@@ -121,28 +121,28 @@
             // btnNovaBalança
             // 
             this.btnNovaBalança.Name = "btnNovaBalança";
-            this.btnNovaBalança.Size = new System.Drawing.Size(180, 22);
+            this.btnNovaBalança.Size = new System.Drawing.Size(163, 22);
             this.btnNovaBalança.Text = "Nova Balança";
             this.btnNovaBalança.Click += new System.EventHandler(this.btnNovaBalança_Click);
             // 
             // btnNovaImpressora
             // 
             this.btnNovaImpressora.Name = "btnNovaImpressora";
-            this.btnNovaImpressora.Size = new System.Drawing.Size(180, 22);
+            this.btnNovaImpressora.Size = new System.Drawing.Size(163, 22);
             this.btnNovaImpressora.Text = "Nova Impressora";
             this.btnNovaImpressora.Click += new System.EventHandler(this.btnNovaImpressora_Click);
             // 
             // btnEditar
             // 
             this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(180, 22);
+            this.btnEditar.Size = new System.Drawing.Size(163, 22);
             this.btnEditar.Text = "Editar";
             this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // btnExcluir
             // 
             this.btnExcluir.Name = "btnExcluir";
-            this.btnExcluir.Size = new System.Drawing.Size(180, 22);
+            this.btnExcluir.Size = new System.Drawing.Size(163, 22);
             this.btnExcluir.Text = "Excluir";
             this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
@@ -151,8 +151,8 @@
             this.pnBalança.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnBalança.Controls.Add(this.label19);
-            this.pnBalança.Controls.Add(this.cbDecimais);
+            this.pnBalança.Controls.Add(this.txtEndereco);
+            this.pnBalança.Controls.Add(this.label22);
             this.pnBalança.Controls.Add(this.txtIP4);
             this.pnBalança.Controls.Add(this.txtIP3);
             this.pnBalança.Controls.Add(this.txtIP2);
@@ -179,35 +179,9 @@
             this.pnBalança.TabStop = false;
             this.pnBalança.Text = "Informações Balança";
             // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(12, 133);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(82, 13);
-            this.label19.TabIndex = 21;
-            this.label19.Text = "Casas Decimais";
-            // 
-            // cbDecimais
-            // 
-            this.cbDecimais.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbDecimais.FormattingEnabled = true;
-            this.cbDecimais.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6"});
-            this.cbDecimais.Location = new System.Drawing.Point(15, 149);
-            this.cbDecimais.Name = "cbDecimais";
-            this.cbDecimais.Size = new System.Drawing.Size(121, 21);
-            this.cbDecimais.TabIndex = 20;
-            // 
             // txtIP4
             // 
-            this.txtIP4.Location = new System.Drawing.Point(105, 200);
+            this.txtIP4.Location = new System.Drawing.Point(114, 200);
             this.txtIP4.Name = "txtIP4";
             this.txtIP4.Size = new System.Drawing.Size(26, 20);
             this.txtIP4.TabIndex = 7;
@@ -216,7 +190,7 @@
             // 
             // txtIP3
             // 
-            this.txtIP3.Location = new System.Drawing.Point(75, 200);
+            this.txtIP3.Location = new System.Drawing.Point(84, 200);
             this.txtIP3.Name = "txtIP3";
             this.txtIP3.Size = new System.Drawing.Size(26, 20);
             this.txtIP3.TabIndex = 6;
@@ -225,7 +199,7 @@
             // 
             // txtIP2
             // 
-            this.txtIP2.Location = new System.Drawing.Point(45, 200);
+            this.txtIP2.Location = new System.Drawing.Point(54, 200);
             this.txtIP2.Name = "txtIP2";
             this.txtIP2.Size = new System.Drawing.Size(26, 20);
             this.txtIP2.TabIndex = 5;
@@ -234,7 +208,7 @@
             // 
             // txtIP1
             // 
-            this.txtIP1.Location = new System.Drawing.Point(15, 200);
+            this.txtIP1.Location = new System.Drawing.Point(24, 200);
             this.txtIP1.Name = "txtIP1";
             this.txtIP1.Size = new System.Drawing.Size(26, 20);
             this.txtIP1.TabIndex = 4;
@@ -256,7 +230,7 @@
             // 
             // txtPorta
             // 
-            this.txtPorta.Location = new System.Drawing.Point(160, 200);
+            this.txtPorta.Location = new System.Drawing.Point(169, 200);
             this.txtPorta.Name = "txtPorta";
             this.txtPorta.Size = new System.Drawing.Size(49, 20);
             this.txtPorta.TabIndex = 8;
@@ -265,7 +239,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(157, 184);
+            this.label6.Location = new System.Drawing.Point(166, 184);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(32, 13);
             this.label6.TabIndex = 10;
@@ -275,7 +249,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 184);
+            this.label5.Location = new System.Drawing.Point(21, 184);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(17, 13);
             this.label5.TabIndex = 8;
@@ -284,7 +258,7 @@
             // 
             // txtNome
             // 
-            this.txtNome.Location = new System.Drawing.Point(160, 95);
+            this.txtNome.Location = new System.Drawing.Point(169, 95);
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(121, 20);
             this.txtNome.TabIndex = 3;
@@ -292,7 +266,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(157, 79);
+            this.label4.Location = new System.Drawing.Point(169, 79);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(77, 13);
             this.label4.TabIndex = 6;
@@ -302,15 +276,15 @@
             // 
             this.cbProtocolo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbProtocolo.FormattingEnabled = true;
-            this.cbProtocolo.Location = new System.Drawing.Point(160, 46);
+            this.cbProtocolo.Location = new System.Drawing.Point(21, 95);
             this.cbProtocolo.Name = "cbProtocolo";
-            this.cbProtocolo.Size = new System.Drawing.Size(121, 21);
+            this.cbProtocolo.Size = new System.Drawing.Size(133, 21);
             this.cbProtocolo.TabIndex = 2;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(157, 30);
+            this.label3.Location = new System.Drawing.Point(21, 79);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(52, 13);
             this.label3.TabIndex = 4;
@@ -319,7 +293,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 79);
+            this.label2.Location = new System.Drawing.Point(169, 30);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(42, 13);
             this.label2.TabIndex = 3;
@@ -329,7 +303,7 @@
             // 
             this.cbModelo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbModelo.FormattingEnabled = true;
-            this.cbModelo.Location = new System.Drawing.Point(15, 95);
+            this.cbModelo.Location = new System.Drawing.Point(169, 46);
             this.cbModelo.Name = "cbModelo";
             this.cbModelo.Size = new System.Drawing.Size(121, 21);
             this.cbModelo.TabIndex = 1;
@@ -338,7 +312,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 30);
+            this.label1.Location = new System.Drawing.Point(21, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 13);
             this.label1.TabIndex = 1;
@@ -349,19 +323,17 @@
             this.cbFabricante.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbFabricante.FormattingEnabled = true;
             this.cbFabricante.Items.AddRange(new object[] {
-            "AEPH do Brasil",
-            "Alfa Instrumentos",
-            "Toledo do Brasil"});
-            this.cbFabricante.Location = new System.Drawing.Point(15, 46);
+            "AEPH do Brasil"});
+            this.cbFabricante.Location = new System.Drawing.Point(21, 46);
             this.cbFabricante.Name = "cbFabricante";
-            this.cbFabricante.Size = new System.Drawing.Size(121, 21);
+            this.cbFabricante.Size = new System.Drawing.Size(133, 21);
             this.cbFabricante.TabIndex = 0;
             this.cbFabricante.SelectedIndexChanged += new System.EventHandler(this.cbFabricante_SelectedIndexChanged);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(38, 207);
+            this.label7.Location = new System.Drawing.Point(47, 207);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(10, 13);
             this.label7.TabIndex = 17;
@@ -371,7 +343,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(98, 208);
+            this.label9.Location = new System.Drawing.Point(107, 208);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(10, 13);
             this.label9.TabIndex = 19;
@@ -381,7 +353,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(68, 208);
+            this.label8.Location = new System.Drawing.Point(77, 208);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(10, 13);
             this.label8.TabIndex = 18;
@@ -682,6 +654,22 @@
             this.label13.TabIndex = 4;
             this.label13.Text = "Protocolo";
             // 
+            // txtEndereco
+            // 
+            this.txtEndereco.Location = new System.Drawing.Point(21, 149);
+            this.txtEndereco.Name = "txtEndereco";
+            this.txtEndereco.Size = new System.Drawing.Size(121, 20);
+            this.txtEndereco.TabIndex = 22;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(21, 133);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(53, 13);
+            this.label22.TabIndex = 23;
+            this.label22.Text = "Endereço";
+            // 
             // RedeConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -689,8 +677,8 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tvRede);
-            this.Controls.Add(this.pnImpressora);
             this.Controls.Add(this.pnBalança);
+            this.Controls.Add(this.pnImpressora);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "RedeConfigForm";
             this.Text = "BalancaConfigForm";
@@ -759,8 +747,6 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.ToolStripMenuItem btnNovaImpressora;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.ComboBox cbDecimais;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ComboBox cbTipoImp;
         private System.Windows.Forms.Label label21;
@@ -769,5 +755,7 @@
         private System.Windows.Forms.Panel pEthernet;
         private System.Windows.Forms.Panel pInstalled;
         private System.Windows.Forms.CheckBox chkSimples;
+        private System.Windows.Forms.TextBox txtEndereco;
+        private System.Windows.Forms.Label label22;
     }
 }

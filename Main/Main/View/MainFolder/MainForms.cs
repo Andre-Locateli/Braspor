@@ -41,9 +41,9 @@ namespace Main.View.MainFolder
         public MainForms()
         {
             InitializeComponent();
-            //txt_usuario.Text = "Igor Perez de Oliveira";
-            //txt_acesso.Text = "Desevolvimento";
-            //OpenPage(new MainInfoForms());
+            lbl_time.Text = $"{DateTime.Now.Day.ToString("D2")}/{DateTime.Now.Month.ToString("D2")}/{DateTime.Now.Year} {DateTime.Now.Hour.ToString("D2")}:{DateTime.Now.Minute.ToString("D2")}";
+            lblUsuario.Text = Program._usuarioLogado.Nome;
+            lblAcesso.Text = Program._usuarioLogado.Acesso;
 
             btnPesagem.Enabled = Program._permissaoUsuario.Pesagem_View;
             button5.Enabled = Program._permissaoUsuario.Relatorio_View;
@@ -572,16 +572,29 @@ namespace Main.View.MainFolder
         }
         public void UpdateStatusSerial()
         {
-            if (Program.SERIALPORT.IsOpen) // Verifica se a porta serial está aberta
+            if (Program.SERIALPORT1.IsOpen) // Verifica se a porta serial está aberta
             {
-                lbSerialStatus.Text = "OPEN";
-                lbSerialStatus.ForeColor = Color.FromArgb(100, 0, 161, 155);
+                lbSerialStatus01.Text = "OPEN";
+                lbSerialStatus01.ForeColor = Color.FromArgb(100, 0, 161, 155);
             }
             else
             {
-                lbSerialStatus.Text = "CLOSE";
-                lbSerialStatus.ForeColor = Color.FromArgb(100, 127, 47, 50);
+                lbSerialStatus01.Text = "CLOSE";
+                lbSerialStatus01.ForeColor = Color.FromArgb(100, 127, 47, 50);
             }
+
+            if (Program.SERIALPORT2.IsOpen) // Verifica se a porta serial está aberta
+            {
+                lbSerialStatus02.Text = "OPEN";
+                lbSerialStatus02.ForeColor = Color.FromArgb(100, 0, 161, 155);
+            }
+            else
+            {
+                lbSerialStatus02.Text = "CLOSE";
+                lbSerialStatus02.ForeColor = Color.FromArgb(100, 127, 47, 50);
+            }
+
+
             if (Program.IMPRESSORAPORT.IsOpen) // Verifica se a porta serial IMP está aberta
             {
                 lbSerialStatus2.Text = "OPEN";
@@ -756,5 +769,40 @@ namespace Main.View.MainFolder
             }
         }
 
+        private void panel8_Paint(object sender, PaintEventArgs e)
+        {
+            try
+            {
+                Panel pn = (Panel)sender;
+                System.Drawing.Color COLOR_BORDER = System.Drawing.Color.FromArgb(237, 237, 237);
+                int borderSize = 2;
+                ControlPaint.DrawBorder(e.Graphics, pn.ClientRectangle, COLOR_BORDER, borderSize, ButtonBorderStyle.Solid, COLOR_BORDER, borderSize, ButtonBorderStyle.Solid, COLOR_BORDER, borderSize, ButtonBorderStyle.Solid, COLOR_BORDER, borderSize, ButtonBorderStyle.Solid);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private void MainForms_Resize(object sender, EventArgs e)
+        {
+            try
+            {
+                panel8.Refresh();
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void lbSerialStatus2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

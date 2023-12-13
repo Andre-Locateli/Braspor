@@ -108,27 +108,27 @@ namespace Main.View.PagesFolder
                 }
 
 
-                if (!Program.SERIALPORT.IsOpen)
+                if (!Program.SERIALPORT1.IsOpen)
                 {
-                    Program.SERIALPORT.PortName = cbCom.SelectedItem.ToString();
-                    Program.SERIALPORT.BaudRate = Convert.ToInt32(cb_baud.SelectedItem.ToString());
+                    Program.SERIALPORT1.PortName = cbCom.SelectedItem.ToString();
+                    Program.SERIALPORT1.BaudRate = Convert.ToInt32(cb_baud.SelectedItem.ToString());
 
                     if (cb_bit.SelectedIndex == 0)
                     {
-                        Program.SERIALPORT.DataBits = 8;
-                        Program.SERIALPORT.StopBits = System.IO.Ports.StopBits.One;
+                        Program.SERIALPORT1.DataBits = 8;
+                        Program.SERIALPORT1.StopBits = System.IO.Ports.StopBits.One;
                     }
                     else
                     {
-                        Program.SERIALPORT.DataBits = 8;
-                        Program.SERIALPORT.StopBits = System.IO.Ports.StopBits.Two;
+                        Program.SERIALPORT1.DataBits = 8;
+                        Program.SERIALPORT1.StopBits = System.IO.Ports.StopBits.Two;
                     }
 
-                    Program._Controle = new ControleCIndicadores(Program.SERIALPORT, 1, Convert.ToInt32(txt_addr.Text), this);
+                    Program._Controle = new ControleCIndicadores(Program.SERIALPORT1, 1, Convert.ToInt32(txt_addr.Text), this);
                     //Program._Controle.Set_Label(label1, Convert.ToInt32(txt_addr.Text));
-                    Program.SERIALPORT.Open();
+                    Program.SERIALPORT1.Open();
 
-                    if (Program.SERIALPORT.IsOpen)
+                    if (Program.SERIALPORT1.IsOpen)
                     {
                         Program._Controle.Request_Inicialize("FULL_SPEED");
                         this.btnSerial.Image = Properties.Resources.errorIcon;
@@ -140,7 +140,7 @@ namespace Main.View.PagesFolder
                 }
                 else
                 {
-                    Program.SERIALPORT.Close();
+                    Program.SERIALPORT1.Close();
                     Program._Controle.Request_Abort("THREAD");
                     Program._Controle = null;
                     this.btnSerial.Image = Properties.Resources._299110_check_sign_icon;

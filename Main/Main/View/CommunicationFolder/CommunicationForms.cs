@@ -45,7 +45,7 @@ namespace Main.View.CommunicationFolder
         {
             InitializeComponent();
             LoadAll();
-            Program.SERIALPORT.DataReceived += serialPort_DataReceived;
+            Program.SERIALPORT1.DataReceived += serialPort_DataReceived;
         }
 
         public void LoadAll()
@@ -507,11 +507,11 @@ namespace Main.View.CommunicationFolder
         private void serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             // Lógica para tratamento dos dados recebidos pela porta serial
-            if (Program.SERIALPORT.BytesToRead > 0)
+            if (Program.SERIALPORT1.BytesToRead > 0)
             {
                 try
                 {
-                    string data = Program.SERIALPORT.ReadLine();
+                    string data = Program.SERIALPORT1.ReadLine();
                 //    Console.WriteLine(data);
                     //((IndicadorClass)Program.Registradores[0]).indicador;
                     if (Program.Registradores.Count > 0)

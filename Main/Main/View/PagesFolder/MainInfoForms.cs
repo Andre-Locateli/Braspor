@@ -47,10 +47,10 @@ namespace Main.View.PagesFolder
 
             try
             {
-                lbl_time.Text = $"{DateTime.Now.Day.ToString("D2")}/{DateTime.Now.Month.ToString("D2")}/{DateTime.Now.Year} {DateTime.Now.Hour.ToString("D2")}:{DateTime.Now.Minute.ToString("D2")}";
+                //lbl_time.Text = $"{DateTime.Now.Day.ToString("D2")}/{DateTime.Now.Month.ToString("D2")}/{DateTime.Now.Year} {DateTime.Now.Hour.ToString("D2")}:{DateTime.Now.Minute.ToString("D2")}";
                 dgv_avisos.RowTemplate.Height = 90;
-                lblUsuario.Text = Program._usuarioLogado.Nome;
-                lblAcesso.Text = Program._usuarioLogado.Acesso;
+               // lblUsuario.Text = Program._usuarioLogado.Nome;
+                //lblAcesso.Text = Program._usuarioLogado.Acesso;
                 tmTime.Enabled = true;
 
                 var qtd_pesagens = Program.SQL.SelectList($"SELECT * FROM LogReceita WHERE CONVERT(DATE, dateinsert) = '{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}' AND Status = 2", "LogReceita");
@@ -123,7 +123,7 @@ namespace Main.View.PagesFolder
         {
             try
             {
-                lbl_time.Text = $"{DateTime.Now.Day.ToString("D2")}/{DateTime.Now.Month.ToString("D2")}/{DateTime.Now.Year} {DateTime.Now.Hour.ToString("D2")}:{DateTime.Now.Minute.ToString("D2")}";
+               // lbl_time.Text = $"{DateTime.Now.Day.ToString("D2")}/{DateTime.Now.Month.ToString("D2")}/{DateTime.Now.Year} {DateTime.Now.Hour.ToString("D2")}:{DateTime.Now.Minute.ToString("D2")}";
                 dgv_avisos.DataSource = Program.SQL.SelectDataGrid("SELECT Id, Mensagem  FROM Avisos", "Avisos");
 
                 if (Program._usuarioLogado.Acesso != "Administrador") 
