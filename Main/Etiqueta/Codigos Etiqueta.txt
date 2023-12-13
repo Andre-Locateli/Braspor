@@ -1,0 +1,6 @@
+#$#1 - Código do Produto
+#$#2 - Descrição do Produto
+#$#3 - Lote
+#$#4 - Número do Documento
+#$#5 - Peso
+#$#6 - Data

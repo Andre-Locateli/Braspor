@@ -1,0 +1,647 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{666FE71E-9600-464A-9B97-B6002530C06D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Main</RootNamespace>
+    <AssemblyName>Main</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>[MKT] Software Vision Control - Icone %282018%29 [MAIOR].ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|Win32'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoUpdater.NET, Version=1.8.3.0, Culture=neutral, PublicKeyToken=501435c91b35f4bc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autoupdater.NET.Official.1.8.3\lib\net45\AutoUpdater.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Freeware.Pdf2Png, Version=1.0.1.0, Culture=neutral, PublicKeyToken=0b93ff91d4be458d, processorArchitecture=MSIL">
+      <HintPath>..\packages\Freeware.Pdf2Png.1.0.1\lib\net45\Freeware.Pdf2Png.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.3, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.3\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.WinForms, Version=0.9.7.1, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.WinForms.0.9.7.1\lib\net45\LiveCharts.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Design, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Fonts, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1001\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.1823.32, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1823.32\lib\net45\Microsoft.Web.WebView2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.WinForms, Version=1.0.1823.32, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1823.32\lib\net45\Microsoft.Web.WebView2.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.Wpf, Version=1.0.1823.32, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1823.32\lib\net45\Microsoft.Web.WebView2.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="zxing, Version=0.16.9.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.9\lib\net48\zxing.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.presentation, Version=0.16.9.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.9\lib\net48\zxing.presentation.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Helper\CFGContext.cs" />
+    <Compile Include="Helper\GeralClass.cs" />
+    <Compile Include="Helper\HttpContext.cs" />
+    <Compile Include="Helper\RandomsHelper.cs" />
+    <Compile Include="Helper\SecurityContext.cs" />
+    <Compile Include="Helper\SerialFolder\cIndicadores.cs" />
+    <Compile Include="Helper\SerialFolder\ControleCIndicadores.cs" />
+    <Compile Include="Helper\SQLContext.cs" />
+    <Compile Include="Helper\StyleSheet.cs" />
+    <Compile Include="Helper\TCPContext.cs" />
+    <Compile Include="Helper\TecladoFilter.cs" />
+    <Compile Include="Model\BandejaClass.cs" />
+    <Compile Include="Model\ConfiguracaoClass.cs" />
+    <Compile Include="Model\CustomReceitaInfo.cs" />
+    <Compile Include="Model\EtiquetaClass.cs" />
+    <Compile Include="Model\EtiquetaFolder\EtiquetaInfo.cs" />
+    <Compile Include="Model\IndicadorClass.cs" />
+    <Compile Include="Model\Log_bandeja_receitaClass.cs" />
+    <Compile Include="Model\PermissaoClass.cs" />
+    <Compile Include="Model\PesagemClass.cs" />
+    <Compile Include="Model\ProdutoClass.cs" />
+    <Compile Include="Model\ProdutoGet.cs" />
+    <Compile Include="Model\ReceitaClass.cs" />
+    <Compile Include="Model\ReceitaLogClass.cs" />
+    <Compile Include="Model\RecipienteClass.cs" />
+    <Compile Include="Model\RedeClass.cs" />
+    <Compile Include="Model\TipoReceitaClass.cs" />
+    <Compile Include="Model\UsuarioClass.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\CornerElement.cs" />
+    <Compile Include="Service\LibPrinting\IZPLPrintingService.cs" />
+    <Compile Include="Service\LibPrinting\ZPLConverterHelper.cs" />
+    <Compile Include="Service\LibPrinting\ZPLPrintingService.cs" />
+    <Compile Include="Service\UIHelper.cs" />
+    <Compile Include="View\CadastroFolder\CadastroBandejaForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CadastroFolder\CadastroBandejaForms.Designer.cs">
+      <DependentUpon>CadastroBandejaForms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CadastroFolder\CadastroNovaReceita.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CadastroFolder\CadastroNovaReceita.Designer.cs">
+      <DependentUpon>CadastroNovaReceita.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CadastroFolder\CadastroProdutoForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CadastroFolder\CadastroProdutoForms.Designer.cs">
+      <DependentUpon>CadastroProdutoForms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CadastroFolder\CadastroReceitaForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CadastroFolder\CadastroReceitaForms.Designer.cs">
+      <DependentUpon>CadastroReceitaForms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CadastroFolder\CadastroRecipienteForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CadastroFolder\CadastroRecipienteForms.Designer.cs">
+      <DependentUpon>CadastroRecipienteForms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CadastroFolder\CadastroTipoReceita.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CadastroFolder\CadastroTipoReceita.Designer.cs">
+      <DependentUpon>CadastroTipoReceita.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CommunicationFolder\CommunicationForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CommunicationFolder\CommunicationForms.Designer.cs">
+      <DependentUpon>CommunicationForms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomLayout\AEPHCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CustomLayout\AEPHCard.Designer.cs">
+      <DependentUpon>AEPHCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomLayout\CardBalanca.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CustomLayout\CardBalanca.Designer.cs">
+      <DependentUpon>CardBalanca.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomLayout\CTComboBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CustomLayout\PesagemRowInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CustomLayout\PesagemRowInfo.Designer.cs">
+      <DependentUpon>PesagemRowInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomLayout\ReceitaCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CustomLayout\ReceitaCard.Designer.cs">
+      <DependentUpon>ReceitaCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomLayout\RowCardCustom.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CustomLayout\RowCardCustom.Designer.cs">
+      <DependentUpon>RowCardCustom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\LoginFolder\LoginForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\LoginFolder\LoginForms.Designer.cs">
+      <DependentUpon>LoginForms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainFolder\MainForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MainFolder\MainForms.Designer.cs">
+      <DependentUpon>MainForms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PagesFolder\Configuration\RedeConfigForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PagesFolder\Configuration\RedeConfigForm.Designer.cs">
+      <DependentUpon>RedeConfigForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PagesFolder\Configuration\SerialForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PagesFolder\Configuration\SerialForm.Designer.cs">
+      <DependentUpon>SerialForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PagesFolder\Configuration\SystemForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PagesFolder\Configuration\SystemForm.Designer.cs">
+      <DependentUpon>SystemForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PagesFolder\Configuration\UserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PagesFolder\Configuration\UserForm.Designer.cs">
+      <DependentUpon>UserForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PagesFolder\InitialForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PagesFolder\InitialForms.Designer.cs">
+      <DependentUpon>InitialForms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PagesFolder\MainInfoForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PagesFolder\MainInfoForms.Designer.cs">
+      <DependentUpon>MainInfoForms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PagesFolder\PesagemFolder\PesagemList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PagesFolder\PesagemFolder\PesagemList.Designer.cs">
+      <DependentUpon>PesagemList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PagesFolder\PesagemFolder\PesagemProcess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PagesFolder\PesagemFolder\PesagemProcess.Designer.cs">
+      <DependentUpon>PesagemProcess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PagesFolder\RelatorioForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PagesFolder\RelatorioForms.Designer.cs">
+      <DependentUpon>RelatorioForms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PagesFolder\TestSend.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PagesFolder\TestSend.Designer.cs">
+      <DependentUpon>TestSend.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PopupFolder\InfoPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PopupFolder\InfoPopup.Designer.cs">
+      <DependentUpon>InfoPopup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PopupFolder\ObjectInfoPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PopupFolder\ObjectInfoPopup.Designer.cs">
+      <DependentUpon>ObjectInfoPopup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PopupFolder\PopupLeitura.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PopupFolder\PopupLeitura.Designer.cs">
+      <DependentUpon>PopupLeitura.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PopupFolder\PrintPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PopupFolder\PrintPopup.Designer.cs">
+      <DependentUpon>PrintPopup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PopupFolder\ProductProtheusPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PopupFolder\ProductProtheusPopup.Designer.cs">
+      <DependentUpon>ProductProtheusPopup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PopupFolder\QuestionPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PopupFolder\QuestionPopup.Designer.cs">
+      <DependentUpon>QuestionPopup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PopupFolder\YesOrNo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PopupFolder\YesOrNo.Designer.cs">
+      <DependentUpon>YesOrNo.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="View\CadastroFolder\CadastroBandejaForms.resx">
+      <DependentUpon>CadastroBandejaForms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CadastroFolder\CadastroNovaReceita.resx">
+      <DependentUpon>CadastroNovaReceita.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CadastroFolder\CadastroProdutoForms.resx">
+      <DependentUpon>CadastroProdutoForms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CadastroFolder\CadastroReceitaForms.resx">
+      <DependentUpon>CadastroReceitaForms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CadastroFolder\CadastroRecipienteForms.resx">
+      <DependentUpon>CadastroRecipienteForms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CadastroFolder\CadastroTipoReceita.resx">
+      <DependentUpon>CadastroTipoReceita.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CommunicationFolder\CommunicationForms.resx">
+      <DependentUpon>CommunicationForms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CustomLayout\AEPHCard.resx">
+      <DependentUpon>AEPHCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CustomLayout\CardBalanca.resx">
+      <DependentUpon>CardBalanca.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CustomLayout\CTComboBox.resx">
+      <DependentUpon>CTComboBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CustomLayout\PesagemRowInfo.resx">
+      <DependentUpon>PesagemRowInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CustomLayout\ReceitaCard.resx">
+      <DependentUpon>ReceitaCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CustomLayout\RowCardCustom.resx">
+      <DependentUpon>RowCardCustom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\LoginFolder\LoginForms.resx">
+      <DependentUpon>LoginForms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MainFolder\MainForms.resx">
+      <DependentUpon>MainForms.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PagesFolder\Configuration\RedeConfigForm.resx">
+      <DependentUpon>RedeConfigForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PagesFolder\Configuration\SerialForm.resx">
+      <DependentUpon>SerialForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PagesFolder\Configuration\SystemForm.resx">
+      <DependentUpon>SystemForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PagesFolder\Configuration\UserForm.resx">
+      <DependentUpon>UserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PagesFolder\InitialForms.resx">
+      <DependentUpon>InitialForms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PagesFolder\MainInfoForms.resx">
+      <DependentUpon>MainInfoForms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PagesFolder\PesagemFolder\PesagemList.resx">
+      <DependentUpon>PesagemList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PagesFolder\PesagemFolder\PesagemProcess.resx">
+      <DependentUpon>PesagemProcess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PagesFolder\RelatorioForms.resx">
+      <DependentUpon>RelatorioForms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PagesFolder\TestSend.resx">
+      <DependentUpon>TestSend.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PopupFolder\InfoPopup.resx">
+      <DependentUpon>InfoPopup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PopupFolder\ObjectInfoPopup.resx">
+      <DependentUpon>ObjectInfoPopup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PopupFolder\PopupLeitura.resx">
+      <DependentUpon>PopupLeitura.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PopupFolder\PrintPopup.resx">
+      <DependentUpon>PrintPopup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PopupFolder\ProductProtheusPopup.resx">
+      <DependentUpon>ProductProtheusPopup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PopupFolder\QuestionPopup.resx">
+      <DependentUpon>QuestionPopup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PopupFolder\YesOrNo.resx">
+      <DependentUpon>YesOrNo.cs</DependentUpon>
+    </EmbeddedResource>
+    <Content Include="modelo.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modelo.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\4115230_cancel_close_delete_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logotipo 4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ApplicationIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\4115230_cancel_close_delete_icon1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\5340287_man_people_person_user_users_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\622405_lock_security_password_protect_safety_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\216242_home_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\216242_home_icon1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\homepng.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\homepng1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\principalIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\134216_menu_lines_hamburger_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menuIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Vision Collector.png" />
+    <None Include="Resources\logo-aeph-do-brasil.png" />
+    <None Include="Resources\299110_check_sign_icon.png" />
+    <None Include="Resources\errorIcon.png" />
+    <None Include="Resources\1564528_fly_messager_send_communication_email_icon.png" />
+    <None Include="Resources\ethernet_off_24px.png" />
+    <None Include="Resources\services_24px.png" />
+    <None Include="Resources\user_24px.png" />
+    <None Include="Resources\pencil-edit-button.png" />
+    <None Include="Resources\delete %281%29.png" />
+    <None Include="Resources\Share_24px.png" />
+    <None Include="Resources\about_24px.png" />
+    <None Include="Resources\VCS_LOGO.png" />
+    <None Include="Resources\box-package-icon.png" />
+    <None Include="Resources\icons8-open-box-96.png" />
+    <None Include="Resources\round_96px.png" />
+    <None Include="Resources\round_96px1.png" />
+    <None Include="Resources\icons8-open-box-40.png" />
+    <None Include="Resources\round_25px.png" />
+    <None Include="Resources\round_v_.png" />
+    <None Include="Resources\restart_144px.png" />
+    <None Include="Resources\restart_24px.png" />
+    <None Include="Resources\arrow_26px.png" />
+    <None Include="Resources\petLogo.png" />
+    <None Include="Resources\btnAcess.png" />
+    <None Include="Resources\btnAcess1.png" />
+    <None Include="Resources\bkLogin.png" />
+    <None Include="Resources\vcIconLogin.png" />
+    <None Include="Resources\image_2023_04_14T10_59_44_706Z.png" />
+    <None Include="Resources\aephbkLogin.png" />
+    <None Include="Resources\close_24px1.png" />
+    <None Include="Resources\logoPet.png" />
+    <None Include="Resources\userMain.png" />
+    <None Include="Resources\checkMain.png" />
+    <None Include="Resources\arrowMain.png" />
+    <None Include="Resources\warningImage.png" />
+    <None Include="Resources\trashIcon.png" />
+    <None Include="Resources\refresh.png" />
+    <None Include="Resources\arrow_right.png" />
+    <None Include="Resources\flag_icon_true.png" />
+    <None Include="Resources\flag_icon_false.png" />
+    <None Include="Resources\Menu_Over.png" />
+    <None Include="Resources\userDisable.png" />
+    <None Include="Resources\lockDisable.png" />
+    <None Include="Resources\lockEnable.png" />
+    <None Include="Resources\userEnable.png" />
+    <None Include="Resources\searchIcon.png" />
+    <None Include="Resources\NoImage.png" />
+    <None Include="Resources\searchIocn.png" />
+    <None Include="Resources\receitaIcon.png" />
+    <None Include="Resources\editIcon.png" />
+    <None Include="Resources\trash_icon.png" />
+    <None Include="Resources\lfArrow.png" />
+    <None Include="Resources\rightArrow.png" />
+    <None Include="Resources\plusIcon.png" />
+    <None Include="Resources\plusiconFlat.png" />
+    <None Include="Resources\arrowDown.png" />
+    <None Include="Resources\bandejaIconr.png" />
+    <None Include="Resources\bandejaAdd.png" />
+    <None Include="Resources\caixaIconr.png" />
+    <None Include="Resources\caixaAdd.png" />
+    <None Include="Resources\produtoadd.png" />
+    <None Include="Resources\produtoaddr.png" />
+    <None Include="Resources\barcode.png" />
+    <None Include="Resources\closePopup.png" />
+    <None Include="Resources\finalizadaIco.png" />
+    <None Include="Resources\executandoIco.png" />
+    <None Include="Resources\pendenteico.png" />
+    <None Include="Resources\plusIconShort.png" />
+    <None Include="Resources\FinalizaProcesso.png" />
+    <None Include="Resources\errorZero.png" />
+    <None Include="Resources\info.png" />
+    <None Include="Resources\info_64px1.png" />
+    <None Include="Resources\document_50px.png" />
+    <None Include="Resources\document_50px1.png" />
+    <None Include="Resources\document_27px.png" />
+    <None Include="Resources\Plus_27px.png" />
+    <None Include="Resources\Plus_27px1.png" />
+    <None Include="Resources\skfAnim.gif" />
+    <Content Include="[MKT] Software Vision Control - Icone %282018%29 [MAIOR].ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Helper\CustomControls\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.Web.WebView2.1.0.1823.32\build\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.1823.32\build\Microsoft.Web.WebView2.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Web.WebView2.1.0.1823.32\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.WebView2.1.0.1823.32\build\Microsoft.Web.WebView2.targets'))" />
+  </Target>
+</Project>
