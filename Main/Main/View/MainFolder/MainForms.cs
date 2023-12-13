@@ -52,10 +52,6 @@ namespace Main.View.MainFolder
             btnSistema.Enabled = Program._permissaoUsuario.Sistema_View;
             btnUsuario.Enabled = Program._permissaoUsuario.Usuario_View;
             btnProduto.Enabled = Program._permissaoUsuario.Produto_view;
-            btnBandeja.Enabled = Program._permissaoUsuario.Bandeja_view;
-            btnRecipiente.Enabled = Program._permissaoUsuario.Recipiente_view;
-            btnTipoReceita.Enabled = Program._permissaoUsuario.tipoReceita_view;
-            btnReceita.Enabled = Program._permissaoUsuario.receita_view;
 
             m_Form.QuickButtonEventClick += M_Form_QuickButtonEventClick;
             //OpenPage(m_Form);
@@ -427,10 +423,6 @@ namespace Main.View.MainFolder
                     this.Invoke(new MethodInvoker(delegate 
                     {
                         btnProduto.Visible = true;
-                        btnBandeja.Visible = true;
-                        btnRecipiente.Visible = true;
-                        btnReceita.Visible = true;
-                        btnTipoReceita.Visible = true;
                     }));
                     break;
 
@@ -624,7 +616,7 @@ namespace Main.View.MainFolder
         {
             try
             {
-                OpenPage(new CadastroProdutoForms());
+                OpenPage(new CadastroMateriaPrimaForms());
             }
             catch (Exception)
             {

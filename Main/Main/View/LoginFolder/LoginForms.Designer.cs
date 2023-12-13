@@ -97,13 +97,15 @@
             this.txt_user.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(242)))));
             this.txt_user.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txt_user.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_user.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(176)))), ((int)(((byte)(176)))));
+            this.txt_user.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.txt_user.Location = new System.Drawing.Point(10, 6);
             this.txt_user.Margin = new System.Windows.Forms.Padding(0);
             this.txt_user.Name = "txt_user";
             this.txt_user.Size = new System.Drawing.Size(278, 22);
             this.txt_user.TabIndex = 0;
-            this.txt_user.Text = " Nome de usuário";
+            this.txt_user.Text = "Nome de usuário";
+            this.txt_user.Enter += new System.EventHandler(this.txt_user_Enter);
+            this.txt_user.Leave += new System.EventHandler(this.txt_user_Leave);
             // 
             // lbl_error
             // 
@@ -129,14 +131,15 @@
             this.txt_password.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(242)))));
             this.txt_password.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txt_password.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_password.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(176)))), ((int)(((byte)(176)))));
+            this.txt_password.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.txt_password.Location = new System.Drawing.Point(10, 6);
             this.txt_password.Margin = new System.Windows.Forms.Padding(0);
             this.txt_password.Name = "txt_password";
             this.txt_password.Size = new System.Drawing.Size(278, 22);
             this.txt_password.TabIndex = 1;
-            this.txt_password.Text = " Senha";
-            this.txt_password.UseSystemPasswordChar = true;
+            this.txt_password.Text = "Senha";
+            this.txt_password.Enter += new System.EventHandler(this.txt_password_Enter);
+            this.txt_password.Leave += new System.EventHandler(this.txt_password_Leave);
             // 
             // panel3
             // 

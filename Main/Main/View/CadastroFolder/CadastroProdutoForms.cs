@@ -157,7 +157,7 @@ namespace Main.View.CadastroFolder
         {
             //try
             //{
-            //    if (e.ColumnIndex == 0) 
+            //    if (e.ColumnIndex == 0)
             //    {
             //        ProdutoClass produto = (ProdutoClass)Program.SQL.SelectObject("SELECT id, part_number, descricao,Peso_alvo, Tolerancia,Foto, dateinsert, part_number_cliente, CodigoEarn  FROM Produto WHERE Id = @Id", "Produto", new Dictionary<string, object>()
             //        {
@@ -171,7 +171,7 @@ namespace Main.View.CadastroFolder
             //                pcbImage.Image = System.Drawing.Image.FromStream(ms);
             //            }
             //        }
-                  
+
             //        btnEditarUser.Visible = true;
             //        btnSalvarUser.Visible = false;
             //        btnNovoUser.Visible = true;
@@ -185,11 +185,11 @@ namespace Main.View.CadastroFolder
 
             //    }
 
-            //    if (e.ColumnIndex ==1)
+            //    if (e.ColumnIndex == 1)
             //    {
 
             //        var list_receitas = Program.SQL.SelectList("SELECT * FROM Receita Where id_produto = @id_produto", "Receita",
-            //            null, new Dictionary<string, object>() 
+            //            null, new Dictionary<string, object>()
             //            {
             //                {"@id_produto", dgv_dados.CurrentRow.Cells["Id"].Value}
             //            });
@@ -198,7 +198,7 @@ namespace Main.View.CadastroFolder
             //        {
             //            YesOrNo question = new YesOrNo("Você tem certeza que deseja remover o produto selecionado ?");
             //            question.ShowDialog();
-                        
+
             //            if (question.RESPOSTA && Program._permissaoUsuario.Produto_remove)
             //            {
             //                if (Program.SQL.CRUDCommand("DELETE FROM Produto WHERE Id = @Id", "Produto", new Dictionary<string, object>() { { "@Id", dgv_dados.CurrentRow.Cells["Id"].Value } }))
@@ -207,7 +207,7 @@ namespace Main.View.CadastroFolder
             //                }
             //            }
             //        }
-            //        else 
+            //        else
             //        {
             //            InfoPopup question = new InfoPopup("Produto com movimentações encontradas.", "Não é possível remover um produto vinculado a uma Receita em execução ou já executada.");
             //            question.ShowDialog();

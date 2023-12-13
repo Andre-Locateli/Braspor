@@ -35,11 +35,6 @@ namespace Main.View.LoginFolder
             pictureBox3.Parent = pictureBox1;
 
             txt_version.Text = Program.software_version;
-            //txt_password.GotFocus += Txt_password_GotFocus;
-            //txt_user.GotFocus += Txt_user_GotFocus;
-
-            txt_password.LostFocus += Txt_password_LostFocus;
-            txt_user.LostFocus += Txt_user_LostFocus;
 
             btnAcessar.Focus();
 
@@ -51,30 +46,15 @@ namespace Main.View.LoginFolder
                     txt_password.Text = Program._ultimaSenha;
                     ch_ultimoAcesso.Checked = Program._checkSalvar;
                 }
+
+                if (txt_password.Text != "Senha")
+                {
+                    txt_password.UseSystemPasswordChar = true;
+                }
             }
             catch (Exception)
             {
             }
-        }
-
-        private void Txt_user_LostFocus(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txt_user.Text)) { txt_user.Text = " Nome de usuário"; }
-        }
-
-        private void Txt_password_LostFocus(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txt_password.Text)) { txt_password.Text = " Senha"; }
-        }
-
-        private void Txt_user_GotFocus(object sender, EventArgs e)
-        {
-            txt_user.Text = "";
-        }
-
-        private void Txt_password_GotFocus(object sender, EventArgs e)
-        {
-            txt_password.Text = "";
         }
 
         private void pcb_close_Click(object sender, EventArgs e)
@@ -221,6 +201,81 @@ namespace Main.View.LoginFolder
             }
             catch (Exception)
             {
+            }
+        }
+
+
+        private void txt_user_Enter(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Windows.Forms.TextBox element = (System.Windows.Forms.TextBox)sender;
+
+                if (element.Text == "Nome de usuário" || element.Text == "Senha")
+                {
+                    element.Text = "";
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+
+        private void txt_user_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Windows.Forms.TextBox element = (System.Windows.Forms.TextBox)sender;
+
+                if (string.IsNullOrWhiteSpace(element.Text))
+                {
+                    if (element.Name == "txt_user") { element.Text = "Nome de usuário"; }
+                    if (element.Name == "txt_password") { element.Text = "Senha"; }
+                    txt_password.UseSystemPasswordChar = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+
+
+        private void txt_password_Enter(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Windows.Forms.TextBox element = (System.Windows.Forms.TextBox)sender;
+                txt_password.UseSystemPasswordChar = true;
+
+                if (element.Text == "Nome de usuário" || element.Text == "Senha")
+                {
+                    element.Text = "";
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+
+        private void txt_password_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Windows.Forms.TextBox element = (System.Windows.Forms.TextBox)sender;
+
+                if (string.IsNullOrWhiteSpace(element.Text))
+                {
+                    if (element.Name == "txt_user") { element.Text = "Nome de usuário"; }
+                    if (element.Name == "txt_password") { element.Text = "Senha"; }
+                    txt_password.UseSystemPasswordChar = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
             }
         }
     }

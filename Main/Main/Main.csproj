@@ -164,6 +164,7 @@
     <Compile Include="Model\EtiquetaClass.cs" />
     <Compile Include="Model\EtiquetaFolder\EtiquetaInfo.cs" />
     <Compile Include="Model\IndicadorClass.cs" />
+    <Compile Include="Model\MateriaPrimaClass.cs" />
     <Compile Include="Model\PermissaoClass.cs" />
     <Compile Include="Model\RedeClass.cs" />
     <Compile Include="Model\UsuarioClass.cs" />
@@ -174,6 +175,12 @@
     <Compile Include="Service\LibPrinting\ZPLConverterHelper.cs" />
     <Compile Include="Service\LibPrinting\ZPLPrintingService.cs" />
     <Compile Include="Service\UIHelper.cs" />
+    <Compile Include="View\CadastroFolder\CadastroMateriaPrimaForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CadastroFolder\CadastroMateriaPrimaForms.Designer.cs">
+      <DependentUpon>CadastroMateriaPrimaForms.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\CadastroFolder\CadastroProdutoForms.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -313,6 +320,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\CadastroFolder\CadastroMateriaPrimaForms.resx">
+      <DependentUpon>CadastroMateriaPrimaForms.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\CadastroFolder\CadastroProdutoForms.resx">
       <DependentUpon>CadastroProdutoForms.cs</DependentUpon>
     </EmbeddedResource>
