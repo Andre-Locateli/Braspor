@@ -48,10 +48,6 @@
             this.btnSistema = new System.Windows.Forms.Button();
             this.btnUsuario = new System.Windows.Forms.Button();
             this.btnProduto = new System.Windows.Forms.Button();
-            this.btnBandeja = new System.Windows.Forms.Button();
-            this.btnRecipiente = new System.Windows.Forms.Button();
-            this.btnTipoReceita = new System.Windows.Forms.Button();
-            this.btnReceita = new System.Windows.Forms.Button();
             this.pnRightSize = new System.Windows.Forms.Panel();
             this.pnDownSize = new System.Windows.Forms.Panel();
             this.pnBothSize = new System.Windows.Forms.Panel();
@@ -343,10 +339,6 @@
             this.pnSubMenu.Controls.Add(this.btnSistema);
             this.pnSubMenu.Controls.Add(this.btnUsuario);
             this.pnSubMenu.Controls.Add(this.btnProduto);
-            this.pnSubMenu.Controls.Add(this.btnBandeja);
-            this.pnSubMenu.Controls.Add(this.btnRecipiente);
-            this.pnSubMenu.Controls.Add(this.btnTipoReceita);
-            this.pnSubMenu.Controls.Add(this.btnReceita);
             this.pnSubMenu.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.pnSubMenu.Location = new System.Drawing.Point(210, 0);
             this.pnSubMenu.Margin = new System.Windows.Forms.Padding(0);
@@ -432,7 +424,7 @@
             this.btnUsuario.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.btnUsuario.Size = new System.Drawing.Size(191, 42);
             this.btnUsuario.TabIndex = 3;
-            this.btnUsuario.Text = "           Usuarios";
+            this.btnUsuario.Text = "           Usuários";
             this.btnUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnUsuario.UseVisualStyleBackColor = false;
             this.btnUsuario.Click += new System.EventHandler(this.button1_Click);
@@ -455,102 +447,10 @@
             this.btnProduto.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
             this.btnProduto.Size = new System.Drawing.Size(191, 42);
             this.btnProduto.TabIndex = 0;
-            this.btnProduto.Text = "           Produto";
+            this.btnProduto.Text = "           Matéria-prima";
             this.btnProduto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnProduto.UseVisualStyleBackColor = false;
             this.btnProduto.Click += new System.EventHandler(this.btnProduto_Click);
-            // 
-            // btnBandeja
-            // 
-            this.btnBandeja.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(74)))), ((int)(((byte)(126)))));
-            this.btnBandeja.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnBandeja.FlatAppearance.BorderSize = 0;
-            this.btnBandeja.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(80)))), ((int)(((byte)(158)))));
-            this.btnBandeja.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(80)))), ((int)(((byte)(158)))));
-            this.btnBandeja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBandeja.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBandeja.ForeColor = System.Drawing.Color.White;
-            this.btnBandeja.Image = ((System.Drawing.Image)(resources.GetObject("btnBandeja.Image")));
-            this.btnBandeja.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBandeja.Location = new System.Drawing.Point(10, 263);
-            this.btnBandeja.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
-            this.btnBandeja.Name = "btnBandeja";
-            this.btnBandeja.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.btnBandeja.Size = new System.Drawing.Size(191, 42);
-            this.btnBandeja.TabIndex = 2;
-            this.btnBandeja.Text = "           Bandeja";
-            this.btnBandeja.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBandeja.UseVisualStyleBackColor = false;
-            this.btnBandeja.Click += new System.EventHandler(this.btnBandeja_Click);
-            // 
-            // btnRecipiente
-            // 
-            this.btnRecipiente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(74)))), ((int)(((byte)(126)))));
-            this.btnRecipiente.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRecipiente.FlatAppearance.BorderSize = 0;
-            this.btnRecipiente.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(80)))), ((int)(((byte)(158)))));
-            this.btnRecipiente.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(80)))), ((int)(((byte)(158)))));
-            this.btnRecipiente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRecipiente.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRecipiente.ForeColor = System.Drawing.Color.White;
-            this.btnRecipiente.Image = ((System.Drawing.Image)(resources.GetObject("btnRecipiente.Image")));
-            this.btnRecipiente.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRecipiente.Location = new System.Drawing.Point(10, 311);
-            this.btnRecipiente.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
-            this.btnRecipiente.Name = "btnRecipiente";
-            this.btnRecipiente.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.btnRecipiente.Size = new System.Drawing.Size(191, 42);
-            this.btnRecipiente.TabIndex = 3;
-            this.btnRecipiente.Text = "           Recipiente";
-            this.btnRecipiente.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRecipiente.UseVisualStyleBackColor = false;
-            this.btnRecipiente.Click += new System.EventHandler(this.btnRecipiente_Click);
-            // 
-            // btnTipoReceita
-            // 
-            this.btnTipoReceita.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(74)))), ((int)(((byte)(126)))));
-            this.btnTipoReceita.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTipoReceita.FlatAppearance.BorderSize = 0;
-            this.btnTipoReceita.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(80)))), ((int)(((byte)(158)))));
-            this.btnTipoReceita.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(80)))), ((int)(((byte)(158)))));
-            this.btnTipoReceita.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTipoReceita.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTipoReceita.ForeColor = System.Drawing.Color.White;
-            this.btnTipoReceita.Image = ((System.Drawing.Image)(resources.GetObject("btnTipoReceita.Image")));
-            this.btnTipoReceita.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTipoReceita.Location = new System.Drawing.Point(10, 359);
-            this.btnTipoReceita.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
-            this.btnTipoReceita.Name = "btnTipoReceita";
-            this.btnTipoReceita.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.btnTipoReceita.Size = new System.Drawing.Size(191, 42);
-            this.btnTipoReceita.TabIndex = 5;
-            this.btnTipoReceita.Text = "           Tipo de Receita";
-            this.btnTipoReceita.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTipoReceita.UseVisualStyleBackColor = false;
-            this.btnTipoReceita.Click += new System.EventHandler(this.btnTipoReceita_Click);
-            // 
-            // btnReceita
-            // 
-            this.btnReceita.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(74)))), ((int)(((byte)(126)))));
-            this.btnReceita.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnReceita.FlatAppearance.BorderSize = 0;
-            this.btnReceita.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(80)))), ((int)(((byte)(158)))));
-            this.btnReceita.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(80)))), ((int)(((byte)(158)))));
-            this.btnReceita.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReceita.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReceita.ForeColor = System.Drawing.Color.White;
-            this.btnReceita.Image = ((System.Drawing.Image)(resources.GetObject("btnReceita.Image")));
-            this.btnReceita.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReceita.Location = new System.Drawing.Point(10, 407);
-            this.btnReceita.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
-            this.btnReceita.Name = "btnReceita";
-            this.btnReceita.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.btnReceita.Size = new System.Drawing.Size(191, 42);
-            this.btnReceita.TabIndex = 4;
-            this.btnReceita.Text = "           Receita";
-            this.btnReceita.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReceita.UseVisualStyleBackColor = false;
-            this.btnReceita.Click += new System.EventHandler(this.btnReceita_Click);
             // 
             // pnRightSize
             // 
@@ -961,14 +861,10 @@
         private System.Windows.Forms.Button btnPesagem;
         private System.Windows.Forms.Button btnCadastro;
         private System.Windows.Forms.Button btnProduto;
-        private System.Windows.Forms.Button btnBandeja;
-        private System.Windows.Forms.Button btnRecipiente;
-        private System.Windows.Forms.Button btnReceita;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lbSerialStatus2;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem btnSerialConfig;
-        private System.Windows.Forms.Button btnTipoReceita;
         private System.Windows.Forms.Button btnManual;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
