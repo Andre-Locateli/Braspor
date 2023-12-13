@@ -318,18 +318,18 @@ namespace Main.Helper
                                 {
                                     if (coluna_to_return is null)
                                     {
-                                        PesagemClass pesagem = new PesagemClass();
-                                        pesagem.Id = Convert.ToInt32(dr["id"]);
-                                        pesagem.CodigoProduto = Convert.ToString(dr["CodigoProduto"]);
-                                        pesagem.Descricao = Convert.ToString(dr["Descricao"]);
-                                        pesagem.PesoAlvo = Convert.ToString(dr["PesoAlvo"]);
-                                        pesagem.PesoReal = Convert.ToString(dr["PesoReal"]);
+                                        //PesagemClass pesagem = new PesagemClass();
+                                        //pesagem.Id = Convert.ToInt32(dr["id"]);
+                                        //pesagem.CodigoProduto = Convert.ToString(dr["CodigoProduto"]);
+                                        //pesagem.Descricao = Convert.ToString(dr["Descricao"]);
+                                        //pesagem.PesoAlvo = Convert.ToString(dr["PesoAlvo"]);
+                                        //pesagem.PesoReal = Convert.ToString(dr["PesoReal"]);
 
-                                        pesagem.Tolerencia = Convert.ToString(dr["Tolerencia"]);
-                                        pesagem.flag_sync = Convert.ToBoolean(dr["flag_sync"]);
+                                        //pesagem.Tolerencia = Convert.ToString(dr["Tolerencia"]);
+                                        //pesagem.flag_sync = Convert.ToBoolean(dr["flag_sync"]);
 
-                                        pesagem.dateinsert = (DateTime)dr["dateinsert"];
-                                        list_return.Add(pesagem);
+                                        //pesagem.dateinsert = (DateTime)dr["dateinsert"];
+                                        //list_return.Add(pesagem);
                                     }
                                     else
                                     {
@@ -339,154 +339,154 @@ namespace Main.Helper
 
                                 if (tabela == "Produto")
                                 {
-                                    ProdutoClass produto = new ProdutoClass();
-                                    produto.Id = Convert.ToInt32(dr["id"]);
-                                    produto.Part_number = Convert.ToString(dr["part_number"]);
-                                    produto.Descricao = Convert.ToString(dr["descricao"]);
-                                    produto.part_number_cliente = Convert.ToString(dr["part_number_cliente"]);
-                                    produto.PesoAlvo = Convert.ToSingle(dr["Peso_alvo"]);
-                                    produto.Tolerancia = Convert.ToSingle(dr["Tolerancia"]);
-                                    string imageBase64 = dr["Foto"].ToString();
-                                    produto.Foto = Convert.FromBase64String(imageBase64);
-                                    //produto.Foto = Convert.ToBase64String(Convert.ToString(dr["Foto"]));
-                                    produto.DateInsert = (DateTime)dr["dateinsert"];
-                                    produto.CodigoEarn = Convert.ToString(dr["CodigoEarn"]);
-                                    list_return.Add(produto);
+                                    //ProdutoClass produto = new ProdutoClass();
+                                    //produto.Id = Convert.ToInt32(dr["id"]);
+                                    //produto.Part_number = Convert.ToString(dr["part_number"]);
+                                    //produto.Descricao = Convert.ToString(dr["descricao"]);
+                                    //produto.part_number_cliente = Convert.ToString(dr["part_number_cliente"]);
+                                    //produto.PesoAlvo = Convert.ToSingle(dr["Peso_alvo"]);
+                                    //produto.Tolerancia = Convert.ToSingle(dr["Tolerancia"]);
+                                    //string imageBase64 = dr["Foto"].ToString();
+                                    //produto.Foto = Convert.FromBase64String(imageBase64);
+                                    ////produto.Foto = Convert.ToBase64String(Convert.ToString(dr["Foto"]));
+                                    //produto.DateInsert = (DateTime)dr["dateinsert"];
+                                    //produto.CodigoEarn = Convert.ToString(dr["CodigoEarn"]);
+                                    //list_return.Add(produto);
                                 }
 
                                 if (tabela == "Bandeja")
                                 {
-                                    BandejaClass bandeja = new BandejaClass();
-                                    bandeja.Id = Convert.ToInt32(dr["id"]);
-                                    bandeja.Codigo = Convert.ToString(dr["Codigo"]);
-                                    bandeja.Descricao = Convert.ToString(dr["descricao"]);
-                                    bandeja.PesoAlvo = Convert.ToSingle(dr["Peso_alvo"]);
-                                    bandeja.Tolerancia = Convert.ToSingle(dr["Tolerancia"]);
-                                    bandeja.Quantidade_produtos = Convert.ToDouble(dr["Quantidade_Produtos"]);
-                                    string imageBase64 = dr["Foto"].ToString();
-                                    bandeja.Foto = Convert.FromBase64String(imageBase64);
-                                    //produto.Foto = Convert.ToBase64String(Convert.ToString(dr["Foto"]));
-                                    bandeja.DateInsert = (DateTime)dr["dateinsert"];
-                                    list_return.Add(bandeja);
+                                    //BandejaClass bandeja = new BandejaClass();
+                                    //bandeja.Id = Convert.ToInt32(dr["id"]);
+                                    //bandeja.Codigo = Convert.ToString(dr["Codigo"]);
+                                    //bandeja.Descricao = Convert.ToString(dr["descricao"]);
+                                    //bandeja.PesoAlvo = Convert.ToSingle(dr["Peso_alvo"]);
+                                    //bandeja.Tolerancia = Convert.ToSingle(dr["Tolerancia"]);
+                                    //bandeja.Quantidade_produtos = Convert.ToDouble(dr["Quantidade_Produtos"]);
+                                    //string imageBase64 = dr["Foto"].ToString();
+                                    //bandeja.Foto = Convert.FromBase64String(imageBase64);
+                                    ////produto.Foto = Convert.ToBase64String(Convert.ToString(dr["Foto"]));
+                                    //bandeja.DateInsert = (DateTime)dr["dateinsert"];
+                                    //list_return.Add(bandeja);
                                 }
 
                                 if (tabela == "Recipiente")
                                 {
-                                    RecipienteClass recipiente = new RecipienteClass();
-                                    recipiente.Id = Convert.ToInt32(dr["id"]);
-                                    recipiente.Package = Convert.ToString(dr["Package"]);
-                                    recipiente.Descricao = Convert.ToString(dr["descricao"]);
-                                    recipiente.PesoAlvo = Convert.ToSingle(dr["Peso_alvo"]);
-                                    recipiente.Tolerancia = Convert.ToSingle(dr["Tolerancia"]);
-                                    string imageBase64 = dr["Foto"].ToString();
-                                    recipiente.Foto = Convert.FromBase64String(imageBase64);
-                                    //produto.Foto = Convert.ToBase64String(Convert.ToString(dr["Foto"]));
-                                    recipiente.DateInsert = (DateTime)dr["dateinsert"];
-                                    list_return.Add(recipiente);
+                                    //RecipienteClass recipiente = new RecipienteClass();
+                                    //recipiente.Id = Convert.ToInt32(dr["id"]);
+                                    //recipiente.Package = Convert.ToString(dr["Package"]);
+                                    //recipiente.Descricao = Convert.ToString(dr["descricao"]);
+                                    //recipiente.PesoAlvo = Convert.ToSingle(dr["Peso_alvo"]);
+                                    //recipiente.Tolerancia = Convert.ToSingle(dr["Tolerancia"]);
+                                    //string imageBase64 = dr["Foto"].ToString();
+                                    //recipiente.Foto = Convert.FromBase64String(imageBase64);
+                                    ////produto.Foto = Convert.ToBase64String(Convert.ToString(dr["Foto"]));
+                                    //recipiente.DateInsert = (DateTime)dr["dateinsert"];
+                                    //list_return.Add(recipiente);
                                 }
 
                                 if (tabela == "tipoReceita")
                                 {
-                                    TipoReceitaClass Trecipiente = new TipoReceitaClass();
-                                    Trecipiente.Id = Convert.ToInt32(dr["id"]);
-                                    Trecipiente.TipoItem = Convert.ToString(dr["Tipo_item"]);
-                                    Trecipiente.DateInsert = (DateTime)dr["dateinsert"];
-                                    list_return.Add(Trecipiente);
+                                    //TipoReceitaClass Trecipiente = new TipoReceitaClass();
+                                    //Trecipiente.Id = Convert.ToInt32(dr["id"]);
+                                    //Trecipiente.TipoItem = Convert.ToString(dr["Tipo_item"]);
+                                    //Trecipiente.DateInsert = (DateTime)dr["dateinsert"];
+                                    //list_return.Add(Trecipiente);
                                 }
 
                                 if (tabela == "Receita") 
                                 {
-                                    ReceitaClass receita = new ReceitaClass();
-                                    receita.Id = Convert.ToInt32(dr["id"]);
-                                    receita.Nome = Convert.ToString(dr["Nome"]);
-                                    receita.Codigo = Convert.ToString(dr["Codigo"]);
-                                    receita.PKSKF = Convert.ToString(dr["PkSKF"]);
-                                    receita.Id_Produto = Convert.ToInt32(dr["id_produto"]);
-                                    receita.Id_Recipiente = Convert.ToInt32(dr["id_recipiente"]);
-                                    receita.Id_Bandeja = Convert.ToInt32(dr["id_bandeja"]);
-                                    receita.Quantidade_pecas = Convert.ToInt32(dr["Quantidade_pecas"]);
-                                    receita.Quantidade_bandejas = Convert.ToInt32(dr["Quantidade_bandejas"]);
-                                    receita.Operador = Convert.ToString(dr["Operador"]);
-                                    receita.Status = Convert.ToInt32(dr["Status"]);
-                                    receita.DateInsert = (DateTime)dr["dateinsert"];
-                                    list_return.Add(receita);
+                                    //ReceitaClass receita = new ReceitaClass();
+                                    //receita.Id = Convert.ToInt32(dr["id"]);
+                                    //receita.Nome = Convert.ToString(dr["Nome"]);
+                                    //receita.Codigo = Convert.ToString(dr["Codigo"]);
+                                    //receita.PKSKF = Convert.ToString(dr["PkSKF"]);
+                                    //receita.Id_Produto = Convert.ToInt32(dr["id_produto"]);
+                                    //receita.Id_Recipiente = Convert.ToInt32(dr["id_recipiente"]);
+                                    //receita.Id_Bandeja = Convert.ToInt32(dr["id_bandeja"]);
+                                    //receita.Quantidade_pecas = Convert.ToInt32(dr["Quantidade_pecas"]);
+                                    //receita.Quantidade_bandejas = Convert.ToInt32(dr["Quantidade_bandejas"]);
+                                    //receita.Operador = Convert.ToString(dr["Operador"]);
+                                    //receita.Status = Convert.ToInt32(dr["Status"]);
+                                    //receita.DateInsert = (DateTime)dr["dateinsert"];
+                                    //list_return.Add(receita);
                                 }
 
 
                                 if (tabela  == "LogReceita") 
                                 {
-                                    ReceitaLogClass receitaLog = new ReceitaLogClass();
-                                    receitaLog.Id = Convert.ToInt32(dr["id"]);
-                                    receitaLog.Codigo = Convert.ToString(dr["Codigo"]);
-                                    receitaLog.Nome = Convert.ToString(dr["Nome"]);
-                                    receitaLog.id_receita = Convert.ToInt32(dr["id_receita"]);
-                                    receitaLog.id_Recipiente = Convert.ToInt32(dr["id_Recipiente"]);
-                                    receitaLog.Peso_Recipiente = Convert.ToSingle(dr["Peso_Recipiente"]);
+                                    //ReceitaLogClass receitaLog = new ReceitaLogClass();
+                                    //receitaLog.Id = Convert.ToInt32(dr["id"]);
+                                    //receitaLog.Codigo = Convert.ToString(dr["Codigo"]);
+                                    //receitaLog.Nome = Convert.ToString(dr["Nome"]);
+                                    //receitaLog.id_receita = Convert.ToInt32(dr["id_receita"]);
+                                    //receitaLog.id_Recipiente = Convert.ToInt32(dr["id_Recipiente"]);
+                                    //receitaLog.Peso_Recipiente = Convert.ToSingle(dr["Peso_Recipiente"]);
 
-                                    if (dr["Peso_Recipiente_Pesado"] != DBNull.Value) 
-                                    {
-                                        receitaLog.Peso_Recipiente_Pesado = Convert.ToSingle(dr["Peso_Recipiente_Pesado"]);
-                                    }
+                                    //if (dr["Peso_Recipiente_Pesado"] != DBNull.Value) 
+                                    //{
+                                    //    receitaLog.Peso_Recipiente_Pesado = Convert.ToSingle(dr["Peso_Recipiente_Pesado"]);
+                                    //}
                                
-                                    receitaLog.id_Bandeja = Convert.ToInt32(dr["id_Bandeja"]);
-                                    receitaLog.Qtd_Bandeja = Convert.ToInt32(dr["Qtd_Bandeja"]);
+                                    //receitaLog.id_Bandeja = Convert.ToInt32(dr["id_Bandeja"]);
+                                    //receitaLog.Qtd_Bandeja = Convert.ToInt32(dr["Qtd_Bandeja"]);
 
-                                    if (dr["Qtd_Bandeja_Pesado"] != DBNull.Value)
-                                    {
-                                        receitaLog.Qtd_Bandeja_Pesado = Convert.ToInt32(dr["Qtd_Bandeja_Pesado"]);
-                                    }
+                                    //if (dr["Qtd_Bandeja_Pesado"] != DBNull.Value)
+                                    //{
+                                    //    receitaLog.Qtd_Bandeja_Pesado = Convert.ToInt32(dr["Qtd_Bandeja_Pesado"]);
+                                    //}
                                     
-                                    receitaLog.Peso_Bandejas = Convert.ToSingle(dr["Peso_Bandejas"]);
+                                    //receitaLog.Peso_Bandejas = Convert.ToSingle(dr["Peso_Bandejas"]);
                                    
-                                    if (dr["Peso_Bandejas_Pesado"] != DBNull.Value)
-                                    {
-                                        receitaLog.Peso_Bandejas_Pesado = Convert.ToSingle(dr["Peso_Bandejas_Pesado"]);
-                                    }
+                                    //if (dr["Peso_Bandejas_Pesado"] != DBNull.Value)
+                                    //{
+                                    //    receitaLog.Peso_Bandejas_Pesado = Convert.ToSingle(dr["Peso_Bandejas_Pesado"]);
+                                    //}
 
-                                    receitaLog.id_Produto = Convert.ToInt32(dr["id_Produto"]);
-                                    receitaLog.Qtd_Pecas = Convert.ToInt32(dr["Qtd_Pecas"]);
+                                    //receitaLog.id_Produto = Convert.ToInt32(dr["id_Produto"]);
+                                    //receitaLog.Qtd_Pecas = Convert.ToInt32(dr["Qtd_Pecas"]);
 
-                                    if (dr["Qtd_Pecas_Pesado"] != DBNull.Value)
-                                    {
-                                        receitaLog.Qtd_Pecas_Pesado = Convert.ToInt32(dr["Qtd_Pecas_Pesado"]);
-                                    }
+                                    //if (dr["Qtd_Pecas_Pesado"] != DBNull.Value)
+                                    //{
+                                    //    receitaLog.Qtd_Pecas_Pesado = Convert.ToInt32(dr["Qtd_Pecas_Pesado"]);
+                                    //}
 
-                                    receitaLog.Peso_Pecas = Convert.ToSingle(dr["Peso_Pecas"]);
+                                    //receitaLog.Peso_Pecas = Convert.ToSingle(dr["Peso_Pecas"]);
 
-                                    if (dr["Peso_Pecas_Pesado"] != DBNull.Value)
-                                    {
-                                        receitaLog.Peso_Pecas_Pesado = Convert.ToSingle(dr["Peso_Pecas_Pesado"]);
-                                    }
+                                    //if (dr["Peso_Pecas_Pesado"] != DBNull.Value)
+                                    //{
+                                    //    receitaLog.Peso_Pecas_Pesado = Convert.ToSingle(dr["Peso_Pecas_Pesado"]);
+                                    //}
                                    
-                                    receitaLog.Estacao = Convert.ToString(dr["Estacao"]);
-                                    receitaLog.Operador = Convert.ToString(dr["Operador"]);
-                                    receitaLog.Status = Convert.ToInt32(dr["Status"]);
-                                    receitaLog.dateinsert = (DateTime)dr["dateinsert"];
-                                    list_return.Add(receitaLog);
+                                    //receitaLog.Estacao = Convert.ToString(dr["Estacao"]);
+                                    //receitaLog.Operador = Convert.ToString(dr["Operador"]);
+                                    //receitaLog.Status = Convert.ToInt32(dr["Status"]);
+                                    //receitaLog.dateinsert = (DateTime)dr["dateinsert"];
+                                    //list_return.Add(receitaLog);
                                 }
 
                                 if (tabela == "CustomReceitaInfo") 
                                 {
-                                    CustomReceitaInfo customReceita = new CustomReceitaInfo();
-                                    customReceita.id = Convert.ToInt32(dr["Id"]);
-                                    customReceita.Nome = Convert.ToString(dr["Nome"]);
-                                    customReceita.Codigo = Convert.ToString(dr["Codigo"]);
-                                    customReceita.QuantidadePecas = Convert.ToInt32(dr["Quantidade_pecas"]);
-                                    customReceita.QuantidadeBandejas = Convert.ToInt32(dr["Quantidade_bandejas"]);
-                                    customReceita.Status = Convert.ToInt32(dr["Status"]);
-                                    customReceita.Date = Convert.ToDateTime(dr["Data"]);
-                                    list_return.Add(customReceita);
+                                    //CustomReceitaInfo customReceita = new CustomReceitaInfo();
+                                    //customReceita.id = Convert.ToInt32(dr["Id"]);
+                                    //customReceita.Nome = Convert.ToString(dr["Nome"]);
+                                    //customReceita.Codigo = Convert.ToString(dr["Codigo"]);
+                                    //customReceita.QuantidadePecas = Convert.ToInt32(dr["Quantidade_pecas"]);
+                                    //customReceita.QuantidadeBandejas = Convert.ToInt32(dr["Quantidade_bandejas"]);
+                                    //customReceita.Status = Convert.ToInt32(dr["Status"]);
+                                    //customReceita.Date = Convert.ToDateTime(dr["Data"]);
+                                    //list_return.Add(customReceita);
                                 }
 
                                 if (tabela == "Log_bandeja_receita") 
                                 {
-                                    Log_bandeja_receitaClass logBand = new Log_bandeja_receitaClass();
-                                    logBand.Id = Convert.ToInt32(dr["Id"]);
-                                    logBand.Id_Log_Receita = Convert.ToInt32(dr["id_log_receita"]);
-                                    logBand.Numero_Bandejas = Convert.ToInt32(dr["Numero_Bandeja"]);
-                                    logBand.Peso_Bandeja = Convert.ToSingle(dr["Peso_bandeja"]);
-                                    logBand.Peso_Produto = Convert.ToSingle(dr["Peso_Produto"]);
-                                    list_return.Add(logBand);
+                                    //Log_bandeja_receitaClass logBand = new Log_bandeja_receitaClass();
+                                    //logBand.Id = Convert.ToInt32(dr["Id"]);
+                                    //logBand.Id_Log_Receita = Convert.ToInt32(dr["id_log_receita"]);
+                                    //logBand.Numero_Bandejas = Convert.ToInt32(dr["Numero_Bandeja"]);
+                                    //logBand.Peso_Bandeja = Convert.ToSingle(dr["Peso_bandeja"]);
+                                    //logBand.Peso_Produto = Convert.ToSingle(dr["Peso_Produto"]);
+                                    //list_return.Add(logBand);
                                 }
                             }
                         }
@@ -545,129 +545,129 @@ namespace Main.Helper
 
                                 if (tabela == "Produto") 
                                 {
-                                    ProdutoClass produto = new ProdutoClass();
-                                    produto.Id = Convert.ToInt32(dr["id"]);
-                                    produto.Part_number = Convert.ToString(dr["part_number"]);
-                                    produto.Descricao = Convert.ToString(dr["descricao"]);
-                                    produto.PesoAlvo = Convert.ToSingle(dr["Peso_alvo"]);
-                                    produto.Tolerancia = Convert.ToSingle(dr["Tolerancia"]);
-                                    produto.part_number_cliente = Convert.ToString(dr["part_number_cliente"]);
-                                    string imageBase64 = dr["Foto"].ToString();
-                                    produto.Foto = Convert.FromBase64String(imageBase64);
-                                    //produto.Foto = Convert.ToBase64String(Convert.ToString(dr["Foto"]));
-                                    produto.DateInsert = (DateTime)dr["dateinsert"];
-                                    produto.CodigoEarn = Convert.ToString(dr["CodigoEarn"]);
-                                    return produto;
+                                    //ProdutoClass produto = new ProdutoClass();
+                                    //produto.Id = Convert.ToInt32(dr["id"]);
+                                    //produto.Part_number = Convert.ToString(dr["part_number"]);
+                                    //produto.Descricao = Convert.ToString(dr["descricao"]);
+                                    //produto.PesoAlvo = Convert.ToSingle(dr["Peso_alvo"]);
+                                    //produto.Tolerancia = Convert.ToSingle(dr["Tolerancia"]);
+                                    //produto.part_number_cliente = Convert.ToString(dr["part_number_cliente"]);
+                                    //string imageBase64 = dr["Foto"].ToString();
+                                    //produto.Foto = Convert.FromBase64String(imageBase64);
+                                    ////produto.Foto = Convert.ToBase64String(Convert.ToString(dr["Foto"]));
+                                    //produto.DateInsert = (DateTime)dr["dateinsert"];
+                                    //produto.CodigoEarn = Convert.ToString(dr["CodigoEarn"]);
+                                    //return produto;
                                 }
 
                                 if (tabela == "Bandeja")
                                 {
-                                    BandejaClass bandeja = new BandejaClass();
-                                    bandeja.Id = Convert.ToInt32(dr["id"]);
-                                    bandeja.Codigo = Convert.ToString(dr["Codigo"]);
-                                    bandeja.Descricao = Convert.ToString(dr["descricao"]);
-                                    bandeja.PesoAlvo = Convert.ToSingle(dr["Peso_alvo"]);
-                                    bandeja.Tolerancia = Convert.ToSingle(dr["Tolerancia"]);
-                                    bandeja.Quantidade_produtos = Convert.ToDouble(dr["Quantidade_Produtos"]);
-                                    string imageBase64 = dr["Foto"].ToString();
-                                    bandeja.Foto = Convert.FromBase64String(imageBase64);
-                                    //produto.Foto = Convert.ToBase64String(Convert.ToString(dr["Foto"]));
-                                    bandeja.DateInsert = (DateTime)dr["dateinsert"];
-                                    return bandeja;
+                                    //BandejaClass bandeja = new BandejaClass();
+                                    //bandeja.Id = Convert.ToInt32(dr["id"]);
+                                    //bandeja.Codigo = Convert.ToString(dr["Codigo"]);
+                                    //bandeja.Descricao = Convert.ToString(dr["descricao"]);
+                                    //bandeja.PesoAlvo = Convert.ToSingle(dr["Peso_alvo"]);
+                                    //bandeja.Tolerancia = Convert.ToSingle(dr["Tolerancia"]);
+                                    //bandeja.Quantidade_produtos = Convert.ToDouble(dr["Quantidade_Produtos"]);
+                                    //string imageBase64 = dr["Foto"].ToString();
+                                    //bandeja.Foto = Convert.FromBase64String(imageBase64);
+                                    ////produto.Foto = Convert.ToBase64String(Convert.ToString(dr["Foto"]));
+                                    //bandeja.DateInsert = (DateTime)dr["dateinsert"];
+                                    //return bandeja;
                                 }
 
                                 if (tabela == "Recipiente")
                                 {
-                                    RecipienteClass recipiente = new RecipienteClass();
-                                    recipiente.Id = Convert.ToInt32(dr["id"]);
-                                    recipiente.Package = Convert.ToString(dr["Package"]);
-                                    recipiente.Descricao = Convert.ToString(dr["descricao"]);
-                                    recipiente.PesoAlvo = Convert.ToSingle(dr["Peso_alvo"]);
-                                    recipiente.Tolerancia = Convert.ToSingle(dr["Tolerancia"]);
-                                    string imageBase64 = dr["Foto"].ToString();
-                                    recipiente.Foto = Convert.FromBase64String(imageBase64);
-                                    //produto.Foto = Convert.ToBase64String(Convert.ToString(dr["Foto"]));
-                                    recipiente.DateInsert = (DateTime)dr["dateinsert"];
-                                    return recipiente;
+                                    //RecipienteClass recipiente = new RecipienteClass();
+                                    //recipiente.Id = Convert.ToInt32(dr["id"]);
+                                    //recipiente.Package = Convert.ToString(dr["Package"]);
+                                    //recipiente.Descricao = Convert.ToString(dr["descricao"]);
+                                    //recipiente.PesoAlvo = Convert.ToSingle(dr["Peso_alvo"]);
+                                    //recipiente.Tolerancia = Convert.ToSingle(dr["Tolerancia"]);
+                                    //string imageBase64 = dr["Foto"].ToString();
+                                    //recipiente.Foto = Convert.FromBase64String(imageBase64);
+                                    ////produto.Foto = Convert.ToBase64String(Convert.ToString(dr["Foto"]));
+                                    //recipiente.DateInsert = (DateTime)dr["dateinsert"];
+                                    //return recipiente;
                                 }
 
                                 if (tabela == "tipoReceita")
                                 {
-                                    TipoReceitaClass Trecipiente = new TipoReceitaClass();
-                                    Trecipiente.Id = Convert.ToInt32(dr["id"]);
-                                    Trecipiente.TipoItem = Convert.ToString(dr["Tipo_item"]);
-                                    Trecipiente.DateInsert = (DateTime)dr["dateinsert"];
-                                    return Trecipiente;
+                                    //TipoReceitaClass Trecipiente = new TipoReceitaClass();
+                                    //Trecipiente.Id = Convert.ToInt32(dr["id"]);
+                                    //Trecipiente.TipoItem = Convert.ToString(dr["Tipo_item"]);
+                                    //Trecipiente.DateInsert = (DateTime)dr["dateinsert"];
+                                    //return Trecipiente;
                                 }
 
                                 if (tabela == "Receita")
                                 {
-                                    ReceitaClass receita = new ReceitaClass();
-                                    receita.Id = Convert.ToInt32(dr["id"]);
-                                    receita.Nome = Convert.ToString(dr["Nome"]);
-                                    receita.Codigo = Convert.ToString(dr["Codigo"]);
-                                    receita.PKSKF = Convert.ToString(dr["PkSKF"]);
-                                    receita.Id_Produto = Convert.ToInt32(dr["id_produto"]);
-                                    receita.Id_Bandeja = Convert.ToInt32(dr["id_bandeja"]);
-                                    receita.Id_Recipiente = Convert.ToInt32(dr["id_recipiente"]);
-                                    receita.Quantidade_pecas = Convert.ToInt32(dr["Quantidade_pecas"]);
-                                    receita.Quantidade_bandejas = Convert.ToInt32(dr["Quantidade_bandejas"]);
-                                    receita.Operador = Convert.ToString(dr["Operador"]);
-                                    receita.Status = Convert.ToInt32(dr["Status"]);
-                                    receita.DateInsert = (DateTime)dr["dateinsert"];
-                                    return receita;
+                                    //ReceitaClass receita = new ReceitaClass();
+                                    //receita.Id = Convert.ToInt32(dr["id"]);
+                                    //receita.Nome = Convert.ToString(dr["Nome"]);
+                                    //receita.Codigo = Convert.ToString(dr["Codigo"]);
+                                    //receita.PKSKF = Convert.ToString(dr["PkSKF"]);
+                                    //receita.Id_Produto = Convert.ToInt32(dr["id_produto"]);
+                                    //receita.Id_Bandeja = Convert.ToInt32(dr["id_bandeja"]);
+                                    //receita.Id_Recipiente = Convert.ToInt32(dr["id_recipiente"]);
+                                    //receita.Quantidade_pecas = Convert.ToInt32(dr["Quantidade_pecas"]);
+                                    //receita.Quantidade_bandejas = Convert.ToInt32(dr["Quantidade_bandejas"]);
+                                    //receita.Operador = Convert.ToString(dr["Operador"]);
+                                    //receita.Status = Convert.ToInt32(dr["Status"]);
+                                    //receita.DateInsert = (DateTime)dr["dateinsert"];
+                                    //return receita;
                                 }
 
                                 if (tabela == "LogReceita")
                                 {
-                                    ReceitaLogClass receitaLog = new ReceitaLogClass();
-                                    receitaLog.Id = Convert.ToInt32(dr["id"]);
-                                    receitaLog.Codigo = Convert.ToString(dr["Codigo"]);
-                                    receitaLog.Nome = Convert.ToString(dr["Nome"]);
-                                    receitaLog.id_receita = Convert.ToInt32(dr["id_receita"]);
-                                    receitaLog.id_Recipiente = Convert.ToInt32(dr["id_Recipiente"]);
-                                    receitaLog.Peso_Recipiente = Convert.ToSingle(dr["Peso_Recipiente"]);
+                                    //ReceitaLogClass receitaLog = new ReceitaLogClass();
+                                    //receitaLog.Id = Convert.ToInt32(dr["id"]);
+                                    //receitaLog.Codigo = Convert.ToString(dr["Codigo"]);
+                                    //receitaLog.Nome = Convert.ToString(dr["Nome"]);
+                                    //receitaLog.id_receita = Convert.ToInt32(dr["id_receita"]);
+                                    //receitaLog.id_Recipiente = Convert.ToInt32(dr["id_Recipiente"]);
+                                    //receitaLog.Peso_Recipiente = Convert.ToSingle(dr["Peso_Recipiente"]);
 
-                                    if (dr["Peso_Recipiente_Pesado"] != DBNull.Value)
-                                    {
-                                        receitaLog.Peso_Recipiente_Pesado = Convert.ToSingle(dr["Peso_Recipiente_Pesado"]);
-                                    }
+                                    //if (dr["Peso_Recipiente_Pesado"] != DBNull.Value)
+                                    //{
+                                    //    receitaLog.Peso_Recipiente_Pesado = Convert.ToSingle(dr["Peso_Recipiente_Pesado"]);
+                                    //}
 
-                                    receitaLog.id_Bandeja = Convert.ToInt32(dr["id_Bandeja"]);
-                                    receitaLog.Qtd_Bandeja = Convert.ToInt32(dr["Qtd_Bandeja"]);
+                                    //receitaLog.id_Bandeja = Convert.ToInt32(dr["id_Bandeja"]);
+                                    //receitaLog.Qtd_Bandeja = Convert.ToInt32(dr["Qtd_Bandeja"]);
 
-                                    if (dr["Qtd_Bandeja_Pesado"] != DBNull.Value)
-                                    {
-                                        receitaLog.Qtd_Bandeja_Pesado = Convert.ToInt32(dr["Qtd_Bandeja_Pesado"]);
-                                    }
+                                    //if (dr["Qtd_Bandeja_Pesado"] != DBNull.Value)
+                                    //{
+                                    //    receitaLog.Qtd_Bandeja_Pesado = Convert.ToInt32(dr["Qtd_Bandeja_Pesado"]);
+                                    //}
 
-                                    receitaLog.Peso_Bandejas = Convert.ToSingle(dr["Peso_Bandejas"]);
+                                    //receitaLog.Peso_Bandejas = Convert.ToSingle(dr["Peso_Bandejas"]);
 
-                                    if (dr["Peso_Bandejas_Pesado"] != DBNull.Value)
-                                    {
-                                        receitaLog.Peso_Bandejas_Pesado = Convert.ToSingle(dr["Peso_Bandejas_Pesado"]);
-                                    }
+                                    //if (dr["Peso_Bandejas_Pesado"] != DBNull.Value)
+                                    //{
+                                    //    receitaLog.Peso_Bandejas_Pesado = Convert.ToSingle(dr["Peso_Bandejas_Pesado"]);
+                                    //}
 
-                                    receitaLog.id_Produto = Convert.ToInt32(dr["id_Produto"]);
-                                    receitaLog.Qtd_Pecas = Convert.ToInt32(dr["Qtd_Pecas"]);
+                                    //receitaLog.id_Produto = Convert.ToInt32(dr["id_Produto"]);
+                                    //receitaLog.Qtd_Pecas = Convert.ToInt32(dr["Qtd_Pecas"]);
 
-                                    if (dr["Qtd_Pecas_Pesado"] != DBNull.Value)
-                                    {
-                                        receitaLog.Qtd_Pecas_Pesado = Convert.ToInt32(dr["Qtd_Pecas_Pesado"]);
-                                    }
+                                    //if (dr["Qtd_Pecas_Pesado"] != DBNull.Value)
+                                    //{
+                                    //    receitaLog.Qtd_Pecas_Pesado = Convert.ToInt32(dr["Qtd_Pecas_Pesado"]);
+                                    //}
 
-                                    receitaLog.Peso_Pecas = Convert.ToSingle(dr["Peso_Pecas"]);
+                                    //receitaLog.Peso_Pecas = Convert.ToSingle(dr["Peso_Pecas"]);
 
-                                    if (dr["Peso_Pecas_Pesado"] != DBNull.Value)
-                                    {
-                                        receitaLog.Peso_Pecas_Pesado = Convert.ToSingle(dr["Peso_Pecas_Pesado"]);
-                                    }
+                                    //if (dr["Peso_Pecas_Pesado"] != DBNull.Value)
+                                    //{
+                                    //    receitaLog.Peso_Pecas_Pesado = Convert.ToSingle(dr["Peso_Pecas_Pesado"]);
+                                    //}
 
-                                    receitaLog.Estacao = Convert.ToString(dr["Estacao"]);
-                                    receitaLog.Operador = Convert.ToString(dr["Operador"]);
-                                    receitaLog.Status = Convert.ToInt32(dr["Status"]);
-                                    receitaLog.dateinsert = (DateTime)dr["dateinsert"];
-                                    return receitaLog;
+                                    //receitaLog.Estacao = Convert.ToString(dr["Estacao"]);
+                                    //receitaLog.Operador = Convert.ToString(dr["Operador"]);
+                                    //receitaLog.Status = Convert.ToInt32(dr["Status"]);
+                                    //receitaLog.dateinsert = (DateTime)dr["dateinsert"];
+                                    //return receitaLog;
                                 }
 
                                 if (tabela == "Acessos")

@@ -68,9 +68,9 @@
             this.txtCodigo.Size = new System.Drawing.Size(306, 20);
             this.txtCodigo.TabIndex = 4;
             this.txtCodigo.Text = "  Digite o código";
-            this.txtCodigo.Click += new System.EventHandler(this.txtCodigo_Click);
-            this.txtCodigo.TextChanged += new System.EventHandler(this.txtCodigo_TextChanged);
-            this.txtCodigo.Leave += new System.EventHandler(this.txtCodigo_Leave);
+            //this.txtCodigo.Click += new System.EventHandler(this.txtCodigo_Click);
+            //this.txtCodigo.TextChanged += new System.EventHandler(this.txtCodigo_TextChanged);
+            //this.txtCodigo.Leave += new System.EventHandler(this.txtCodigo_Leave);
             // 
             // pcbClose
             // 
@@ -82,7 +82,7 @@
             this.pcbClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pcbClose.TabIndex = 1;
             this.pcbClose.TabStop = false;
-            this.pcbClose.Click += new System.EventHandler(this.pcbClose_Click);
+            //this.pcbClose.Click += new System.EventHandler(this.pcbClose_Click);
             // 
             // pictureBox1
             // 

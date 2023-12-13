@@ -65,7 +65,7 @@ namespace Main.View.MainFolder
             if (modo_operacao)
             {
                 PesagemList pList = new PesagemList();
-                pList.ItemEditadoTrigger += PList_ItemEditadoTrigger;
+                //pList.ItemEditadoTrigger += PList_ItemEditadoTrigger;
                 OpenPage(pList);
             }
             else
@@ -462,24 +462,24 @@ namespace Main.View.MainFolder
 
         private void btnPesagem_Click(object sender, EventArgs e)
         {
-            PesagemList pList = new PesagemList();
-            pList.ItemEditadoTrigger += PList_ItemEditadoTrigger;
-            OpenPage(pList);
+            //PesagemList pList = new PesagemList();
+            //pList.ItemEditadoTrigger += PList_ItemEditadoTrigger;
+            //OpenPage(pList);
         }
 
         private void PList_ItemEditadoTrigger(object sender, EventArgs e)
         {
             try
             {
-                PesagemList item = (PesagemList)sender;
-                if (item.ItemEditado != null) 
-                {
-                    PesagemProcess pes = new PesagemProcess(item.LogReceita);
-                    pes.ItemRepesarTrigger += Pes_ItemRepesarTrigger;
-                    pes.ListarNovamenteTrigger += Pes_ListarNovamenteTrigger;
-                    OpenPage(pes);
-                    return;
-                }
+                //PesagemList item = (PesagemList)sender;
+                //if (item.ItemEditado != null) 
+                //{
+                //    PesagemProcess pes = new PesagemProcess(item.LogReceita);
+                //    pes.ItemRepesarTrigger += Pes_ItemRepesarTrigger;
+                //    pes.ListarNovamenteTrigger += Pes_ListarNovamenteTrigger;
+                //    OpenPage(pes);
+                //    return;
+                //}
             }
             catch (Exception)
             {
@@ -490,13 +490,13 @@ namespace Main.View.MainFolder
         {
             try
             {
-                PesagemProcess item = (PesagemProcess)sender;
-                if (item.ListarNovamente) 
-                {
-                    PesagemList pList = new PesagemList();
-                    pList.ItemEditadoTrigger += PList_ItemEditadoTrigger;
-                    OpenPage(pList);
-                }
+                //PesagemProcess item = (PesagemProcess)sender;
+                //if (item.ListarNovamente) 
+                //{
+                //    PesagemList pList = new PesagemList();
+                //    pList.ItemEditadoTrigger += PList_ItemEditadoTrigger;
+                //    OpenPage(pList);
+                //}
             }
             catch (Exception)
             {
@@ -507,14 +507,14 @@ namespace Main.View.MainFolder
         {
             try
             {
-                PesagemProcess item = (PesagemProcess)sender;
-                if (item.ItemRepesar != null) 
-                {
-                    PesagemProcess pes = new PesagemProcess(item.ItemRepesar);
-                    pes.ItemRepesarTrigger += Pes_ItemRepesarTrigger;
-                    pes.ListarNovamenteTrigger += Pes_ListarNovamenteTrigger;
-                    OpenPage(pes);
-                }
+                //PesagemProcess item = (PesagemProcess)sender;
+                //if (item.ItemRepesar != null) 
+                //{
+                //    PesagemProcess pes = new PesagemProcess(item.ItemRepesar);
+                //    pes.ItemRepesarTrigger += Pes_ItemRepesarTrigger;
+                //    pes.ListarNovamenteTrigger += Pes_ListarNovamenteTrigger;
+                //    OpenPage(pes);
+               // }
             }
             catch (Exception)
             {
@@ -635,7 +635,7 @@ namespace Main.View.MainFolder
         {
             try
             {
-                OpenPage(new CadastroBandejaForms());
+                //OpenPage(new CadastroBandejaForms());
             }
             catch (Exception)
             {
@@ -646,7 +646,7 @@ namespace Main.View.MainFolder
         {
             try
             {
-                OpenPage(new CadastroRecipienteForms());
+                //OpenPage(new CadastroRecipienteForms());
             }
             catch (Exception)
             {
@@ -658,10 +658,10 @@ namespace Main.View.MainFolder
             try 
             {
                 //OpenPage(new CadastroNovaReceita());
-                CadastroReceitaForms cad_receita = new CadastroReceitaForms();
-                cad_receita.ItemSelecionadoTrigger += Cad_receita_ItemSelecionadoTrigger;
-                cad_receita.ItemEditadoTrigger += Cad_receita_ItemEditadoTrigger;
-                OpenPage(cad_receita);
+                //CadastroReceitaForms cad_receita = new CadastroReceitaForms();
+                //cad_receita.ItemSelecionadoTrigger += Cad_receita_ItemSelecionadoTrigger;
+                //cad_receita.ItemEditadoTrigger += Cad_receita_ItemEditadoTrigger;
+                //OpenPage(cad_receita);
             }
             catch (Exception)
             {
@@ -672,10 +672,10 @@ namespace Main.View.MainFolder
         {
             try
             {
-                CadastroReceitaForms selecionado = (CadastroReceitaForms)sender;
-                CadastroNovaReceita recNova = new CadastroNovaReceita(selecionado.ItemEditado);
-                recNova.ItemSelecionadoTrigger += RecNova_ItemSelecionadoTrigger;
-                OpenPage(recNova);
+                //CadastroReceitaForms selecionado = (CadastroReceitaForms)sender;
+                //CadastroNovaReceita recNova = new CadastroNovaReceita(selecionado.ItemEditado);
+                //recNova.ItemSelecionadoTrigger += RecNova_ItemSelecionadoTrigger;
+                //OpenPage(recNova);
             }
             catch (Exception)
             {
@@ -686,9 +686,9 @@ namespace Main.View.MainFolder
         {
             try
             {
-                CadastroNovaReceita recNova = new CadastroNovaReceita();
-                recNova.ItemSelecionadoTrigger += RecNova_ItemSelecionadoTrigger;
-                OpenPage(recNova);
+                //CadastroNovaReceita recNova = new CadastroNovaReceita();
+                //recNova.ItemSelecionadoTrigger += RecNova_ItemSelecionadoTrigger;
+                //OpenPage(recNova);
             }
             catch (Exception)
             {
@@ -700,10 +700,10 @@ namespace Main.View.MainFolder
             try
             {
                 //OpenPage(new CadastroNovaReceita());
-                CadastroReceitaForms cad_receita = new CadastroReceitaForms();
-                cad_receita.ItemSelecionadoTrigger += Cad_receita_ItemSelecionadoTrigger;
-                cad_receita.ItemEditadoTrigger += Cad_receita_ItemEditadoTrigger;
-                OpenPage(cad_receita);
+                //CadastroReceitaForms cad_receita = new CadastroReceitaForms();
+                //cad_receita.ItemSelecionadoTrigger += Cad_receita_ItemSelecionadoTrigger;
+                //cad_receita.ItemEditadoTrigger += Cad_receita_ItemEditadoTrigger;
+                //OpenPage(cad_receita);
             }
             catch (Exception)
             {
@@ -720,7 +720,7 @@ namespace Main.View.MainFolder
         {
             try
             {
-                OpenPage(new CadastroTipoReceita());
+                //OpenPage(new CadastroTipoReceita());
             }
             catch (Exception)
             {

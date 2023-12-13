@@ -94,158 +94,158 @@ namespace Main.View.PagesFolder
 
         private void cbReceita_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
-            {
-                ComboBox cb = (ComboBox)sender;
-                string valor = "";
+            //try
+            //{
+            //    ComboBox cb = (ComboBox)sender;
+            //    string valor = "";
 
-                if (cb.Tag.ToString() == "Receita")
-                {
-                    ReceitaClass receita = (ReceitaClass)cb.SelectedItem;
-                    if (receita == null) { return; }
-                    if (where_condition.Length == 0) { where_condition += $" WHERE Nome = @Nome"; where_parameter.Add("@Nome", receita.Nome); }
-                    else
-                    {
-                        if (where_condition.Contains("@Nome"))
-                        {
-                            where_parameter["@Nome"] = receita.Nome;
-                        }
-                        else
-                        {
-                            where_condition += $" AND Nome = @Nome ";
-                            where_parameter["@Nome"] = receita.Nome;
-                        }
-                    }
-                }
-                if (cb.Tag.ToString() == "Produto")
-                {
-                    ProdutoClass produto = (ProdutoClass)cb.SelectedItem;
-                    if (produto == null) { return; }
-                    if (where_condition.Length == 0) { where_condition += $" WHERE id_Produto = @id_Produto "; where_parameter.Add("@id_Produto", produto.Id); }
-                    else
-                    {
-                        if (where_condition.Contains("@id_Produto"))
-                        {
-                            where_parameter["@id_Produto"] = produto.Id;
-                        }
-                        else
-                        {
-                            where_condition += $" AND id_Produto = @id_Produto ";
-                            where_parameter["@id_Produto"] = produto.Id;
-                        }
-                    }
-                }
+            //    if (cb.Tag.ToString() == "Receita")
+            //    {
+            //        ReceitaClass receita = (ReceitaClass)cb.SelectedItem;
+            //        if (receita == null) { return; }
+            //        if (where_condition.Length == 0) { where_condition += $" WHERE Nome = @Nome"; where_parameter.Add("@Nome", receita.Nome); }
+            //        else
+            //        {
+            //            if (where_condition.Contains("@Nome"))
+            //            {
+            //                where_parameter["@Nome"] = receita.Nome;
+            //            }
+            //            else
+            //            {
+            //                where_condition += $" AND Nome = @Nome ";
+            //                where_parameter["@Nome"] = receita.Nome;
+            //            }
+            //        }
+            //    }
+            //    if (cb.Tag.ToString() == "Produto")
+            //    {
+            //        ProdutoClass produto = (ProdutoClass)cb.SelectedItem;
+            //        if (produto == null) { return; }
+            //        if (where_condition.Length == 0) { where_condition += $" WHERE id_Produto = @id_Produto "; where_parameter.Add("@id_Produto", produto.Id); }
+            //        else
+            //        {
+            //            if (where_condition.Contains("@id_Produto"))
+            //            {
+            //                where_parameter["@id_Produto"] = produto.Id;
+            //            }
+            //            else
+            //            {
+            //                where_condition += $" AND id_Produto = @id_Produto ";
+            //                where_parameter["@id_Produto"] = produto.Id;
+            //            }
+            //        }
+            //    }
 
-                dgv_dados.DataSource = Program.SQL.SelectDataGrid("SELECT Id, Nome, Codigo," +
-                    "Qtd_Pecas_Pesado AS [QTD Peças], " +
-                    "Peso_Pecas AS [Peças Peso], " +
-                    "Peso_Pecas_Pesado AS [Peso Peças Final], " +
-                    "Estacao, " +
-                    "Operador," +
-                    "datefim AS [Data Fim] FROM LogReceita " +
-                    $"{where_condition}", "LogReceita",
-                    where_parameter);
+            //    dgv_dados.DataSource = Program.SQL.SelectDataGrid("SELECT Id, Nome, Codigo," +
+            //        "Qtd_Pecas_Pesado AS [QTD Peças], " +
+            //        "Peso_Pecas AS [Peças Peso], " +
+            //        "Peso_Pecas_Pesado AS [Peso Peças Final], " +
+            //        "Estacao, " +
+            //        "Operador," +
+            //        "datefim AS [Data Fim] FROM LogReceita " +
+            //        $"{where_condition}", "LogReceita",
+            //        where_parameter);
 
-                dgv_dados.Columns[1].Visible = false;
-            }
-            catch (Exception)
-            {
-                where_condition = "";
-                where_parameter.Clear();
-            }
+            //    dgv_dados.Columns[1].Visible = false;
+            //}
+            //catch (Exception)
+            //{
+            //    where_condition = "";
+            //    where_parameter.Clear();
+            //}
         }
 
         private void dgv_dados_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.ColumnIndex == 0) 
-                {
-                    //Exportar relatório desse Log.
+            //try
+            //{
+            //    if (e.ColumnIndex == 0) 
+            //    {
+            //        //Exportar relatório desse Log.
 
-                    ReceitaLogClass receita_log = (ReceitaLogClass)Program.SQL.SelectObject("SELECT * FROM LogReceita WHERE Id = @Id", "LogReceita", new Dictionary<string, object>()
-                    {
-                        {"@Id", dgv_dados.CurrentRow.Cells["Id"].Value}
-                    });
+            //        ReceitaLogClass receita_log = (ReceitaLogClass)Program.SQL.SelectObject("SELECT * FROM LogReceita WHERE Id = @Id", "LogReceita", new Dictionary<string, object>()
+            //        {
+            //            {"@Id", dgv_dados.CurrentRow.Cells["Id"].Value}
+            //        });
 
-                    if (receita_log != null) 
-                    {
+            //        if (receita_log != null) 
+            //        {
 
-                        ReceitaClass receita = (ReceitaClass)Program.SQL.SelectObject("SELECT * FROM Receita WHERE Id = @Id", "Receita", new Dictionary<string, object>()
-                        {
-                            {"@Id", receita_log.id_receita}
-                        });
+            //            ReceitaClass receita = (ReceitaClass)Program.SQL.SelectObject("SELECT * FROM Receita WHERE Id = @Id", "Receita", new Dictionary<string, object>()
+            //            {
+            //                {"@Id", receita_log.id_receita}
+            //            });
 
-                        ProdutoClass produto = (ProdutoClass)Program.SQL.SelectObject("SELECT * FROM Produto WHERE id = @id", "Produto", new Dictionary<string, object>()
-                        {
-                            {"@id", receita_log.id_Produto}
-                        });
+            //            ProdutoClass produto = (ProdutoClass)Program.SQL.SelectObject("SELECT * FROM Produto WHERE id = @id", "Produto", new Dictionary<string, object>()
+            //            {
+            //                {"@id", receita_log.id_Produto}
+            //            });
 
-                        if (receita_log.Id != 0 && receita.Id != 0 && produto.Id != 0)
-                        {
-                            Microsoft.Office.Interop.Excel.Application xlexcel = new Microsoft.Office.Interop.Excel.Application();
-                            Microsoft.Office.Interop.Excel.Workbook xlWorkBook = xlexcel.Workbooks.Add(AppDomain.CurrentDomain.BaseDirectory + "modelo.xlsx");
-                            Microsoft.Office.Interop.Excel.Worksheet xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
-                            Microsoft.Office.Interop.Excel.Worksheet xlWorkSheet2 = xlWorkBook.Worksheets.get_Item(2);
-                            object misValue = System.Reflection.Missing.Value;
+            //            if (receita_log.Id != 0 && receita.Id != 0 && produto.Id != 0)
+            //            {
+            //                Microsoft.Office.Interop.Excel.Application xlexcel = new Microsoft.Office.Interop.Excel.Application();
+            //                Microsoft.Office.Interop.Excel.Workbook xlWorkBook = xlexcel.Workbooks.Add(AppDomain.CurrentDomain.BaseDirectory + "modelo.xlsx");
+            //                Microsoft.Office.Interop.Excel.Worksheet xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+            //                Microsoft.Office.Interop.Excel.Worksheet xlWorkSheet2 = xlWorkBook.Worksheets.get_Item(2);
+            //                object misValue = System.Reflection.Missing.Value;
 
-                            xlWorkSheet.Activate();
-                            xlexcel.ActiveSheet.Range("A6").Value = produto.Part_number;
-                            xlexcel.ActiveSheet.Range("D6").Value = produto.part_number_cliente;
-                            xlexcel.ActiveSheet.Range("J6").Value = receita.PKSKF;
-                            xlexcel.ActiveSheet.Range("A8").Value = DateTime.Now;
-                            xlexcel.ActiveSheet.Range("D8").Value = Convert.ToString(receita_log.Peso_Bandejas_Pesado + receita_log.Peso_Recipiente_Pesado + receita_log.Peso_Pecas_Pesado) + "kg";
-                            var seq_list = Program.SQL.SelectList("SELECT * FROM LogReceita WHERE id_receita = @id_receita", "LogReceita",null, new Dictionary<string, object>()
-                            {
-                                {"@id_receita", receita_log.id_receita}
-                            });
-                            xlexcel.ActiveSheet.Range("J8").Value = "Nº " + (seq_list.Count + 1).ToString(); //Como pegar a sequencia
+            //                xlWorkSheet.Activate();
+            //                xlexcel.ActiveSheet.Range("A6").Value = produto.Part_number;
+            //                xlexcel.ActiveSheet.Range("D6").Value = produto.part_number_cliente;
+            //                xlexcel.ActiveSheet.Range("J6").Value = receita.PKSKF;
+            //                xlexcel.ActiveSheet.Range("A8").Value = DateTime.Now;
+            //                xlexcel.ActiveSheet.Range("D8").Value = Convert.ToString(receita_log.Peso_Bandejas_Pesado + receita_log.Peso_Recipiente_Pesado + receita_log.Peso_Pecas_Pesado) + "kg";
+            //                var seq_list = Program.SQL.SelectList("SELECT * FROM LogReceita WHERE id_receita = @id_receita", "LogReceita",null, new Dictionary<string, object>()
+            //                {
+            //                    {"@id_receita", receita_log.id_receita}
+            //                });
+            //                xlexcel.ActiveSheet.Range("J8").Value = "Nº " + (seq_list.Count + 1).ToString(); //Como pegar a sequencia
 
-                            dataGridView1.DataSource = Program.SQL.SelectDataGrid("SELECT Peso_Pecas_Pesado AS [Peso], * FROM LogReceita WHERE id_Produto = @id_Produto " +
-                                "AND Peso_Pecas_Pesado IS NOT NULL", "LogReceita",
-                                new Dictionary<string, object>() 
-                                {
-                                    {"@id_Produto", produto.Id}
-                                });
+            //                dataGridView1.DataSource = Program.SQL.SelectDataGrid("SELECT Peso_Pecas_Pesado AS [Peso], * FROM LogReceita WHERE id_Produto = @id_Produto " +
+            //                    "AND Peso_Pecas_Pesado IS NOT NULL", "LogReceita",
+            //                    new Dictionary<string, object>() 
+            //                    {
+            //                        {"@id_Produto", produto.Id}
+            //                    });
 
-                            copyAlltoClipboard();
-                            xlWorkSheet2.Activate();
-                            Microsoft.Office.Interop.Excel.Range CR = (Microsoft.Office.Interop.Excel.Range)xlWorkSheet2.Cells[1, 1];
-                            CR.Select();
-                            xlWorkSheet2.PasteSpecial(CR, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true);
+            //                copyAlltoClipboard();
+            //                xlWorkSheet2.Activate();
+            //                Microsoft.Office.Interop.Excel.Range CR = (Microsoft.Office.Interop.Excel.Range)xlWorkSheet2.Cells[1, 1];
+            //                CR.Select();
+            //                xlWorkSheet2.PasteSpecial(CR, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true);
 
-                            Microsoft.Office.Interop.Excel.ChartObjects chartObjects = (Microsoft.Office.Interop.Excel.ChartObjects)xlWorkSheet.ChartObjects();
-                            Microsoft.Office.Interop.Excel.ChartObject chartObject = chartObjects.Add(35, 520, 2300, 780);
-                            Microsoft.Office.Interop.Excel.Chart chart = chartObject.Chart;
-                            Microsoft.Office.Interop.Excel.Range chartRange = xlWorkSheet2.get_Range("A1:A" + dataGridView1.Rows.Count);
-                            chart.SetSourceData(chartRange);
-                            chart.ChartType = Microsoft.Office.Interop.Excel.XlChartType.xlLine;
+            //                Microsoft.Office.Interop.Excel.ChartObjects chartObjects = (Microsoft.Office.Interop.Excel.ChartObjects)xlWorkSheet.ChartObjects();
+            //                Microsoft.Office.Interop.Excel.ChartObject chartObject = chartObjects.Add(35, 520, 2300, 780);
+            //                Microsoft.Office.Interop.Excel.Chart chart = chartObject.Chart;
+            //                Microsoft.Office.Interop.Excel.Range chartRange = xlWorkSheet2.get_Range("A1:A" + dataGridView1.Rows.Count);
+            //                chart.SetSourceData(chartRange);
+            //                chart.ChartType = Microsoft.Office.Interop.Excel.XlChartType.xlLine;
 
-                            xlexcel.Visible = true;
-                            xlWorkSheet.Activate();
-                            xlWorkBook = null;
-                            xlWorkSheet = null;
-                            releaseObject(xlexcel);
-                            releaseObject(xlWorkBook);
-                            releaseObject(xlWorkSheet);
-                        }
-                        else 
-                        {
-                            InfoPopup info = new InfoPopup("Erro na exportação","não foi possível puxar todos os dados do banco, verifique a base de dados.");
-                        }
+            //                xlexcel.Visible = true;
+            //                xlWorkSheet.Activate();
+            //                xlWorkBook = null;
+            //                xlWorkSheet = null;
+            //                releaseObject(xlexcel);
+            //                releaseObject(xlWorkBook);
+            //                releaseObject(xlWorkSheet);
+            //            }
+            //            else 
+            //            {
+            //                InfoPopup info = new InfoPopup("Erro na exportação","não foi possível puxar todos os dados do banco, verifique a base de dados.");
+            //            }
                     
-                    }
+            //        }
 
          
 
 
-                }
-            }
-            catch (Exception ex)
-            {
-                InfoPopup InfoError = new InfoPopup("Erro na exportação", "Verifique se existem registros para esse processo selecionado. Caso contrário não é possível exportar os dados.");
-                InfoError.ShowDialog();
-            }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    InfoPopup InfoError = new InfoPopup("Erro na exportação", "Verifique se existem registros para esse processo selecionado. Caso contrário não é possível exportar os dados.");
+            //    InfoError.ShowDialog();
+            //}
         }
 
         private void copyAlltoClipboard()

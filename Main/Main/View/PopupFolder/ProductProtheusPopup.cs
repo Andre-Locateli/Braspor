@@ -14,7 +14,7 @@ namespace Main.View.PopupFolder
 {
     public partial class ProductProtheusPopup : Form
     {
-        public ProdutoGet PRODUTO = new ProdutoGet();
+       // public //ProdutoGet PRODUTO = new ProdutoGet();
         public string NUMERO_OP = "";
 
         public ProductProtheusPopup()
@@ -41,10 +41,10 @@ namespace Main.View.PopupFolder
                 if (string.IsNullOrWhiteSpace(txtTolerencia.Text)) { return; }
 
                 NUMERO_OP = txtNumeroOp.Text;
-                PRODUTO.cod_produto = txtCodigoProduto.Text;
-                PRODUTO.descricao = txtDescricao.Text;
-                PRODUTO.peso_alvo = txtPesoAlvo.Text;
-                PRODUTO.tolerancia = txtTolerencia.Text;
+                //PRODUTO.cod_produto = txtCodigoProduto.Text;
+                //PRODUTO.descricao = txtDescricao.Text;
+                //PRODUTO.peso_alvo = txtPesoAlvo.Text;
+                //PRODUTO.tolerancia = txtTolerencia.Text;
                 this.Close();
             }
             catch (Exception)

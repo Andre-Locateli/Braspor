@@ -155,68 +155,68 @@ namespace Main.View.CadastroFolder
 
         private void dgv_dados_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.ColumnIndex == 0) 
-                {
-                    ProdutoClass produto = (ProdutoClass)Program.SQL.SelectObject("SELECT id, part_number, descricao,Peso_alvo, Tolerancia,Foto, dateinsert, part_number_cliente, CodigoEarn  FROM Produto WHERE Id = @Id", "Produto", new Dictionary<string, object>()
-                    {
-                        {"@Id", dgv_dados.CurrentRow.Cells["Id"].Value}
-                    });
+            //try
+            //{
+            //    if (e.ColumnIndex == 0) 
+            //    {
+            //        ProdutoClass produto = (ProdutoClass)Program.SQL.SelectObject("SELECT id, part_number, descricao,Peso_alvo, Tolerancia,Foto, dateinsert, part_number_cliente, CodigoEarn  FROM Produto WHERE Id = @Id", "Produto", new Dictionary<string, object>()
+            //        {
+            //            {"@Id", dgv_dados.CurrentRow.Cells["Id"].Value}
+            //        });
 
-                    if (produto.Foto.Length > 0)
-                    {
-                        using (MemoryStream ms = new MemoryStream(produto.Foto))
-                        {
-                            pcbImage.Image = System.Drawing.Image.FromStream(ms);
-                        }
-                    }
+            //        if (produto.Foto.Length > 0)
+            //        {
+            //            using (MemoryStream ms = new MemoryStream(produto.Foto))
+            //            {
+            //                pcbImage.Image = System.Drawing.Image.FromStream(ms);
+            //            }
+            //        }
                   
-                    btnEditarUser.Visible = true;
-                    btnSalvarUser.Visible = false;
-                    btnNovoUser.Visible = true;
+            //        btnEditarUser.Visible = true;
+            //        btnSalvarUser.Visible = false;
+            //        btnNovoUser.Visible = true;
 
-                    txtPartNumber.Text = produto.Part_number;
-                    txtPesoAlvo.Text = produto.PesoAlvo.ToString();
-                    txtTolerancia.Text = produto.Tolerancia.ToString();
-                    txtDescricao.Text = produto.Descricao;
-                    txtPtnCliente.Text = produto.part_number_cliente;
-                    txtCodigoBarra.Text = produto.CodigoEarn;
+            //        txtPartNumber.Text = produto.Part_number;
+            //        txtPesoAlvo.Text = produto.PesoAlvo.ToString();
+            //        txtTolerancia.Text = produto.Tolerancia.ToString();
+            //        txtDescricao.Text = produto.Descricao;
+            //        txtPtnCliente.Text = produto.part_number_cliente;
+            //        txtCodigoBarra.Text = produto.CodigoEarn;
 
-                }
+            //    }
 
-                if (e.ColumnIndex ==1)
-                {
+            //    if (e.ColumnIndex ==1)
+            //    {
 
-                    var list_receitas = Program.SQL.SelectList("SELECT * FROM Receita Where id_produto = @id_produto", "Receita",
-                        null, new Dictionary<string, object>() 
-                        {
-                            {"@id_produto", dgv_dados.CurrentRow.Cells["Id"].Value}
-                        });
+            //        var list_receitas = Program.SQL.SelectList("SELECT * FROM Receita Where id_produto = @id_produto", "Receita",
+            //            null, new Dictionary<string, object>() 
+            //            {
+            //                {"@id_produto", dgv_dados.CurrentRow.Cells["Id"].Value}
+            //            });
 
-                    if (list_receitas.Count <= 0 || Program._usuarioLogado.Acesso == "Administrador")
-                    {
-                        YesOrNo question = new YesOrNo("Você tem certeza que deseja remover o produto selecionado ?");
-                        question.ShowDialog();
+            //        if (list_receitas.Count <= 0 || Program._usuarioLogado.Acesso == "Administrador")
+            //        {
+            //            YesOrNo question = new YesOrNo("Você tem certeza que deseja remover o produto selecionado ?");
+            //            question.ShowDialog();
                         
-                        if (question.RESPOSTA && Program._permissaoUsuario.Produto_remove)
-                        {
-                            if (Program.SQL.CRUDCommand("DELETE FROM Produto WHERE Id = @Id", "Produto", new Dictionary<string, object>() { { "@Id", dgv_dados.CurrentRow.Cells["Id"].Value } }))
-                            {
-                                btnNovoUser_Click(new object(), new EventArgs());
-                            }
-                        }
-                    }
-                    else 
-                    {
-                        InfoPopup question = new InfoPopup("Produto com movimentações encontradas.", "Não é possível remover um produto vinculado a uma Receita em execução ou já executada.");
-                        question.ShowDialog();
-                    }
-                }
-            }
-            catch (Exception)
-            {
-            }
+            //            if (question.RESPOSTA && Program._permissaoUsuario.Produto_remove)
+            //            {
+            //                if (Program.SQL.CRUDCommand("DELETE FROM Produto WHERE Id = @Id", "Produto", new Dictionary<string, object>() { { "@Id", dgv_dados.CurrentRow.Cells["Id"].Value } }))
+            //                {
+            //                    btnNovoUser_Click(new object(), new EventArgs());
+            //                }
+            //            }
+            //        }
+            //        else 
+            //        {
+            //            InfoPopup question = new InfoPopup("Produto com movimentações encontradas.", "Não é possível remover um produto vinculado a uma Receita em execução ou já executada.");
+            //            question.ShowDialog();
+            //        }
+            //    }
+            //}
+            //catch (Exception)
+            //{
+            //}
         }
 
         private void btnEditarUser_Click(object sender, EventArgs e)
@@ -297,16 +297,16 @@ namespace Main.View.CadastroFolder
         {
             try
             {
-                ProdutoClass prod = (ProdutoClass)Program.SQL.SelectObject("SELECT * FROM Produto WHERE part_number = @part_number", "Produto",
-                    new Dictionary<string, object>() 
-                    {
-                        {"@part_number", txtPartNumber.Text}
-                    });
+                //ProdutoClass prod = (ProdutoClass)Program.SQL.SelectObject("SELECT * FROM Produto WHERE part_number = @part_number", "Produto",
+                //    new Dictionary<string, object>() 
+                //    {
+                //        {"@part_number", txtPartNumber.Text}
+                //    });
 
-                if (prod != null) 
-                {
-                    txtPartNumber.Text = "";
-                }
+                //if (prod != null) 
+                //{
+                //    txtPartNumber.Text = "";
+                //}
 
             }
             catch (Exception)

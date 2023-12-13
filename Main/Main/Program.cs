@@ -67,8 +67,8 @@ namespace Main
             TecladoFilter filtro = new TecladoFilter();
             Application.AddMessageFilter(filtro);
             //Application.Run(new CommunicationForms());
-            List<object> _rede = Program.SQL.SelectList("SELECT * FROM Rede WHERE parent = @parent", "Rede", null, new Dictionary<string, object>() { { "@parent", Environment.MachineName.Trim() } });
-            REDE = _rede.Cast<RedeClass>().ToList();
+            //List<object> _rede = Program.SQL.SelectList("SELECT * FROM Rede WHERE parent = @parent", "Rede", null, new Dictionary<string, object>() { { "@parent", Environment.MachineName.Trim() } });
+            //REDE = _rede.Cast<RedeClass>().ToList();
 
             AutoUpdater.InstalledVersion = new Version(software_version);
             AutoUpdater.Synchronous = true;
@@ -77,7 +77,7 @@ namespace Main
             AutoUpdater.ClearAppDirectory = true;
             AutoUpdater.Mandatory = true;
             AutoUpdater.UpdateMode = Mode.Forced;
-            AutoUpdater.Start("ftp://ftp.aephdobrasil.com.br/SKF/xml_skf.xml", new NetworkCredential("ITO@aephdobrasil.com.br", "3x6lGPv3"));
+            AutoUpdater.Start("ftp://ftp.aephdobrasil.com.br/BRASPOR/xml_braspor.xml", new NetworkCredential("ITO@aephdobrasil.com.br", "3x6lGPv3"));
 
             Application.Run(new LoginForms());
 

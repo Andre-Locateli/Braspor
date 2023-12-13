@@ -229,9 +229,9 @@
             this.dgvDados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDados.Size = new System.Drawing.Size(839, 334);
             this.dgvDados.TabIndex = 50;
-            this.dgvDados.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDados_CellContentDoubleClick);
-            this.dgvDados.CellContextMenuStripChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDados_CellContextMenuStripChanged);
-            this.dgvDados.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDados_CellContentDoubleClick);
+            //this.dgvDados.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDados_CellContentDoubleClick);
+           // this.dgvDados.CellContextMenuStripChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDados_CellContextMenuStripChanged);
+            //this.dgvDados.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDados_CellContentDoubleClick);
             // 
             // iconReceita
             // 
@@ -253,14 +253,14 @@
             this.excluirToolStripMenuItem});
             this.metroContextMenu1.Name = "metroContextMenu1";
             this.metroContextMenu1.Size = new System.Drawing.Size(110, 26);
-            this.metroContextMenu1.Opening += new System.ComponentModel.CancelEventHandler(this.metroContextMenu1_Opening);
+            //this.metroContextMenu1.Opening += new System.ComponentModel.CancelEventHandler(this.metroContextMenu1_Opening);
             // 
             // excluirToolStripMenuItem
             // 
             this.excluirToolStripMenuItem.Name = "excluirToolStripMenuItem";
             this.excluirToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
             this.excluirToolStripMenuItem.Text = "Excluir";
-            this.excluirToolStripMenuItem.Click += new System.EventHandler(this.excluirToolStripMenuItem_Click);
+            //this.excluirToolStripMenuItem.Click += new System.EventHandler(this.excluirToolStripMenuItem_Click);
             // 
             // panel3
             // 
@@ -331,7 +331,7 @@
             this.btnthree.TabIndex = 4;
             this.btnthree.Text = "3";
             this.btnthree.UseVisualStyleBackColor = true;
-            this.btnthree.Click += new System.EventHandler(this.btnOne_Click);
+            //this.btnthree.Click += new System.EventHandler(this.btnOne_Click);
             // 
             // btnTwo
             // 
@@ -348,7 +348,7 @@
             this.btnTwo.TabIndex = 2;
             this.btnTwo.Text = "2";
             this.btnTwo.UseVisualStyleBackColor = true;
-            this.btnTwo.Click += new System.EventHandler(this.btnOne_Click);
+          //  this.btnTwo.Click += new System.EventHandler(this.btnOne_Click);
             // 
             // btnOne
             // 
@@ -365,7 +365,7 @@
             this.btnOne.TabIndex = 0;
             this.btnOne.Text = "1";
             this.btnOne.UseVisualStyleBackColor = true;
-            this.btnOne.Click += new System.EventHandler(this.btnOne_Click);
+           // this.btnOne.Click += new System.EventHandler(this.btnOne_Click);
             // 
             // panel4
             // 
@@ -435,7 +435,7 @@
             this.btnExecutar.TabIndex = 58;
             this.btnExecutar.Text = "Executar leitura";
             this.btnExecutar.UseVisualStyleBackColor = false;
-            this.btnExecutar.Click += new System.EventHandler(this.btnExecutar_Click);
+           // this.btnExecutar.Click += new System.EventHandler(this.btnExecutar_Click);
             // 
             // dataGridViewImageColumn1
             // 
@@ -462,7 +462,7 @@
             this.pcb_next.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pcb_next.TabIndex = 56;
             this.pcb_next.TabStop = false;
-            this.pcb_next.Click += new System.EventHandler(this.pcb_next_Click);
+            //this.pcb_next.Click += new System.EventHandler(this.pcb_next_Click);
             // 
             // pcb_return
             // 
@@ -475,7 +475,7 @@
             this.pcb_return.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pcb_return.TabIndex = 54;
             this.pcb_return.TabStop = false;
-            this.pcb_return.Click += new System.EventHandler(this.pcb_return_Click);
+            //this.pcb_return.Click += new System.EventHandler(this.pcb_return_Click);
             // 
             // PesagemList
             // 

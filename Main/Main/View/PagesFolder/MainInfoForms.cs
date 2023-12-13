@@ -228,7 +228,7 @@ namespace Main.View.PagesFolder
 
                 if (btn.Tag.ToString() == "Receita")
                 {
-                    QuickButtonPress = new CadastroNovaReceita();
+                    //QuickButtonPress = new CadastroNovaReceita();
                 }
 
                 if (btn.Tag.ToString() == "Usuario")

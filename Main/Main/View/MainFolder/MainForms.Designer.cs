@@ -63,6 +63,18 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lbSerialStatus = new System.Windows.Forms.Label();
             this.lbSerialStatus2 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.lbl_time = new System.Windows.Forms.Label();
+            this.lblAcesso = new System.Windows.Forms.Label();
+            this.lblUsuario = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.sidebar.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcb_logo)).BeginInit();
@@ -71,12 +83,18 @@
             this.panel2.SuspendLayout();
             this.tbSerial.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel6.SuspendLayout();
+            this.panel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // sidebar
             // 
-            this.sidebar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
             this.sidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(46)))), ((int)(((byte)(84)))));
             this.sidebar.Controls.Add(this.panel1);
             this.sidebar.Controls.Add(this.btnHome);
@@ -86,11 +104,12 @@
             this.sidebar.Controls.Add(this.btnConfiguração);
             this.sidebar.Controls.Add(this.btnManual);
             this.sidebar.Controls.Add(this.button1);
+            this.sidebar.Dock = System.Windows.Forms.DockStyle.Left;
             this.sidebar.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.sidebar.Location = new System.Drawing.Point(0, 0);
             this.sidebar.Margin = new System.Windows.Forms.Padding(0);
             this.sidebar.Name = "sidebar";
-            this.sidebar.Size = new System.Drawing.Size(210, 588);
+            this.sidebar.Size = new System.Drawing.Size(210, 690);
             this.sidebar.TabIndex = 0;
             this.sidebar.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.panel7_MouseDoubleClick);
             this.sidebar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel7_MouseDown);
@@ -302,9 +321,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pn_container.BackColor = System.Drawing.Color.White;
-            this.pn_container.Location = new System.Drawing.Point(210, 0);
+            this.pn_container.Location = new System.Drawing.Point(210, 95);
             this.pn_container.Name = "pn_container";
-            this.pn_container.Size = new System.Drawing.Size(931, 688);
+            this.pn_container.Size = new System.Drawing.Size(931, 595);
             this.pn_container.TabIndex = 1;
             this.pn_container.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.panel7_MouseDoubleClick);
             this.pn_container.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel7_MouseDown);
@@ -661,18 +680,161 @@
             this.lbSerialStatus2.TabIndex = 3;
             this.lbSerialStatus2.Text = "-";
             // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.tableLayoutPanel1);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(210, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(933, 97);
+            this.panel3.TabIndex = 5;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.panel5, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel4, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel6, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(933, 97);
+            this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(247)))), ((int)(((byte)(248)))));
+            this.panel5.Controls.Add(this.panel7);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel5.Location = new System.Drawing.Point(747, 0);
+            this.panel5.Margin = new System.Windows.Forms.Padding(0);
+            this.panel5.Name = "panel5";
+            this.panel5.Padding = new System.Windows.Forms.Padding(10);
+            this.panel5.Size = new System.Drawing.Size(186, 97);
+            this.panel5.TabIndex = 2;
+            // 
+            // panel7
+            // 
+            this.panel7.BackColor = System.Drawing.Color.White;
+            this.panel7.Controls.Add(this.pictureBox1);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel7.Location = new System.Drawing.Point(10, 10);
+            this.panel7.Name = "panel7";
+            this.panel7.Padding = new System.Windows.Forms.Padding(2);
+            this.panel7.Size = new System.Drawing.Size(166, 77);
+            this.panel7.TabIndex = 3;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.White;
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Image = global::Main.Properties.Resources.braspor;
+            this.pictureBox1.Location = new System.Drawing.Point(2, 2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(162, 73);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(247)))), ((int)(((byte)(248)))));
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(742, 0);
+            this.panel4.Margin = new System.Windows.Forms.Padding(0);
+            this.panel4.Name = "panel4";
+            this.panel4.Padding = new System.Windows.Forms.Padding(20);
+            this.panel4.Size = new System.Drawing.Size(5, 97);
+            this.panel4.TabIndex = 1;
+            // 
+            // panel6
+            // 
+            this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(247)))), ((int)(((byte)(248)))));
+            this.panel6.Controls.Add(this.panel8);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel6.Location = new System.Drawing.Point(0, 0);
+            this.panel6.Margin = new System.Windows.Forms.Padding(0);
+            this.panel6.Name = "panel6";
+            this.panel6.Padding = new System.Windows.Forms.Padding(10);
+            this.panel6.Size = new System.Drawing.Size(742, 97);
+            this.panel6.TabIndex = 0;
+            // 
+            // panel8
+            // 
+            this.panel8.BackColor = System.Drawing.Color.White;
+            this.panel8.Controls.Add(this.lbl_time);
+            this.panel8.Controls.Add(this.lblAcesso);
+            this.panel8.Controls.Add(this.lblUsuario);
+            this.panel8.Controls.Add(this.pictureBox2);
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel8.Location = new System.Drawing.Point(10, 10);
+            this.panel8.Margin = new System.Windows.Forms.Padding(0);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(722, 77);
+            this.panel8.TabIndex = 3;
+            // 
+            // lbl_time
+            // 
+            this.lbl_time.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_time.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.lbl_time.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(114)))), ((int)(((byte)(113)))));
+            this.lbl_time.Location = new System.Drawing.Point(544, 47);
+            this.lbl_time.Name = "lbl_time";
+            this.lbl_time.Size = new System.Drawing.Size(169, 25);
+            this.lbl_time.TabIndex = 3;
+            this.lbl_time.Text = "label1";
+            this.lbl_time.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblAcesso
+            // 
+            this.lblAcesso.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAcesso.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(114)))), ((int)(((byte)(113)))));
+            this.lblAcesso.Location = new System.Drawing.Point(76, 41);
+            this.lblAcesso.Name = "lblAcesso";
+            this.lblAcesso.Size = new System.Drawing.Size(345, 20);
+            this.lblAcesso.TabIndex = 2;
+            this.lblAcesso.Text = "label1";
+            // 
+            // lblUsuario
+            // 
+            this.lblUsuario.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUsuario.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(114)))), ((int)(((byte)(113)))));
+            this.lblUsuario.Location = new System.Drawing.Point(76, 16);
+            this.lblUsuario.Name = "lblUsuario";
+            this.lblUsuario.Size = new System.Drawing.Size(345, 25);
+            this.lblUsuario.TabIndex = 1;
+            this.lblUsuario.Text = "label1";
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::Main.Properties.Resources.userMain;
+            this.pictureBox2.Location = new System.Drawing.Point(19, 16);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(44, 45);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 0;
+            this.pictureBox2.TabStop = false;
+            // 
             // MainForms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1143, 690);
+            this.Controls.Add(this.pnSubMenu);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.pnBothSize);
             this.Controls.Add(this.pnDownSize);
             this.Controls.Add(this.pnRightSize);
-            this.Controls.Add(this.sidebar);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.pnSubMenu);
+            this.Controls.Add(this.sidebar);
             this.Controls.Add(this.pn_container);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -694,6 +856,14 @@
             this.tbSerial.ResumeLayout(false);
             this.tbSerial.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel6.ResumeLayout(false);
+            this.panel8.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -733,5 +903,17 @@
         private System.Windows.Forms.ToolStripMenuItem btnSerialConfig;
         private System.Windows.Forms.Button btnTipoReceita;
         private System.Windows.Forms.Button btnManual;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Label lbl_time;
+        private System.Windows.Forms.Label lblAcesso;
+        private System.Windows.Forms.Label lblUsuario;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }

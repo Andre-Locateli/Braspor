@@ -160,22 +160,12 @@
     <Compile Include="Helper\StyleSheet.cs" />
     <Compile Include="Helper\TCPContext.cs" />
     <Compile Include="Helper\TecladoFilter.cs" />
-    <Compile Include="Model\BandejaClass.cs" />
     <Compile Include="Model\ConfiguracaoClass.cs" />
-    <Compile Include="Model\CustomReceitaInfo.cs" />
     <Compile Include="Model\EtiquetaClass.cs" />
     <Compile Include="Model\EtiquetaFolder\EtiquetaInfo.cs" />
     <Compile Include="Model\IndicadorClass.cs" />
-    <Compile Include="Model\Log_bandeja_receitaClass.cs" />
     <Compile Include="Model\PermissaoClass.cs" />
-    <Compile Include="Model\PesagemClass.cs" />
-    <Compile Include="Model\ProdutoClass.cs" />
-    <Compile Include="Model\ProdutoGet.cs" />
-    <Compile Include="Model\ReceitaClass.cs" />
-    <Compile Include="Model\ReceitaLogClass.cs" />
-    <Compile Include="Model\RecipienteClass.cs" />
     <Compile Include="Model\RedeClass.cs" />
-    <Compile Include="Model\TipoReceitaClass.cs" />
     <Compile Include="Model\UsuarioClass.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -184,41 +174,11 @@
     <Compile Include="Service\LibPrinting\ZPLConverterHelper.cs" />
     <Compile Include="Service\LibPrinting\ZPLPrintingService.cs" />
     <Compile Include="Service\UIHelper.cs" />
-    <Compile Include="View\CadastroFolder\CadastroBandejaForms.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\CadastroFolder\CadastroBandejaForms.Designer.cs">
-      <DependentUpon>CadastroBandejaForms.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\CadastroFolder\CadastroNovaReceita.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\CadastroFolder\CadastroNovaReceita.Designer.cs">
-      <DependentUpon>CadastroNovaReceita.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\CadastroFolder\CadastroProdutoForms.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\CadastroFolder\CadastroProdutoForms.Designer.cs">
       <DependentUpon>CadastroProdutoForms.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\CadastroFolder\CadastroReceitaForms.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\CadastroFolder\CadastroReceitaForms.Designer.cs">
-      <DependentUpon>CadastroReceitaForms.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\CadastroFolder\CadastroRecipienteForms.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\CadastroFolder\CadastroRecipienteForms.Designer.cs">
-      <DependentUpon>CadastroRecipienteForms.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\CadastroFolder\CadastroTipoReceita.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\CadastroFolder\CadastroTipoReceita.Designer.cs">
-      <DependentUpon>CadastroTipoReceita.cs</DependentUpon>
     </Compile>
     <Compile Include="View\CommunicationFolder\CommunicationForms.cs">
       <SubType>Form</SubType>
@@ -226,38 +186,8 @@
     <Compile Include="View\CommunicationFolder\CommunicationForms.Designer.cs">
       <DependentUpon>CommunicationForms.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\CustomLayout\AEPHCard.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\CustomLayout\AEPHCard.Designer.cs">
-      <DependentUpon>AEPHCard.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\CustomLayout\CardBalanca.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\CustomLayout\CardBalanca.Designer.cs">
-      <DependentUpon>CardBalanca.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\CustomLayout\CTComboBox.cs">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\CustomLayout\PesagemRowInfo.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\CustomLayout\PesagemRowInfo.Designer.cs">
-      <DependentUpon>PesagemRowInfo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\CustomLayout\ReceitaCard.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\CustomLayout\ReceitaCard.Designer.cs">
-      <DependentUpon>ReceitaCard.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\CustomLayout\RowCardCustom.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\CustomLayout\RowCardCustom.Designer.cs">
-      <DependentUpon>RowCardCustom.cs</DependentUpon>
     </Compile>
     <Compile Include="View\LoginFolder\LoginForms.cs">
       <SubType>Form</SubType>
@@ -383,44 +313,14 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="View\CadastroFolder\CadastroBandejaForms.resx">
-      <DependentUpon>CadastroBandejaForms.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\CadastroFolder\CadastroNovaReceita.resx">
-      <DependentUpon>CadastroNovaReceita.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\CadastroFolder\CadastroProdutoForms.resx">
       <DependentUpon>CadastroProdutoForms.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\CadastroFolder\CadastroReceitaForms.resx">
-      <DependentUpon>CadastroReceitaForms.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\CadastroFolder\CadastroRecipienteForms.resx">
-      <DependentUpon>CadastroRecipienteForms.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\CadastroFolder\CadastroTipoReceita.resx">
-      <DependentUpon>CadastroTipoReceita.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\CommunicationFolder\CommunicationForms.resx">
       <DependentUpon>CommunicationForms.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\CustomLayout\AEPHCard.resx">
-      <DependentUpon>AEPHCard.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\CustomLayout\CardBalanca.resx">
-      <DependentUpon>CardBalanca.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\CustomLayout\CTComboBox.resx">
       <DependentUpon>CTComboBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\CustomLayout\PesagemRowInfo.resx">
-      <DependentUpon>PesagemRowInfo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\CustomLayout\ReceitaCard.resx">
-      <DependentUpon>ReceitaCard.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\CustomLayout\RowCardCustom.resx">
-      <DependentUpon>RowCardCustom.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\LoginFolder\LoginForms.resx">
       <DependentUpon>LoginForms.cs</DependentUpon>
@@ -631,6 +531,7 @@
     <None Include="Resources\Plus_27px.png" />
     <None Include="Resources\Plus_27px1.png" />
     <None Include="Resources\skfAnim.gif" />
+    <None Include="Resources\braspor.jpg" />
     <Content Include="[MKT] Software Vision Control - Icone %282018%29 [MAIOR].ico" />
   </ItemGroup>
   <ItemGroup>
