@@ -32,14 +32,35 @@ namespace Main.View.PagesFolder.ProcessFolder
 
         private void ProcessForms_Load(object sender, EventArgs e)
         {
+            Task.Run(() =>
+            {
+                try
+                {
+                    while (true)
+                    {
+                        valorReferencia.Invoke(new MethodInvoker(() =>
+                        {
+                            valorReferencia.Text = $"{SerialCommunicationService.indicadores_info[Program.COMNAME_01].PS}";
+                            valorReferencia.Text =  valorReferencia.Text.Replace(",", ".");
+                        }));
 
+                        valorContagem.Invoke(new MethodInvoker(() =>
+                        {
+                            valorContagem.Text = $"{SerialCommunicationService.indicadores_info[Program.COMNAME_02].PS}";
+                            valorContagem.Text = valorContagem.Text.Replace(",", ".");
+                        }));
+                    }
+                }
+                catch (Exception)
+                {
+                }
+            });
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             try
             {
-                label1.Text = $"Peso do Indicador 01: {SerialCommunicationService.indicadores_info[Program.COMNAME_01].PS}";
             }
             catch (Exception)
             {
@@ -50,7 +71,6 @@ namespace Main.View.PagesFolder.ProcessFolder
         {
             try
             {
-                label2.Text = $"Peso do Indicador 02: {SerialCommunicationService.indicadores_info[Program.COMNAME_01].PS}";
             }
             catch (Exception)
             {

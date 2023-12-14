@@ -91,7 +91,6 @@
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(208, 87);
             this.panel11.TabIndex = 38;
-            //this.panel11.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // pictureBox1
             // 
@@ -121,7 +120,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(684, 88);
             this.panel1.TabIndex = 37;
-           // this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // pictureBox4
             // 
@@ -241,7 +239,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(322, 187);
             this.panel2.TabIndex = 0;
-            //this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // panel4
             // 
@@ -253,7 +250,6 @@
             this.panel4.Padding = new System.Windows.Forms.Padding(2);
             this.panel4.Size = new System.Drawing.Size(322, 187);
             this.panel4.TabIndex = 2;
-            //this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // pcb_imageStattus
             // 
@@ -493,7 +489,6 @@
             this.btnListagem.Text = "Voltar para lista";
             this.btnListagem.UseVisualStyleBackColor = false;
             this.btnListagem.Visible = false;
-            //this.btnListagem.Click += new System.EventHandler(this.btnListagem_Click);
             // 
             // btnNovamente
             // 
@@ -511,8 +506,6 @@
             this.btnNovamente.Text = "Repetir receita";
             this.btnNovamente.UseVisualStyleBackColor = false;
             this.btnNovamente.Visible = false;
-            //this.btnNovamente.VisibleChanged += new System.EventHandler(this.btnNovamente_VisibleChanged);
-            //this.btnNovamente.Click += new System.EventHandler(this.btnNovamente_Click);
             // 
             // lblwarningReset
             // 
@@ -547,10 +540,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "PesagemProcess";
             this.Text = "PesagemProcess";
-            //this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PesagemProcess_FormClosed);
-            //this.Load += new System.EventHandler(this.PesagemProcess_Load);
-           // this.VisibleChanged += new System.EventHandler(this.PesagemProcess_VisibleChanged);
-           // this.Resize += new System.EventHandler(this.PesagemProcess_Resize);
             this.panel11.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
