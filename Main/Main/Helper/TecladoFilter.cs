@@ -36,7 +36,7 @@ namespace Main.Helper
             {
                 if (!GeralClass.IsFormOpen(typeof(SerialForm)))
                 {
-                    Console.WriteLine("F1");
+                    //Console.WriteLine("F1");
                     SerialForm serialForm = new SerialForm();
                     serialForm.ShowDialog();
                 }

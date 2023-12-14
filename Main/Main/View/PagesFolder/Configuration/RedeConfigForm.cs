@@ -133,7 +133,8 @@ namespace Main.View.PagesFolder.Configuration
                     txtIP3.Text = IP_teil[2];
                     txtIP4.Text = IP_teil[3];
                     txtPorta.Text = itemRede.porta.ToString();
-                    if(itemRede.casasDecimais != null)
+                    txtEndereco.Text = itemRede.addr.ToString();
+                    if (itemRede.casasDecimais != null)
                     {
                         //cbDecimais.Text = itemRede.casasDecimais.ToString();
                     }
@@ -237,7 +238,7 @@ namespace Main.View.PagesFolder.Configuration
             string IP = txtIP1.Text + "." + txtIP2.Text + "." + txtIP3.Text + "." + txtIP4.Text;
             IP = IP.Replace(" ", "");
             //if (cbFabricante.Text != "" && cbProtocolo.Text != "" && cbModelo.Text != "" && txtNome.Text != "" && IP != "" && txtPorta.Text != "" && cbDecimais.Text != "")
-            if (cbFabricante.Text != "" && cbProtocolo.Text != "" && cbModelo.Text != "" && txtNome.Text != "")
+            if (cbFabricante.Text != "" && cbProtocolo.Text != "" && cbModelo.Text != "" && txtNome.Text != "" && txtEndereco.Text != "")
                 {
                    /*if (ValidarCampoIP(txtIP1.Text, txtIP2.Text, txtIP3.Text, txtIP4.Text) == false)
                    {
@@ -279,6 +280,7 @@ namespace Main.View.PagesFolder.Configuration
 
                     }
                 }
+
                 else if(tvRede.SelectedNode.Tag.GetType() == typeof(RedeClass))
                 {
                     RedeClass RedeNode = (RedeClass)tvRede.SelectedNode.Tag;
@@ -301,7 +303,7 @@ namespace Main.View.PagesFolder.Configuration
                         parametros.Add("@porta", 0);
                         //parametros.Add("@casasDecimais", cbDecimais.Text);
                         parametros.Add("@dateupdate", DateTime.Today);
-                        bool result = Program.SQL.CRUDCommand("update Rede set fabricante = @fabricante, modelo = @modelo, protocolo = @protocolo, nome = @nome, parent = @parent, full_name = @full_name, num_parent = @num_parent, IP = @IP, porta = @porta, casasDecimais = @casasDecimais, dateupdate = @dateupdate where Id=@Id", "Rede", parametros);
+                        bool result = Program.SQL.CRUDCommand("update Rede set fabricante = @fabricante, modelo = @modelo, protocolo = @protocolo, nome = @nome, parent = @parent, full_name = @full_name, num_parent = @num_parent, IP = @IP, porta = @porta, dateupdate = @dateupdate where Id=@Id", "Rede", parametros);
                         if (result)
                         {
                             MessageBox.Show("Balança editada com sucesso!", "VC Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -311,6 +313,7 @@ namespace Main.View.PagesFolder.Configuration
                         }
                     }
                 }
+            
             }
             else
             {
@@ -670,7 +673,7 @@ namespace Main.View.PagesFolder.Configuration
                 Program.REDE = _rede.Cast<RedeClass>().ToList();
 
                 CommunicationForms communication = Application.OpenForms.OfType<CommunicationForms>().FirstOrDefault();
-                communication.LoadAll();
+                //communication.LoadAll();
             }
             catch (Exception)
             {
@@ -710,6 +713,28 @@ namespace Main.View.PagesFolder.Configuration
                 pProtocolo.Visible = false;
                 pEthernet.Visible = false;
                 pInstalled.Visible = false;
+            }
+        }
+
+        private void txtEndereco_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                var list = Program.SQL.SelectList("SELECT * FROM Rede WHERE addr = @addr AND tipo = 'Balança'", "Rede", null,
+                    new Dictionary<string, object>() 
+                    {
+                        {"@addr", txtEndereco.Text}
+                    });
+
+                if (list.Count > 0) 
+                {
+                    txtEndereco.Text = "";
+                    InfoPopup popup = new InfoPopup("Campo endereço já em uso!", "O campo de endereço digitado, já está sendo usado por uma balança cadastrada no sistema.");
+                    popup.Show();
+                }
+            }
+            catch (Exception ex)
+            {
             }
         }
     }
