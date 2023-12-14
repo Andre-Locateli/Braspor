@@ -39,7 +39,13 @@ namespace Main.View.PagesFolder.ProcessFolder
         {
             try
             {
-                label1.Text = $"Peso do Indicador 01: {SerialCommunicationService.indicadores_info[Program.COMNAME_01].PS}";
+                //label1.Text = $"Peso do Indicador 01: {SerialCommunicationService.indicadores_info[Program.COMNAME_01].PS}";
+
+                SerialCommunicationService.SendCommand(SerialCommunicationService.SERIALPORT1,0);
+
+
+
+
             }
             catch (Exception)
             {
@@ -50,7 +56,8 @@ namespace Main.View.PagesFolder.ProcessFolder
         {
             try
             {
-                label2.Text = $"Peso do Indicador 02: {SerialCommunicationService.indicadores_info[Program.COMNAME_01].PS}";
+                //label2.Text = $"Peso do Indicador 02: {SerialCommunicationService.indicadores_info[Program.COMNAME_01].PS}";
+                SerialCommunicationService.SendCommand(SerialCommunicationService.SERIALPORT1, 1);
             }
             catch (Exception)
             {

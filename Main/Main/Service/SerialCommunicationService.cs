@@ -146,7 +146,15 @@ namespace Main.Service
                 }
                 else 
                 {
-                    if (indicador_watchdogTime[SERIALPORT1.PortName].ElapsedMilliseconds >= 80) 
+                    if (!indicador_watchdogTime.ContainsKey(SERIALPORT1.PortName))
+                    {
+                        if (!indicador_watchdogTime.ContainsKey(SERIALPORT1.PortName))
+                        {
+                            indicador_watchdogTime.Add(SERIALPORT1.PortName, new Stopwatch());
+                            indicador_watchdogTime[SERIALPORT1.PortName].Start();
+                        }
+                    }
+                    if (indicador_watchdogTime[SERIALPORT1.PortName].ElapsedMilliseconds >= 80)
                     {
                         indicadores_info[SERIALPORT1.PortName].availableStatus = true;
                         indicador_watchdogTime[SERIALPORT1.PortName].Stop();
@@ -184,6 +192,14 @@ namespace Main.Service
                 }
                 else
                 {
+                    if (!indicador_watchdogTime.ContainsKey(SERIALPORT2.PortName))
+                    {
+                        if (!indicador_watchdogTime.ContainsKey(SERIALPORT2.PortName))
+                        {
+                            indicador_watchdogTime.Add(SERIALPORT2.PortName, new Stopwatch());
+                            indicador_watchdogTime[SERIALPORT2.PortName].Start();
+                        }
+                    }
                     if (indicador_watchdogTime[SERIALPORT2.PortName].ElapsedMilliseconds >= 80)
                     {
                         indicadores_info[SERIALPORT2.PortName].availableStatus = true;
@@ -198,7 +214,6 @@ namespace Main.Service
 
             }
         }
-
 
         private static void Value_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
@@ -237,6 +252,61 @@ namespace Main.Service
                 {
                     byte[] clear = new byte[received.BytesToRead];
                     received.Read(clear, 0, received.BytesToRead);
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+
+        public static void SendCommand(SerialPort serialCOM, int typeSend)
+        {
+            try
+            {
+                //Tara Command
+                if (typeSend == 0)
+                {
+                    portInfo[serialCOM].availableStatus = false;
+
+                    byte[] command = new byte[]
+                    {
+                        Convert.ToByte(indicadores_info[SERIALPORT1.PortName].indicador.addr),
+                        0x06,
+                        0x00,
+                        0x02,
+                        0x00,
+                        0x01,
+                        0x00,
+                        0x00
+                    };
+
+                    byte[] crc_calc = CommunicationFormsHelper.CRC(command);
+                    command[6] = crc_calc[0];
+                    command[7] = crc_calc[1];
+                    serialCOM.Write(command, 0, command.Length);
+                }
+                //Zero Command
+                else if (typeSend == 1) 
+                {
+                    portInfo[serialCOM].availableStatus = false;
+
+                    byte[] command = new byte[]
+                    {
+                        Convert.ToByte(indicadores_info[SERIALPORT1.PortName].indicador.addr),
+                        0x06,
+                        0x00,
+                        0x02,
+                        0x00,
+                        0x02,
+                        0x00,
+                        0x00
+                    };
+
+                    byte[] crc_calc = CommunicationFormsHelper.CRC(command);
+                    command[6] = crc_calc[0];
+                    command[7] = crc_calc[1];
+                    serialCOM.Write(command, 0, command.Length);
                 }
             }
             catch (Exception ex)
