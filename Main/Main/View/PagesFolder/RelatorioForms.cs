@@ -24,20 +24,22 @@ namespace Main.View.PagesFolder
         {
             InitializeComponent();
 
-            lbl_time.Text = $"{DateTime.Now.Day.ToString("D2")}/{DateTime.Now.Month.ToString("D2")}/{DateTime.Now.Year}";
-            lblUsuario.Text = Program._usuarioLogado.Nome;
-            lblAcesso.Text = Program._usuarioLogado.Acesso;
+            //lbl_time.Text = $"{DateTime.Now.Day.ToString("D2")}/{DateTime.Now.Month.ToString("D2")}/{DateTime.Now.Year}";
+            //lblUsuario.Text = Program._usuarioLogado.Nome;
+            //lblAcesso.Text = Program._usuarioLogado.Acesso;
 
-            LoadComboBox(cbReceita, "SELECT DISTINCT Nome, * FROM Receita", "Receita", new Dictionary<string, object>() { }, "Nome");
-            LoadComboBox(cbProduto, "SELECT DISTINCT part_number, * FROM Produto", "Produto", new Dictionary<string, object>() { }, "part_number");
+            //LoadComboBox(cbReceita, "SELECT DISTINCT Nome, * FROM Receita", "Receita", new Dictionary<string, object>() { }, "Nome");
+            //LoadComboBox(cbProduto, "SELECT DISTINCT part_number, * FROM Produto", "Produto", new Dictionary<string, object>() { }, "part_number");
 
-            where_condition = "";
-            where_parameter.Clear();
+            //where_condition = "";
+            //where_parameter.Clear();
 
-            string day = DateTime.Now.Day.ToString().Length == 2 ? DateTime.Now.Day.ToString() : $"0{DateTime.Now.Day.ToString()}";
-            string month = DateTime.Now.Month.ToString().Length == 2 ? DateTime.Now.Month.ToString() : $"0{DateTime.Now.Month.ToString()}";
+            //string day = DateTime.Now.Day.ToString().Length == 2 ? DateTime.Now.Day.ToString() : $"0{DateTime.Now.Day.ToString()}";
+            //string month = DateTime.Now.Month.ToString().Length == 2 ? DateTime.Now.Month.ToString() : $"0{DateTime.Now.Month.ToString()}";
 
-            mtxtDate.Text = $"{day}/{month}/{DateTime.Now.Year}";
+            //mtxtDate.Text = $"{day}/{month}/{DateTime.Now.Year}";
+
+            mtxtDate.Text = DateTime.Now.ToString();
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)

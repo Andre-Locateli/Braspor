@@ -31,6 +31,9 @@ namespace Main.View.MainFolder
         private bool _isResizing;
         private bool _isFullScreen = false;
 
+        private int idUsuario = 0;
+        private string nomeUsuario = "";
+
         bool sidebarExpand = true;
         bool layout = true;
         bool AnimationRunning = false;
@@ -38,9 +41,13 @@ namespace Main.View.MainFolder
 
         private MainInfoForms m_Form = new MainInfoForms();
 
-        public MainForms()
+        public MainForms(int id_Usuario, string nome_Usuario)
         {
             InitializeComponent();
+            
+            idUsuario = id_Usuario;
+            nomeUsuario = nome_Usuario;
+
             lbl_time.Text = $"{DateTime.Now.Day.ToString("D2")}/{DateTime.Now.Month.ToString("D2")}/{DateTime.Now.Year} {DateTime.Now.Hour.ToString("D2")}:{DateTime.Now.Minute.ToString("D2")}";
             lblUsuario.Text = Program._usuarioLogado.Nome;
             lblAcesso.Text = Program._usuarioLogado.Acesso;
@@ -629,7 +636,7 @@ namespace Main.View.MainFolder
         {
             try
             {
-                OpenPage(new CadastroMateriaPrimaForms());
+                OpenPage(new CadastroMateriaPrimaForms(idUsuario, nomeUsuario));
             }
             catch (Exception)
             {

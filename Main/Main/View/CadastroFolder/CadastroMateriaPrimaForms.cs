@@ -8,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,9 +18,18 @@ namespace Main.View.CadastroFolder
     {
         double pctTolerancia = 0;
 
-        public CadastroMateriaPrimaForms()
+        int idUsuario = 0;
+        string nomeUsuario = "";
+
+        int idMateriaEdit = 0;
+
+        Regex apenasNumero = new Regex("[^0-9]");
+
+        public CadastroMateriaPrimaForms(int id_Usuario, string nome_Usuario)
         {
             InitializeComponent();
+            idUsuario = id_Usuario;
+            nomeUsuario = nome_Usuario;
         }
 
         private void CadastroMateriaPrimaForms_Load(object sender, EventArgs e)
@@ -88,8 +98,14 @@ namespace Main.View.CadastroFolder
                 if (string.IsNullOrWhiteSpace(txtDescricao.Text)) { btnPaintBorder_Click(txtDescricao); return; }
                 if (string.IsNullOrWhiteSpace(txtCodigo.Text)) { btnPaintBorder_Click(txtCodigo); return; }
                 if (string.IsNullOrWhiteSpace(txtQtMinima.Text)) { btnPaintBorder_Click(txtQtMinima); return; }
-                this.Refresh();
 
+                if (apenasNumero.IsMatch(txtQtMinima.Text))
+                {
+                    btnPaintBorder_Click(txtQtMinima);
+                    return;
+                }
+
+                this.Refresh();
 
                 if (Program.SQL.CRUDCommand("INSERT INTO MateriaPrima (Codigo, Descricao, Tolerancia_erro, quantidade_minima, bit_status, dateinsert) VALUES (@Codigo, @Descricao, @Tolerancia_erro, @quantidade_minima, @bit_status, @dateinsert)", "MateriaPrima", 
                     new Dictionary<string, object>()
@@ -101,10 +117,21 @@ namespace Main.View.CadastroFolder
                         {"@bit_status", disponivelCk },
                         {"@dateinsert", DateTime.Now}}))
                 {
+                    var insertHistorico = Program.SQL.CRUDCommand("INSERT INTO Historico_Acoes (Id_usuario, Nome_usuario, Acao, Descricao, dateinsert) VALUES (@Id_usuario, @Nome_usuario, @Acao, @Descricao, @dateinsert)", "Historico_Acoes",
+                    new Dictionary<string, object>()
+                    {
+                        {"@Id_usuario", idUsuario},
+                        {"@Nome_usuario", nomeUsuario},
+                        {"@Acao", "Inserção de Matéria-prima"},
+                        {"@Descricao", "Matéria-prima: " + txtCodigo.Text + " - " + txtDescricao.Text },
+                        {"@dateinsert", DateTime.Now}
+                    });
+
                     btnNovoUser_Click(sender, e);
                     btnEditarUser.Visible = true;
                     btnSalvarUser.Visible = false;
                     btnNovoUser.Visible = true;
+
                     LoadProductDB();
                 }
                 else
@@ -152,12 +179,15 @@ namespace Main.View.CadastroFolder
                 if (string.IsNullOrWhiteSpace(txtDescricao.Text)) { btnPaintBorder_Click(txtDescricao); return; }
                 if (string.IsNullOrWhiteSpace(txtCodigo.Text)) { btnPaintBorder_Click(txtCodigo); return; }
                 if (string.IsNullOrWhiteSpace(txtQtMinima.Text)) { btnPaintBorder_Click(txtQtMinima); return; }
+
+                if (!apenasNumero.IsMatch(txtQtMinima.Text)) { btnPaintBorder_Click(txtQtMinima); return; }
                 this.Refresh();
 
+                
                 if (Program.SQL.CRUDCommand("UPDATE MateriaPrima SET Codigo = @Codigo, Descricao = @Descricao, Tolerancia_erro = @Tolerancia_erro, quantidade_minima = @quantidade_minima, bit_status = @bit_status, dateinsert = @dateinsert WHERE Id = @Id", "MateriaPrima", 
                     new Dictionary<string, object>()
                     {
-                        {"@Id", dgv_dados.CurrentRow.Cells["Id"].Value},
+                        {"@Id", idMateriaEdit},
                         {"@Codigo", txtCodigo.Text },
                         {"@Descricao", txtDescricao.Text },
                         {"@Tolerancia_erro", pctTolerancia },
@@ -166,6 +196,16 @@ namespace Main.View.CadastroFolder
                         {"@dateinsert", DateTime.Now}
                     }))
                 {
+                    var insertHistorico = Program.SQL.CRUDCommand("INSERT INTO Historico_Acoes (Id_usuario, Nome_usuario, Acao, Descricao, dateinsert) VALUES (@Id_usuario, @Nome_usuario, @Acao, @Descricao, @dateinsert)", "Historico_Acoes",
+                    new Dictionary<string, object>()
+                    {
+                        {"@Id_usuario", idUsuario},
+                        {"@Nome_usuario", nomeUsuario},
+                        {"@Acao", "Edição de Matéria-prima"},
+                        {"@Descricao", "Matéria-prima: " + txtCodigo.Text + " - " + txtDescricao.Text },
+                        {"@dateinsert", DateTime.Now}
+                    });
+
                     btnNovoUser_Click(sender, e);
                     btnEditarUser.Visible = false;
                     btnSalvarUser.Visible = true;
@@ -212,6 +252,7 @@ namespace Main.View.CadastroFolder
                     btnSalvarUser.Visible = false;
                     btnNovoUser.Visible = true;
 
+                    idMateriaEdit = materiaPrima.Id;
                     txtDescricao.Text = materiaPrima.Descricao;
                     txtCodigo.Text = materiaPrima.Codigo;
                     txtTolerancia.Text = materiaPrima.Tolerancia_erro.ToString() + "%";
@@ -232,6 +273,16 @@ namespace Main.View.CadastroFolder
                     {
                         if (Program.SQL.CRUDCommand("DELETE FROM MateriaPrima WHERE Id = @Id", "MateriaPrima", new Dictionary<string, object>() { { "@Id", dgv_dados.CurrentRow.Cells["Id"].Value } }))
                         {
+                            var insertHistorico = Program.SQL.CRUDCommand("INSERT INTO Historico_Acoes (Id_usuario, Nome_usuario, Acao, Descricao, dateinsert) VALUES (@Id_usuario, @Nome_usuario, @Acao, @Descricao, @dateinsert)", "Historico_Acoes",
+                            new Dictionary<string, object>()
+                            {
+                                {"@Id_usuario", idUsuario},
+                                {"@Nome_usuario", nomeUsuario},
+                                {"@Acao", "Exclusão de Matéria-prima"},
+                                {"@Descricao", "Matéria-prima: " + txtCodigo.Text + " - " + txtDescricao.Text },
+                                {"@dateinsert", DateTime.Now}
+                            });
+
                             btnNovoUser_Click(new object(), new EventArgs());
                             LoadProductDB();
                         }

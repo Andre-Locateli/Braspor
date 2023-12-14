@@ -349,6 +349,18 @@ namespace Main.Helper
                                     materia.DateInsert = Convert.ToDateTime(dr["dateinsert"]);
                                     list_return.Add(materia);
                                 }
+
+                                if(tabela == "Historico_Acoes")
+                                {
+                                    HistoricoAcoesModel historico = new HistoricoAcoesModel();
+                                    historico.Id = Convert.ToInt32(dr["Id"]);
+                                    historico.Id_usuario = Convert.ToInt32(dr["Id_usuario"]);
+                                    historico.Nome_usuario = Convert.ToString(dr["Nome_usuario"]);
+                                    historico.Acao = Convert.ToString(dr["Acao"]);
+                                    historico.Descricao = Convert.ToString(dr["Descricao"]);
+                                    historico.Dateinsert = Convert.ToDateTime(dr["dateinsert"]);
+                                    list_return.Add(historico);
+                                }
                             }
                         }
                         return list_return;
@@ -415,6 +427,19 @@ namespace Main.Helper
                                     materia.Status = Convert.ToBoolean(dr["bit_status"]);
                                     materia.DateInsert = Convert.ToDateTime(dr["dateinsert"]);
                                     return materia;
+                                }
+
+
+                                if (tabela == "Historico_Acoes")
+                                {
+                                    HistoricoAcoesModel historico = new HistoricoAcoesModel();
+                                    historico.Id = Convert.ToInt32(dr["Id"]);
+                                    historico.Id_usuario = Convert.ToInt32(dr["Id_usuario"]);
+                                    historico.Nome_usuario = Convert.ToString(dr["Nome_usuario"]);
+                                    historico.Acao = Convert.ToString(dr["Acao"]);
+                                    historico.Descricao = Convert.ToString(dr["Descricao"]);
+                                    historico.Dateinsert = Convert.ToDateTime(dr["dateinsert"]);
+                                    return historico;
                                 }
 
                                 if (tabela == "Acessos")

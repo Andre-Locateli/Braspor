@@ -163,6 +163,7 @@
     <Compile Include="Model\ConfiguracaoClass.cs" />
     <Compile Include="Model\EtiquetaClass.cs" />
     <Compile Include="Model\EtiquetaFolder\EtiquetaInfo.cs" />
+    <Compile Include="Model\HistoricoAcoesModel.cs" />
     <Compile Include="Model\IndicadorClass.cs" />
     <Compile Include="Model\MateriaPrimaClass.cs" />
     <Compile Include="Model\PermissaoClass.cs" />

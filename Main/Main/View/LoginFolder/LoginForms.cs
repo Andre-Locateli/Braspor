@@ -105,7 +105,7 @@ namespace Main.View.LoginFolder
 
                         this.Hide();
 
-                        MainForms main = new MainForms();
+                        MainForms main = new MainForms(user.Id, user.Nome);
                         main.Show();
                         Program.com = new CommunicationForms();
                         Program.com.Show();
