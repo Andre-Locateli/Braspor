@@ -42,6 +42,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "CommunicationForms";
             this.Text = "CommunicationForms";
+            //this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CommunicationForms_FormClosed);
             this.ResumeLayout(false);
 
         }

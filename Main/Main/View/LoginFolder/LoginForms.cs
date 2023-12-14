@@ -107,9 +107,6 @@ namespace Main.View.LoginFolder
 
                         MainForms main = new MainForms();
                         main.Show();
-                        Program.com = new CommunicationForms();
-                        Program.com.Show();
-                        Program.com.Visible = false;
                     }
                     else 
                     {

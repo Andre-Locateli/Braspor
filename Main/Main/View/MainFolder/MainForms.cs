@@ -5,6 +5,7 @@ using Main.View.CadastroFolder;
 using Main.View.PagesFolder;
 using Main.View.PagesFolder.Configuration;
 using Main.View.PagesFolder.PesagemFolder;
+using Main.View.PagesFolder.ProcessFolder;
 using Main.View.PopupFolder;
 using System;
 using System.Collections.Generic;
@@ -223,7 +224,7 @@ namespace Main.View.MainFolder
         {
             try
             {
-                OpenPage(new InitialForms());
+                //OpenPage(new InitialForms());
             }
             catch (Exception)
             {
@@ -457,6 +458,10 @@ namespace Main.View.MainFolder
             //PesagemList pList = new PesagemList();
             //pList.ItemEditadoTrigger += PList_ItemEditadoTrigger;
             //OpenPage(pList);
+
+            ProcessForms proc = new ProcessForms();
+            OpenPage(proc);
+
         }
 
         private void PList_ItemEditadoTrigger(object sender, EventArgs e)
@@ -564,7 +569,7 @@ namespace Main.View.MainFolder
         }
         public void UpdateStatusSerial()
         {
-            if (Program.SERIALPORT1.IsOpen) // Verifica se a porta serial está aberta
+            if (SerialCommunicationService.SERIALPORT1.IsOpen) // Verifica se a porta serial está aberta
             {
                 lbSerialStatus01.Text = "OPEN";
                 lbSerialStatus01.ForeColor = Color.FromArgb(100, 0, 161, 155);
@@ -575,7 +580,7 @@ namespace Main.View.MainFolder
                 lbSerialStatus01.ForeColor = Color.FromArgb(100, 127, 47, 50);
             }
 
-            if (Program.SERIALPORT2.IsOpen) // Verifica se a porta serial está aberta
+            if (SerialCommunicationService.SERIALPORT2.IsOpen) // Verifica se a porta serial está aberta
             {
                 lbSerialStatus02.Text = "OPEN";
                 lbSerialStatus02.ForeColor = Color.FromArgb(100, 0, 161, 155);

@@ -28,9 +28,9 @@ namespace Main.View.PagesFolder.Configuration
             loadDgvEtiqueta();
             LoadStringSQL();
 
-            lbl_time.Text = $"{DateTime.Now.Day.ToString("D2")}/{DateTime.Now.Month.ToString("D2")}/{DateTime.Now.Year}";
-            lblUsuario.Text = Program._usuarioLogado.Nome;
-            lblAcesso.Text = Program._usuarioLogado.Acesso;
+            //lbl_time.Text = $"{DateTime.Now.Day.ToString("D2")}/{DateTime.Now.Month.ToString("D2")}/{DateTime.Now.Year}";
+            //lblUsuario.Text = Program._usuarioLogado.Nome;
+            //lblAcesso.Text = Program._usuarioLogado.Acesso;
 
             if (Convert.ToBoolean(Program.CFG._modoOperacao))
             {
@@ -461,7 +461,7 @@ namespace Main.View.PagesFolder.Configuration
             {
                 // teste();
 
-                Program.com.ImpressoraPrint(new EtiquetaInfo() {   earn = "123456789122", packCaixa = "88", partNumber = "123456", produtoProduzido = "AB-CA-111011", quantidadePecas = "138", date = Convert.ToString(GetJulianDay(DateTime.Now)) }, 2);
+                //Program.com.ImpressoraPrint(new EtiquetaInfo() {   earn = "123456789122", packCaixa = "88", partNumber = "123456", produtoProduzido = "AB-CA-111011", quantidadePecas = "138", date = Convert.ToString(GetJulianDay(DateTime.Now)) }, 2);
             }
             catch (Exception)
             {
@@ -565,6 +565,39 @@ namespace Main.View.PagesFolder.Configuration
                 {
                     // MessageBox.Show($"Erro ao salvar Configuração da Estação! {ex}", "VC Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            XmlDocument doc = new XmlDocument();
+            string caminhoCompleto = Path.Combine(Application.StartupPath, Program.CFG.CaminhoConfig);
+            doc.Load(caminhoCompleto);
+            XmlElement elem = (XmlElement)doc.SelectSingleNode("//EnderecoRef");
+            if (elem != null)
+            {
+                elem.InnerText = txtEnderecoReferencia.Text;
+                Program.Endereco_Referencia = Convert.ToInt32(txtEnderecoReferencia.Text);
+            }
+            try
+            {
+                doc.Save(caminhoCompleto);
+                MessageBox.Show("Configuração de Estação salva com sucesso!", "VC Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao salvar Configuração da Estação! {ex}", "VC Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void txtEnderecoReferencia_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
             }
             catch (Exception)
             {

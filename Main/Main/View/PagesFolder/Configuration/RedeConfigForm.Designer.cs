@@ -37,6 +37,8 @@
             this.btnEditar = new System.Windows.Forms.ToolStripMenuItem();
             this.btnExcluir = new System.Windows.Forms.ToolStripMenuItem();
             this.pnBalança = new System.Windows.Forms.GroupBox();
+            this.txtEndereco = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
             this.txtIP4 = new System.Windows.Forms.TextBox();
             this.txtIP3 = new System.Windows.Forms.TextBox();
             this.txtIP2 = new System.Windows.Forms.TextBox();
@@ -85,8 +87,6 @@
             this.label14 = new System.Windows.Forms.Label();
             this.cbProtocoloImp = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.txtEndereco = new System.Windows.Forms.TextBox();
-            this.label22 = new System.Windows.Forms.Label();
             this.MenuItem.SuspendLayout();
             this.pnBalança.SuspendLayout();
             this.pnImpressora.SuspendLayout();
@@ -178,6 +178,23 @@
             this.pnBalança.TabIndex = 1;
             this.pnBalança.TabStop = false;
             this.pnBalança.Text = "Informações Balança";
+            // 
+            // txtEndereco
+            // 
+            this.txtEndereco.Location = new System.Drawing.Point(21, 149);
+            this.txtEndereco.Name = "txtEndereco";
+            this.txtEndereco.Size = new System.Drawing.Size(121, 20);
+            this.txtEndereco.TabIndex = 22;
+            this.txtEndereco.Leave += new System.EventHandler(this.txtEndereco_Leave);
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(21, 133);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(53, 13);
+            this.label22.TabIndex = 23;
+            this.label22.Text = "Endereço";
             // 
             // txtIP4
             // 
@@ -653,22 +670,6 @@
             this.label13.Size = new System.Drawing.Size(52, 13);
             this.label13.TabIndex = 4;
             this.label13.Text = "Protocolo";
-            // 
-            // txtEndereco
-            // 
-            this.txtEndereco.Location = new System.Drawing.Point(21, 149);
-            this.txtEndereco.Name = "txtEndereco";
-            this.txtEndereco.Size = new System.Drawing.Size(121, 20);
-            this.txtEndereco.TabIndex = 22;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(21, 133);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(53, 13);
-            this.label22.TabIndex = 23;
-            this.label22.Text = "Endereço";
             // 
             // RedeConfigForm
             // 

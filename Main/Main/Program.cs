@@ -2,6 +2,7 @@
 using Main.Helper;
 using Main.Helper.SerialFolder;
 using Main.Model;
+using Main.Service;
 using Main.View.CommunicationFolder;
 using Main.View.LoginFolder;
 using Main.View.MainFolder;
@@ -35,8 +36,7 @@ namespace Main
         public static CFGContext CFG = new CFGContext();
         public static SQLContext SQL;
         public static TCPContext TCP;
-        public static SerialPort SERIALPORT1 = new SerialPort();
-        public static SerialPort SERIALPORT2 = new SerialPort();
+       
         public static SerialPort IMPRESSORAPORT = new SerialPort();
         public static ControleCIndicadores _Controle;
         public static UsuarioClass _usuarioLogado;
@@ -58,6 +58,12 @@ namespace Main
         public static string software_version = "1.0.0.1";
         public static CommunicationForms com { get; set; }
 
+
+        public static string COMNAME_01 = "";
+        public static string COMNAME_02 = "";
+
+        public static int Endereco_Referencia = 1;
+
         [STAThread]
         static void Main()
         {
@@ -68,9 +74,6 @@ namespace Main
           //  Application.ApplicationExit += Application_ApplicationExit;
             TecladoFilter filtro = new TecladoFilter();
             Application.AddMessageFilter(filtro);
-            //Application.Run(new CommunicationForms());
-            //List<object> _rede = Program.SQL.SelectList("SELECT * FROM Rede WHERE parent = @parent", "Rede", null, new Dictionary<string, object>() { { "@parent", Environment.MachineName.Trim() } });
-            //REDE = _rede.Cast<RedeClass>().ToList();
 
             AutoUpdater.InstalledVersion = new Version(software_version);
             AutoUpdater.Synchronous = true;
@@ -202,6 +205,10 @@ namespace Main
                 xml_modo.InnerText = "false";
                 root.AppendChild(xml_modo);
 
+                XmlElement xml_endereco = xmlDoc.CreateElement("EnderecoRef");
+                xml_endereco.InnerText = "1";
+                root.AppendChild(xml_endereco);
+
                 xmlDoc.Save(caminhoCompleto);
                 CFG.Estação = Environment.MachineName;
 
@@ -225,6 +232,9 @@ namespace Main
                 XmlElement ultimaSenha = (XmlElement)xmlConf[0].SelectSingleNode("ultimoSenha");
                 XmlElement checkSalvar = (XmlElement)xmlConf[0].SelectSingleNode("checkLembrar");
 
+                XmlElement xml_balanca_1 = (XmlElement)xmlConf[0].SelectSingleNode("Balanca_1");
+                XmlElement xml_balanca_2 = (XmlElement)xmlConf[0].SelectSingleNode("Balanca_2");
+
                 XmlElement xml_PortSerial = (XmlElement)xmlConf[0].SelectSingleNode("PortaSerial_1");
                 XmlElement xml_BaudRate = (XmlElement)xmlConf[0].SelectSingleNode("BaudRate_1");
                 XmlElement xml_StopBit = (XmlElement)xmlConf[0].SelectSingleNode("StopBit_1");
@@ -242,6 +252,20 @@ namespace Main
                 XmlElement xml_Paridade3 = (XmlElement)xmlConf[0].SelectSingleNode("Paridade_3");
                 XmlElement xml_Autoconnect3 = (XmlElement)xmlConf[0].SelectSingleNode("AutoConnect_3");
 
+                //Console.WriteLine("$Valores lidos do XML:\n" +
+                //    $"Balança: {xml_balanca_1.InnerText}\n" +
+                //    $"Porta Serial: {xml_PortSerial.InnerText}\n" +
+                //    $"Baud Rate: {xml_BaudRate.InnerText}\n" +
+                //    $"StopBit: {xml_StopBit.InnerText}\n" +
+                //    $"Auto Connect: {xml_Autoconnect3.InnerText}\n");
+
+                //Console.WriteLine("$Valores lidos do XML:\n" +
+                //    $"Balança: {xml_balanca_2.InnerText}\n" +
+                //    $"Porta Serial: {xml_PortSerial3.InnerText}\n" +
+                //    $"Baud Rate: {xml_BaudRate3.InnerText}\n" +
+                //    $"StopBit: {xml_StopBit3.InnerText}\n" +
+                //    $"Auto Connect: {xml_Autoconnect3.InnerText}\n");
+
                 XmlElement xml_X = (XmlElement)xmlConf[0].SelectSingleNode("x");
                 XmlElement xml_Y = (XmlElement)xmlConf[0].SelectSingleNode("y");
                 XmlElement xml_width = (XmlElement)xmlConf[0].SelectSingleNode("width");
@@ -249,10 +273,12 @@ namespace Main
                 XmlElement xml_full_screen = (XmlElement)xmlConf[0].SelectSingleNode("full_screen");
 
                 XmlElement xml_modo_operacao = (XmlElement)xmlConf[0].SelectSingleNode("ModoDeOperacao");
+                XmlElement xml_endereco_referencia = (XmlElement)xmlConf[0].SelectSingleNode("EnderecoRef");
 
-                XmlElement xml_balanca_1 = (XmlElement)xmlConf[0].SelectSingleNode("Balanca_1");
-                XmlElement xml_balanca_2 = (XmlElement)xmlConf[0].SelectSingleNode("Balanca_2");
-
+                COMNAME_01 = xml_PortSerial.InnerText;
+                COMNAME_02 = xml_PortSerial3.InnerText;
+                Endereco_Referencia = Convert.ToInt32(xml_endereco_referencia.InnerText);
+                
                 //PORTA SERIAL 01
                 if (xml_Autoconnect.InnerText == "1")
                 {
@@ -267,23 +293,42 @@ namespace Main
                 {
                     try
                     {
-                        SERIALPORT1.PortName = xml_PortSerial.InnerText;
+                        SerialCommunicationService.SERIALPORT1.PortName = xml_PortSerial.InnerText;
                     }
                     catch (Exception ex)
                     {
                     }
                 }
-                SERIALPORT1.BaudRate = Convert.ToInt32(xml_BaudRate.InnerText);
-                SERIALPORT1.DataBits = 8;
-                SERIALPORT1.Parity = Parity.None;
-                SERIALPORT1.StopBits = GeralClass.v_StopBit(xml_StopBit.InnerText);
-                try
+                SerialCommunicationService.SERIALPORT1.BaudRate = Convert.ToInt32(xml_BaudRate.InnerText);
+                SerialCommunicationService.SERIALPORT1.DataBits = 8;
+                SerialCommunicationService.SERIALPORT1.Parity = Parity.None;
+                SerialCommunicationService.SERIALPORT1.StopBits = GeralClass.v_StopBit(xml_StopBit.InnerText);
+                
+                //PORTA SERIAL 03
+                if (xml_Autoconnect3.InnerText == "1")
                 {
-                    if (_autoconnect_1) SERIALPORT1.Open();
+                    _autoconnect_3 = true;
                 }
-                catch (Exception ex)
+                else
                 {
+                    _autoconnect_3 = false;
                 }
+
+                if (xml_PortSerial3.InnerText != "")
+                {
+                    try
+                    {
+                        SerialCommunicationService.SERIALPORT2.PortName = xml_PortSerial3.InnerText;
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+                }
+                SerialCommunicationService.SERIALPORT2.BaudRate = Convert.ToInt32(xml_BaudRate3.InnerText);
+                SerialCommunicationService.SERIALPORT2.DataBits = 8;
+                SerialCommunicationService.SERIALPORT2.Parity = Parity.None;
+                SerialCommunicationService.SERIALPORT2.StopBits = GeralClass.v_StopBit(xml_StopBit3.InnerText);
+
 
                 //PORTA SERIAL 02
                 if (xml_Autoconnect2.InnerText == "1")
@@ -328,39 +373,7 @@ namespace Main
                 catch (Exception ex)
                 {
                 }
-
-                //PORTA SERIAL 03
-                if (xml_Autoconnect3.InnerText == "1")
-                {
-                    _autoconnect_3 = true;
-                }
-                else
-                {
-                    _autoconnect_3 = false;
-                }
-
-                if (xml_PortSerial3.InnerText != "")
-                {
-                    try
-                    {
-                        SERIALPORT2.PortName = xml_PortSerial3.InnerText;
-                    }
-                    catch (Exception ex)
-                    {
-                    }
-                }
-                SERIALPORT2.BaudRate = Convert.ToInt32(xml_BaudRate3.InnerText);
-                SERIALPORT2.DataBits = 8;
-                SERIALPORT2.Parity = Parity.None;
-                SERIALPORT2.StopBits = GeralClass.v_StopBit(xml_StopBit3.InnerText);
-                try
-                {
-                    if (_autoconnect_3) SERIALPORT2.Open();
-                }
-                catch (Exception ex)
-                {
-                }
-
+            
                 CFG.balanca_1 = xml_balanca_1.InnerText;
                 CFG.balanca_2 = xml_balanca_2.InnerText;
 
