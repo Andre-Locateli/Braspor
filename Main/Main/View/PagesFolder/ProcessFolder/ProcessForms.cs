@@ -17,16 +17,23 @@ namespace Main.View.PagesFolder.ProcessFolder
 {
     public partial class ProcessForms : Form
     {
+        int timeSec, timeMin, timeH;
+        Boolean tmpExectAtivo;
+
+        double pesoReferencia = 0.0;
 
         //Comunicação
         public System.Timers.Timer tmRead = new System.Timers.Timer();
         public bool availableStatus = true;
 
-        public ProcessForms()
+        public ProcessForms(int id_Usuario, int id_MateriaPrima, int qt_Minima, string dsc_MateriaPrima)
         {
             InitializeComponent();
 
             SerialCommunicationService.InitWithAutoConnect();
+
+            lbl_qtMinima.Text = qt_Minima.ToString();
+            lbl_Descricao.Text = dsc_MateriaPrima;
         }
 
         private void ProcessForms_Load(object sender, EventArgs e)
@@ -121,6 +128,52 @@ namespace Main.View.PagesFolder.ProcessFolder
             this.Invalidate();
             this.Refresh();
             this.Update();
+        }
+
+        private void btn_IniciarContagem_Click(object sender, EventArgs e)
+        {
+            tmpExectAtivo = true;
+            TimerRelogio.Start();
+            lbl_Status.Text = "Em andamento";
+        }
+
+        private void btn_SalvarReferencia_Click(object sender, EventArgs e)
+        {
+            btn_IniciarContagem.Enabled = true;
+            btn_IniciarContagem.ForeColor = Color.Green;
+            btn_IniciarContagem.BackColor = Color.FromArgb(192, 255, 192);
+
+            btn_SalvarReferencia.Enabled = false;
+            btn_SalvarReferencia.ForeColor = Color.FromArgb(64, 64, 64);
+            btn_SalvarReferencia.BackColor = Color.Silver;
+
+            pesoReferencia = Convert.ToDouble(valorReferencia) / Convert.ToDouble(lbl_qtMinima.Text);
+            Load_Referencia.Visible = false;
+        }
+
+        private void TimerRelogio_Tick(object sender, EventArgs e)
+        {
+            if (tmpExectAtivo)
+            {
+                timeSec++;
+
+                if (timeSec > 60)
+                {
+                    timeMin++;
+                    timeSec = 0;
+
+                    if(timeMin > 60)
+                    {
+                        timeH++;
+                        timeMin = 0;
+                    }
+                }
+            }
+
+            lbl_Horario.Invoke(new MethodInvoker(() =>
+            {
+                lbl_Horario.Text = (String.Format("{0:00}", timeH)) + ":" + (String.Format("{0:00}", timeMin)) + ":" + (String.Format("{0:00}", timeSec));
+            }));
         }
     }
 }
