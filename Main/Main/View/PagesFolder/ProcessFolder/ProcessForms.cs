@@ -60,7 +60,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                 {
                 }
             });
-
+            Console.WriteLine("Teste");
             if (SerialCommunicationService.portInfo.ContainsKey(SerialCommunicationService.SERIALPORT1) && SerialCommunicationService.portInfo[SerialCommunicationService.SERIALPORT1].indicador.addr == Program.Endereco_Referencia)
             {
                 taraReferencia.Tag = SerialCommunicationService.SERIALPORT1;
