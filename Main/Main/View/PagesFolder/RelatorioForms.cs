@@ -233,10 +233,10 @@ namespace Main.View.PagesFolder
 
         private void copyAlltoClipboard()
         {
-            dataGridView1.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
-            dataGridView1.MultiSelect = true;
-            dataGridView1.SelectAll();
-            DataObject dataObj = dataGridView1.GetClipboardContent();
+            dgv_dados.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            dgv_dados.MultiSelect = true;
+            dgv_dados.SelectAll();
+            DataObject dataObj = dgv_dados.GetClipboardContent();
             if (dataObj != null)
                 Clipboard.SetDataObject(dataObj);
         }
@@ -467,9 +467,13 @@ namespace Main.View.PagesFolder
                     excelApp = new Microsoft.Office.Interop.Excel.Application();
                     workbook = excelApp.Workbooks.Add(AppDomain.CurrentDomain.BaseDirectory + "modelo.xlsx");
                     worksheet = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Worksheets.get_Item(1);
-                    Microsoft.Office.Interop.Excel.Range destinationRange = (Microsoft.Office.Interop.Excel.Range)worksheet.Cells[9, 1];
-                    destinationRange.Select();
-                    worksheet.PasteSpecial(Microsoft.Office.Interop.Excel.XlPasteType.xlPasteAll);
+                    Microsoft.Office.Interop.Excel.Range CR = (Microsoft.Office.Interop.Excel.Range)worksheet.Cells[9, 1];
+                    CR.Select();
+                    worksheet.PasteSpecial(CR, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true);
+
+                    excelApp.ActiveSheet.Range("F3").Value = Program._usuarioLogado.Nome;
+                    excelApp.ActiveSheet.Range("G3").Value = DateTime.Now;
+
                     excelApp.Visible = true;
                     workbook = null;
                     worksheet = null;
@@ -477,7 +481,7 @@ namespace Main.View.PagesFolder
                     releaseObject(workbook);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 excelApp.Visible = true;
                 workbook = null;
