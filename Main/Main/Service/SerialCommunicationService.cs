@@ -26,7 +26,7 @@ namespace Main.Service
         private static List<Object> _indicadores = new List<Object>();
 
         public static Dictionary<string, IndicadorClass> indicadores_info = new Dictionary<string, IndicadorClass>();
-        private static Dictionary<SerialPort, IndicadorClass> portInfo = new Dictionary<SerialPort, IndicadorClass>();
+        public static Dictionary<SerialPort, IndicadorClass> portInfo = new Dictionary<SerialPort, IndicadorClass>();
         private static Dictionary<String, Stopwatch> indicador_watchdogTime = new Dictionary<string, Stopwatch>();
 
 
