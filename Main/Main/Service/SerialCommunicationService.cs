@@ -255,7 +255,7 @@ namespace Main.Service
                         byte[] crc_calc = CommunicationFormsHelper.CRC(command);
                         command[6] = crc_calc[0];
                         command[7] = crc_calc[1];
-                        //Console.WriteLine($"Estou mando no {SERIALPORT2.PortName}");
+                        //Console.WriteLine($"Estou enviando no {SERIALPORT2.PortName}");
                         SERIALPORT2.Write(command, 0, command.Length);
                         indicadores_info[SERIALPORT2.PortName].availableStatus = false;
 
@@ -313,12 +313,14 @@ namespace Main.Service
 
                     if (bruto[7] == crc_calc[0] && bruto[8] == crc_calc[1])
                     {
+                        Console.WriteLine($"Endereço recebido: {bruto[0]}");
+
                         if (bruto[0] == Convert.ToByte(portInfo[received].indicador.addr) && bruto[1] == 0x03)
                         {
                             indicadores_info[received.PortName].PS = CommunicationFormsHelper.PesoConverted(bruto[3], bruto[4], bruto[5], bruto[6]);
                             indicadores_info[received.PortName].PB = Convert.ToDouble(indicadores_info[received.PortName].PS);
 
-                            Console.WriteLine($"{received.PortName}: {indicadores_info[received.PortName].PS}");
+                           // Console.WriteLine($"{received.PortName}: {indicadores_info[received.PortName].PS}");
                             indicadores_info[received.PortName].availableStatus = true;
                             indicador_watchdogTime.Remove(received.PortName);
                         }

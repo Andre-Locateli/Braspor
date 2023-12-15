@@ -466,8 +466,8 @@ namespace Main.View.MainFolder
             //pList.ItemEditadoTrigger += PList_ItemEditadoTrigger;
             //OpenPage(pList);
 
-            ProcessForms proc = new ProcessForms();
-            OpenPage(proc);
+            EscolhaPesagemForms escolha = new EscolhaPesagemForms(idUsuario, nomeUsuario);
+            escolha.ShowDialog();
 
         }
 
