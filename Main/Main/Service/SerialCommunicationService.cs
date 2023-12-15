@@ -33,8 +33,6 @@ namespace Main.Service
 
         private static System.Timers.Timer tmRead = new System.Timers.Timer();
 
-        private static bool testeAvailable = true;
-
         public static void InitWithAutoConnect() 
         {
             try
@@ -115,10 +113,14 @@ namespace Main.Service
             try
             {
 
-                if (indicadores_info[SERIALPORT1.PortName] != null && indicadores_info[SERIALPORT1.PortName].availableStatus)
+                //if (CommandFlag) { return; }
+
+                if (indicadores_info.ContainsKey(SERIALPORT1.PortName)) 
                 {
-                    byte[] command = new byte[]
+                    if (indicadores_info[SERIALPORT1.PortName] != null && indicadores_info[SERIALPORT1.PortName].availableStatus)
                     {
+                        byte[] command = new byte[]
+                        {
                         //Estou confundindo as portas.
                             Convert.ToByte(indicadores_info[SERIALPORT1.PortName].indicador.addr),
                                 0x03,
@@ -128,44 +130,47 @@ namespace Main.Service
                                 0x02,
                                 0x00,
                                 0x00
-                    };
+                        };
 
-                    byte[] crc_calc = CommunicationFormsHelper.CRC(command);
-                    command[6] = crc_calc[0];
-                    command[7] = crc_calc[1];
-                    //Console.WriteLine($"Estou mando no {SERIALPORT1.PortName}");
-                    SERIALPORT1.Write(command, 0, command.Length);
-                    indicadores_info[SERIALPORT1.PortName].availableStatus = false;
+                        byte[] crc_calc = CommunicationFormsHelper.CRC(command);
+                        command[6] = crc_calc[0];
+                        command[7] = crc_calc[1];
+                        //Console.WriteLine($"Estou mando no {SERIALPORT1.PortName}");
+                        SERIALPORT1.Write(command, 0, command.Length);
+                        indicadores_info[SERIALPORT1.PortName].availableStatus = false;
 
-                    if (!indicador_watchdogTime.ContainsKey(SERIALPORT1.PortName))
-                    {
-                        indicador_watchdogTime.Add(SERIALPORT1.PortName, new Stopwatch());
-                        indicador_watchdogTime[SERIALPORT1.PortName].Start();
-                    }
-
-                }
-                else 
-                {
-                    if (!indicador_watchdogTime.ContainsKey(SERIALPORT1.PortName))
-                    {
                         if (!indicador_watchdogTime.ContainsKey(SERIALPORT1.PortName))
                         {
                             indicador_watchdogTime.Add(SERIALPORT1.PortName, new Stopwatch());
                             indicador_watchdogTime[SERIALPORT1.PortName].Start();
                         }
+
                     }
-                    if (indicador_watchdogTime[SERIALPORT1.PortName].ElapsedMilliseconds >= 80)
+                    else
                     {
-                        indicadores_info[SERIALPORT1.PortName].availableStatus = true;
-                        indicador_watchdogTime[SERIALPORT1.PortName].Stop();
-                        indicador_watchdogTime.Remove(SERIALPORT1.PortName);
+                        if (!indicador_watchdogTime.ContainsKey(SERIALPORT1.PortName))
+                        {
+                            if (!indicador_watchdogTime.ContainsKey(SERIALPORT1.PortName))
+                            {
+                                indicador_watchdogTime.Add(SERIALPORT1.PortName, new Stopwatch());
+                                indicador_watchdogTime[SERIALPORT1.PortName].Start();
+                            }
+                        }
+                        if (indicador_watchdogTime[SERIALPORT1.PortName].ElapsedMilliseconds >= 80)
+                        {
+                            indicadores_info[SERIALPORT1.PortName].availableStatus = true;
+                            indicador_watchdogTime[SERIALPORT1.PortName].Stop();
+                            indicador_watchdogTime.Remove(SERIALPORT1.PortName);
+                        }
                     }
                 }
 
-                if (indicadores_info[SERIALPORT2.PortName] != null && indicadores_info[SERIALPORT2.PortName].availableStatus)
+                if (indicadores_info.ContainsKey(SERIALPORT2.PortName)) 
                 {
-                    byte[] command = new byte[]
+                    if (indicadores_info[SERIALPORT2.PortName] != null && indicadores_info[SERIALPORT2.PortName].availableStatus)
                     {
+                        byte[] command = new byte[]
+                        {
                         //Estou confundindo as portas.
                             Convert.ToByte(indicadores_info[SERIALPORT2.PortName].indicador.addr),
                                 0x03,
@@ -175,36 +180,37 @@ namespace Main.Service
                                 0x02,
                                 0x00,
                                 0x00
-                    };
+                        };
 
-                    byte[] crc_calc = CommunicationFormsHelper.CRC(command);
-                    command[6] = crc_calc[0];
-                    command[7] = crc_calc[1];
-                    //Console.WriteLine($"Estou mando no {SERIALPORT2.PortName}");
-                    SERIALPORT2.Write(command, 0, command.Length);
-                    indicadores_info[SERIALPORT2.PortName].availableStatus = false;
+                        byte[] crc_calc = CommunicationFormsHelper.CRC(command);
+                        command[6] = crc_calc[0];
+                        command[7] = crc_calc[1];
+                        //Console.WriteLine($"Estou mando no {SERIALPORT2.PortName}");
+                        SERIALPORT2.Write(command, 0, command.Length);
+                        indicadores_info[SERIALPORT2.PortName].availableStatus = false;
 
-                    if (!indicador_watchdogTime.ContainsKey(SERIALPORT2.PortName))
-                    {
-                        indicador_watchdogTime.Add(SERIALPORT2.PortName, new Stopwatch());
-                        indicador_watchdogTime[SERIALPORT2.PortName].Start();
-                    }
-                }
-                else
-                {
-                    if (!indicador_watchdogTime.ContainsKey(SERIALPORT2.PortName))
-                    {
                         if (!indicador_watchdogTime.ContainsKey(SERIALPORT2.PortName))
                         {
                             indicador_watchdogTime.Add(SERIALPORT2.PortName, new Stopwatch());
                             indicador_watchdogTime[SERIALPORT2.PortName].Start();
                         }
                     }
-                    if (indicador_watchdogTime[SERIALPORT2.PortName].ElapsedMilliseconds >= 80)
+                    else
                     {
-                        indicadores_info[SERIALPORT2.PortName].availableStatus = true;
-                        indicador_watchdogTime[SERIALPORT2.PortName].Stop();
-                        indicador_watchdogTime.Remove(SERIALPORT2.PortName);
+                        if (!indicador_watchdogTime.ContainsKey(SERIALPORT2.PortName))
+                        {
+                            if (!indicador_watchdogTime.ContainsKey(SERIALPORT2.PortName))
+                            {
+                                indicador_watchdogTime.Add(SERIALPORT2.PortName, new Stopwatch());
+                                indicador_watchdogTime[SERIALPORT2.PortName].Start();
+                            }
+                        }
+                        if (indicador_watchdogTime[SERIALPORT2.PortName].ElapsedMilliseconds >= 80)
+                        {
+                            indicadores_info[SERIALPORT2.PortName].availableStatus = true;
+                            indicador_watchdogTime[SERIALPORT2.PortName].Stop();
+                            indicador_watchdogTime.Remove(SERIALPORT2.PortName);
+                        }
                     }
                 }
 
@@ -264,10 +270,15 @@ namespace Main.Service
         {
             try
             {
+                tmRead.Stop();
+                //CommandFlag = true;
+
+                ///await Task.Delay(1000);
+               
                 //Tara Command
                 if (typeSend == 0)
                 {
-                    portInfo[serialCOM].availableStatus = false;
+                    //portInfo[serialCOM].availableStatus = false;
 
                     byte[] command = new byte[]
                     {
@@ -289,7 +300,7 @@ namespace Main.Service
                 //Zero Command
                 else if (typeSend == 1) 
                 {
-                    portInfo[serialCOM].availableStatus = false;
+                    //portInfo[serialCOM].availableStatus = false;
 
                     byte[] command = new byte[]
                     {
@@ -308,6 +319,9 @@ namespace Main.Service
                     command[7] = crc_calc[1];
                     serialCOM.Write(command, 0, command.Length);
                 }
+
+                //CommandFlag = false;
+                tmRead.Start();
             }
             catch (Exception ex)
             {
