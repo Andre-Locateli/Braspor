@@ -720,10 +720,11 @@ namespace Main.View.PagesFolder.Configuration
         {
             try
             {
-                var list = Program.SQL.SelectList("SELECT * FROM Rede WHERE addr = @addr AND tipo = 'Balança'", "Rede", null,
+                var list = Program.SQL.SelectList("SELECT * FROM Rede WHERE addr = @addr AND tipo = 'Balança' AND parent = @parent", "Rede", null,
                     new Dictionary<string, object>() 
                     {
-                        {"@addr", txtEndereco.Text}
+                        {"@addr", txtEndereco.Text},
+                        {"@parent", Environment.MachineName}
                     });
 
                 if (list.Count > 0) 
