@@ -57,20 +57,11 @@ namespace Main.View.PagesFolder.ProcessFolder
             });
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void taraReferencia_Click(object sender, EventArgs e)
         {
             try
             {
-            }
-            catch (Exception)
-            {
-            }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            try
-            {
+                SerialCommunicationService.SendCommand(SerialCommunicationService.SERIALPORT1, 1);
             }
             catch (Exception)
             {
@@ -78,5 +69,23 @@ namespace Main.View.PagesFolder.ProcessFolder
             }
         }
 
+        private void taraContagem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SerialCommunicationService.SendCommand(SerialCommunicationService.SERIALPORT2, 1);
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void ProcessForms_SizeChanged(object sender, EventArgs e)
+        {
+            this.Invalidate();
+            this.Refresh();
+            this.Update();
+        }
     }
 }
