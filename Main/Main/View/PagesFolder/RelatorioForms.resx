@@ -117,22 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="export.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="export.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAedJREFUaEPt
-        mctKw0AUhrtzIS58ATfWNpdmGkTxGdwINgkFwedw61oR3OlDWHwpXQn1svGy0Qn8Qpmczpw200wD88GH
-        EHO+ntFWxXY8Ho9nfQmG4144LB5Dkb9If1dqkl/gYe0Qx8WODE8rD7RKbR5CBieVB2hCW4eQsY9KvClt
-        HEKN4rI11H7FuodQg7hsDbVPGYn8ErcvjhrDZWuo/XkufQg1hMvWUPs6lzqEGsFla6h9kxjjUztgQO2b
-        xBif2gEDat8kxvjUDhhQ+yYxxoeKuBRr8aEiLsVafKiIS7EWHyriUqzFh4q4FGvxoSIuxVp8qIhLsRYf
-        KuJSrMWHijD9CkV2FcenwyQ52y6N0yINRH4tP/et3MsWa/GhIgyfymWRqBCK0b6851mZYYkEHypi8LM/
-        yATG51IeUN4rv0tkY64Y50NFdEZJdoNRI/Ipdks1dGKUDxXRKb/6Bxg1EonsiGroxCgfKqJTiPNNjBrp
-        90+2qIZOjPKhIjpbf4DWP4Va/yKWtvvHKGz1L7J/yz8X7srXRLd7vFEap6PDIMnv5fWfmfsWEmvxkUPu
-        /rlb9Q1r8cEbG1SscSNRPGAtPr0kC+Twqxpz4DRMsz2stRgzbzE1/3RK8nf5cTIYjHexjsfj8awdnc4f
-        EhF4VG3q+1AAAAAASUVORK5CYII=
-</value>
-  </data>
 </root>

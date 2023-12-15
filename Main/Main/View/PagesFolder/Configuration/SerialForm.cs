@@ -340,6 +340,8 @@ namespace Main.View.PagesFolder.Configuration
                             Console.WriteLine(ex.ToString());
                             btnSalvar01.Text = "Conectar";
                         }
+
+                        SerialCommunicationService.InitWithoutAutoConnect();
                     }
                     else
                     {
@@ -374,6 +376,7 @@ namespace Main.View.PagesFolder.Configuration
                             Console.WriteLine(ex.ToString());
                             btnSalvar02.Text = "Conectar";
                         }
+                        SerialCommunicationService.InitWithoutAutoConnect();
                     }
                     else
                     {
