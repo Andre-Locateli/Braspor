@@ -104,5 +104,23 @@ namespace Main.View.PagesFolder.ProcessFolder
         }
 
 
+        private void taraContagem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SerialCommunicationService.SendCommand(SerialCommunicationService.SERIALPORT2, 1);
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void ProcessForms_SizeChanged(object sender, EventArgs e)
+        {
+            this.Invalidate();
+            this.Refresh();
+            this.Update();
+        }
     }
 }
