@@ -207,7 +207,7 @@ namespace Main.View.PagesFolder.Configuration
             cbProtocolo.Items.Clear();
             if (cbFabricante.Text == "AEPH do Brasil")
             {
-                cbProtocolo.Items.Add("TCA");
+                //cbProtocolo.Items.Add("TCA");
                 cbProtocolo.Items.Add("RTU");
             }
 

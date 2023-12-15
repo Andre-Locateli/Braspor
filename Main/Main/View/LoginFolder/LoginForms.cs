@@ -104,7 +104,7 @@ namespace Main.View.LoginFolder
                         SaveLoginInfo(ch_ultimoAcesso.Checked);
 
                         this.Hide();
-
+                        SerialCommunicationService.InitWithAutoConnect();
                         MainForms main = new MainForms(user.Id, user.Nome);
                         main.Show();
                     }

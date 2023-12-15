@@ -17,29 +17,16 @@ namespace Main.View.PagesFolder
 {
     public partial class RelatorioForms : Form
     {
+        private Microsoft.Office.Interop.Excel.Application excelApp { get; set; }
+        private Microsoft.Office.Interop.Excel.Workbook workbook { get; set; }
+        private Microsoft.Office.Interop.Excel.Worksheet worksheet { get; set; }
+
         private string where_condition = "";
         private Dictionary<string, object> where_parameter = new Dictionary<string, object>();
 
         public RelatorioForms()
         {
             InitializeComponent();
-
-            //lbl_time.Text = $"{DateTime.Now.Day.ToString("D2")}/{DateTime.Now.Month.ToString("D2")}/{DateTime.Now.Year}";
-            //lblUsuario.Text = Program._usuarioLogado.Nome;
-            //lblAcesso.Text = Program._usuarioLogado.Acesso;
-
-            //LoadComboBox(cbReceita, "SELECT DISTINCT Nome, * FROM Receita", "Receita", new Dictionary<string, object>() { }, "Nome");
-            //LoadComboBox(cbProduto, "SELECT DISTINCT part_number, * FROM Produto", "Produto", new Dictionary<string, object>() { }, "part_number");
-
-            //where_condition = "";
-            //where_parameter.Clear();
-
-            //string day = DateTime.Now.Day.ToString().Length == 2 ? DateTime.Now.Day.ToString() : $"0{DateTime.Now.Day.ToString()}";
-            //string month = DateTime.Now.Month.ToString().Length == 2 ? DateTime.Now.Month.ToString() : $"0{DateTime.Now.Month.ToString()}";
-
-            //mtxtDate.Text = $"{day}/{month}/{DateTime.Now.Year}";
-
-            mtxtDate.Text = DateTime.Now.ToString();
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -51,14 +38,23 @@ namespace Main.View.PagesFolder
         {
             try
             {
-                if (e.RowIndex % 2 == 0)
+                if (dgv_dados.Rows.Count > 0) 
                 {
-                    //dgv_dados.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.White;
+                    lblNoDATA.Visible = false;
                 }
-                else
+                else 
                 {
-                    //dgv_dados.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(41, 46, 84);
+                    lblNoDATA.Visible = true;
                 }
+
+                //if (e.RowIndex % 2 == 0)
+                //{
+                //    //dgv_dados.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.White;
+                //}
+                //else
+                //{
+                //    //dgv_dados.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(41, 46, 84);
+                //}
             }
             catch (Exception)
             {
@@ -73,21 +69,6 @@ namespace Main.View.PagesFolder
                 {
                     dgv_dados.SelectedRows[0].Selected = false;
                 }
-            }
-            catch (Exception)
-            {
-            }
-        }
-
-        public void LoadComboBox(ComboBox cb, string consulta, string tabela, Dictionary<string, object> parameter, string parameter_name)
-        {
-            try
-            {
-                List<object> items = Program.SQL.SelectList(consulta, tabela, null, parameter);
-
-                cb.DataSource = items;
-                cb.DisplayMember = parameter_name;
-                cb.SelectedItem = null;
             }
             catch (Exception)
             {
@@ -260,44 +241,6 @@ namespace Main.View.PagesFolder
                 Clipboard.SetDataObject(dataObj);
         }
 
-        private void mtxtDate_Leave(object sender, EventArgs e)
-        {
-            try
-            {
-                if (mtxtDate.Text.Length >= 10)
-                {
-                    if (where_condition.Length == 0) { where_condition += $" WHERE CONVERT(DATE, dateinsert) = @dateinsert "; where_parameter.Add("@dateinsert", mtxtDate.Text); }
-                    else
-                    {
-                        if (where_condition.Contains("@dateinsert"))
-                        {
-                            where_parameter["@dateinsert"] = mtxtDate.Text;
-                        }
-                        else
-                        {
-                            where_condition += $" AND CONVERT(DATE, dateinsert) = @dateinsert ";
-                            where_parameter["@dateinsert"] = mtxtDate.Text;
-                        }
-                    }
-
-                    dgv_dados.DataSource = Program.SQL.SelectDataGrid("SELECT Id, Nome, Codigo," +
-                        "Qtd_Pecas_Pesado AS [QTD Peças], " +
-                        "Peso_Pecas AS [Peças Peso], " +
-                        "Peso_Pecas_Pesado AS [Peso Peças Final], " +
-                        "Estacao, " +
-                        "Operador," +
-                        "datefim AS [Data Fim] FROM LogReceita " +
-                        $"{where_condition}", "LogReceita",
-                        where_parameter);
-
-                    dgv_dados.Columns[1].Visible = false;
-                }
-            }
-            catch (Exception)
-            {
-            }
-        }
-
         private void panel1_Paint_1(object sender, PaintEventArgs e)
         {
             System.Windows.Forms.Panel pn = (System.Windows.Forms.Panel)sender;
@@ -351,10 +294,244 @@ namespace Main.View.PagesFolder
             try
             {
                 InitSearch();
+                mtxtDateInicio.Text = $"{fixTime(DateTime.Now.Day)}/{fixTime(DateTime.Now.Month)}/{DateTime.Now.Year} 00:00";
+                mtxtDateFim.Text = $"{fixTime(DateTime.Now.Day)}/{fixTime(DateTime.Now.Month)}/{DateTime.Now.Year} 23:59";
+                LoadComboBox(cbProduto,"SELECT * FROM MateriaPrima", "MateriaPrima", new Dictionary<string, object>() { },
+                    "Descricao");
+
+                LoadComboBox(cbUsuario, "SELECT * FROM Usuario", "Usuario", new Dictionary<string, object>() { },
+                    "Nome");
+
+                mtxtDateInicio.Tag = label2;
+                mtxtDateFim.Tag = label7;
             }
             catch (Exception)
             {
             }
         }
+
+        private string fixTime(int inputdata) 
+        {
+            try
+            {
+                if (inputdata.ToString().Length == 1) { return string.Format("0{0}", inputdata); }
+                else if(inputdata.ToString().Length == 2) { return inputdata.ToString(); }
+
+                return "";
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
+        }
+
+        public void LoadComboBox(ComboBox cb, string consulta, string tabela, Dictionary<string, object> parameter, string parameter_name)
+        {
+            try
+            {
+                List<object> items = Program.SQL.SelectList(consulta, tabela, null, parameter);
+
+                cb.DataSource = items;
+                cb.DisplayMember = parameter_name;
+                cb.SelectedItem = null;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void cbProduto_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                MateriaPrimaClass mtp = (MateriaPrimaClass)Program.SQL.SelectObject("SELECT * FROM MateriaPrima WHERE Descricao = @Descricao", "MateriaPrima",
+                    new Dictionary<string, object>() 
+                    {
+                        {"@Descricao", cbProduto.Text}
+                    });
+
+                if (mtp == null) 
+                {
+                    cbProduto.Text = "";
+                    cbProduto.SelectedItem = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void cbUsuario_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                UsuarioClass mtp = (UsuarioClass)Program.SQL.SelectObject("SELECT * FROM Usuario WHERE Nome = @Nome", "Usuario",
+                    new Dictionary<string, object>()
+                    {
+                        {"@Nome", cbUsuario.Text}
+                    });
+
+                if (mtp == null)
+                {
+                    cbUsuario.Text = "";
+                    cbUsuario.SelectedItem = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void mtxtDate_LeaveEvent(object sender, EventArgs e)
+        {
+            try
+            {
+                MaskedTextBox currentTXT = (MaskedTextBox)sender;
+                System.Windows.Forms.Label lblRed = (System.Windows.Forms.Label)currentTXT.Tag;
+
+                int qtd = currentTXT.Text.Count(c => ' ' == c);
+
+                if (qtd > 1)
+                {
+                    lblRed.ForeColor = System.Drawing.Color.Red;
+                }
+                else 
+                {
+                    lblRed.ForeColor = System.Drawing.Color.Black;
+                }
+
+                //Console.WriteLine($"Quantidade de espaços em branco. {qtd}");
+
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+
+        private void btnPaintBorder_Click(object sender)
+        {
+            System.Drawing.Color borderColor = System.Drawing.Color.Red;
+            Control item = (Control)sender;
+            using (Graphics g = item.CreateGraphics())
+            {
+                System.Drawing.Pen pen = new System.Drawing.Pen(borderColor, 1);
+                System.Drawing.Rectangle rect = new System.Drawing.Rectangle(0, 0, item.Width - 1, item.Height - 1);
+                g.DrawRectangle(pen, rect);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                YesOrNo question = new YesOrNo("Você tem certeza?\nA exportação de todos os dados pode levar alguns instantes.");
+                question.ShowDialog();
+                if (question.RESPOSTA)
+                {
+                    dgv_dados.DataSource = Program.SQL.SelectDataGrid("SELECT M.Descricao AS 'Matéria Prima', U.Nome AS 'Nome Operador', P.Descricao AS 'Descrição Produto', P.Tempo_execucao AS 'Tempo execução', P.Total_contagem AS 'Contagem total de itens' , P.Peso_total AS 'Peso total do processo', P.dateinsert AS 'Data Inicio', P.dateend AS 'Data Fim' FROM Processos P INNER JOIN Usuario U ON P.Id_usuario = U.Id INNER JOIN MateriaPrima M ON P.Id_produto = M.Id", "Processos");
+
+                    ExportToExcel(dgv_dados);
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ExportToExcel(dgv_dados);
+        }
+
+        private void ExportToExcel(DataGridView dataGridView)
+        {
+            try
+            {
+
+                dataGridView.SelectAll();
+                copyAlltoClipboard();
+
+                if (dataGridView.SelectedCells.Count > 0)
+                {
+                    DataObject dataObject = dataGridView.GetClipboardContent();
+                    Clipboard.SetDataObject(dataObject);
+
+                    excelApp = new Microsoft.Office.Interop.Excel.Application();
+                    workbook = excelApp.Workbooks.Add(AppDomain.CurrentDomain.BaseDirectory + "modelo.xlsx");
+                    worksheet = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Worksheets.get_Item(1);
+                    Microsoft.Office.Interop.Excel.Range destinationRange = (Microsoft.Office.Interop.Excel.Range)worksheet.Cells[9, 1];
+                    destinationRange.Select();
+                    worksheet.PasteSpecial(Microsoft.Office.Interop.Excel.XlPasteType.xlPasteAll);
+                    excelApp.Visible = true;
+                    workbook = null;
+                    worksheet = null;
+                    releaseObject(excelApp);
+                    releaseObject(workbook);
+                }
+            }
+            catch (Exception)
+            {
+                excelApp.Visible = true;
+                workbook = null;
+                worksheet = null;
+                releaseObject(excelApp);
+                releaseObject(workbook);
+            }
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                resetLayoutColor();
+                if (mtxtDateInicio.Text.Count(c => ' ' == c) > 1) { label2.ForeColor = System.Drawing.Color.Red;return; }
+                if (mtxtDateFim.Text.Count(c => ' ' == c) > 1) { label7.ForeColor = System.Drawing.Color.Red; return; }
+
+                if (cbProduto.SelectedItem == null) { label4.ForeColor = System.Drawing.Color.Red; return; }
+                if (cbUsuario.SelectedItem == null) { label3.ForeColor = System.Drawing.Color.Red; return; }
+
+                if (mtxtDateInicio.Text.Count(c => ' ' == c) > 1) { label2.ForeColor = System.Drawing.Color.Red;return; }
+
+
+                UsuarioClass USER = (UsuarioClass)cbUsuario.SelectedItem;
+                MateriaPrimaClass MATERIA = (MateriaPrimaClass)cbProduto.SelectedItem;
+
+                //Terminar esse CÓDIGO PARA BUSCAR OS ITENS COM OS PARAMETROS.
+                where_condition = $"P.dateinsert >= '{mtxtDateInicio.Text}' AND P.dateend <= '{mtxtDateFim.Text}' AND P.Id_usuario = {USER.Id} AND P.Id_produto = {MATERIA.Id}";
+
+                dgv_dados.DataSource = Program.SQL.SelectDataGrid($"SELECT M.Descricao AS 'Matéria Prima', U.Nome AS 'Nome Operador', P.Descricao AS 'Descrição Produto', P.Tempo_execucao AS 'Tempo execução', P.Total_contagem AS 'Contagem total de itens' , P.Peso_total AS 'Peso total do processo', P.dateinsert AS 'Data Inicio', P.dateend AS 'Data Fim' FROM Processos P INNER JOIN Usuario U ON P.Id_usuario = U.Id INNER JOIN MateriaPrima M ON P.Id_produto = M.Id WHERE {where_condition}", "Processos");
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
+        private void resetLayoutColor() 
+        {
+            try
+            {
+                label2.ForeColor = System.Drawing.Color.Black;
+                label7.ForeColor = System.Drawing.Color.Black;
+                label4.ForeColor = System.Drawing.Color.Black;
+                label3.ForeColor = System.Drawing.Color.Black;
+                label2.ForeColor = System.Drawing.Color.Black;
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+
+
     }
 }

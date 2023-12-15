@@ -25,8 +25,6 @@ namespace Main.View.PagesFolder.ProcessFolder
         public ProcessForms()
         {
             InitializeComponent();
-
-            SerialCommunicationService.InitWithAutoConnect();
         }
 
         private void ProcessForms_Load(object sender, EventArgs e)

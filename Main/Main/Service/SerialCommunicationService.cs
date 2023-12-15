@@ -33,6 +33,7 @@ namespace Main.Service
 
         private static System.Timers.Timer tmRead = new System.Timers.Timer();
 
+        //Conecta no inicio do programa, caso esteja configurado para conexão automatica.
         public static void InitWithAutoConnect() 
         {
             try
@@ -82,8 +83,8 @@ namespace Main.Service
 
                 if (indicadores_info.Count <= 0)
                 {
-                    InfoPopup info = new InfoPopup("Configuração de indicadores necessária !!", "Atenção, Pressione o botão F1 na página principal para configurar os indicadores.");
-                    info.Show();
+                   // InfoPopup info = new InfoPopup("Configuração de indicadores necessária !!", "Atenção, Pressione o botão F1 na página principal para configurar os indicadores.");
+                   // info.Show();
                 }
                 else 
                 {
@@ -98,24 +99,93 @@ namespace Main.Service
 
             }
         }
-
+        //Conecta com o Indicador quando o botão de conectar é pressionado na tela de Conexão Serial.
         public static void InitWithoutAutoConnect()
         {
+            try
+            {
+                portInfo.Clear();
+                indicadores_info.Clear();
+                indicador_watchdogTime.Clear();
+                try
+                {
+                    if (!SERIALPORT1.IsOpen) { SERIALPORT1.Open(); }
+                }
+                catch (Exception)
+                {
+                }
 
+                try
+                {
+                    if (!SERIALPORT2.IsOpen) { SERIALPORT2.Open(); }
+                }
+                catch (Exception)
+                {
+
+                }
+
+                SERIALPORT1.DataReceived += Value_DataReceived;
+                SERIALPORT2.DataReceived += Value_DataReceived;
+
+                Dictionary<string, object> parametros = new Dictionary<string, object>()
+                {
+                    { "@parent", Environment.MachineName}
+                };
+
+                _indicadores = Program.SQL.SelectList("select * from Rede where parent = @parent and tipo = 'Balança'", "Rede", values: parametros);
+
+                if (_indicadores.Count > 0)
+                {
+                    foreach (RedeClass indicador in _indicadores)
+                    {
+
+                        if (indicador.nome == Program.CFG.balanca_1)
+                        {
+                            IndicadorClass indicador01 = new IndicadorClass(SERIALPORT1, indicador);
+                            indicador01.nome = Program.CFG.balanca_1;
+                            indicadores_info.Add(SERIALPORT1.PortName, indicador01);
+                            portInfo.Add(SERIALPORT1, indicador01);
+
+                        }
+                        else if (indicador.nome == Program.CFG.balanca_2)
+                        {
+                            IndicadorClass indicador02 = new IndicadorClass(SERIALPORT2, indicador);
+                            indicador02.nome = Program.CFG.balanca_2;
+                            indicadores_info.Add(SERIALPORT2.PortName, indicador02);
+                            portInfo.Add(SERIALPORT2, indicador02);
+                        }
+                    }
+                }
+
+                if (indicadores_info.Count <= 0)
+                {
+                    //InfoPopup info = new InfoPopup("Configuração de indicadores necessária !!", "Atenção, Pressione o botão F1 na página principal para configurar os indicadores.");
+                    //info.Show();
+                }
+                else
+                {
+                    tmRead.Interval = 60;
+                    tmRead.Elapsed += TmRead_Elapsed;
+                    tmRead.Start();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
 
 
         //FUNÇÕES
 
+        //Função para requisição de peso no Indicador Modbus.
         private static void TmRead_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             try
             {
 
-                //if (CommandFlag) { return; }
-
-                if (indicadores_info.ContainsKey(SERIALPORT1.PortName)) 
+                if (indicadores_info.ContainsKey(SERIALPORT1.PortName) && SERIALPORT1.IsOpen) 
                 {
                     if (indicadores_info[SERIALPORT1.PortName] != null && indicadores_info[SERIALPORT1.PortName].availableStatus)
                     {
@@ -165,7 +235,7 @@ namespace Main.Service
                     }
                 }
 
-                if (indicadores_info.ContainsKey(SERIALPORT2.PortName)) 
+                if (indicadores_info.ContainsKey(SERIALPORT2.PortName) && SERIALPORT2.IsOpen) 
                 {
                     if (indicadores_info[SERIALPORT2.PortName] != null && indicadores_info[SERIALPORT2.PortName].availableStatus)
                     {
@@ -220,7 +290,7 @@ namespace Main.Service
 
             }
         }
-
+        //Função que vai tratar o retorno dos dados do Indicador.
         private static void Value_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             try
@@ -270,15 +340,11 @@ namespace Main.Service
         {
             try
             {
+                //Para comunicação de peso.
                 tmRead.Stop();
-                //CommandFlag = true;
-
-                ///await Task.Delay(1000);
-               
                 //Tara Command
                 if (typeSend == 0)
                 {
-                    //portInfo[serialCOM].availableStatus = false;
 
                     byte[] command = new byte[]
                     {
@@ -319,8 +385,7 @@ namespace Main.Service
                     command[7] = crc_calc[1];
                     serialCOM.Write(command, 0, command.Length);
                 }
-
-                //CommandFlag = false;
+                //Retoma a comunicação de peso.
                 tmRead.Start();
             }
             catch (Exception ex)
