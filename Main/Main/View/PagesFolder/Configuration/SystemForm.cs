@@ -539,13 +539,7 @@ namespace Main.View.PagesFolder.Configuration
 
         private void SystemForm_Load(object sender, EventArgs e)
         {
-            try
-            {
-                txtEnderecoReferencia.Text = Program.Endereco_Referencia.ToString();
-            }
-            catch (Exception ex)
-            {
-            }
+
         }
 
         private void ch_producao_CheckedChanged(object sender, EventArgs e)
