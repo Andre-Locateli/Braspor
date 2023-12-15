@@ -1,4 +1,5 @@
-﻿using Main.Model;
+﻿using LiveCharts.Charts;
+using Main.Model;
 using Main.Service;
 using Main.View.CommunicationFolder;
 using System;
@@ -18,9 +19,7 @@ namespace Main.View.PagesFolder.ProcessFolder
     {
 
         //Comunicação
-
         public System.Timers.Timer tmRead = new System.Timers.Timer();
-        SerialPort teste = new SerialPort();
         public bool availableStatus = true;
 
         public ProcessForms()
@@ -40,14 +39,20 @@ namespace Main.View.PagesFolder.ProcessFolder
                     {
                         valorReferencia.Invoke(new MethodInvoker(() =>
                         {
-                            valorReferencia.Text = $"{SerialCommunicationService.indicadores_info[Program.COMNAME_01].PS}";
-                            valorReferencia.Text =  valorReferencia.Text.Replace(",", ".");
+                            if (SerialCommunicationService.indicadores_info.ContainsKey(Program.COMNAME_01)) 
+                            {
+                                valorReferencia.Text = $"{SerialCommunicationService.indicadores_info[Program.COMNAME_01].PS}";
+                                valorReferencia.Text = valorReferencia.Text.Replace(",", ".");
+                            }
                         }));
 
                         valorContagem.Invoke(new MethodInvoker(() =>
                         {
-                            valorContagem.Text = $"{SerialCommunicationService.indicadores_info[Program.COMNAME_02].PS}";
-                            valorContagem.Text = valorContagem.Text.Replace(",", ".");
+                            if (SerialCommunicationService.indicadores_info.ContainsKey(Program.COMNAME_02)) 
+                            {
+                                valorContagem.Text = $"{SerialCommunicationService.indicadores_info[Program.COMNAME_02].PS}";
+                                valorContagem.Text = valorContagem.Text.Replace(",", ".");
+                            }
                         }));
                     }
                 }
@@ -55,28 +60,49 @@ namespace Main.View.PagesFolder.ProcessFolder
                 {
                 }
             });
+
+            if (SerialCommunicationService.portInfo.ContainsKey(SerialCommunicationService.SERIALPORT1) && SerialCommunicationService.portInfo[SerialCommunicationService.SERIALPORT1].indicador.addr == Program.Endereco_Referencia)
+            {
+                taraReferencia.Tag = SerialCommunicationService.SERIALPORT1;
+                zeroReferencia.Tag = SerialCommunicationService.SERIALPORT1;
+
+                taraContagem.Tag = SerialCommunicationService.SERIALPORT2;
+                zeroContagem.Tag = SerialCommunicationService.SERIALPORT2;
+            }
+            else if (SerialCommunicationService.portInfo.ContainsKey(SerialCommunicationService.SERIALPORT2) && SerialCommunicationService.portInfo[SerialCommunicationService.SERIALPORT2].indicador.addr == Program.Endereco_Referencia)
+            {
+                taraReferencia.Tag = SerialCommunicationService.SERIALPORT2;
+                zeroReferencia.Tag = SerialCommunicationService.SERIALPORT2;
+
+                taraContagem.Tag = SerialCommunicationService.SERIALPORT1;
+                zeroContagem.Tag = SerialCommunicationService.SERIALPORT1;
+            }
+
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void CommandButtonEventClick(object sender, EventArgs e)
         {
             try
             {
+
+                PictureBox piCommand = (PictureBox)sender;
+
+                if (piCommand.Name.Contains("tara"))
+                {
+                    SerialCommunicationService.SendCommand((SerialPort)piCommand.Tag, 0);
+                }
+                else if (piCommand.Name.Contains("zero")) 
+                {
+                    SerialCommunicationService.SendCommand((SerialPort)piCommand.Tag, 1);
+                }
+
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            try
-            {
-            }
-            catch (Exception)
-            {
-
-            }
-        }
 
     }
 }
