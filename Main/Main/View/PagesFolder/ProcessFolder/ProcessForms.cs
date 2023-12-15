@@ -20,7 +20,7 @@ namespace Main.View.PagesFolder.ProcessFolder
         int timeSec, timeMin, timeH;
         Boolean tmpExectAtivo;
 
-        double pesoReferencia = 0.0;
+        double pesoReferencia;
 
         //Comunicação
         public System.Timers.Timer tmRead = new System.Timers.Timer();
@@ -135,6 +135,16 @@ namespace Main.View.PagesFolder.ProcessFolder
             tmpExectAtivo = true;
             TimerRelogio.Start();
             lbl_Status.Text = "Em andamento";
+
+            while (true)
+            {
+
+            }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
         private void btn_SalvarReferencia_Click(object sender, EventArgs e)
@@ -147,7 +157,7 @@ namespace Main.View.PagesFolder.ProcessFolder
             btn_SalvarReferencia.ForeColor = Color.FromArgb(64, 64, 64);
             btn_SalvarReferencia.BackColor = Color.Silver;
 
-            pesoReferencia = Convert.ToDouble(valorReferencia) / Convert.ToDouble(lbl_qtMinima.Text);
+            pesoReferencia = Convert.ToDouble(valorReferencia.Text) / Convert.ToDouble(lbl_qtMinima.Text);
             Load_Referencia.Visible = false;
         }
 

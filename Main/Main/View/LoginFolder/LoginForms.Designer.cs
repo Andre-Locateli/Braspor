@@ -225,8 +225,10 @@
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "LoginForms";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LoginForms_KeyDown);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LoginForms_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.LoginForms_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.LoginForms_MouseUp);

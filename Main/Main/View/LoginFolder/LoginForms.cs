@@ -72,6 +72,17 @@ namespace Main.View.LoginFolder
         {
             try
             {
+                Logar();
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        private void Logar()
+        {
+            try
+            {
                 if (string.IsNullOrWhiteSpace(txt_user.Text))
                 {
                     uiHelper.ShowErrorLabel(lbl_error, "Informe o usuário de acesso", 5000);
@@ -108,7 +119,7 @@ namespace Main.View.LoginFolder
                         MainForms main = new MainForms(user.Id, user.Nome);
                         main.Show();
                     }
-                    else 
+                    else
                     {
                         uiHelper.ShowErrorLabel(lbl_error, "Nenhuma permissão vinculada ao usuário.", 5000);
                     }
@@ -274,6 +285,11 @@ namespace Main.View.LoginFolder
             {
                 Console.WriteLine(ex.ToString());
             }
+        }
+
+        private void LoginForms_KeyDown(object sender, KeyEventArgs e)
+        {
+
         }
     }
 }

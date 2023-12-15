@@ -34,6 +34,16 @@
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
+            this.pctg100 = new System.Windows.Forms.Panel();
+            this.pct90 = new System.Windows.Forms.Panel();
+            this.pctg80 = new System.Windows.Forms.Panel();
+            this.pctg70 = new System.Windows.Forms.Panel();
+            this.pctg60 = new System.Windows.Forms.Panel();
+            this.pctg50 = new System.Windows.Forms.Panel();
+            this.pctg40 = new System.Windows.Forms.Panel();
+            this.pctg30 = new System.Windows.Forms.Panel();
+            this.pctg20 = new System.Windows.Forms.Panel();
+            this.pctg10 = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
             this.lbl_Status = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -63,16 +73,6 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.valorContagem = new System.Windows.Forms.Label();
             this.TimerRelogio = new System.Windows.Forms.Timer(this.components);
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.panel12 = new System.Windows.Forms.Panel();
-            this.panel13 = new System.Windows.Forms.Panel();
-            this.panel14 = new System.Windows.Forms.Panel();
-            this.panel15 = new System.Windows.Forms.Panel();
-            this.panel16 = new System.Windows.Forms.Panel();
-            this.panel17 = new System.Windows.Forms.Panel();
-            this.panel19 = new System.Windows.Forms.Panel();
-            this.panel18 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -100,6 +100,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(987, 612);
             this.panel1.TabIndex = 5;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // panel6
             // 
@@ -143,20 +144,90 @@
             // 
             // panel9
             // 
-            this.panel9.Controls.Add(this.panel18);
-            this.panel9.Controls.Add(this.panel19);
-            this.panel9.Controls.Add(this.panel17);
-            this.panel9.Controls.Add(this.panel16);
-            this.panel9.Controls.Add(this.panel15);
-            this.panel9.Controls.Add(this.panel14);
-            this.panel9.Controls.Add(this.panel13);
-            this.panel9.Controls.Add(this.panel12);
-            this.panel9.Controls.Add(this.panel11);
-            this.panel9.Controls.Add(this.panel10);
+            this.panel9.Controls.Add(this.pctg100);
+            this.panel9.Controls.Add(this.pct90);
+            this.panel9.Controls.Add(this.pctg80);
+            this.panel9.Controls.Add(this.pctg70);
+            this.panel9.Controls.Add(this.pctg60);
+            this.panel9.Controls.Add(this.pctg50);
+            this.panel9.Controls.Add(this.pctg40);
+            this.panel9.Controls.Add(this.pctg30);
+            this.panel9.Controls.Add(this.pctg20);
+            this.panel9.Controls.Add(this.pctg10);
             this.panel9.Location = new System.Drawing.Point(11, 85);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(439, 44);
             this.panel9.TabIndex = 11;
+            // 
+            // pctg100
+            // 
+            this.pctg100.Location = new System.Drawing.Point(392, 0);
+            this.pctg100.Name = "pctg100";
+            this.pctg100.Size = new System.Drawing.Size(42, 43);
+            this.pctg100.TabIndex = 10;
+            // 
+            // pct90
+            // 
+            this.pct90.Location = new System.Drawing.Point(349, 0);
+            this.pct90.Name = "pct90";
+            this.pct90.Size = new System.Drawing.Size(42, 43);
+            this.pct90.TabIndex = 9;
+            // 
+            // pctg80
+            // 
+            this.pctg80.Location = new System.Drawing.Point(306, 0);
+            this.pctg80.Name = "pctg80";
+            this.pctg80.Size = new System.Drawing.Size(42, 43);
+            this.pctg80.TabIndex = 7;
+            // 
+            // pctg70
+            // 
+            this.pctg70.Location = new System.Drawing.Point(263, 0);
+            this.pctg70.Name = "pctg70";
+            this.pctg70.Size = new System.Drawing.Size(42, 43);
+            this.pctg70.TabIndex = 6;
+            // 
+            // pctg60
+            // 
+            this.pctg60.Location = new System.Drawing.Point(220, 0);
+            this.pctg60.Name = "pctg60";
+            this.pctg60.Size = new System.Drawing.Size(42, 43);
+            this.pctg60.TabIndex = 5;
+            // 
+            // pctg50
+            // 
+            this.pctg50.Location = new System.Drawing.Point(177, 0);
+            this.pctg50.Name = "pctg50";
+            this.pctg50.Size = new System.Drawing.Size(42, 43);
+            this.pctg50.TabIndex = 4;
+            // 
+            // pctg40
+            // 
+            this.pctg40.Location = new System.Drawing.Point(134, 0);
+            this.pctg40.Name = "pctg40";
+            this.pctg40.Size = new System.Drawing.Size(42, 43);
+            this.pctg40.TabIndex = 3;
+            // 
+            // pctg30
+            // 
+            this.pctg30.Location = new System.Drawing.Point(91, 0);
+            this.pctg30.Name = "pctg30";
+            this.pctg30.Size = new System.Drawing.Size(42, 43);
+            this.pctg30.TabIndex = 2;
+            // 
+            // pctg20
+            // 
+            this.pctg20.Location = new System.Drawing.Point(48, 0);
+            this.pctg20.Name = "pctg20";
+            this.pctg20.Size = new System.Drawing.Size(42, 43);
+            this.pctg20.TabIndex = 1;
+            // 
+            // pctg10
+            // 
+            this.pctg10.Location = new System.Drawing.Point(5, 0);
+            this.pctg10.Name = "pctg10";
+            this.pctg10.Size = new System.Drawing.Size(42, 43);
+            this.pctg10.TabIndex = 0;
             // 
             // label11
             // 
@@ -205,7 +276,7 @@
             this.lbl_QtContab.Name = "lbl_QtContab";
             this.lbl_QtContab.Size = new System.Drawing.Size(219, 40);
             this.lbl_QtContab.TabIndex = 1;
-            this.lbl_QtContab.Text = "1357";
+            this.lbl_QtContab.Text = "0";
             this.lbl_QtContab.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // lbl_Horario
@@ -476,76 +547,6 @@
             this.TimerRelogio.Interval = 1000;
             this.TimerRelogio.Tick += new System.EventHandler(this.TimerRelogio_Tick);
             // 
-            // panel10
-            // 
-            this.panel10.Location = new System.Drawing.Point(5, 0);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(42, 43);
-            this.panel10.TabIndex = 0;
-            // 
-            // panel11
-            // 
-            this.panel11.Location = new System.Drawing.Point(48, 0);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(42, 43);
-            this.panel11.TabIndex = 1;
-            // 
-            // panel12
-            // 
-            this.panel12.Location = new System.Drawing.Point(91, 0);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(42, 43);
-            this.panel12.TabIndex = 2;
-            // 
-            // panel13
-            // 
-            this.panel13.Location = new System.Drawing.Point(134, 0);
-            this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(42, 43);
-            this.panel13.TabIndex = 3;
-            // 
-            // panel14
-            // 
-            this.panel14.Location = new System.Drawing.Point(177, 0);
-            this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(42, 43);
-            this.panel14.TabIndex = 4;
-            // 
-            // panel15
-            // 
-            this.panel15.Location = new System.Drawing.Point(220, 0);
-            this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(42, 43);
-            this.panel15.TabIndex = 5;
-            // 
-            // panel16
-            // 
-            this.panel16.Location = new System.Drawing.Point(263, 0);
-            this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(42, 43);
-            this.panel16.TabIndex = 6;
-            // 
-            // panel17
-            // 
-            this.panel17.Location = new System.Drawing.Point(306, 0);
-            this.panel17.Name = "panel17";
-            this.panel17.Size = new System.Drawing.Size(42, 43);
-            this.panel17.TabIndex = 7;
-            // 
-            // panel19
-            // 
-            this.panel19.Location = new System.Drawing.Point(349, 0);
-            this.panel19.Name = "panel19";
-            this.panel19.Size = new System.Drawing.Size(42, 43);
-            this.panel19.TabIndex = 9;
-            // 
-            // panel18
-            // 
-            this.panel18.Location = new System.Drawing.Point(392, 0);
-            this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(42, 43);
-            this.panel18.TabIndex = 10;
-            // 
             // ProcessForms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -612,15 +613,15 @@
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.PictureBox Load_Referencia;
         private System.Windows.Forms.Timer TimerRelogio;
-        private System.Windows.Forms.Panel panel17;
-        private System.Windows.Forms.Panel panel16;
-        private System.Windows.Forms.Panel panel15;
-        private System.Windows.Forms.Panel panel14;
-        private System.Windows.Forms.Panel panel13;
-        private System.Windows.Forms.Panel panel12;
-        private System.Windows.Forms.Panel panel11;
-        private System.Windows.Forms.Panel panel10;
-        private System.Windows.Forms.Panel panel18;
-        private System.Windows.Forms.Panel panel19;
+        private System.Windows.Forms.Panel pctg80;
+        private System.Windows.Forms.Panel pctg70;
+        private System.Windows.Forms.Panel pctg60;
+        private System.Windows.Forms.Panel pctg50;
+        private System.Windows.Forms.Panel pctg40;
+        private System.Windows.Forms.Panel pctg30;
+        private System.Windows.Forms.Panel pctg20;
+        private System.Windows.Forms.Panel pctg10;
+        private System.Windows.Forms.Panel pctg100;
+        private System.Windows.Forms.Panel pct90;
     }
 }
