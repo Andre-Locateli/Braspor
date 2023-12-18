@@ -44,7 +44,6 @@
             this.pctg30 = new System.Windows.Forms.Panel();
             this.pctg20 = new System.Windows.Forms.Panel();
             this.pctg10 = new System.Windows.Forms.Panel();
-            this.label11 = new System.Windows.Forms.Label();
             this.lbl_Status = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -73,6 +72,8 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.valorContagem = new System.Windows.Forms.Label();
             this.TimerRelogio = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -129,8 +130,9 @@
             this.panel8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel8.Controls.Add(this.label1);
+            this.panel8.Controls.Add(this.label2);
             this.panel8.Controls.Add(this.panel9);
-            this.panel8.Controls.Add(this.label11);
             this.panel8.Controls.Add(this.lbl_Status);
             this.panel8.Controls.Add(this.label5);
             this.panel8.Controls.Add(this.label4);
@@ -154,7 +156,7 @@
             this.panel9.Controls.Add(this.pctg30);
             this.panel9.Controls.Add(this.pctg20);
             this.panel9.Controls.Add(this.pctg10);
-            this.panel9.Location = new System.Drawing.Point(11, 85);
+            this.panel9.Location = new System.Drawing.Point(11, 76);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(439, 44);
             this.panel9.TabIndex = 11;
@@ -229,41 +231,31 @@
             this.pctg10.Size = new System.Drawing.Size(42, 43);
             this.pctg10.TabIndex = 0;
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(82, 167);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(58, 21);
-            this.label11.TabIndex = 10;
-            this.label11.Text = "STATUS";
-            // 
             // lbl_Status
             // 
-            this.lbl_Status.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Status.Location = new System.Drawing.Point(5, 189);
+            this.lbl_Status.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Status.Location = new System.Drawing.Point(280, 122);
             this.lbl_Status.Name = "lbl_Status";
-            this.lbl_Status.Size = new System.Drawing.Size(225, 30);
+            this.lbl_Status.Size = new System.Drawing.Size(170, 23);
             this.lbl_Status.TabIndex = 9;
-            this.lbl_Status.Text = "PARADO";
+            this.lbl_Status.Text = "EM ANDAMENTO";
             this.lbl_Status.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI Light", 12F);
-            this.label5.Location = new System.Drawing.Point(233, 8);
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(0, 8);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(226, 21);
+            this.label5.Size = new System.Drawing.Size(221, 20);
             this.label5.TabIndex = 3;
-            this.label5.Text = "QUANTIDADE CONTABILIZADA:";
+            this.label5.Text = "QUANTIDADE EM TEMPO REAL:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(30, 8);
+            this.label4.Location = new System.Drawing.Point(34, 158);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(168, 21);
             this.label4.TabIndex = 2;
@@ -272,9 +264,9 @@
             // lbl_QtContab
             // 
             this.lbl_QtContab.Font = new System.Drawing.Font("Segoe UI Light", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_QtContab.Location = new System.Drawing.Point(237, 30);
+            this.lbl_QtContab.Location = new System.Drawing.Point(4, 22);
             this.lbl_QtContab.Name = "lbl_QtContab";
-            this.lbl_QtContab.Size = new System.Drawing.Size(219, 40);
+            this.lbl_QtContab.Size = new System.Drawing.Size(217, 40);
             this.lbl_QtContab.TabIndex = 1;
             this.lbl_QtContab.Text = "0";
             this.lbl_QtContab.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -283,7 +275,7 @@
             // 
             this.lbl_Horario.AutoSize = true;
             this.lbl_Horario.Font = new System.Drawing.Font("Segoe UI Light", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Horario.Location = new System.Drawing.Point(54, 30);
+            this.lbl_Horario.Location = new System.Drawing.Point(53, 173);
             this.lbl_Horario.Name = "lbl_Horario";
             this.lbl_Horario.Size = new System.Drawing.Size(119, 40);
             this.lbl_Horario.TabIndex = 0;
@@ -545,7 +537,27 @@
             // TimerRelogio
             // 
             this.TimerRelogio.Interval = 1000;
-            this.TimerRelogio.Tick += new System.EventHandler(this.TimerRelogio_Tick);
+            this.TimerRelogio.Tick += new System.EventHandler(this.TimerRelogio_Tick_1);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(238, 8);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(222, 20);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "QUANTIDADE CONTABILIZADA:";
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Segoe UI Light", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(242, 22);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(214, 40);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "0";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // ProcessForms
             // 
@@ -606,13 +618,11 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lbl_MateriaPrima;
         private System.Windows.Forms.Label lbl_qtMinima;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label lbl_Status;
         private System.Windows.Forms.Label lbl_Descricao;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.PictureBox Load_Referencia;
-        private System.Windows.Forms.Timer TimerRelogio;
         private System.Windows.Forms.Panel pctg80;
         private System.Windows.Forms.Panel pctg70;
         private System.Windows.Forms.Panel pctg60;
@@ -623,5 +633,8 @@
         private System.Windows.Forms.Panel pctg10;
         private System.Windows.Forms.Panel pctg100;
         private System.Windows.Forms.Panel pct90;
+        private System.Windows.Forms.Timer TimerRelogio;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }

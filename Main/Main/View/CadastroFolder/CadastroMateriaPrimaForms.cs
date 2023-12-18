@@ -23,7 +23,7 @@ namespace Main.View.CadastroFolder
 
         int idMateriaEdit = 0;
 
-        Regex apenasNumero = new Regex("[^0-9]");
+        Regex apenasNumero = new Regex("^[0-9]*$");
 
         public CadastroMateriaPrimaForms(int id_Usuario, string nome_Usuario)
         {

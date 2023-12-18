@@ -20,6 +20,8 @@ namespace Main.View.PagesFolder.ProcessFolder
         int timeSec, timeMin, timeH;
         Boolean tmpExectAtivo;
 
+        bool isAtivo = true;
+
         double pesoReferencia;
 
         //Comunicação
@@ -61,6 +63,18 @@ namespace Main.View.PagesFolder.ProcessFolder
                                 valorContagem.Text = valorContagem.Text.Replace(",", ".");
                             }
                         }));
+
+                        if(btn_IniciarContagem.Text == "Terminar Contagem")
+                        {
+                            decimal qtContab = 0;
+                            //qtContab = Convert.ToDouble(valorContagem.Text) / pesoReferencia;
+                            qtContab = Convert.ToDecimal($"{SerialCommunicationService.indicadores_info[Program.COMNAME_02].PS}") / Convert.ToDecimal(0.004795);
+
+                            this.Invoke(new MethodInvoker(() =>
+                            {
+                                lbl_QtContab.Text = Convert.ToInt32(qtContab).ToString();
+                            }));
+                        }
                     }
                 }
                 catch (Exception)
@@ -132,36 +146,24 @@ namespace Main.View.PagesFolder.ProcessFolder
 
         private void btn_IniciarContagem_Click(object sender, EventArgs e)
         {
-            tmpExectAtivo = true;
-            TimerRelogio.Start();
-            lbl_Status.Text = "Em andamento";
+            try
+            {
+                tmpExectAtivo = true;
+                TimerRelogio.Start();
+                lbl_Status.Text = "Em andamento";
 
-            while (true)
+                this.Invoke(new MethodInvoker(() =>
+                {
+                    btn_IniciarContagem.Text = "Terminar Contagem";
+                }));
+            }
+            catch (Exception ex)
             {
 
             }
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void btn_SalvarReferencia_Click(object sender, EventArgs e)
-        {
-            btn_IniciarContagem.Enabled = true;
-            btn_IniciarContagem.ForeColor = Color.Green;
-            btn_IniciarContagem.BackColor = Color.FromArgb(192, 255, 192);
-
-            btn_SalvarReferencia.Enabled = false;
-            btn_SalvarReferencia.ForeColor = Color.FromArgb(64, 64, 64);
-            btn_SalvarReferencia.BackColor = Color.Silver;
-
-            pesoReferencia = Convert.ToDouble(valorReferencia.Text) / Convert.ToDouble(lbl_qtMinima.Text);
-            Load_Referencia.Visible = false;
-        }
-
-        private void TimerRelogio_Tick(object sender, EventArgs e)
+        private void TimerRelogio_Tick_1(object sender, EventArgs e)
         {
             if (tmpExectAtivo)
             {
@@ -172,7 +174,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                     timeMin++;
                     timeSec = 0;
 
-                    if(timeMin > 60)
+                    if (timeMin > 60)
                     {
                         timeH++;
                         timeMin = 0;
@@ -184,6 +186,32 @@ namespace Main.View.PagesFolder.ProcessFolder
             {
                 lbl_Horario.Text = (String.Format("{0:00}", timeH)) + ":" + (String.Format("{0:00}", timeMin)) + ":" + (String.Format("{0:00}", timeSec));
             }));
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btn_SalvarReferencia_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                btn_IniciarContagem.Enabled = true;
+                btn_IniciarContagem.ForeColor = Color.Green;
+                btn_IniciarContagem.BackColor = Color.FromArgb(192, 255, 192);
+
+                btn_SalvarReferencia.Enabled = false;
+                btn_SalvarReferencia.ForeColor = Color.FromArgb(64, 64, 64);
+                btn_SalvarReferencia.BackColor = Color.Silver;
+
+                pesoReferencia = Convert.ToDouble($"{SerialCommunicationService.indicadores_info[Program.COMNAME_01].PS}") / Convert.ToDouble(lbl_qtMinima.Text);
+                Load_Referencia.Visible = false;
+
+            }
+            catch (Exception ex) 
+            { 
+            }
         }
     }
 }
