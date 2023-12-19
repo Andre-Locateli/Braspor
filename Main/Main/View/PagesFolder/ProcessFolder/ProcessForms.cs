@@ -22,12 +22,21 @@ namespace Main.View.PagesFolder.ProcessFolder
 
         bool isAtivo = true;
 
-        double pesoReferencia;
+        decimal pesoReferencia;
         decimal qtContab = 0;
 
         //Comunicação
         public System.Timers.Timer tmRead = new System.Timers.Timer();
         public bool availableStatus = true;
+
+        int indiceReferencia = 0;
+        int indiceContador = 0;
+
+        int contadorValor = 0;
+
+        int valorGuardado = 0;
+        int valorAntes = 0;
+        int valorContabilizado = 0;
 
         public ProcessForms(int id_Usuario, int id_MateriaPrima, int qt_Minima, string dsc_MateriaPrima)
         {
@@ -41,55 +50,251 @@ namespace Main.View.PagesFolder.ProcessFolder
 
         private void ProcessForms_Load(object sender, EventArgs e)
         {
-            Task.Run(() =>
+            int i = 0;
+
+            foreach (IndicadorClass ind in SerialCommunicationService.indicador_addr)
+            {
+                if (ind.indicador.addr == Program.Endereco_Referencia)
+                {
+                    indiceReferencia = i;
+                }
+                else
+                {
+                    indiceContador = i;
+                }
+
+                i++;
+            }
+
+            Task.Run(async () =>
             {
                 try
                 {
                     while (true)
                     {
-                        //valorReferencia.Invoke(new MethodInvoker(() =>
-                        //{
-                        //    if (SerialCommunicationService.indicadores_info.ContainsKey(Program.COMNAME_01))
-                        //    {
-                        //        valorReferencia.Text = $"{SerialCommunicationService.indicadores_info[Program.COMNAME_01].PS}";
-                        //        valorReferencia.Text = valorReferencia.Text.Replace(",", ".");
-                        //    }
-                        //}));
-
-                        //valorContagem.Invoke(new MethodInvoker(() =>
-                        //{
-                        //    if (SerialCommunicationService.indicadores_info.ContainsKey(Program.COMNAME_02))
-                        //    {
-                        //        valorContagem.Text = $"{SerialCommunicationService.indicadores_info[Program.COMNAME_02].PS}";
-                        //        valorContagem.Text = valorContagem.Text.Replace(",", ".");
-                        //    }
-                        //}));
-
-                        if(btn_IniciarContagem.Text == "Terminar Contagem")
+                        valorReferencia.Invoke(new MethodInvoker(() =>
                         {
-                            //qtContab = Convert.ToDouble(valorContagem.Text) / pesoReferencia;
-                           // qtContab = Convert.ToDecimal($"{SerialCommunicationService.indicadores_info[Program.COMNAME_02].PS}") / Convert.ToDecimal(0.004795);
+                            valorReferencia.Text = $"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}";
+                            valorReferencia.Text = valorReferencia.Text.Replace(",", ".");
+                        }));
 
-                            //this.Invoke(new MethodInvoker(() =>
-                            //{
-                            //    lbl_QtContab.Text = Convert.ToInt32(qtContab).ToString();
-                            //}));
+                        valorContagem.Invoke(new MethodInvoker(() =>
+                        {
+                            valorContagem.Text = $"{SerialCommunicationService.indicador_addr[indiceContador].PS}";
+                            valorContagem.Text = valorContagem.Text.Replace(",", ".");
+                        }));
+
+                        if (btn_IniciarContagem.Text == "Terminar Contagem")
+                        {
+                            qtContab = Convert.ToDecimal(valorContagem.Text) / pesoReferencia;
+                            qtContab = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceContador].PS}") / pesoReferencia;
+
+                            this.Invoke(new MethodInvoker(() =>
+                            {
+                                if (contadorValor == 0)
+                                {
+                                    valorAntes = Convert.ToInt32(qtContab);
+                                }
+
+                                lbl_QtContab.Text = Convert.ToInt32(qtContab).ToString();
+
+                                valorGuardado = Convert.ToInt32(qtContab);
+
+                                contadorValor++;
+                            }));
                         }
 
-                        if (qtContab == 0)
+                        if (Convert.ToInt32(qtContab) == 0)
                         {
                             this.Invoke(new MethodInvoker(() =>
                             {
-                                lbl_QtContab.Text = Convert.ToInt32(qtContab).ToString();
+                                pctg10.BackColor = Color.Gray;
+                                pctg20.BackColor = Color.Gray;
+                                pctg30.BackColor = Color.Gray;
+                                pctg40.BackColor = Color.Gray;
+                                pctg50.BackColor = Color.Gray;
+                                pctg60.BackColor = Color.Gray;
+                                pctg70.BackColor = Color.Gray;
+                                pctg80.BackColor = Color.Gray;
+                                pctg90.BackColor = Color.Gray;
+                                pctg100.BackColor = Color.Gray;
                             }));
                         }
-                        else if (qtContab == 1) 
+                        else if (Convert.ToInt32(qtContab) == 1) 
                         {
                             this.Invoke(new MethodInvoker(() =>
                             {
-                                lbl_QtContab.Text = Convert.ToInt32(qtContab).ToString();
+                                pctg10.BackColor = Color.Green;
+                                pctg20.BackColor = Color.Gray;
+                                pctg30.BackColor = Color.Gray;
+                                pctg40.BackColor = Color.Gray;
+                                pctg50.BackColor = Color.Gray;
+                                pctg60.BackColor = Color.Gray;
+                                pctg70.BackColor = Color.Gray;
+                                pctg80.BackColor = Color.Gray;
+                                pctg90.BackColor = Color.Gray;
+                                pctg100.BackColor = Color.Gray;
                             }));
                         }
+                        else if (Convert.ToInt32(qtContab) == 2)
+                        {
+                            this.Invoke(new MethodInvoker(() =>
+                            {
+                                pctg10.BackColor = Color.Green;
+                                pctg20.BackColor = Color.Green;
+                                pctg30.BackColor = Color.Gray;
+                                pctg40.BackColor = Color.Gray;
+                                pctg50.BackColor = Color.Gray;
+                                pctg60.BackColor = Color.Gray;
+                                pctg70.BackColor = Color.Gray;
+                                pctg80.BackColor = Color.Gray;
+                                pctg90.BackColor = Color.Gray;
+                                pctg100.BackColor = Color.Gray;
+                            }));
+                        }
+                        else if (Convert.ToInt32(qtContab) == 3)
+                        {
+                            this.Invoke(new MethodInvoker(() =>
+                            {
+                                pctg10.BackColor = Color.Green;
+                                pctg20.BackColor = Color.Green;
+                                pctg30.BackColor = Color.Green;
+                                pctg40.BackColor = Color.Gray;
+                                pctg50.BackColor = Color.Gray;
+                                pctg60.BackColor = Color.Gray;
+                                pctg70.BackColor = Color.Gray;
+                                pctg80.BackColor = Color.Gray;
+                                pctg90.BackColor = Color.Gray;
+                                pctg100.BackColor = Color.Gray;
+                            }));
+                        }
+                        else if (Convert.ToInt32(qtContab) == 4)
+                        {
+                            this.Invoke(new MethodInvoker(() =>
+                            {
+                                pctg10.BackColor = Color.Green;
+                                pctg20.BackColor = Color.Green;
+                                pctg30.BackColor = Color.Green;
+                                pctg40.BackColor = Color.Green;
+                                pctg50.BackColor = Color.Gray;
+                                pctg60.BackColor = Color.Gray;
+                                pctg70.BackColor = Color.Gray;
+                                pctg80.BackColor = Color.Gray;
+                                pctg90.BackColor = Color.Gray;
+                                pctg100.BackColor = Color.Gray;
+                            }));
+                        }
+                        else if (Convert.ToInt32(qtContab) == 5)
+                        {
+                            this.Invoke(new MethodInvoker(() =>
+                            {
+                                pctg10.BackColor = Color.Green;
+                                pctg20.BackColor = Color.Green;
+                                pctg30.BackColor = Color.Green;
+                                pctg40.BackColor = Color.Green;
+                                pctg50.BackColor = Color.Green;
+                                pctg60.BackColor = Color.Gray;
+                                pctg70.BackColor = Color.Gray;
+                                pctg80.BackColor = Color.Gray;
+                                pctg90.BackColor = Color.Gray;
+                                pctg100.BackColor = Color.Gray;
+                            }));
+                        }
+                        else if (Convert.ToInt32(qtContab) == 6)
+                        {
+                            this.Invoke(new MethodInvoker(() =>
+                            {
+                                pctg10.BackColor = Color.Green;
+                                pctg20.BackColor = Color.Green;
+                                pctg30.BackColor = Color.Green;
+                                pctg40.BackColor = Color.Green;
+                                pctg50.BackColor = Color.Green;
+                                pctg60.BackColor = Color.Green;
+                                pctg70.BackColor = Color.Gray;
+                                pctg80.BackColor = Color.Gray;
+                                pctg90.BackColor = Color.Gray;
+                                pctg100.BackColor = Color.Gray;
+                            }));
+                        }
+                        else if (Convert.ToInt32(qtContab) == 7)
+                        {
+                            this.Invoke(new MethodInvoker(() =>
+                            {
+                                pctg10.BackColor = Color.Green;
+                                pctg20.BackColor = Color.Green;
+                                pctg30.BackColor = Color.Green;
+                                pctg40.BackColor = Color.Green;
+                                pctg50.BackColor = Color.Green;
+                                pctg60.BackColor = Color.Green;
+                                pctg70.BackColor = Color.Green;
+                                pctg80.BackColor = Color.Gray;
+                                pctg90.BackColor = Color.Gray;
+                                pctg100.BackColor = Color.Gray;
+                            }));
+                        }
+                        else if (Convert.ToInt32(qtContab) == 8)
+                        {
+                            this.Invoke(new MethodInvoker(() =>
+                            {
+                                pctg10.BackColor = Color.Green;
+                                pctg20.BackColor = Color.Green;
+                                pctg30.BackColor = Color.Green;
+                                pctg40.BackColor = Color.Green;
+                                pctg50.BackColor = Color.Green;
+                                pctg60.BackColor = Color.Green;
+                                pctg70.BackColor = Color.Green;
+                                pctg80.BackColor = Color.Green;
+                                pctg90.BackColor = Color.Gray;
+                                pctg100.BackColor = Color.Gray;
+                            }));
+                        }
+                        else if (Convert.ToInt32(qtContab) == 9)
+                        {
+                            this.Invoke(new MethodInvoker(() =>
+                            {
+                                pctg10.BackColor = Color.Green;
+                                pctg20.BackColor = Color.Green;
+                                pctg30.BackColor = Color.Green;
+                                pctg40.BackColor = Color.Green;
+                                pctg50.BackColor = Color.Green;
+                                pctg60.BackColor = Color.Green;
+                                pctg70.BackColor = Color.Green;
+                                pctg80.BackColor = Color.Green;
+                                pctg90.BackColor = Color.Green;
+                                pctg100.BackColor = Color.Gray;
+                            }));
+                        }
+                        else if (Convert.ToInt32(qtContab) >= 10)
+                        {
+                            this.Invoke(new MethodInvoker(() =>
+                            {
+                                pctg10.BackColor = Color.Green;
+                                pctg20.BackColor = Color.Green;
+                                pctg30.BackColor = Color.Green;
+                                pctg40.BackColor = Color.Green;
+                                pctg50.BackColor = Color.Green;
+                                pctg60.BackColor = Color.Green;
+                                pctg70.BackColor = Color.Green;
+                                pctg80.BackColor = Color.Green;
+                                pctg90.BackColor = Color.Green;
+                                pctg100.BackColor = Color.Green;
+                            }));
+                        }
+
+
+                        //await Task.Delay(3000);
+
+                        //if (valorAntes != valorGuardado)
+                        //{
+                        //    if (valorGuardado == 0)
+                        //    {
+                        //        valorContabilizado += valorGuardado;
+
+                        //        lbl_ValorReal.Text = valorContabilizado.ToString();
+
+                        //        contadorValor = 0;
+                        //    }
+                        //}
                     }
                 }
                 catch (Exception)
@@ -130,19 +335,6 @@ namespace Main.View.PagesFolder.ProcessFolder
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-        }
-
-
-        private void taraContagem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //SerialCommunicationService.SendCommand(SerialCommunicationService.SERIALPORT2, 1);
-            }
-            catch (Exception)
-            {
-
             }
         }
 
@@ -214,7 +406,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                 btn_SalvarReferencia.ForeColor = Color.FromArgb(64, 64, 64);
                 btn_SalvarReferencia.BackColor = Color.Silver;
 
-                //pesoReferencia = Convert.ToDouble($"{SerialCommunicationService.indicadores_info[Program.COMNAME_01].PS}") / Convert.ToDouble(lbl_qtMinima.Text);
+                pesoReferencia = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}") / Convert.ToDecimal(lbl_qtMinima.Text);
                 Load_Referencia.Visible = false;
 
             }

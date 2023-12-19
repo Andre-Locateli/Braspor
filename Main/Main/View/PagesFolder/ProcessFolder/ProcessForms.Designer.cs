@@ -34,10 +34,10 @@
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lbl_ValorReal = new System.Windows.Forms.Label();
             this.panel9 = new System.Windows.Forms.Panel();
             this.pctg100 = new System.Windows.Forms.Panel();
-            this.pct90 = new System.Windows.Forms.Panel();
+            this.pctg90 = new System.Windows.Forms.Panel();
             this.pctg80 = new System.Windows.Forms.Panel();
             this.pctg70 = new System.Windows.Forms.Panel();
             this.pctg60 = new System.Windows.Forms.Panel();
@@ -131,7 +131,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel8.Controls.Add(this.label1);
-            this.panel8.Controls.Add(this.label2);
+            this.panel8.Controls.Add(this.lbl_ValorReal);
             this.panel8.Controls.Add(this.panel9);
             this.panel8.Controls.Add(this.lbl_Status);
             this.panel8.Controls.Add(this.label5);
@@ -154,20 +154,20 @@
             this.label1.TabIndex = 13;
             this.label1.Text = "QUANTIDADE CONTABILIZADA:";
             // 
-            // label2
+            // lbl_ValorReal
             // 
-            this.label2.Font = new System.Drawing.Font("Segoe UI Light", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(242, 22);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(214, 40);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "0";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lbl_ValorReal.Font = new System.Drawing.Font("Segoe UI Light", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_ValorReal.Location = new System.Drawing.Point(242, 22);
+            this.lbl_ValorReal.Name = "lbl_ValorReal";
+            this.lbl_ValorReal.Size = new System.Drawing.Size(214, 40);
+            this.lbl_ValorReal.TabIndex = 12;
+            this.lbl_ValorReal.Text = "0";
+            this.lbl_ValorReal.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // panel9
             // 
             this.panel9.Controls.Add(this.pctg100);
-            this.panel9.Controls.Add(this.pct90);
+            this.panel9.Controls.Add(this.pctg90);
             this.panel9.Controls.Add(this.pctg80);
             this.panel9.Controls.Add(this.pctg70);
             this.panel9.Controls.Add(this.pctg60);
@@ -189,13 +189,13 @@
             this.pctg100.Size = new System.Drawing.Size(42, 43);
             this.pctg100.TabIndex = 10;
             // 
-            // pct90
+            // pctg90
             // 
-            this.pct90.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pct90.Location = new System.Drawing.Point(349, 0);
-            this.pct90.Name = "pct90";
-            this.pct90.Size = new System.Drawing.Size(42, 43);
-            this.pct90.TabIndex = 9;
+            this.pctg90.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pctg90.Location = new System.Drawing.Point(349, 0);
+            this.pctg90.Name = "pctg90";
+            this.pctg90.Size = new System.Drawing.Size(42, 43);
+            this.pctg90.TabIndex = 9;
             // 
             // pctg80
             // 
@@ -642,9 +642,9 @@
         private System.Windows.Forms.Panel pctg20;
         private System.Windows.Forms.Panel pctg10;
         private System.Windows.Forms.Panel pctg100;
-        private System.Windows.Forms.Panel pct90;
+        private System.Windows.Forms.Panel pctg90;
         private System.Windows.Forms.Timer TimerRelogio;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbl_ValorReal;
     }
 }

@@ -99,7 +99,7 @@ namespace Main.View.CadastroFolder
                 if (string.IsNullOrWhiteSpace(txtCodigo.Text)) { btnPaintBorder_Click(txtCodigo); return; }
                 if (string.IsNullOrWhiteSpace(txtQtMinima.Text)) { btnPaintBorder_Click(txtQtMinima); return; }
 
-                if (apenasNumero.IsMatch(txtQtMinima.Text))
+                if (!apenasNumero.IsMatch(txtQtMinima.Text))
                 {
                     btnPaintBorder_Click(txtQtMinima);
                     return;
