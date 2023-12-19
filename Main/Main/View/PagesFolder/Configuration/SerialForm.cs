@@ -34,7 +34,7 @@ namespace Main.View.PagesFolder.Configuration
 
             chkAutoconnect01.Checked = Program._autoconnect_1;
             chkAutoconnect2.Checked = Program._autoconnect_2;
-            chkAutoconnect02.Checked = Program._autoconnect_3;
+            //chkAutoconnect02.Checked = Program._autoconnect_3;
         }
 
         private async void SerialForm_Load(object sender, EventArgs e)
@@ -49,14 +49,14 @@ namespace Main.View.PagesFolder.Configuration
                 {
                     btnSalvar01.Text = "Conectar";
                 }
-                if (SerialCommunicationService.SERIALPORT2.IsOpen)
-                {
-                    btnSalvar02.Text = "Desconectar";
-                }
-                else
-                {
-                    btnSalvar02.Text = "Conectar";
-                }
+                //if (SerialCommunicationService.SERIALPORT2.IsOpen)
+                //{
+                //    btnSalvar02.Text = "Desconectar";
+                //}
+                //else
+                //{
+                //    btnSalvar02.Text = "Conectar";
+                //}
                 if (Program.IMPRESSORAPORT.IsOpen)
                 {
                     btnConectar02.Text = "Desconectar";
@@ -139,9 +139,9 @@ namespace Main.View.PagesFolder.Configuration
                 cbStopBit2.Texts = GeralClass.v_StopBit(Program.IMPRESSORAPORT.StopBits);
 
                 //Indicador 02
-                cbPortaSerial02.Texts = SerialCommunicationService.SERIALPORT2.PortName;
-                cbBaudRate02.Texts = SerialCommunicationService.SERIALPORT2.BaudRate.ToString();
-                cbStopBit02.Texts = GeralClass.v_StopBit(SerialCommunicationService.SERIALPORT2.StopBits);
+                //cbPortaSerial02.Texts = SerialCommunicationService.SERIALPORT2.PortName;
+                //cbBaudRate02.Texts = SerialCommunicationService.SERIALPORT2.BaudRate.ToString();
+                //cbStopBit02.Texts = GeralClass.v_StopBit(SerialCommunicationService.SERIALPORT2.StopBits);
 
                 if (Program.IMPRESSORAPORT.Parity == Parity.Even)
                 {
@@ -179,8 +179,8 @@ namespace Main.View.PagesFolder.Configuration
                     }
                 });
 
-                cbBalanca01.Texts = Program.CFG.balanca_1;
-                cbBalanca02.Texts = Program.CFG.balanca_2;
+                //cbBalanca01.Texts = Program.CFG.balanca_1;
+                //cbBalanca02.Texts = Program.CFG.balanca_2;
             }
             catch (Exception ex)
             {
@@ -227,7 +227,7 @@ namespace Main.View.PagesFolder.Configuration
                     if (xml_PortaSerial_1 != null && xml_BaudRate_1 != null && xml_StopBit_1 != null && xml_Autoconnect_1 != null)
                     {
                         xml_Balanca_1.InnerText = cbBalanca01.Texts;
-                        Program.CFG.balanca_1 = cbBalanca01.Texts;
+                        //Program.CFG.balanca_1 = cbBalanca01.Texts;
                         xml_PortaSerial_1.InnerText = SerialCommunicationService.SERIALPORT1.PortName;
                         xml_BaudRate_1.InnerText = SerialCommunicationService.SERIALPORT1.BaudRate.ToString();
                         xml_StopBit_1.InnerText = GeralClass.v_StopBit(SerialCommunicationService.SERIALPORT1.StopBits);
@@ -257,10 +257,10 @@ namespace Main.View.PagesFolder.Configuration
                     if (xml_PortaSerial_3 != null && xml_BaudRate_3 != null && xml_StopBit_3 != null && xml_Autoconnect_3 != null)
                     {
                         xml_Balanca_3.InnerText = cbBalanca02.Texts;
-                        Program.CFG.balanca_2 = cbBalanca02.Texts;
-                        xml_PortaSerial_3.InnerText = SerialCommunicationService.SERIALPORT2.PortName;
-                        xml_BaudRate_3.InnerText = SerialCommunicationService.SERIALPORT2.BaudRate.ToString();
-                        xml_StopBit_3.InnerText = GeralClass.v_StopBit(SerialCommunicationService.SERIALPORT2.StopBits);
+                        //Program.CFG.balanca_2 = cbBalanca02.Texts;
+                        //xml_PortaSerial_3.InnerText = SerialCommunicationService.SERIALPORT2.PortName;
+                        //xml_BaudRate_3.InnerText = SerialCommunicationService.SERIALPORT2.BaudRate.ToString();
+                        //xml_StopBit_3.InnerText = GeralClass.v_StopBit(SerialCommunicationService.SERIALPORT2.StopBits);
                         if (chkAutoconnect02.Checked == true) xml_Autoconnect_3.InnerText = "1";
                         else xml_Autoconnect_3.InnerText = "0";
                     }
@@ -358,37 +358,37 @@ namespace Main.View.PagesFolder.Configuration
                 else if (btn.Tag.ToString() == "Indicador 02") 
                 {
 
-                    if (!SerialCommunicationService.SERIALPORT2.IsOpen)
-                    {
-                        SerialCommunicationService.SERIALPORT2.PortName = cbPortaSerial02.Texts;
-                        SerialCommunicationService.SERIALPORT2.BaudRate = Convert.ToInt32(cbBaudRate02.Texts);
-                        SerialCommunicationService.SERIALPORT2.StopBits = GeralClass.v_StopBit(cbStopBit02.Texts);
+                    //if (!SerialCommunicationService.SERIALPORT2.IsOpen)
+                    //{
+                    //    SerialCommunicationService.SERIALPORT2.PortName = cbPortaSerial02.Texts;
+                    //    SerialCommunicationService.SERIALPORT2.BaudRate = Convert.ToInt32(cbBaudRate02.Texts);
+                    //    SerialCommunicationService.SERIALPORT2.StopBits = GeralClass.v_StopBit(cbStopBit02.Texts);
 
-                        try
-                        {
-                            v_SerialPort1_ConfChange(btn.Tag.ToString());
-                            SerialCommunicationService.SERIALPORT2.Close();
-                            SerialCommunicationService.SERIALPORT2.Open();
-                            btnSalvar02.Text = "Desconectar";
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine(ex.ToString());
-                            btnSalvar02.Text = "Conectar";
-                        }
-                        SerialCommunicationService.InitWithoutAutoConnect();
-                    }
-                    else
-                    {
-                        v_SerialPort1_ConfChange(btn.Tag.ToString());
-                        SerialCommunicationService.SERIALPORT2.Close();
-                        btnSalvar02.Text = "Conectar";
-                    }
-                    if (Application.OpenForms.OfType<MainForms>().Any())
-                    {
-                        MainForms MainForm = Application.OpenForms.OfType<MainForms>().FirstOrDefault();
-                        MainForm.UpdateStatusSerial();
-                    }
+                    //    try
+                    //    {
+                    //        v_SerialPort1_ConfChange(btn.Tag.ToString());
+                    //        SerialCommunicationService.SERIALPORT2.Close();
+                    //        SerialCommunicationService.SERIALPORT2.Open();
+                    //        btnSalvar02.Text = "Desconectar";
+                    //    }
+                    //    catch (Exception ex)
+                    //    {
+                    //        Console.WriteLine(ex.ToString());
+                    //        btnSalvar02.Text = "Conectar";
+                    //    }
+                    //    SerialCommunicationService.InitWithoutAutoConnect();
+                    //}
+                    //else
+                    //{
+                    //    v_SerialPort1_ConfChange(btn.Tag.ToString());
+                    //    SerialCommunicationService.SERIALPORT2.Close();
+                    //    btnSalvar02.Text = "Conectar";
+                    //}
+                    //if (Application.OpenForms.OfType<MainForms>().Any())
+                    //{
+                    //    MainForms MainForm = Application.OpenForms.OfType<MainForms>().FirstOrDefault();
+                    //    MainForm.UpdateStatusSerial();
+                    //}
                 }
 
                 if (Program.com != null) 

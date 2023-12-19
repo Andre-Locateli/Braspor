@@ -32,7 +32,7 @@ namespace Main.View.PagesFolder.ProcessFolder
         {
             InitializeComponent();
 
-            SerialCommunicationService.InitWithAutoConnect();
+            //SerialCommunicationService.InitWithAutoConnect();
 
             lbl_qtMinima.Text = qt_Minima.ToString();
             lbl_Descricao.Text = dsc_MateriaPrima;
@@ -46,34 +46,34 @@ namespace Main.View.PagesFolder.ProcessFolder
                 {
                     while (true)
                     {
-                        valorReferencia.Invoke(new MethodInvoker(() =>
-                        {
-                            if (SerialCommunicationService.indicadores_info.ContainsKey(Program.COMNAME_01))
-                            {
-                                valorReferencia.Text = $"{SerialCommunicationService.indicadores_info[Program.COMNAME_01].PS}";
-                                valorReferencia.Text = valorReferencia.Text.Replace(",", ".");
-                            }
-                        }));
+                        //valorReferencia.Invoke(new MethodInvoker(() =>
+                        //{
+                        //    if (SerialCommunicationService.indicadores_info.ContainsKey(Program.COMNAME_01))
+                        //    {
+                        //        valorReferencia.Text = $"{SerialCommunicationService.indicadores_info[Program.COMNAME_01].PS}";
+                        //        valorReferencia.Text = valorReferencia.Text.Replace(",", ".");
+                        //    }
+                        //}));
 
-                        valorContagem.Invoke(new MethodInvoker(() =>
-                        {
-                            if (SerialCommunicationService.indicadores_info.ContainsKey(Program.COMNAME_02))
-                            {
-                                valorContagem.Text = $"{SerialCommunicationService.indicadores_info[Program.COMNAME_02].PS}";
-                                valorContagem.Text = valorContagem.Text.Replace(",", ".");
-                            }
-                        }));
+                        //valorContagem.Invoke(new MethodInvoker(() =>
+                        //{
+                        //    if (SerialCommunicationService.indicadores_info.ContainsKey(Program.COMNAME_02))
+                        //    {
+                        //        valorContagem.Text = $"{SerialCommunicationService.indicadores_info[Program.COMNAME_02].PS}";
+                        //        valorContagem.Text = valorContagem.Text.Replace(",", ".");
+                        //    }
+                        //}));
 
                         if(btn_IniciarContagem.Text == "Terminar Contagem")
                         {
                             decimal qtContab = 0;
                             //qtContab = Convert.ToDouble(valorContagem.Text) / pesoReferencia;
-                            qtContab = Convert.ToDecimal($"{SerialCommunicationService.indicadores_info[Program.COMNAME_02].PS}") / Convert.ToDecimal(0.004795);
+                           // qtContab = Convert.ToDecimal($"{SerialCommunicationService.indicadores_info[Program.COMNAME_02].PS}") / Convert.ToDecimal(0.004795);
 
-                            this.Invoke(new MethodInvoker(() =>
-                            {
-                                lbl_QtContab.Text = Convert.ToInt32(qtContab).ToString();
-                            }));
+                            //this.Invoke(new MethodInvoker(() =>
+                            //{
+                            //    lbl_QtContab.Text = Convert.ToInt32(qtContab).ToString();
+                            //}));
                         }
                     }
                 }
@@ -81,22 +81,16 @@ namespace Main.View.PagesFolder.ProcessFolder
                 {
                 }
             });
-            Console.WriteLine("Teste");
-            if (SerialCommunicationService.portInfo.ContainsKey(SerialCommunicationService.SERIALPORT1) && SerialCommunicationService.portInfo[SerialCommunicationService.SERIALPORT1].indicador.addr == Program.Endereco_Referencia)
-            {
-                taraReferencia.Tag = SerialCommunicationService.SERIALPORT1;
-                zeroReferencia.Tag = SerialCommunicationService.SERIALPORT1;
 
-                taraContagem.Tag = SerialCommunicationService.SERIALPORT2;
-                zeroContagem.Tag = SerialCommunicationService.SERIALPORT2;
-            }
-            else if (SerialCommunicationService.portInfo.ContainsKey(SerialCommunicationService.SERIALPORT2) && SerialCommunicationService.portInfo[SerialCommunicationService.SERIALPORT2].indicador.addr == Program.Endereco_Referencia)
-            {
-                taraReferencia.Tag = SerialCommunicationService.SERIALPORT2;
-                zeroReferencia.Tag = SerialCommunicationService.SERIALPORT2;
+            //Console.WriteLine("Teste");
 
-                taraContagem.Tag = SerialCommunicationService.SERIALPORT1;
-                zeroContagem.Tag = SerialCommunicationService.SERIALPORT1;
+            if (SerialCommunicationService.SERIALPORT1.IsOpen)
+            {
+                taraReferencia.Tag = Program.Endereco_Referencia;
+                zeroReferencia.Tag = Program.Endereco_Referencia;
+
+                taraContagem.Tag = Program.Endereco_Referencia + 1;
+                zeroContagem.Tag = Program.Endereco_Referencia + 1;
             }
 
         }
@@ -110,11 +104,11 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                 if (piCommand.Name.Contains("tara"))
                 {
-                    SerialCommunicationService.SendCommand((SerialPort)piCommand.Tag, 0);
+                    SerialCommunicationService.SendCommand(Convert.ToInt32(piCommand.Tag), 0);
                 }
                 else if (piCommand.Name.Contains("zero"))
                 {
-                    SerialCommunicationService.SendCommand((SerialPort)piCommand.Tag, 1);
+                    SerialCommunicationService.SendCommand(Convert.ToInt32(piCommand.Tag), 1);
                 }
 
             }
@@ -129,7 +123,7 @@ namespace Main.View.PagesFolder.ProcessFolder
         {
             try
             {
-                SerialCommunicationService.SendCommand(SerialCommunicationService.SERIALPORT2, 1);
+                //SerialCommunicationService.SendCommand(SerialCommunicationService.SERIALPORT2, 1);
             }
             catch (Exception)
             {
@@ -205,7 +199,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                 btn_SalvarReferencia.ForeColor = Color.FromArgb(64, 64, 64);
                 btn_SalvarReferencia.BackColor = Color.Silver;
 
-                pesoReferencia = Convert.ToDouble($"{SerialCommunicationService.indicadores_info[Program.COMNAME_01].PS}") / Convert.ToDouble(lbl_qtMinima.Text);
+                //pesoReferencia = Convert.ToDouble($"{SerialCommunicationService.indicadores_info[Program.COMNAME_01].PS}") / Convert.ToDouble(lbl_qtMinima.Text);
                 Load_Referencia.Visible = false;
 
             }
