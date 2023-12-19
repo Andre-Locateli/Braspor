@@ -183,6 +183,10 @@ namespace Main.View.MainFolder
                     }
                     tbSerial.Visible = false;
                     //pcb_logo.Visible = false;
+
+                    tbSerial.Visible = false;
+                    label5.Visible = false;
+                    panel9.Visible = false;
                 }
                 else if (sidebar.Width == 210)
                 {
@@ -201,6 +205,10 @@ namespace Main.View.MainFolder
                     //pnDownSize.Location = new Point(pnDownSize.Location.X + 160, pnDownSize.Location.Y);
                     //pn_container.Location = new Point(pn_container.Location.X + 160, pn_container.Location.Y);
                     //pcb_logo.Visible = true;
+
+                    tbSerial.Visible = true;
+                    label5.Visible = true;
+                    panel9.Visible = true;
                 }
                 b_grow = false;
                 sidebarExpand = !sidebarExpand;
@@ -209,6 +217,20 @@ namespace Main.View.MainFolder
             }
             //this.Refresh();
             //this.Update();
+            ResizeElements();
+        }
+
+        private void ResizeElements() 
+        {
+            try
+            {
+                panel8.Invalidate();
+                panel8.Refresh();
+                panel8.Update();
+            }
+            catch (Exception ex)
+            {
+            }
         }
 
         private void MainForms_FormClosed(object sender, FormClosedEventArgs e)
@@ -223,6 +245,9 @@ namespace Main.View.MainFolder
                 pnSubMenu.Visible = false;
                 AnimationRunning = true;
                 AnimationMenu();
+
+                //panel8.Refresh();
+                //panel8.Invalidate();
             }
             catch (Exception)
             {
@@ -810,5 +835,92 @@ namespace Main.View.MainFolder
         {
 
         }
+
+        private void toolTip1_Popup(object sender, PopupEventArgs e)
+        {
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void pictureBox4_MouseHover(object sender, EventArgs e)
+        {
+            try
+            {
+                Control senderObject = sender as Control;
+
+                if (senderObject.Tag.ToString() != "")
+                {
+                    ToolTip info = new ToolTip
+                    {
+                        AutomaticDelay = 250
+                    };
+
+                    string tooltipMessage = string.Empty;
+
+                    tooltipMessage = senderObject.Tag.ToString();
+
+                    info.SetToolTip(senderObject, tooltipMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                YesOrNo question = new YesOrNo("Deseja realmente finalizar o sistema ?");
+                question.ShowDialog();
+                if (question.RESPOSTA)
+                {
+                    List<Form> fechar = new List<Form>();
+                    foreach (Form form in System.Windows.Forms.Application.OpenForms)
+                    {
+                        fechar.Add(form);
+                    }
+
+                    foreach (Form item in fechar)
+                    {
+                        item.Dispose();
+                        item.Close();
+                    }
+
+                    this.Close();
+                    Application.Exit();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void pictureBox5_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.WindowState = FormWindowState.Minimized;
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        public void eventPaintPic(object sender, PaintEventArgs e)
+        {
+            PictureBox pn = (PictureBox)sender;
+            System.Drawing.Color COLOR_BORDER = System.Drawing.Color.FromArgb(237, 237, 237);
+            int borderSize = 2;
+            ControlPaint.DrawBorder(e.Graphics, pn.ClientRectangle, COLOR_BORDER, borderSize, ButtonBorderStyle.Solid, COLOR_BORDER, borderSize, ButtonBorderStyle.Solid, COLOR_BORDER, borderSize, ButtonBorderStyle.Solid, COLOR_BORDER, borderSize, ButtonBorderStyle.Solid);
+        }
+
+
     }
 }

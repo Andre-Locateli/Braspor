@@ -113,6 +113,16 @@ namespace Main.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _352270_close_icon {
+            get {
+                object obj = ResourceManager.GetObject("_352270_close_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _4115230_cancel_close_delete_icon {
             get {
                 object obj = ResourceManager.GetObject("4115230_cancel_close_delete_icon", resourceCulture);
@@ -146,6 +156,16 @@ namespace Main.Properties {
         internal static System.Drawing.Bitmap _622405_lock_security_password_protect_safety_icon {
             get {
                 object obj = ResourceManager.GetObject("622405_lock_security_password_protect_safety_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _8664917_window_minimize_icon {
+            get {
+                object obj = ResourceManager.GetObject("_8664917_window_minimize_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -87,7 +87,7 @@
             this.panel5.Controls.Add(this.button2);
             this.panel5.Controls.Add(this.button1);
             this.panel5.Controls.Add(this.panel7);
-            this.panel5.Location = new System.Drawing.Point(723, 12);
+            this.panel5.Location = new System.Drawing.Point(748, 12);
             this.panel5.Name = "panel5";
             this.panel5.Padding = new System.Windows.Forms.Padding(2);
             this.panel5.Size = new System.Drawing.Size(208, 217);
@@ -211,7 +211,7 @@
             this.panel6.BackColor = System.Drawing.Color.White;
             this.panel6.Controls.Add(this.dgv_avisos);
             this.panel6.Controls.Add(this.panel8);
-            this.panel6.Location = new System.Drawing.Point(723, 235);
+            this.panel6.Location = new System.Drawing.Point(748, 235);
             this.panel6.Name = "panel6";
             this.panel6.Padding = new System.Windows.Forms.Padding(2);
             this.panel6.Size = new System.Drawing.Size(208, 361);
@@ -361,7 +361,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(694, 169);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(716, 169);
             this.tableLayoutPanel1.TabIndex = 8;
             // 
             // panel10
@@ -370,11 +370,11 @@
             this.panel10.Controls.Add(this.lbl_prevista);
             this.panel10.Controls.Add(this.label5);
             this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel10.Location = new System.Drawing.Point(468, 0);
+            this.panel10.Location = new System.Drawing.Point(484, 0);
             this.panel10.Margin = new System.Windows.Forms.Padding(0);
             this.panel10.Name = "panel10";
             this.panel10.Padding = new System.Windows.Forms.Padding(5, 10, 5, 10);
-            this.panel10.Size = new System.Drawing.Size(226, 169);
+            this.panel10.Size = new System.Drawing.Size(232, 169);
             this.panel10.TabIndex = 4;
             this.panel10.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -385,7 +385,7 @@
             this.lbl_prevista.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(49)))), ((int)(((byte)(97)))));
             this.lbl_prevista.Location = new System.Drawing.Point(5, 10);
             this.lbl_prevista.Name = "lbl_prevista";
-            this.lbl_prevista.Size = new System.Drawing.Size(216, 91);
+            this.lbl_prevista.Size = new System.Drawing.Size(222, 91);
             this.lbl_prevista.TabIndex = 6;
             this.lbl_prevista.Text = "10000";
             this.lbl_prevista.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -398,15 +398,15 @@
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(49)))), ((int)(((byte)(97)))));
             this.label5.Location = new System.Drawing.Point(29, 102);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(168, 59);
+            this.label5.Size = new System.Drawing.Size(174, 59);
             this.label5.TabIndex = 5;
-            this.label5.Text = "pesangens previstas";
+            this.label5.Text = "Quantidade Folhas Mês";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel9
             // 
             this.panel9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(247)))), ((int)(((byte)(248)))));
-            this.panel9.Location = new System.Drawing.Point(461, 3);
+            this.panel9.Location = new System.Drawing.Point(477, 3);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(4, 163);
             this.panel9.TabIndex = 3;
@@ -417,11 +417,11 @@
             this.panel4.Controls.Add(this.lblPendente);
             this.panel4.Controls.Add(this.label4);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(234, 0);
+            this.panel4.Location = new System.Drawing.Point(242, 0);
             this.panel4.Margin = new System.Windows.Forms.Padding(0);
             this.panel4.Name = "panel4";
             this.panel4.Padding = new System.Windows.Forms.Padding(5, 10, 5, 10);
-            this.panel4.Size = new System.Drawing.Size(224, 169);
+            this.panel4.Size = new System.Drawing.Size(232, 169);
             this.panel4.TabIndex = 2;
             this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -432,7 +432,7 @@
             this.lblPendente.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(49)))), ((int)(((byte)(97)))));
             this.lblPendente.Location = new System.Drawing.Point(5, 10);
             this.lblPendente.Name = "lblPendente";
-            this.lblPendente.Size = new System.Drawing.Size(214, 91);
+            this.lblPendente.Size = new System.Drawing.Size(222, 91);
             this.lblPendente.TabIndex = 5;
             this.lblPendente.Text = "10000";
             this.lblPendente.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -445,15 +445,15 @@
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(49)))), ((int)(((byte)(97)))));
             this.label4.Location = new System.Drawing.Point(29, 102);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(167, 59);
+            this.label4.Size = new System.Drawing.Size(175, 59);
             this.label4.TabIndex = 4;
-            this.label4.Text = "pesagens pendentes";
+            this.label4.Text = "Quantidade Folhas Hoje";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(247)))), ((int)(((byte)(248)))));
-            this.panel3.Location = new System.Drawing.Point(227, 3);
+            this.panel3.Location = new System.Drawing.Point(235, 3);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(4, 163);
             this.panel3.TabIndex = 1;
@@ -468,7 +468,7 @@
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(5, 10, 5, 10);
-            this.panel2.Size = new System.Drawing.Size(224, 169);
+            this.panel2.Size = new System.Drawing.Size(232, 169);
             this.panel2.TabIndex = 0;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -479,7 +479,7 @@
             this.lbl_hoje.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(49)))), ((int)(((byte)(97)))));
             this.lbl_hoje.Location = new System.Drawing.Point(5, 10);
             this.lbl_hoje.Name = "lbl_hoje";
-            this.lbl_hoje.Size = new System.Drawing.Size(214, 91);
+            this.lbl_hoje.Size = new System.Drawing.Size(222, 91);
             this.lbl_hoje.TabIndex = 4;
             this.lbl_hoje.Text = "10000";
             this.lbl_hoje.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -492,9 +492,9 @@
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(49)))), ((int)(((byte)(97)))));
             this.label3.Location = new System.Drawing.Point(29, 102);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(167, 59);
+            this.label3.Size = new System.Drawing.Size(175, 59);
             this.label3.TabIndex = 3;
-            this.label3.Text = "pesangens hoje";
+            this.label3.Text = "Processos Hoje";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cartesianChart1
@@ -504,7 +504,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cartesianChart1.Location = new System.Drawing.Point(13, 201);
             this.cartesianChart1.Name = "cartesianChart1";
-            this.cartesianChart1.Size = new System.Drawing.Size(694, 395);
+            this.cartesianChart1.Size = new System.Drawing.Size(716, 395);
             this.cartesianChart1.TabIndex = 9;
             this.cartesianChart1.Text = "cartesianChart1";
             // 
