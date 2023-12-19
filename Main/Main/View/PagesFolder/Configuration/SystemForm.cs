@@ -461,7 +461,7 @@ namespace Main.View.PagesFolder.Configuration
             {
                 // teste();
 
-                //Program.com.ImpressoraPrint(new EtiquetaInfo() {   earn = "123456789122", packCaixa = "88", partNumber = "123456", produtoProduzido = "AB-CA-111011", quantidadePecas = "138", date = Convert.ToString(GetJulianDay(DateTime.Now)) }, 2);
+               // Program.com.ImpressoraPrint(new EtiquetaInfo() {   earn = "123456789122", packCaixa = "88", partNumber = "123456", produtoProduzido = "AB-CA-111011", quantidadePecas = "138", date = Convert.ToString(GetJulianDay(DateTime.Now)) }, 2);
             }
             catch (Exception)
             {

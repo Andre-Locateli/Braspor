@@ -167,6 +167,7 @@
     <Compile Include="Model\IndicadorClass.cs" />
     <Compile Include="Model\MateriaPrimaClass.cs" />
     <Compile Include="Model\PermissaoClass.cs" />
+    <Compile Include="Model\ProcessosModel.cs" />
     <Compile Include="Model\RedeClass.cs" />
     <Compile Include="Model\UsuarioClass.cs" />
     <Compile Include="Program.cs" />
@@ -554,6 +555,8 @@
     <None Include="Resources\Plus_27px1.png" />
     <None Include="Resources\skfAnim.gif" />
     <None Include="Resources\braspor.jpg" />
+    <None Include="Resources\352270_close_icon.png" />
+    <None Include="Resources\8664917_window_minimize_icon.png" />
     <Content Include="[MKT] Software Vision Control - Icone %282018%29 [MAIOR].ico" />
   </ItemGroup>
   <ItemGroup>

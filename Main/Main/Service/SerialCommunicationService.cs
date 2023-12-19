@@ -1,4 +1,5 @@
 ﻿using Main.Model;
+using Main.Model.EtiquetaFolder;
 using Main.View.CommunicationFolder;
 using Main.View.PopupFolder;
 using Microsoft.Office.Interop.Excel;
@@ -6,15 +7,21 @@ using Org.BouncyCastle.Crypto.Engines;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Printing;
+using System.IO;
 using System.IO.Ports;
 using System.Linq;
+using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using ZPL;
 using ZXing.OneD;
 
 namespace Main.Service
@@ -134,7 +141,7 @@ namespace Main.Service
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                //MessageBox.Show(ex.Message);
             }
         }
 
@@ -326,6 +333,260 @@ namespace Main.Service
             }
             catch (Exception ex)
             {
+            }
+        }
+
+
+        public async static void ImpressoraPrint(EtiquetaInfo etiqueta, int type)
+        {
+            try
+            {
+
+                var listPrinter = Program.SQL.SelectList("SELECT * FROM Rede WHERE Parent = @Parent AND tipo = 'Impressora'", "Rede",
+                    null, new Dictionary<string, object>()
+                    {
+                        {"@Parent", Environment.MachineName}
+                    });
+
+                if (listPrinter.Count >= 1)
+                {
+                    //Pegar ela e executar
+
+                    foreach (RedeClass impressora in listPrinter)
+                    {
+                        if (Program.Configuracao.id_Impressora == impressora.Id)
+                        {
+                            Console.WriteLine(Program.Etiqueta.arquivo);
+
+                            if (impressora.tipo_impressao == 2)
+                            {
+                                Task task = Task.Run(async () =>
+                                {
+                                    string ipAddress = impressora.IP;
+                                    int port = impressora.porta;
+                                    int timeoutMilliseconds = 1000;
+                                    using (TcpClient tcpClient = new TcpClient())
+                                    {
+                                        try
+                                        {
+                                            using (CancellationTokenSource cancellationTokenSource = new CancellationTokenSource(timeoutMilliseconds))
+                                            {
+                                                Task connectTask = tcpClient.ConnectAsync(ipAddress, port);
+                                                await Task.WhenAny(connectTask, Task.Delay(Timeout.Infinite, cancellationTokenSource.Token));
+                                                cancellationTokenSource.Token.ThrowIfCancellationRequested();
+
+                                                //Program.DebbugPage.InsertLog($"Dispositivo conectado com sucesso! {impressora.full_name}");
+
+                                                using (NetworkStream stream = tcpClient.GetStream())
+                                                {
+                                                    byte[] bufferWrite = Encoding.UTF8.GetBytes(Program.Etiqueta.arquivo);
+                                                    stream.Write(bufferWrite, 0, bufferWrite.Length);
+                                                    //Program.DebbugPage.InsertLog($"Dados enviados: {bufferWrite}");
+                                                }
+                                            }
+                                        }
+                                        catch (OperationCanceledException)
+                                        {
+                                            //Program.DebbugPage.InsertLog($"Tempo limite de conexão atingido. {impressora.full_name}");
+                                        }
+                                        catch (IOException ex)
+                                        {
+                                            //Program.DebbugPage.InsertLog($"Erro na escrita dos dados: {ex.Message}" + $" {impressora.full_name}");
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            //Program.DebbugPage.InsertLog($"Erro ao tentar conectar: {ex.Message}" + $" {impressora.full_name}");
+                                        }
+                                    }
+                                });
+                            }
+
+                            //Serial
+                            else if (impressora.tipo_impressao == 1)
+                            {
+                                Task taskSerial = Task.Run(() =>
+                                {
+
+                                    try
+                                    {
+                                        if (Program.IMPRESSORAPORT.IsOpen)
+                                        {
+                                            // Program.IMPRESSORAPORT.Open();
+                                            //Program.DebbugPage.InsertLog"Dispositivo conectado com sucesso! {0}", impressora.full_name);
+
+                                            byte[] bufferWrite = Encoding.UTF8.GetBytes(Program.Etiqueta.arquivo);
+                                            Program.IMPRESSORAPORT.Write(bufferWrite, 0, bufferWrite.Length);
+                                            //Program.DebbugPage.InsertLog$"Dados enviados: {Encoding.UTF8.GetString(bufferWrite)}");
+                                            //MessageBox.Show("Enviado para impressora");
+                                        }
+
+                                    }
+                                    catch (TimeoutException)
+                                    {
+                                        //Program.DebbugPage.InsertLog($"Tempo limite de conexão atingido. {impressora.full_name}");
+                                    }
+                                    catch (UnauthorizedAccessException ex)
+                                    {
+                                        //Program.DebbugPage.InsertLog($"Erro de acesso à porta serial: {ex.Message} {impressora.full_name}");
+                                    }
+                                    catch (IOException ex)
+                                    {
+                                        //Program.DebbugPage.InsertLog($"Erro na escrita dos dados: {ex.Message} {impressora.full_name}");
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                       // Program.DebbugPage.InsertLog($"Erro ao tentar conectar: {ex.Message} {impressora.full_name}");
+                                    }
+                                    finally
+                                    {
+                                        //if (Program.IMPRESSORAPORT.IsOpen)
+                                        //    Program.IMPRESSORAPORT.Close();
+                                    }
+
+                                });
+                            }
+
+                            //Impressora normal
+                            else if (impressora.tipo_impressao == 0)
+                            {
+                                Program.Etiqueta.arquivo = Program.Etiqueta.arquivo.Replace("#Balanca#", "1");
+                                Program.Etiqueta.arquivo = Program.Etiqueta.arquivo.Replace("#Referencia#", "1");
+                                Program.Etiqueta.arquivo = Program.Etiqueta.arquivo.Replace("#PLiq#", "1");
+                                Program.Etiqueta.arquivo = Program.Etiqueta.arquivo.Replace("#Data#", $"{DateTime.Now.Day}/{DateTime.Now.Month}/{DateTime.Now.Year.ToString().Substring(2, 2)}");
+                                Program.Etiqueta.arquivo = Program.Etiqueta.arquivo.Replace("#Hora#", $"{DateTime.Now.Second}:{DateTime.Now.Minute}:{DateTime.Now.Hour}");
+
+                                ZXing.BarcodeWriter brcode = new ZXing.BarcodeWriter();
+
+                                string lbl_1 = $"Balança: {1}";
+                                string lbl_2 = $"Ref: {1}";
+
+                                string lbl_3 = $"Data:  {format_string(DateTime.Now.Day.ToString())}/{format_string(DateTime.Now.Month.ToString())}/{DateTime.Now.Year.ToString().Substring(2, 2)} ";
+                                string lbl_4 = $"Hora: {format_string(DateTime.Now.Hour.ToString())}:{format_string(DateTime.Now.Minute.ToString())}:{format_string(DateTime.Now.Second.ToString())}";
+
+                                string lbl_5 = $"Peso Liquido:";
+                                string lbl__5 = $"{1}";
+
+                                string lbl_6 = $"{1}";
+
+                                System.Drawing.Font font = new System.Drawing.Font("Arial", 10, System.Drawing.FontStyle.Bold, GraphicsUnit.Pixel);
+                                System.Drawing.Font fontSmall = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold, GraphicsUnit.Pixel);
+                                System.Drawing.Font fontBig = new System.Drawing.Font("Arial", 18, System.Drawing.FontStyle.Bold, GraphicsUnit.Pixel);
+
+                                //Font fontLarge = new Font("SKF Sans", 36, FontStyle.Regular, GraphicsUnit.Pixel);
+                                Brush brush = Brushes.Black;
+
+                                int x = (int)(100 * (96 / 25.4f)); //100 mm
+                                int y = (int)(030 * (96 / 25.4f)); //30 mm
+
+                                Bitmap bitmap = new Bitmap(x, y);
+
+                                int wid = (int)(40 * 96 / 25.4f);
+                                int hei = (int)(07 * 96 / 25.4f);
+
+                                //brcode.Format = BarcodeFormat.PDF_417;
+                                //brcode.Options = new ZXing.Common.EncodingOptions()
+                                //{
+                                //    Margin = 0,
+                                //    Height = hei,
+                                //    Width = wid,
+                                //};
+
+                                //Bitmap barcodeBitmap = new Bitmap(brcode.Write(1), wid, hei);
+
+                                using (Graphics graphics = Graphics.FromImage(bitmap))
+                                {
+                                    graphics.Clear(Color.White);
+                                    graphics.DrawString(lbl_1, font, brush, new PointF(10, 20));
+                                    graphics.DrawString(lbl_2, font, brush, new PointF(10, 35));
+
+                                    graphics.DrawString(lbl_3, font, brush, new PointF(290, 20));
+                                    graphics.DrawString(lbl_4, font, brush, new PointF(290, 35));
+
+                                    //graphics.DrawImage(barcodeBitmap, new PointF(10, 70));
+                                    //graphics.DrawImage(barcodeBitmap, new PointF(250, 70));
+
+                                    graphics.DrawString(lbl_5, font, brush, new PointF(155, 60));
+                                    graphics.DrawString(lbl__5, fontBig, brush, new PointF(155, 75));
+
+                                    graphics.DrawString(lbl_6, fontSmall, brush, new PointF(50, 90));
+                                    graphics.DrawString(lbl_6, fontSmall, brush, new PointF(300, 90));
+                                }
+
+                                PrintDocument documento = new PrintDocument();
+                                PrinterSettings configImpressora = new PrinterSettings();
+                                PageSettings pageSettings = documento.DefaultPageSettings;
+
+                                string[] impressoras = PrinterSettings.InstalledPrinters.Cast<string>().ToArray();
+                                string name = "";
+                                foreach (string item in impressoras)
+                                {
+                                    //if (item.Contains("Citizen CL-S631")) { name = item; }
+                                    //if (item.Contains("ZDesigner ZD220-203dpi ZPL")) { name = item; }
+
+                                    if (item == impressora.impressora) { name = impressora.impressora; }
+                                }
+                                ZPLPrintingService prnSvc = new ZPLPrintingService();
+                                string zplCode = await prnSvc.GetImageZPLEncoded(bitmap);
+
+                                bitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                                //PrintPopup print = new PrintPopup(bitmap);
+                                //print.ShowDialog();
+
+                                if (!string.IsNullOrWhiteSpace(name))
+                                {
+                                    configImpressora.PrinterName = name;
+                                    documento.PrinterSettings = configImpressora;
+                                    documento.DefaultPageSettings.Landscape = true;
+                                    //bitmap.Dispose();
+                                }
+
+                                documento.PrintPage += (sender, args) =>
+                                {
+                                    // Desenhe a imagem no objeto Graphics do evento
+                                    args.Graphics.DrawImage(bitmap, 0, 0); // Ajuste a posição conforme necessário
+                                };
+
+                                //PrintPreviewDialog previewDialog = new PrintPreviewDialog();
+                                //previewDialog.Document = documento;
+                                //previewDialog.ShowDialog();
+
+                                documento.Print();
+                            }
+
+                            //   }
+                        }
+                    }
+
+                    // RedeClass impressora = (RedeClass)listPrinter[0];
+
+                }
+                else
+                {
+                    //System.Windows.MessageBox.Show("Nenhuma impressora foi encontrada na base de dados.\n\rCadastre uma na tela de rede!!", "VC Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+
+        public static string format_string(string s)
+        {
+            try
+            {
+                if (s.Length == 1)
+                {
+                    return "0" + s;
+                }
+
+                return s;
+            }
+            catch (Exception)
+            {
+                return s;
             }
         }
 

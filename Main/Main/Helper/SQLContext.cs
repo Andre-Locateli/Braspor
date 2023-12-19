@@ -361,6 +361,21 @@ namespace Main.Helper
                                     historico.Dateinsert = Convert.ToDateTime(dr["dateinsert"]);
                                     list_return.Add(historico);
                                 }
+
+                                if (tabela == "Processos")
+                                {
+                                    ProcessosModel process = new ProcessosModel();
+                                    process.Id = Convert.ToInt32(dr["Id"]);
+                                    process.IdUsuario = Convert.ToInt32(dr["Id_usuario"]);
+                                    process.Id_Produto = Convert.ToInt32(dr["Id_Produto"]);
+                                    process.Descricao = Convert.ToString(dr["Descricao"]);
+                                    process.TempoExecucao = Convert.ToString(dr["Tempo_execucao"]);
+                                    process.TotalContagem = Convert.ToInt32(dr["Total_contagem"]);
+                                    process.PesoTotal = Convert.ToDouble(dr["Peso_total"]);
+                                    list_return.Add(process);
+                                }
+
+
                             }
                         }
                         return list_return;
