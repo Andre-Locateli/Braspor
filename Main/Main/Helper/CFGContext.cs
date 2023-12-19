@@ -19,8 +19,8 @@ namespace Main.Helper
         public string _modoOperacao { get; set; } = "false";
 
 
-        public string balanca_1 { get; set; } = "";
-        public string balanca_2 { get; set; } = "";
+        //public string balanca_1 { get; set; } = "";
+        //public string balanca_2 { get; set; } = "";
 
 
     }

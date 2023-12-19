@@ -58,10 +58,6 @@
             this.btnSerialConfig = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.lbSerialStatus01 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.lbSerialStatus2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.lbSerialStatus02 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -75,6 +71,8 @@
             this.lblAcesso = new System.Windows.Forms.Label();
             this.lblUsuario = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.lbSerialStatus2 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.sidebar.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcb_logo)).BeginInit();
@@ -524,15 +522,12 @@
             this.tbSerial.ContextMenuStrip = this.contextMenuStrip1;
             this.tbSerial.Controls.Add(this.label1, 0, 0);
             this.tbSerial.Controls.Add(this.lbSerialStatus01, 1, 0);
-            this.tbSerial.Controls.Add(this.label2, 0, 2);
-            this.tbSerial.Controls.Add(this.lbSerialStatus2, 1, 2);
-            this.tbSerial.Controls.Add(this.label3, 0, 1);
-            this.tbSerial.Controls.Add(this.lbSerialStatus02, 1, 1);
+            this.tbSerial.Controls.Add(this.label2, 0, 1);
+            this.tbSerial.Controls.Add(this.lbSerialStatus2, 1, 1);
             this.tbSerial.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbSerial.Location = new System.Drawing.Point(5, 27);
             this.tbSerial.Name = "tbSerial";
-            this.tbSerial.RowCount = 3;
-            this.tbSerial.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tbSerial.RowCount = 2;
             this.tbSerial.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tbSerial.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tbSerial.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -561,9 +556,9 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 36);
+            this.label1.Size = new System.Drawing.Size(94, 54);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Serial Ind 01:";
+            this.label1.Text = "Serial Indicadores";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbSerialStatus01
@@ -574,63 +569,10 @@
             this.lbSerialStatus01.ForeColor = System.Drawing.Color.White;
             this.lbSerialStatus01.Location = new System.Drawing.Point(103, 0);
             this.lbSerialStatus01.Name = "lbSerialStatus01";
-            this.lbSerialStatus01.Size = new System.Drawing.Size(94, 36);
+            this.lbSerialStatus01.Size = new System.Drawing.Size(94, 54);
             this.lbSerialStatus01.TabIndex = 1;
             this.lbSerialStatus01.Text = "-";
             this.lbSerialStatus01.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(3, 72);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(94, 36);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Serial Imp:";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lbSerialStatus2
-            // 
-            this.lbSerialStatus2.AutoSize = true;
-            this.lbSerialStatus2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbSerialStatus2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.lbSerialStatus2.ForeColor = System.Drawing.Color.White;
-            this.lbSerialStatus2.Location = new System.Drawing.Point(103, 72);
-            this.lbSerialStatus2.Name = "lbSerialStatus2";
-            this.lbSerialStatus2.Size = new System.Drawing.Size(94, 36);
-            this.lbSerialStatus2.TabIndex = 3;
-            this.lbSerialStatus2.Text = "-";
-            this.lbSerialStatus2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbSerialStatus2.Click += new System.EventHandler(this.lbSerialStatus2_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(3, 36);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(94, 36);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Serial Ind 02:";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lbSerialStatus02
-            // 
-            this.lbSerialStatus02.AutoSize = true;
-            this.lbSerialStatus02.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbSerialStatus02.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.lbSerialStatus02.ForeColor = System.Drawing.Color.White;
-            this.lbSerialStatus02.Location = new System.Drawing.Point(103, 36);
-            this.lbSerialStatus02.Name = "lbSerialStatus02";
-            this.lbSerialStatus02.Size = new System.Drawing.Size(94, 36);
-            this.lbSerialStatus02.TabIndex = 6;
-            this.lbSerialStatus02.Text = "-";
-            this.lbSerialStatus02.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label5
             // 
@@ -788,6 +730,33 @@
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
             // 
+            // lbSerialStatus2
+            // 
+            this.lbSerialStatus2.AutoSize = true;
+            this.lbSerialStatus2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbSerialStatus2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
+            this.lbSerialStatus2.ForeColor = System.Drawing.Color.White;
+            this.lbSerialStatus2.Location = new System.Drawing.Point(103, 54);
+            this.lbSerialStatus2.Name = "lbSerialStatus2";
+            this.lbSerialStatus2.Size = new System.Drawing.Size(94, 54);
+            this.lbSerialStatus2.TabIndex = 3;
+            this.lbSerialStatus2.Text = "-";
+            this.lbSerialStatus2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbSerialStatus2.Click += new System.EventHandler(this.lbSerialStatus2_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(3, 54);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(94, 54);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Serial Impressora";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // MainForms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -861,8 +830,6 @@
         private System.Windows.Forms.Button btnPesagem;
         private System.Windows.Forms.Button btnCadastro;
         private System.Windows.Forms.Button btnProduto;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label lbSerialStatus2;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem btnSerialConfig;
         private System.Windows.Forms.Button btnManual;
@@ -878,9 +845,9 @@
         private System.Windows.Forms.Label lblAcesso;
         private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label lbSerialStatus02;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbSerialStatus2;
     }
 }

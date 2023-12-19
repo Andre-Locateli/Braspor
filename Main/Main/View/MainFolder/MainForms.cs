@@ -589,16 +589,16 @@ namespace Main.View.MainFolder
                 lbSerialStatus01.ForeColor = Color.FromArgb(100, 127, 47, 50);
             }
 
-            if (SerialCommunicationService.SERIALPORT2.IsOpen) // Verifica se a porta serial está aberta
-            {
-                lbSerialStatus02.Text = "OPEN";
-                lbSerialStatus02.ForeColor = Color.FromArgb(100, 0, 161, 155);
-            }
-            else
-            {
-                lbSerialStatus02.Text = "CLOSE";
-                lbSerialStatus02.ForeColor = Color.FromArgb(100, 127, 47, 50);
-            }
+            //if (SerialCommunicationService.SERIALPORT2.IsOpen) // Verifica se a porta serial está aberta
+            //{
+            //    lbSerialStatus02.Text = "OPEN";
+            //    lbSerialStatus02.ForeColor = Color.FromArgb(100, 0, 161, 155);
+            //}
+            //else
+            //{
+            //    lbSerialStatus02.Text = "CLOSE";
+            //    lbSerialStatus02.ForeColor = Color.FromArgb(100, 127, 47, 50);
+            //}
 
 
             if (Program.IMPRESSORAPORT.IsOpen) // Verifica se a porta serial IMP está aberta
