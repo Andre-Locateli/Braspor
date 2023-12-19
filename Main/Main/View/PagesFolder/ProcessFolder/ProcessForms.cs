@@ -23,6 +23,7 @@ namespace Main.View.PagesFolder.ProcessFolder
         bool isAtivo = true;
 
         double pesoReferencia;
+        decimal qtContab = 0;
 
         //Comunicação
         public System.Timers.Timer tmRead = new System.Timers.Timer();
@@ -66,10 +67,24 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                         if(btn_IniciarContagem.Text == "Terminar Contagem")
                         {
-                            decimal qtContab = 0;
                             //qtContab = Convert.ToDouble(valorContagem.Text) / pesoReferencia;
                             qtContab = Convert.ToDecimal($"{SerialCommunicationService.indicadores_info[Program.COMNAME_02].PS}") / Convert.ToDecimal(0.004795);
 
+                            this.Invoke(new MethodInvoker(() =>
+                            {
+                                lbl_QtContab.Text = Convert.ToInt32(qtContab).ToString();
+                            }));
+                        }
+
+                        if (qtContab == 0)
+                        {
+                            this.Invoke(new MethodInvoker(() =>
+                            {
+                                lbl_QtContab.Text = Convert.ToInt32(qtContab).ToString();
+                            }));
+                        }
+                        else if (qtContab == 1) 
+                        {
                             this.Invoke(new MethodInvoker(() =>
                             {
                                 lbl_QtContab.Text = Convert.ToInt32(qtContab).ToString();

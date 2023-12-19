@@ -289,7 +289,10 @@ namespace Main.View.LoginFolder
 
         private void LoginForms_KeyDown(object sender, KeyEventArgs e)
         {
-
+            if (e.KeyCode == Keys.Enter)
+            {
+                Logar();
+            }
         }
     }
 }

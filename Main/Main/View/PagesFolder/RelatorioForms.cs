@@ -24,9 +24,14 @@ namespace Main.View.PagesFolder
         private string where_condition = "";
         private Dictionary<string, object> where_parameter = new Dictionary<string, object>();
 
-        public RelatorioForms()
+        int idUsuario = 0;
+        string nomeUsuario = "";
+
+        public RelatorioForms(int id_Usuario, string nome_Usuario)
         {
             InitializeComponent();
+            idUsuario = id_Usuario;
+            nomeUsuario = nome_Usuario;
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -479,6 +484,16 @@ namespace Main.View.PagesFolder
                     worksheet = null;
                     releaseObject(excelApp);
                     releaseObject(workbook);
+
+                    var insertHistorico = Program.SQL.CRUDCommand("INSERT INTO Historico_Acoes (Id_usuario, Nome_usuario, Acao, Descricao, dateinsert) VALUES (@Id_usuario, @Nome_usuario, @Acao, @Descricao, @dateinsert)", "Historico_Acoes",
+                    new Dictionary<string, object>()
+                    {
+                        {"@Id_usuario", idUsuario},
+                        {"@Nome_usuario", nomeUsuario},
+                        {"@Acao", "Exportação de Relatório"},
+                        {"@Descricao", "Relatório: " + mtxtDateInicio.Text + " - " + mtxtDateFim.Text + " / " + cbProduto.Text },
+                        {"@dateinsert", DateTime.Now}
+                    });
                 }
             }
             catch (Exception ex)

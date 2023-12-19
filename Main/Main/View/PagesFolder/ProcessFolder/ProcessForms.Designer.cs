@@ -33,6 +33,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel9 = new System.Windows.Forms.Panel();
             this.pctg100 = new System.Windows.Forms.Panel();
             this.pct90 = new System.Windows.Forms.Panel();
@@ -72,8 +74,6 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.valorContagem = new System.Windows.Forms.Label();
             this.TimerRelogio = new System.Windows.Forms.Timer(this.components);
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -144,6 +144,26 @@
             this.panel8.Size = new System.Drawing.Size(461, 225);
             this.panel8.TabIndex = 10;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(238, 8);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(222, 20);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "QUANTIDADE CONTABILIZADA:";
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Segoe UI Light", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(242, 22);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(214, 40);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "0";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // panel9
             // 
             this.panel9.Controls.Add(this.pctg100);
@@ -163,6 +183,7 @@
             // 
             // pctg100
             // 
+            this.pctg100.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pctg100.Location = new System.Drawing.Point(392, 0);
             this.pctg100.Name = "pctg100";
             this.pctg100.Size = new System.Drawing.Size(42, 43);
@@ -170,6 +191,7 @@
             // 
             // pct90
             // 
+            this.pct90.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pct90.Location = new System.Drawing.Point(349, 0);
             this.pct90.Name = "pct90";
             this.pct90.Size = new System.Drawing.Size(42, 43);
@@ -177,6 +199,7 @@
             // 
             // pctg80
             // 
+            this.pctg80.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pctg80.Location = new System.Drawing.Point(306, 0);
             this.pctg80.Name = "pctg80";
             this.pctg80.Size = new System.Drawing.Size(42, 43);
@@ -184,6 +207,7 @@
             // 
             // pctg70
             // 
+            this.pctg70.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pctg70.Location = new System.Drawing.Point(263, 0);
             this.pctg70.Name = "pctg70";
             this.pctg70.Size = new System.Drawing.Size(42, 43);
@@ -191,6 +215,7 @@
             // 
             // pctg60
             // 
+            this.pctg60.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pctg60.Location = new System.Drawing.Point(220, 0);
             this.pctg60.Name = "pctg60";
             this.pctg60.Size = new System.Drawing.Size(42, 43);
@@ -198,6 +223,7 @@
             // 
             // pctg50
             // 
+            this.pctg50.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pctg50.Location = new System.Drawing.Point(177, 0);
             this.pctg50.Name = "pctg50";
             this.pctg50.Size = new System.Drawing.Size(42, 43);
@@ -205,6 +231,7 @@
             // 
             // pctg40
             // 
+            this.pctg40.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pctg40.Location = new System.Drawing.Point(134, 0);
             this.pctg40.Name = "pctg40";
             this.pctg40.Size = new System.Drawing.Size(42, 43);
@@ -212,6 +239,7 @@
             // 
             // pctg30
             // 
+            this.pctg30.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pctg30.Location = new System.Drawing.Point(91, 0);
             this.pctg30.Name = "pctg30";
             this.pctg30.Size = new System.Drawing.Size(42, 43);
@@ -219,6 +247,7 @@
             // 
             // pctg20
             // 
+            this.pctg20.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pctg20.Location = new System.Drawing.Point(48, 0);
             this.pctg20.Name = "pctg20";
             this.pctg20.Size = new System.Drawing.Size(42, 43);
@@ -226,6 +255,7 @@
             // 
             // pctg10
             // 
+            this.pctg10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pctg10.Location = new System.Drawing.Point(5, 0);
             this.pctg10.Name = "pctg10";
             this.pctg10.Size = new System.Drawing.Size(42, 43);
@@ -538,26 +568,6 @@
             // 
             this.TimerRelogio.Interval = 1000;
             this.TimerRelogio.Tick += new System.EventHandler(this.TimerRelogio_Tick_1);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(238, 8);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(222, 20);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "QUANTIDADE CONTABILIZADA:";
-            // 
-            // label2
-            // 
-            this.label2.Font = new System.Drawing.Font("Segoe UI Light", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(242, 22);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(214, 40);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "0";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // ProcessForms
             // 

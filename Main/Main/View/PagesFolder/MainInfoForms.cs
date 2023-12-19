@@ -18,6 +18,7 @@ using Main.View.PopupFolder;
 using Main.View.PagesFolder.PesagemFolder;
 using Main.View.CadastroFolder;
 using Main.View.PagesFolder.Configuration;
+using Main.View.PagesFolder.ProcessFolder;
 
 namespace Main.View.PagesFolder
 {
@@ -40,10 +41,15 @@ namespace Main.View.PagesFolder
             }
         }
 
+        int idUsuario = 0;
+        string nomeUsuario = "";
 
-        public MainInfoForms()
+        public MainInfoForms(int id_Usuario, string nome_Usuario)
         {
             InitializeComponent();
+
+            idUsuario = id_Usuario;
+            nomeUsuario = nome_Usuario;
 
             try
             {
@@ -218,12 +224,13 @@ namespace Main.View.PagesFolder
 
                 if (btn.Tag.ToString() == "Pesagem") 
                 {
-                    QuickButtonPress = new PesagemList(); 
+                    EscolhaPesagemForms escolha = new EscolhaPesagemForms(idUsuario, nomeUsuario);
+                    escolha.ShowDialog();
                 }
 
                 if (btn.Tag.ToString() == "Relatorio")
                 {
-                    QuickButtonPress = new RelatorioForms();
+                    QuickButtonPress = new RelatorioForms(idUsuario, nomeUsuario);
                 }
 
                 if (btn.Tag.ToString() == "Receita")
@@ -238,7 +245,7 @@ namespace Main.View.PagesFolder
 
                 if (btn.Tag.ToString() == "Produto")
                 {
-                    QuickButtonPress = new CadastroProdutoForms();
+                    QuickButtonPress = new CadastroMateriaPrimaForms(idUsuario, nomeUsuario);
                 }
 
             }

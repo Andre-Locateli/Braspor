@@ -40,7 +40,7 @@ namespace Main.View.MainFolder
         bool AnimationRunning = false;
         bool closeProgram = true;
 
-        private MainInfoForms m_Form = new MainInfoForms();
+        private MainInfoForms m_Form;
 
         public MainForms(int id_Usuario, string nome_Usuario)
         {
@@ -48,6 +48,8 @@ namespace Main.View.MainFolder
             
             idUsuario = id_Usuario;
             nomeUsuario = nome_Usuario;
+
+            m_Form = new MainInfoForms(idUsuario, nomeUsuario);
 
             lbl_time.Text = $"{DateTime.Now.Day.ToString("D2")}/{DateTime.Now.Month.ToString("D2")}/{DateTime.Now.Year} {DateTime.Now.Hour.ToString("D2")}:{DateTime.Now.Minute.ToString("D2")}";
             lblUsuario.Text = Program._usuarioLogado.Nome;
@@ -312,7 +314,7 @@ namespace Main.View.MainFolder
 
         private void button5_Click(object sender, EventArgs e)
         {
-            OpenPage(new RelatorioForms());
+            OpenPage(new RelatorioForms(idUsuario, nomeUsuario));
         }
 
         private void btnClose_Click_1(object sender, EventArgs e)
@@ -565,7 +567,7 @@ namespace Main.View.MainFolder
 
         private void btnHome_Click_1(object sender, EventArgs e)
         {
-            MainInfoForms info = new MainInfoForms();
+            MainInfoForms info = new MainInfoForms(idUsuario, nomeUsuario);
             info.QuickButtonEventClick += M_Form_QuickButtonEventClick;
             OpenPage(info);
         }

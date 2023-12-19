@@ -33,10 +33,6 @@ namespace Main.View.PagesFolder.Configuration
             InitializeComponent();
             LoadUserDB();
 
-            lbl_time.Text = $"{DateTime.Now.Day.ToString("D2")}/{DateTime.Now.Month.ToString("D2")}/{DateTime.Now.Year}";
-            lblUsuario.Text = Program._usuarioLogado.Nome;
-            lblAcesso.Text = Program._usuarioLogado.Acesso;
-
             ChangeButtonStyle(btnUser, Resources.userEnable, true, Color.FromArgb(0, 93, 131), Color.White);
             ChangeButtonStyle(btnPermissao, Resources.lockDisable, true, Color.White, Color.FromArgb(178, 178, 178));
 
@@ -176,8 +172,6 @@ namespace Main.View.PagesFolder.Configuration
                 lblLogin.Text = "Login";
                 lblSenha.ForeColor = Color.Black;
                 lblSenha.Text = "Senha";
-                lblAcesso.ForeColor = Color.Black;
-                lblAcesso.Text = "Acesso";
             }
             catch (Exception)
             {
