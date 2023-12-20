@@ -51,6 +51,13 @@ namespace Main.Model
 			set { _totalContagem = value; }
 		}
 
+		private double _pesoReferencia;
+		public double PesoReferencia
+		{
+			get { return _pesoReferencia; }
+			set { PesoReferencia = value; }
+		}
+
 		private double _pesoTotal;
 		public double PesoTotal
 		{

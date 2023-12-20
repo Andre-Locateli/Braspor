@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
@@ -32,13 +33,18 @@ namespace Main.View.PagesFolder.ProcessFolder
         int indiceReferencia = 0;
         int indiceContador = 0;
 
-        int contadorValor = 0;
+        int valorSuporte = 0;
+        int valorSecSup = 0;
 
-        int valorGuardado = 0;
-        int valorAntes = 0;
-        int valorContabilizado = 0;
+        int valorTotal = 0;
 
-        public ProcessForms(int id_Usuario, int id_MateriaPrima, int qt_Minima, string dsc_MateriaPrima)
+        int bloqueiaStop = 0;
+        int bloqueiaValor = 0;
+
+        Stopwatch stopSup = new Stopwatch();
+        Stopwatch stopValor = new Stopwatch();
+
+        public ProcessForms(int id_Usuario, int id_MateriaPrima, int qt_Minima, string dsc_MateriaPrima, int id_Processo)
         {
             InitializeComponent();
 
@@ -74,8 +80,15 @@ namespace Main.View.PagesFolder.ProcessFolder
                     {
                         valorReferencia.Invoke(new MethodInvoker(() =>
                         {
-                            valorReferencia.Text = $"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}";
-                            valorReferencia.Text = valorReferencia.Text.Replace(",", ".");
+                            if ($"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}".Contains("-"))
+                            {
+                                valorReferencia.Text = "0.000";
+                            }
+                            else
+                            {
+                                valorReferencia.Text = $"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}";
+                                valorReferencia.Text = valorReferencia.Text.Replace(",", ".");
+                            }
                         }));
 
                         valorContagem.Invoke(new MethodInvoker(() =>
@@ -91,16 +104,7 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                             this.Invoke(new MethodInvoker(() =>
                             {
-                                if (contadorValor == 0)
-                                {
-                                    valorAntes = Convert.ToInt32(qtContab);
-                                }
-
                                 lbl_QtContab.Text = Convert.ToInt32(qtContab).ToString();
-
-                                valorGuardado = Convert.ToInt32(qtContab);
-
-                                contadorValor++;
                             }));
                         }
 
@@ -281,20 +285,59 @@ namespace Main.View.PagesFolder.ProcessFolder
                             }));
                         }
 
+                        if(valorSuporte != Convert.ToInt32(qtContab))
+                        {
+                            valorSuporte = Convert.ToInt32(qtContab);
 
-                        //await Task.Delay(3000);
+                            if(bloqueiaValor == 0)
+                            {
+                                valorSecSup = valorSuporte;
+                                bloqueiaValor = 1;
+                                stopValor.Start();
+                            }
 
-                        //if (valorAntes != valorGuardado)
-                        //{
-                        //    if (valorGuardado == 0)
-                        //    {
-                        //        valorContabilizado += valorGuardado;
+                            while(stopValor.ElapsedMilliseconds < 5000)
+                            {
+                                valorSuporte = Convert.ToInt32(qtContab);
+                            }
 
-                        //        lbl_ValorReal.Text = valorContabilizado.ToString();
+                            if(valorSecSup == valorSuporte)
+                            {
+                                if (Convert.ToInt32(qtContab) <= 0)
+                                {
+                                    if (bloqueiaStop == 0)
+                                    {
+                                        stopSup.Start();
+                                        bloqueiaStop = 1;
+                                    }
 
-                        //        contadorValor = 0;
-                        //    }
-                        //}
+                                    if (stopSup.ElapsedMilliseconds > 5000 && Convert.ToInt32(qtContab) == 0)
+                                    {
+                                        //var insertBanco = Program.SQL.CRUDCommand("INSERT INTO MateriaPrima (Codigo, Descricao, Tolerancia_erro, quantidade_minima, bit_status, dateinsert) VALUES (@Codigo, @Descricao, @Tolerancia_erro, @quantidade_minima, @bit_status, @dateinsert)", "MateriaPrima",
+                                        //new Dictionary<string, object>()
+                                        //{
+                                        //    {"@Codigo", txtCodigo.Text },
+                                        //    {"@Descricao", txtDescricao.Text },
+                                        //    {"@Tolerancia_erro", pctTolerancia },
+                                        //    {"@quantidade_minima", Convert.ToInt32(txtQtMinima.Text) },
+                                        //    {"@bit_status", disponivelCk },
+                                        //    {"@dateinsert", DateTime.Now}
+                                        //});
+
+                                        valorTotal += valorSuporte;
+
+                                        this.Invoke(new MethodInvoker(() =>
+                                        {
+                                            lbl_ValorReal.Text = valorTotal.ToString();
+                                        }));
+
+                                        bloqueiaStop = 1;
+                                        stopSup.Reset();
+                                        valorSuporte = Convert.ToInt32(qtContab);
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
                 catch (Exception)
@@ -312,7 +355,6 @@ namespace Main.View.PagesFolder.ProcessFolder
                 taraContagem.Tag = Program.Endereco_Referencia + 1;
                 zeroContagem.Tag = Program.Endereco_Referencia + 1;
             }
-
         }
 
         private void CommandButtonEventClick(object sender, EventArgs e)

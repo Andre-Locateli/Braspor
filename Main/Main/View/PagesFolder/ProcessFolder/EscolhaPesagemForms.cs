@@ -74,7 +74,32 @@ namespace Main.View.PagesFolder.ProcessFolder
                     qtMinima = materia.Quantidade_minima;
                 }
 
-                ProcessForms proc = new ProcessForms(idUsuario, idMateria, qtMinima, txt_Descricao.Text);
+                DateTime dataInsertBanco = DateTime.Now;
+
+                var insertBanco = Program.SQL.CRUDCommand("INSERT INTO Processos (Id_produto, Id_usuario, Descricao, Status_processo, dateinsert) VALUES (@Id_produto, @Id_usuario, @Descricao, @Status_processo, @dateinsert)", "Processos",
+                new Dictionary<string, object>()
+                {
+                    {"@Id_produto", idMateria },
+                    {"@Id_usuario", idUsuario },
+                    {"@Descricao", txt_Descricao.Text },
+                    {"@Status_processo", 1 },
+                    {"@dateinsert", DateTime.Now}
+                });
+
+                int idInserido = 0;
+
+                var selectID = Program.SQL.SelectList("SELECT * FROM Processos WHERE dateinsert = @dateinsert", "Processos", null,
+                new Dictionary<string, object>()
+                {
+                    {"@dateinsert", dataInsertBanco }
+                });
+
+                foreach(ProcessosModel process in selectID)
+                {
+                    idInserido = process.Id;
+                }
+
+                ProcessForms proc = new ProcessForms(idUsuario, idMateria, qtMinima, txt_Descricao.Text, idInserido);
 
                 foreach (Form openForm in Application.OpenForms)
                 {
