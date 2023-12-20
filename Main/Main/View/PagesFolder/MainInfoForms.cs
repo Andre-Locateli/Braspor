@@ -60,40 +60,45 @@ namespace Main.View.PagesFolder
                 var qtd_pesagens = Program.SQL.SelectList($"SELECT * FROM Processos WHERE CONVERT(DATE, dateinsert) = '{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}' AND Status_processo = 2", "Processos");
                 lbl_hoje.Text = $"{qtd_pesagens.Count()}";
 
-                //var qtd_estornada = Program.SQL.SelectList($"SELECT * FROM LogReceita WHERE CONVERT(DATE, dateinsert) = '{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}' AND Status = 0", "LogReceita");
-                //lblPendente.Text = $"{qtd_estornada.Count()}";
+                var qtd_folhas = Program.SQL.SelectList($"SELECT SUM(Total_contagem) AS QtdTotal FROM Processos WHERE CONVERT(DATE, dateinsert) = '{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}' AND Status_processo = 2", "Processos", "QtdTotal");
 
-                //var qtd_mes = Program.SQL.SelectList($"SELECT * FROM LogReceita WHERE convert(datetime, convert(int, getdate())) >= '{DateTime.Now.Year}-{DateTime.Now.Month}-01' AND convert(datetime, convert(int, getdate())) <= '{DateTime.Now.Year}-{DateTime.Now.Month}-31'", "LogReceita");
-                //lbl_prevista.Text = $"{qtd_mes.Count()}";
+                if (qtd_folhas.Count > 0)
+                {
+                    lblqtdFolhas.Text = $"{qtd_folhas[0]}";
+                }
+                else { lblqtdFolhas.Text = "0"; }
+     
+                var qtd_mes = Program.SQL.SelectList($"SELECT * FROM Processos WHERE CONVERT(DATE, dateinsert) >= '{DateTime.Now.Year}-{DateTime.Now.Month}-01' AND CONVERT(DATE, dateinsert) <= '{DateTime.Now.Year}-{DateTime.Now.Month}-31'", "Processos");
+                lbl_prevista.Text = $"{qtd_mes.Count()}";
 
-                //double[] valores_dias = new double[33];
+                double[] valores_dias = new double[33];
 
-                //for (int i = 0; i <= DateTime.Now.Day; i++)
-                //{
-                //    var temp = Program.SQL.SelectList($"SELECT * FROM LogReceita WHERE CONVERT(DATE, dateinsert) = '{DateTime.Now.Year}-{DateTime.Now.Month}-{i + 1}'", "LogReceita");
+                for (int i = 0; i <= DateTime.Now.Day; i++)
+                {
+                    var temp = Program.SQL.SelectList($"SELECT * FROM Processos WHERE CONVERT(DATE, dateinsert) = '{DateTime.Now.Year}-{DateTime.Now.Month}-{i + 1}'", "Processos");
 
-                //    valores_dias[i + 1] = temp.Count();
-                //}
+                    valores_dias[i + 1] = temp.Count();
+                }
 
-                //SeriesCollection series = new SeriesCollection
-                //{
-                //    new LineSeries
-                //    {
-                //        Title = " ",
-                //        Values = new ChartValues<double>(valores_dias),
-                //        Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(39,213,67)),
-                //        PointGeometry = DefaultGeometries.Circle,
-                //        PointGeometrySize = 15,
-                //        Fill = System.Windows.Media.Brushes.Transparent,
-                //        LineSmoothness =0,
-                //        StrokeThickness = 2,
-                //        IsHitTestVisible = false,
-                //    },
-                //};
+                SeriesCollection series = new SeriesCollection
+                {
+                    new LineSeries
+                    {
+                        Title = " ",
+                        Values = new ChartValues<double>(valores_dias),
+                        Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(39,213,67)),
+                        PointGeometry = DefaultGeometries.Circle,
+                        PointGeometrySize = 15,
+                        Fill = System.Windows.Media.Brushes.Transparent,
+                        LineSmoothness = 1,
+                        StrokeThickness = 2,
+                        IsHitTestVisible = false,
+                    },
+                };
 
-                //cartesianChart1.AxisX = new AxesCollection { new Axis { Separator = new Separator { IsEnabled = false, Step = 1 }, Title = "", FontSize = 15, Foreground = System.Windows.Media.Brushes.Gray, MinValue = 1, MaxValue = 31 } };
-                //cartesianChart1.AxisY = new AxesCollection { new Axis { Separator = new Separator { IsEnabled = true, Step = 1 }, Title = "", FontSize = 15, Foreground = System.Windows.Media.Brushes.Gray, } };
-                //cartesianChart1.Series = series;
+                cartesianChart1.AxisX = new AxesCollection { new Axis { Separator = new Separator { IsEnabled = false, Step = 1 }, Title = "", FontSize = 15, Foreground = System.Windows.Media.Brushes.Gray, MinValue = 1, MaxValue = 31 } };
+                cartesianChart1.AxisY = new AxesCollection { new Axis { Separator = new Separator { IsEnabled = true, Step = 1 }, Title = "", FontSize = 15, Foreground = System.Windows.Media.Brushes.Gray, } };
+                cartesianChart1.Series = series;
 
                 button1.Enabled = Program._permissaoUsuario.Pesagem_View;
                 button2.Enabled = Program._permissaoUsuario.Relatorio_View;

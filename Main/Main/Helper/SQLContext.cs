@@ -364,17 +364,24 @@ namespace Main.Helper
 
                                 if (tabela == "Processos")
                                 {
-                                    ProcessosModel process = new ProcessosModel();
-                                    process.Id = Convert.ToInt32(dr["Id"]);
-                                    process.IdUsuario = Convert.ToInt32(dr["Id_usuario"]);
-                                    process.Id_Produto = Convert.ToInt32(dr["Id_Produto"]);
-                                    process.Descricao = Convert.ToString(dr["Descricao"]);
-                                    process.TempoExecucao = Convert.ToString(dr["Tempo_execucao"]);
-                                    process.TotalContagem = Convert.ToInt32(dr["Total_contagem"]);
-                                    process.PesoReferencia = Convert.ToDouble(dr["Peso_Referencia"]);
-                                    process.PesoTotal = Convert.ToDouble(dr["Peso_total"]);
-                                    process.dateinsert = Convert.ToDateTime(dr["dateinsert"]);
-                                    list_return.Add(process);
+                                    if (coluna_to_return is null)
+                                    {
+                                        ProcessosModel process = new ProcessosModel();
+                                        process.Id = Convert.ToInt32(dr["Id"]);
+                                        process.IdUsuario = Convert.ToInt32(dr["Id_usuario"]);
+                                        process.Id_Produto = Convert.ToInt32(dr["Id_Produto"]);
+                                        process.Descricao = Convert.ToString(dr["Descricao"]);
+                                        process.TempoExecucao = Convert.ToString(dr["Tempo_execucao"]);
+                                        process.TotalContagem = Convert.ToInt32(dr["Total_contagem"]);
+                                        process.PesoTotal = Convert.ToDouble(dr["Peso_total"]);
+                                        list_return.Add(process);
+                                    }
+                                    else
+                                    {
+                                        list_return.Add(dr[coluna_to_return]);
+                                    }
+
+                              
                                 }
 
 

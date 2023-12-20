@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tmTime = new System.Windows.Forms.Timer(this.components);
             this.panel5 = new System.Windows.Forms.Panel();
             this.button5 = new System.Windows.Forms.Button();
@@ -54,7 +54,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.panel9 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.lblPendente = new System.Windows.Forms.Label();
+            this.lblqtdFolhas = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -229,28 +229,28 @@
             this.dgv_avisos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgv_avisos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgv_avisos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_avisos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_avisos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgv_avisos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_avisos.ColumnHeadersVisible = false;
             this.dgv_avisos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.warningIcon,
             this.trashIcon});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_avisos.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_avisos.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgv_avisos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_avisos.Location = new System.Drawing.Point(2, 39);
             this.dgv_avisos.Name = "dgv_avisos";
@@ -400,7 +400,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(174, 59);
             this.label5.TabIndex = 5;
-            this.label5.Text = "Quantidade Folhas Mês";
+            this.label5.Text = "Quantidade Mês";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel9
@@ -414,7 +414,7 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.White;
-            this.panel4.Controls.Add(this.lblPendente);
+            this.panel4.Controls.Add(this.lblqtdFolhas);
             this.panel4.Controls.Add(this.label4);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(242, 0);
@@ -425,17 +425,17 @@
             this.panel4.TabIndex = 2;
             this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // lblPendente
+            // lblqtdFolhas
             // 
-            this.lblPendente.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblPendente.Font = new System.Drawing.Font("Segoe UI", 35.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPendente.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(49)))), ((int)(((byte)(97)))));
-            this.lblPendente.Location = new System.Drawing.Point(5, 10);
-            this.lblPendente.Name = "lblPendente";
-            this.lblPendente.Size = new System.Drawing.Size(222, 91);
-            this.lblPendente.TabIndex = 5;
-            this.lblPendente.Text = "10000";
-            this.lblPendente.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.lblqtdFolhas.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblqtdFolhas.Font = new System.Drawing.Font("Segoe UI", 35.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblqtdFolhas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(49)))), ((int)(((byte)(97)))));
+            this.lblqtdFolhas.Location = new System.Drawing.Point(5, 10);
+            this.lblqtdFolhas.Name = "lblqtdFolhas";
+            this.lblqtdFolhas.Size = new System.Drawing.Size(222, 91);
+            this.lblqtdFolhas.TabIndex = 5;
+            this.lblqtdFolhas.Text = "10000";
+            this.lblqtdFolhas.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // label4
             // 
@@ -447,7 +447,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(175, 59);
             this.label4.TabIndex = 4;
-            this.label4.Text = "Quantidade Folhas Hoje";
+            this.label4.Text = "Quantidade Hoje";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel3
@@ -563,7 +563,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lbl_prevista;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label lblPendente;
+        private System.Windows.Forms.Label lblqtdFolhas;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lbl_hoje;
         private LiveCharts.WinForms.CartesianChart cartesianChart1;
