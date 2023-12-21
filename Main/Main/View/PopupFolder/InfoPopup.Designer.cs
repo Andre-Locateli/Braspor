@@ -52,16 +52,16 @@
             this.lblTitulo.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitulo.Location = new System.Drawing.Point(70, 12);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(414, 77);
+            this.lblTitulo.Size = new System.Drawing.Size(404, 77);
             this.lblTitulo.TabIndex = 19;
             this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblInformacao
             // 
             this.lblInformacao.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInformacao.Location = new System.Drawing.Point(9, 100);
+            this.lblInformacao.Location = new System.Drawing.Point(7, 100);
             this.lblInformacao.Name = "lblInformacao";
-            this.lblInformacao.Size = new System.Drawing.Size(508, 106);
+            this.lblInformacao.Size = new System.Drawing.Size(516, 106);
             this.lblInformacao.TabIndex = 20;
             this.lblInformacao.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -90,6 +90,7 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(529, 291);
             this.panel2.TabIndex = 22;
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // InfoPopup
             // 
@@ -97,16 +98,17 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(529, 291);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnEnviar);
             this.Controls.Add(this.lblInformacao);
             this.Controls.Add(this.lblTitulo);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "InfoPopup";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "InfoPopup";
+            this.Load += new System.EventHandler(this.InfoPopup_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 

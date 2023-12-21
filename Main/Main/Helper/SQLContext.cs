@@ -373,7 +373,9 @@ namespace Main.Helper
                                         process.Descricao = Convert.ToString(dr["Descricao"]);
                                         process.TempoExecucao = Convert.ToString(dr["Tempo_execucao"]);
                                         process.TotalContagem = Convert.ToInt32(dr["Total_contagem"]);
+                                        process.PesoReferencia = Convert.ToDouble(dr["Peso_Referencia"]);
                                         process.PesoTotal = Convert.ToDouble(dr["Peso_total"]);
+                                        process.dateinsert = Convert.ToDateTime(dr["dateinsert"]);
                                         list_return.Add(process);
                                     }
                                     else

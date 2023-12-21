@@ -183,6 +183,7 @@
             // 
             // pctg100
             // 
+            this.pctg100.BackColor = System.Drawing.Color.Gray;
             this.pctg100.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pctg100.Location = new System.Drawing.Point(392, 0);
             this.pctg100.Name = "pctg100";
@@ -191,6 +192,7 @@
             // 
             // pctg90
             // 
+            this.pctg90.BackColor = System.Drawing.Color.Gray;
             this.pctg90.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pctg90.Location = new System.Drawing.Point(349, 0);
             this.pctg90.Name = "pctg90";
@@ -199,6 +201,7 @@
             // 
             // pctg80
             // 
+            this.pctg80.BackColor = System.Drawing.Color.Gray;
             this.pctg80.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pctg80.Location = new System.Drawing.Point(306, 0);
             this.pctg80.Name = "pctg80";
@@ -207,6 +210,7 @@
             // 
             // pctg70
             // 
+            this.pctg70.BackColor = System.Drawing.Color.Gray;
             this.pctg70.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pctg70.Location = new System.Drawing.Point(263, 0);
             this.pctg70.Name = "pctg70";
@@ -215,6 +219,7 @@
             // 
             // pctg60
             // 
+            this.pctg60.BackColor = System.Drawing.Color.Gray;
             this.pctg60.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pctg60.Location = new System.Drawing.Point(220, 0);
             this.pctg60.Name = "pctg60";
@@ -223,6 +228,7 @@
             // 
             // pctg50
             // 
+            this.pctg50.BackColor = System.Drawing.Color.Gray;
             this.pctg50.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pctg50.Location = new System.Drawing.Point(177, 0);
             this.pctg50.Name = "pctg50";
@@ -231,6 +237,7 @@
             // 
             // pctg40
             // 
+            this.pctg40.BackColor = System.Drawing.Color.Gray;
             this.pctg40.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pctg40.Location = new System.Drawing.Point(134, 0);
             this.pctg40.Name = "pctg40";
@@ -239,6 +246,7 @@
             // 
             // pctg30
             // 
+            this.pctg30.BackColor = System.Drawing.Color.Gray;
             this.pctg30.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pctg30.Location = new System.Drawing.Point(91, 0);
             this.pctg30.Name = "pctg30";
@@ -247,6 +255,7 @@
             // 
             // pctg20
             // 
+            this.pctg20.BackColor = System.Drawing.Color.Gray;
             this.pctg20.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pctg20.Location = new System.Drawing.Point(48, 0);
             this.pctg20.Name = "pctg20";
@@ -255,6 +264,7 @@
             // 
             // pctg10
             // 
+            this.pctg10.BackColor = System.Drawing.Color.Gray;
             this.pctg10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pctg10.Location = new System.Drawing.Point(5, 0);
             this.pctg10.Name = "pctg10";
@@ -264,11 +274,11 @@
             // lbl_Status
             // 
             this.lbl_Status.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Status.Location = new System.Drawing.Point(280, 122);
+            this.lbl_Status.Location = new System.Drawing.Point(11, 122);
             this.lbl_Status.Name = "lbl_Status";
-            this.lbl_Status.Size = new System.Drawing.Size(170, 23);
+            this.lbl_Status.Size = new System.Drawing.Size(439, 23);
             this.lbl_Status.TabIndex = 9;
-            this.lbl_Status.Text = "EM ANDAMENTO";
+            this.lbl_Status.Text = "AGUARDANDO MATÉRIA-PRIMA";
             this.lbl_Status.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label5

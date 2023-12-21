@@ -1,5 +1,6 @@
 ﻿using Main.Model;
 using Main.View.MainFolder;
+using Main.View.PopupFolder;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -53,62 +54,69 @@ namespace Main.View.PagesFolder.ProcessFolder
         {
             if (cb_MateriaPrima.Text == "")
             {
-                MessageBox.Show("Selecione a Matéria-prima para pesagem!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                InfoPopup info = new InfoPopup("Erro", "Selecione a Matéria-prima para pesagem!", Properties.Resources.errorIcon);
+                info.ShowDialog();
             }
             else
             {
-                CodSubs = cb_MateriaPrima.Text.Substring(0, codLength);
+                YesOrNo question = new YesOrNo("Tem certeza que deseja iniciar esse processo?");
+                question.ShowDialog();
 
-                int idMateria = 0;
-                int qtMinima = 0;
-
-                var listaMateriaPrima = Program.SQL.SelectList("SELECT * FROM MateriaPrima WHERE Codigo = @Codigo", "MateriaPrima", null,
-                new Dictionary<string, object>()
+                if(question.RESPOSTA)
                 {
+                    CodSubs = cb_MateriaPrima.Text.Substring(0, codLength);
+
+                    int idMateria = 0;
+                    int qtMinima = 0;
+
+                    var listaMateriaPrima = Program.SQL.SelectList("SELECT * FROM MateriaPrima WHERE Codigo = @Codigo", "MateriaPrima", null,
+                    new Dictionary<string, object>()
+                    {
                     {"@Codigo", CodSubs }
-                });
+                    });
 
-                foreach (MateriaPrimaClass materia in listaMateriaPrima)
-                {
-                    idMateria = materia.Id;
-                    qtMinima = materia.Quantidade_minima;
-                }
+                    foreach (MateriaPrimaClass materia in listaMateriaPrima)
+                    {
+                        idMateria = materia.Id;
+                        qtMinima = materia.Quantidade_minima;
+                    }
 
-                DateTime dataInsertBanco = DateTime.Now;
+                    DateTime dataInsertBanco = DateTime.Now;
 
-                var insertBanco = Program.SQL.CRUDCommand("INSERT INTO Processos (Id_produto, Id_usuario, Descricao, Status_processo, dateinsert) VALUES (@Id_produto, @Id_usuario, @Descricao, @Status_processo, @dateinsert)", "Processos",
-                new Dictionary<string, object>()
-                {
+                    var insertBanco = Program.SQL.CRUDCommand("INSERT INTO Processos (Id_produto, Id_usuario, Descricao, Status_processo, dateinsert) VALUES (@Id_produto, @Id_usuario, @Descricao, @Status_processo, @dateinsert)", "Processos",
+                    new Dictionary<string, object>()
+                    {
                     {"@Id_produto", idMateria },
                     {"@Id_usuario", idUsuario },
                     {"@Descricao", txt_Descricao.Text },
                     {"@Status_processo", 1 },
                     {"@dateinsert", DateTime.Now}
-                });
+                    });
 
-                int idInserido = 0;
+                    int idInserido = 0;
 
-                var selectID = Program.SQL.SelectList("SELECT * FROM Processos WHERE dateinsert = @dateinsert", "Processos", null,
-                new Dictionary<string, object>()
-                {
-                    {"@dateinsert", dataInsertBanco }
-                });
-
-                foreach(ProcessosModel process in selectID)
-                {
-                    idInserido = process.Id;
-                }
-
-                ProcessForms proc = new ProcessForms(idUsuario, idMateria, qtMinima, txt_Descricao.Text, idInserido);
-
-                foreach (Form openForm in Application.OpenForms)
-                {
-                    if (openForm is MainForms)
+                    var selectID = Program.SQL.SelectList("SELECT * FROM Processos WHERE dateinsert = @dateinsert", "Processos", null,
+                    new Dictionary<string, object>()
                     {
-                        MainForms mainForm = (MainForms)openForm;
-                        mainForm.OpenPage(proc);
-                        this.Close();
-                        return;
+                    {"@dateinsert", dataInsertBanco }
+                    });
+
+                    foreach (ProcessosModel process in selectID)
+                    {
+                        idInserido = process.Id;
+                    }
+
+                    ProcessForms proc = new ProcessForms(idUsuario, nomeUsuario, idMateria, qtMinima, txt_Descricao.Text, idInserido);
+
+                    foreach (Form openForm in Application.OpenForms)
+                    {
+                        if (openForm is MainForms)
+                        {
+                            MainForms mainForm = (MainForms)openForm;
+                            mainForm.OpenPage(proc);
+                            this.Close();
+                            return;
+                        }
                     }
                 }
             }

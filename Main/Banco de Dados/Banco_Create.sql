@@ -138,6 +138,7 @@ CREATE TABLE [dbo].[Avisos] (
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
+GO
 CREATE TABLE [dbo].[MateriaPrima] (
     [Id]					NUMERIC (18)   IDENTITY (1, 1) NOT NULL,
     [Codigo]				VARCHAR (20)   NULL,
@@ -150,9 +151,33 @@ CREATE TABLE [dbo].[MateriaPrima] (
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
--
+GO
+CREATE TABLE [dbo].[Processos] (
+	[Id]				INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	[Id_produto]		INT NOT NULL,
+	[Id_usuario]		INT NOT NULL,
+	[Descricao]			VARCHAR(MAX),
+	[Tempo_execucao]	VARCHAR(20),
+	[Total_contagem]	INT,
+	[Peso_Referencia]	REAL,
+	[Peso_total]		REAL,
+	[Status_processo]	INT,
+	[dateinsert]		DATETIME2(7),
+	[dateend]			DATETIME2(7),
+	[dateupdate]		DATETIME2(7)
+);
 
+GO
+CREATE TABLE [dbo].[Log_Processos] (
+	[Id]				INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	[Id_processo]		INT NOT NULL,
+	[Peso_temporeal]	REAL NOT NULL,
+	[Peso_total]		REAL NOT NULL,
+	[Tempo_execucao]	VARCHAR(20),
+	[dateinsert]		DATETIME2(7)
+)
 
+~
 
 insert into Usuario(Nome, login, senha, acesso) values ('Administrador', 'admin', 'admin', 'Administrador')
 insert into Configuracao(porta_arduino, baud_Rate, stop_bit) values ('COM7', '115200', '2')
