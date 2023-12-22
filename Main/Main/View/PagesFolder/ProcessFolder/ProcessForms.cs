@@ -22,6 +22,8 @@ namespace Main.View.PagesFolder.ProcessFolder
     {
         int idUsuario = 0;
         string nomeUsuario = "";
+        int idProcesso = 1;
+        string descProcesso = "";
 
         int qtminima;
         int countMensagens = 0;
@@ -49,6 +51,9 @@ namespace Main.View.PagesFolder.ProcessFolder
 
         int bloqueiaValor = 0;
         int bloqueiaLoop = 1;
+        int bloqueiaContag = 0;
+
+        bool isTrue = true;
 
         Stopwatch stopSup = new Stopwatch();
         Stopwatch stopValor = new Stopwatch();
@@ -59,6 +64,8 @@ namespace Main.View.PagesFolder.ProcessFolder
 
             idUsuario = id_Usuario;
             nomeUsuario = nome_Usuario;
+            idProcesso = id_Processo;
+            descProcesso = dsc_MateriaPrima;
             //SerialCommunicationService.InitWithAutoConnect();
 
             lbl_qtMinima.Text = qt_Minima.ToString();
@@ -87,7 +94,7 @@ namespace Main.View.PagesFolder.ProcessFolder
             Task.Run(() => {
                 try
                 {
-                    while (true)
+                    while (isTrue)
                     {
                         valorReferencia.Invoke(new MethodInvoker(() =>
                         {
@@ -102,11 +109,14 @@ namespace Main.View.PagesFolder.ProcessFolder
                             }
                         }));
 
-                        valorContagem.Invoke(new MethodInvoker(() =>
+                        if(bloqueiaContag == 0)
                         {
-                            valorContagem.Text = $"{SerialCommunicationService.indicador_addr[indiceContador].PS}";
-                            valorContagem.Text = valorContagem.Text.Replace(",", ".");
-                        }));
+                            valorContagem.Invoke(new MethodInvoker(() =>
+                            {
+                                valorContagem.Text = $"{SerialCommunicationService.indicador_addr[indiceContador].PS}";
+                                valorContagem.Text = valorContagem.Text.Replace(",", ".");
+                            }));
+                        }
 
                         if (btn_IniciarContagem.Text == "Finalizar Processo")
                         {
@@ -128,26 +138,25 @@ namespace Main.View.PagesFolder.ProcessFolder
                             {
                                 valorSecSup = valorSuporte;
                                 stopValor.Start();
-                            }
 
+                                //if (stopValor.ElapsedMilliseconds < 5)
+                                //{
+                                //    this.Invoke(new MethodInvoker(() =>
+                                //    {
+                                //        pctg10.BackColor = Color.Green;
+                                //        pctg20.BackColor = Color.Green;
+                                //        pctg30.BackColor = Color.Green;
+                                //        pctg40.BackColor = Color.Green;
+                                //        pctg50.BackColor = Color.Green;
+                                //        pctg60.BackColor = Color.Gray;
+                                //        pctg70.BackColor = Color.Gray;
+                                //        pctg80.BackColor = Color.Gray;
+                                //        pctg90.BackColor = Color.Gray;
+                                //        pctg100.BackColor = Color.Gray;
 
-                            if (stopValor.ElapsedMilliseconds < 5)
-                            {
-                                this.Invoke(new MethodInvoker(() =>
-                                {
-                                    pctg10.BackColor = Color.Green;
-                                    pctg20.BackColor = Color.Green;
-                                    pctg30.BackColor = Color.Green;
-                                    pctg40.BackColor = Color.Green;
-                                    pctg50.BackColor = Color.Green;
-                                    pctg60.BackColor = Color.Gray;
-                                    pctg70.BackColor = Color.Gray;
-                                    pctg80.BackColor = Color.Gray;
-                                    pctg90.BackColor = Color.Gray;
-                                    pctg100.BackColor = Color.Gray;
-
-                                    lbl_Status.Text = "PESANDO...";
-                                }));
+                                //        lbl_Status.Text = "PESANDO...";
+                                //    }));
+                                //}
                             }
 
                             valorSuporte = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceContador].PS}");
@@ -156,41 +165,25 @@ namespace Main.View.PagesFolder.ProcessFolder
                             {
                                 if (valorSecSup == valorSuporte)
                                 {
-                                    this.Invoke(new MethodInvoker(() =>
-                                    {
-                                        pctg10.BackColor = Color.Green;
-                                        pctg20.BackColor = Color.Green;
-                                        pctg30.BackColor = Color.Green;
-                                        pctg40.BackColor = Color.Green;
-                                        pctg50.BackColor = Color.Green;
-                                        pctg60.BackColor = Color.Green;
-                                        pctg70.BackColor = Color.Green;
-                                        pctg80.BackColor = Color.Green;
-                                        pctg90.BackColor = Color.Green;
-                                        pctg100.BackColor = Color.Green;
+                                    //this.Invoke(new MethodInvoker(() =>
+                                    //{
+                                    //    pctg10.BackColor = Color.Green;
+                                    //    pctg20.BackColor = Color.Green;
+                                    //    pctg30.BackColor = Color.Green;
+                                    //    pctg40.BackColor = Color.Green;
+                                    //    pctg50.BackColor = Color.Green;
+                                    //    pctg60.BackColor = Color.Green;
+                                    //    pctg70.BackColor = Color.Green;
+                                    //    pctg80.BackColor = Color.Green;
+                                    //    pctg90.BackColor = Color.Green;
+                                    //    pctg100.BackColor = Color.Green;
 
-                                        lbl_Status.Text = "PESO CALCULADO. RETIRE A MATÉRIA-PRIMA";
-                                    }));
+                                    //    lbl_Status.Text = "PESO CONTABILIZADO. RETIRE A MATÉRIA-PRIMA";
+                                    //}));
 
                                     bloqueiaLoop = 0;
                                     bloqueiaValor = 1;
-                                }
-
-                                if(stopValor.ElapsedMilliseconds > 7000)
-                                {
-                                    this.Invoke(new MethodInvoker(() =>
-                                    {
-                                        pctg10.BackColor = Color.Gray;
-                                        pctg20.BackColor = Color.Gray;
-                                        pctg30.BackColor = Color.Gray;
-                                        pctg40.BackColor = Color.Gray;
-                                        pctg50.BackColor = Color.Gray;
-                                        pctg60.BackColor = Color.Gray;
-                                        pctg70.BackColor = Color.Gray;
-                                        pctg80.BackColor = Color.Gray;
-                                        pctg90.BackColor = Color.Gray;
-                                        pctg100.BackColor = Color.Gray;
-                                    }));
+                                    SerialCommunicationService.SendCommand(Convert.ToInt32(taraContagem.Tag), 0);
                                 }
 
                                 stopValor.Reset();
@@ -206,25 +199,6 @@ namespace Main.View.PagesFolder.ProcessFolder
                                 stopSup.Start();
                             }
 
-                            if (stopSup.ElapsedMilliseconds > 0 && stopSup.ElapsedMilliseconds < 5)
-                            {
-                                this.Invoke(new MethodInvoker(() =>
-                                {
-                                    pctg10.BackColor = Color.Green;
-                                    pctg20.BackColor = Color.Green;
-                                    pctg30.BackColor = Color.Green;
-                                    pctg40.BackColor = Color.Green;
-                                    pctg50.BackColor = Color.Green;
-                                    pctg60.BackColor = Color.Gray;
-                                    pctg70.BackColor = Color.Gray;
-                                    pctg80.BackColor = Color.Gray;
-                                    pctg90.BackColor = Color.Gray;
-                                    pctg100.BackColor = Color.Gray;
-
-                                    lbl_Status.Text = "PESANDO...";
-                                }));
-                            }
-
                             if (stopSup.ElapsedMilliseconds > 5000)
                             {
                                 if (valorSuporte <= 0)
@@ -237,21 +211,44 @@ namespace Main.View.PagesFolder.ProcessFolder
                                         lbl_ValorReal.Text = valorTotal.ToString();
                                     }));
 
-                                    this.Invoke(new MethodInvoker(() =>
+                                    var insertLog = Program.SQL.CRUDCommand("INSERT INTO Log_Processos (Id_processo, Peso_temporeal, Peso_total, Tempo_execucao, dateinsert) VALUES (@Id_processo, @Peso_temporeal, @Peso_total, @Tempo_execucao, @dateinsert)", "Log_Processos",
+                                    new Dictionary<string, object>()
                                     {
-                                        pctg10.BackColor = Color.Green;
-                                        pctg20.BackColor = Color.Green;
-                                        pctg30.BackColor = Color.Green;
-                                        pctg40.BackColor = Color.Green;
-                                        pctg50.BackColor = Color.Green;
-                                        pctg60.BackColor = Color.Green;
-                                        pctg70.BackColor = Color.Green;
-                                        pctg80.BackColor = Color.Green;
-                                        pctg90.BackColor = Color.Green;
-                                        pctg100.BackColor = Color.Green;
+                                        {"@Id_processo", idProcesso },
+                                        {"@Peso_temporeal", qtContabTotal },
+                                        {"@Peso_total", valorTotal },
+                                        {"@Tempo_execucao", lbl_Horario.Text },
+                                        {"@dateinsert", DateTime.Now}
+                                    });
 
-                                        lbl_Status.Text = "PESO REGISTRADO. AGUARDANDO MATÉRIA-PRIMA";
-                                    }));
+
+                                    var UpdateProcesso = Program.SQL.CRUDCommand("UPDATE Processos SET Descricao = @Descricao, Tempo_execucao = @Tempo_execucao, Total_contagem = @Total_contagem, Peso_Referencia = @Peso_Referencia, Peso_total = @Peso_total, Status_processo = 2, dateinsert = @dateinsert WHERE Id = @Id\r\n", "Log_Processos",
+                                    new Dictionary<string, object>()
+                                    {
+                                        {"@Id", idProcesso },
+                                        {"@Descricao", descProcesso },
+                                        {"@Tempo_execucao", lbl_Horario.Text },
+                                        {"@Total_contagem", valorTotal },
+                                        {"@Peso_Referencia", pesoReferencia },
+                                        {"@Peso_total", valorTotal },
+                                        {"@dateinsert", DateTime.Now }
+                                    });
+
+                                    //this.Invoke(new MethodInvoker(() =>
+                                    //{
+                                    //    pctg10.BackColor = Color.Green;
+                                    //    pctg20.BackColor = Color.Green;
+                                    //    pctg30.BackColor = Color.Green;
+                                    //    pctg40.BackColor = Color.Green;
+                                    //    pctg50.BackColor = Color.Green;
+                                    //    pctg60.BackColor = Color.Green;
+                                    //    pctg70.BackColor = Color.Green;
+                                    //    pctg80.BackColor = Color.Green;
+                                    //    pctg90.BackColor = Color.Green;
+                                    //    pctg100.BackColor = Color.Green;
+
+                                    //    lbl_Status.Text = "PESO REGISTRADO. AGUARDANDO MATÉRIA-PRIMA";
+                                    //}));
 
                                     bloqueiaLoop = 1;
                                     bloqueiaValor = 0;
@@ -268,44 +265,6 @@ namespace Main.View.PagesFolder.ProcessFolder
                                 }
                             }
                         }
-                        else if (countMensagens == 0)
-                        {
-                            this.Invoke(new MethodInvoker(() =>
-                            {
-                                pctg10.BackColor = Color.Gray;
-                                pctg20.BackColor = Color.Gray;
-                                pctg30.BackColor = Color.Gray;
-                                pctg40.BackColor = Color.Gray;
-                                pctg50.BackColor = Color.Gray;
-                                pctg60.BackColor = Color.Gray;
-                                pctg70.BackColor = Color.Gray;
-                                pctg80.BackColor = Color.Gray;
-                                pctg90.BackColor = Color.Gray;
-                                pctg100.BackColor = Color.Gray;
-
-                                lbl_Status.Text = "AGUARDANDO MATÉRIA-PRIMA";
-                            }));
-                        }
-                        else if (countMensagens == 1)
-                        {
-                            this.Invoke(new MethodInvoker(() =>
-                            {
-                                pctg10.BackColor = Color.Green;
-                                pctg20.BackColor = Color.Green;
-                                pctg30.BackColor = Color.Green;
-                                pctg40.BackColor = Color.Green;
-                                pctg50.BackColor = Color.Green;
-                                pctg60.BackColor = Color.Green;
-                                pctg70.BackColor = Color.Green;
-                                pctg80.BackColor = Color.Green;
-                                pctg90.BackColor = Color.Green;
-                                pctg100.BackColor = Color.Green;
-
-                                lbl_Status.Text = "PESO REGISTRADO. AGUARDANDO MATÉRIA-PRIMA";
-                            }));
-                        }
-
-
                     }
                 }
                 catch (Exception)
@@ -357,11 +316,12 @@ namespace Main.View.PagesFolder.ProcessFolder
             this.Update();
         }
 
-        private void btn_IniciarContagem_Click(object sender, EventArgs e)
+        private async void btn_IniciarContagem_Click(object sender, EventArgs e)
         {
             try
             {
-                if(btn_IniciarContagem.Text != "Finalizar Processo")
+
+                if (btn_IniciarContagem.Text != "Finalizar Processo")
                 {
                     YesOrNo question = new YesOrNo("Deseja iniciar a contagem?");
                     question.ShowDialog();
@@ -371,6 +331,8 @@ namespace Main.View.PagesFolder.ProcessFolder
                         tmpExectAtivo = true;
                         TimerRelogio.Start();
                         lbl_Status.Text = "Em andamento";
+
+                        SerialCommunicationService.SendCommand(Convert.ToInt32(taraContagem.Tag), 0);
 
                         this.Invoke(new MethodInvoker(() =>
                         {
@@ -385,6 +347,10 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                     if (question.RESPOSTA) 
                     {
+                        isTrue = false;
+
+                        await Task.Delay(1000);
+
                         InfoPopup info = new InfoPopup("Parabéns!", "Processo e contagem registrados com sucesso!", Properties.Resources._299110_check_sign_icon);
                         info.ShowDialog();
 
@@ -433,6 +399,11 @@ namespace Main.View.PagesFolder.ProcessFolder
             {
                 lbl_Horario.Text = (String.Format("{0:00}", timeH)) + ":" + (String.Format("{0:00}", timeMin)) + ":" + (String.Format("{0:00}", timeSec));
             }));
+        }
+
+        private void lbl_ValorReal_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)

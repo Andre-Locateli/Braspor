@@ -55,7 +55,7 @@ namespace Main.Model
 		public double PesoReferencia
 		{
 			get { return _pesoReferencia; }
-			set { PesoReferencia = value; }
+			set { _pesoReferencia = value; }
 		}
 
 		private double _pesoTotal;
@@ -92,8 +92,5 @@ namespace Main.Model
 			get { return _dateupdate; }
 			set { _dateupdate = value; }
 		}
-
-
-
 	}
 }

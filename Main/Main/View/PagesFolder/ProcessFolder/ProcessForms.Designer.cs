@@ -163,6 +163,7 @@
             this.lbl_ValorReal.TabIndex = 12;
             this.lbl_ValorReal.Text = "0";
             this.lbl_ValorReal.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lbl_ValorReal.Click += new System.EventHandler(this.lbl_ValorReal_Click);
             // 
             // panel9
             // 
@@ -273,10 +274,10 @@
             // 
             // lbl_Status
             // 
-            this.lbl_Status.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Status.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Status.Location = new System.Drawing.Point(11, 122);
             this.lbl_Status.Name = "lbl_Status";
-            this.lbl_Status.Size = new System.Drawing.Size(439, 23);
+            this.lbl_Status.Size = new System.Drawing.Size(439, 20);
             this.lbl_Status.TabIndex = 9;
             this.lbl_Status.Text = "AGUARDANDO MATÉRIA-PRIMA";
             this.lbl_Status.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

@@ -381,12 +381,20 @@ namespace Main.Helper
                                     else
                                     {
                                         list_return.Add(dr[coluna_to_return]);
-                                    }
-
-                              
+                                    }                   
                                 }
 
-
+                                if (tabela == "Log_Processos")
+                                {
+                                    LogProcessosClass logprocessos = new LogProcessosClass();
+                                    logprocessos.Id = Convert.ToInt32(dr["Id"]);
+                                    logprocessos.Id_processo = Convert.ToInt32(dr["Id_processo"]);
+                                    logprocessos.Peso_temporeal = Convert.ToDecimal(dr["Peso_temporeal"]);
+                                    logprocessos.Peso_total = Convert.ToDecimal(dr["Peso_total"]);
+                                    logprocessos.Tempo_execucao = Convert.ToString(dr["Tempo_execucao"]);
+                                    logprocessos.dateinsert = Convert.ToDateTime(dr["dateinsert"]);
+                                    list_return.Add(logprocessos);
+                                }
                             }
                         }
                         return list_return;

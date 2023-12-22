@@ -50,7 +50,7 @@ namespace Main.View.PagesFolder.ProcessFolder
             this.Close();
         }
 
-        private void btn_Confirmar_Click(object sender, EventArgs e)
+        private async void btn_Confirmar_Click(object sender, EventArgs e)
         {
             if (cb_MateriaPrima.Text == "")
             {
@@ -72,7 +72,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                     var listaMateriaPrima = Program.SQL.SelectList("SELECT * FROM MateriaPrima WHERE Codigo = @Codigo", "MateriaPrima", null,
                     new Dictionary<string, object>()
                     {
-                    {"@Codigo", CodSubs }
+                        {"@Codigo", CodSubs }
                     });
 
                     foreach (MateriaPrimaClass materia in listaMateriaPrima)
@@ -86,25 +86,24 @@ namespace Main.View.PagesFolder.ProcessFolder
                     var insertBanco = Program.SQL.CRUDCommand("INSERT INTO Processos (Id_produto, Id_usuario, Descricao, Status_processo, dateinsert) VALUES (@Id_produto, @Id_usuario, @Descricao, @Status_processo, @dateinsert)", "Processos",
                     new Dictionary<string, object>()
                     {
-                    {"@Id_produto", idMateria },
-                    {"@Id_usuario", idUsuario },
-                    {"@Descricao", txt_Descricao.Text },
-                    {"@Status_processo", 1 },
-                    {"@dateinsert", DateTime.Now}
+                        {"@Id_produto", idMateria },
+                        {"@Id_usuario", idUsuario },
+                        {"@Descricao", txt_Descricao.Text },
+                        {"@Status_processo", 1 },
+                        {"@dateinsert", dataInsertBanco}
                     });
 
                     int idInserido = 0;
 
-                    var selectID = Program.SQL.SelectList("SELECT * FROM Processos WHERE dateinsert = @dateinsert", "Processos", null,
+                    await Task.Delay(500);
+
+                    var selectID = Program.SQL.SelectList("SELECT * FROM Processos WHERE dateinsert = @dateinsert", "Processos", "Id",
                     new Dictionary<string, object>()
                     {
-                    {"@dateinsert", dataInsertBanco }
+                        {"@dateinsert", dataInsertBanco }
                     });
 
-                    foreach (ProcessosModel process in selectID)
-                    {
-                        idInserido = process.Id;
-                    }
+                    idInserido = (int)selectID.First();
 
                     ProcessForms proc = new ProcessForms(idUsuario, nomeUsuario, idMateria, qtMinima, txt_Descricao.Text, idInserido);
 
