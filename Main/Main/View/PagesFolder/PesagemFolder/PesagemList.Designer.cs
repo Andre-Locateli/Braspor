@@ -227,7 +227,7 @@
             this.dgvDados.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.White;
             this.dgvDados.RowTemplate.Height = 35;
             this.dgvDados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDados.Size = new System.Drawing.Size(839, 334);
+            this.dgvDados.Size = new System.Drawing.Size(839, 346);
             this.dgvDados.TabIndex = 50;
             // 
             // iconReceita
@@ -263,7 +263,7 @@
             this.panel3.Controls.Add(this.quantityPage);
             this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.tableLayoutPanel1);
-            this.panel3.Location = new System.Drawing.Point(671, 575);
+            this.panel3.Location = new System.Drawing.Point(671, 587);
             this.panel3.Name = "panel3";
             this.panel3.Padding = new System.Windows.Forms.Padding(5);
             this.panel3.Size = new System.Drawing.Size(200, 32);
@@ -421,7 +421,7 @@
             this.btnExecutar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExecutar.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
             this.btnExecutar.ForeColor = System.Drawing.Color.White;
-            this.btnExecutar.Location = new System.Drawing.Point(59, 569);
+            this.btnExecutar.Location = new System.Drawing.Point(59, 581);
             this.btnExecutar.Name = "btnExecutar";
             this.btnExecutar.Size = new System.Drawing.Size(200, 35);
             this.btnExecutar.TabIndex = 58;
@@ -447,19 +447,20 @@
             this.pcb_next.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pcb_next.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pcb_next.Image = global::Main.Properties.Resources.rightArrow;
-            this.pcb_next.Location = new System.Drawing.Point(870, 579);
+            this.pcb_next.Location = new System.Drawing.Point(870, 591);
             this.pcb_next.Name = "pcb_next";
             this.pcb_next.Size = new System.Drawing.Size(28, 24);
             this.pcb_next.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pcb_next.TabIndex = 56;
             this.pcb_next.TabStop = false;
+            this.pcb_next.Click += new System.EventHandler(this.pcb_next_Click);
             // 
             // pcb_return
             // 
             this.pcb_return.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pcb_return.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pcb_return.Image = global::Main.Properties.Resources.lfArrow;
-            this.pcb_return.Location = new System.Drawing.Point(643, 579);
+            this.pcb_return.Location = new System.Drawing.Point(643, 591);
             this.pcb_return.Name = "pcb_return";
             this.pcb_return.Size = new System.Drawing.Size(28, 24);
             this.pcb_return.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -471,7 +472,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(247)))), ((int)(((byte)(248)))));
-            this.ClientSize = new System.Drawing.Size(964, 620);
+            this.ClientSize = new System.Drawing.Size(964, 632);
             this.Controls.Add(this.btnExecutar);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.pcb_next);

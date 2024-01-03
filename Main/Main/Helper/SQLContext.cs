@@ -369,12 +369,36 @@ namespace Main.Helper
                                         ProcessosModel process = new ProcessosModel();
                                         process.Id = Convert.ToInt32(dr["Id"]);
                                         process.IdUsuario = Convert.ToInt32(dr["Id_usuario"]);
-                                        process.Id_Produto = Convert.ToInt32(dr["Id_Produto"]);
+                                        process.Id_Produto = Convert.ToInt32(dr["Id_produto"]);
                                         process.Descricao = Convert.ToString(dr["Descricao"]);
                                         process.TempoExecucao = Convert.ToString(dr["Tempo_execucao"]);
-                                        process.TotalContagem = Convert.ToInt32(dr["Total_contagem"]);
-                                        process.PesoReferencia = Convert.ToDouble(dr["Peso_Referencia"]);
-                                        process.PesoTotal = Convert.ToDouble(dr["Peso_total"]);
+                                        if (dr["Total_contagem"] != DBNull.Value)
+                                        {
+                                            process.TotalContagem = Convert.ToInt32(dr["Total_contagem"]);
+                                        }
+                                        else
+                                        {
+                                            process.TotalContagem = 0;
+                                        }
+
+                                        if (dr["Peso_Referencia"] != DBNull.Value)
+                                        {
+                                            process.PesoReferencia = Convert.ToDouble(dr["Peso_Referencia"]);
+                                        }
+                                        else
+                                        {
+                                            process.PesoReferencia = 0;
+                                        }
+
+                                        if (dr["Peso_total"] != DBNull.Value)
+                                        {
+                                            process.PesoTotal = Convert.ToDouble(dr["Peso_total"]);
+                                        }
+                                        else
+                                        {
+                                            process.PesoTotal = 0;
+                                        }
+                                        process.StatusProcesso = Convert.ToInt32(dr["Status_processo"]);
                                         process.dateinsert = Convert.ToDateTime(dr["dateinsert"]);
                                         list_return.Add(process);
                                     }

@@ -17,6 +17,10 @@ namespace Main.View.PagesFolder.PesagemFolder
     //
     public partial class PesagemList : Form
     {
+        private void pcb_next_Click(object sender, EventArgs e)
+        {
+
+        }
         //public event EventHandler ItemEditadoTrigger;
 
         //private ReceitaClass _itemEditado;
@@ -256,7 +260,7 @@ namespace Main.View.PagesFolder.PesagemFolder
         //            {
         //                bool bDeleteCRUD = Program.SQL.CRUDCommand("DELETE FROM LogReceita WHERE id = @id", "LogReceita",
         //                    new Dictionary<string, object>() { { "@id", linha_selecionada.Cells["Id"].Value.ToString() } });
-                        
+
         //                if (bDeleteCRUD)  
         //                {
         //                    LoadDatabaseInfo();
@@ -264,7 +268,7 @@ namespace Main.View.PagesFolder.PesagemFolder
 
         //            }
         //        }
-     
+
         //    }
         //    catch (Exception)
         //    {
@@ -296,6 +300,6 @@ namespace Main.View.PagesFolder.PesagemFolder
         //{
 
         //}
-    
+
     }
 }

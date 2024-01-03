@@ -261,6 +261,12 @@
     <Compile Include="View\PagesFolder\ProcessFolder\EscolhaPesagemForms.Designer.cs">
       <DependentUpon>EscolhaPesagemForms.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\PagesFolder\ProcessFolder\PesagemForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PagesFolder\ProcessFolder\PesagemForms.Designer.cs">
+      <DependentUpon>PesagemForms.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\PagesFolder\ProcessFolder\ProcessForms.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -373,6 +379,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\PagesFolder\ProcessFolder\EscolhaPesagemForms.resx">
       <DependentUpon>EscolhaPesagemForms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PagesFolder\ProcessFolder\PesagemForms.resx">
+      <DependentUpon>PesagemForms.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\PagesFolder\ProcessFolder\ProcessForms.resx">
       <DependentUpon>ProcessForms.cs</DependentUpon>

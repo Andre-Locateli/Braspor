@@ -225,8 +225,7 @@ namespace Main.View.PagesFolder
 
                 if (btn.Tag.ToString() == "Pesagem") 
                 {
-                    EscolhaPesagemForms escolha = new EscolhaPesagemForms(idUsuario, nomeUsuario);
-                    escolha.ShowDialog();
+                    QuickButtonPress = new PesagemForms(idUsuario, nomeUsuario);
                 }
 
                 if (btn.Tag.ToString() == "Relatorio")

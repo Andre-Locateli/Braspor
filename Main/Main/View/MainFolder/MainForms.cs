@@ -493,8 +493,8 @@ namespace Main.View.MainFolder
             //pList.ItemEditadoTrigger += PList_ItemEditadoTrigger;
             //OpenPage(pList);
 
-            EscolhaPesagemForms escolha = new EscolhaPesagemForms(idUsuario, nomeUsuario);
-            escolha.ShowDialog();
+            PesagemForms pesagem = new PesagemForms(idUsuario, nomeUsuario);
+            OpenPage(pesagem);
 
         }
 

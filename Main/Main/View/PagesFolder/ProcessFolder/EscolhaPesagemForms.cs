@@ -89,7 +89,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                         {"@Id_produto", idMateria },
                         {"@Id_usuario", idUsuario },
                         {"@Descricao", txt_Descricao.Text },
-                        {"@Status_processo", 1 },
+                        {"@Status_processo", 0 },
                         {"@dateinsert", dataInsertBanco}
                     });
 
