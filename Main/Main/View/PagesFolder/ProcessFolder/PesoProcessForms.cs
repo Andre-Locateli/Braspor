@@ -1,7 +1,5 @@
-﻿using LiveCharts.Charts;
-using Main.Model;
+﻿using Main.Model;
 using Main.Service;
-using Main.View.CommunicationFolder;
 using Main.View.MainFolder;
 using Main.View.PopupFolder;
 using System;
@@ -10,7 +8,6 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
-using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +15,7 @@ using System.Windows.Forms;
 
 namespace Main.View.PagesFolder.ProcessFolder
 {
-    public partial class ProcessForms : Form
+    public partial class PesoProcessForms : Form
     {
         int idUsuario = 0;
         string nomeUsuario = "";
@@ -33,7 +30,7 @@ namespace Main.View.PagesFolder.ProcessFolder
         int qtminima;
         int countMensagens = 0;
 
-        int timeSec, timeMin, timeH;        
+        int timeSec, timeMin, timeH;
         string tempoContagem = "";
 
         Boolean tmpExectAtivo;
@@ -68,7 +65,7 @@ namespace Main.View.PagesFolder.ProcessFolder
         Stopwatch stopSup = new Stopwatch();
         Stopwatch stopValor = new Stopwatch();
 
-        public ProcessForms(int id_Usuario, string nome_Usuario, int id_MateriaPrima, int qt_Minima, string dsc_MateriaPrima, int id_Processo)
+        public PesoProcessForms(int id_Usuario, string nome_Usuario, int id_MateriaPrima, int qt_Minima, string dsc_MateriaPrima, int id_Processo)
         {
             InitializeComponent();
 
@@ -86,7 +83,7 @@ namespace Main.View.PagesFolder.ProcessFolder
             {
                 descProcesso = process.Descricao;
             }
-            
+
             //SerialCommunicationService.InitWithAutoConnect();
 
             var selectProduto = Program.SQL.SelectList("SELECT * FROM MateriaPrima WHERE Id = @Id", "MateriaPrima", null,
@@ -95,7 +92,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                 {"@Id", id_MateriaPrima }
             });
 
-            foreach(MateriaPrimaClass materia in selectProduto)
+            foreach (MateriaPrimaClass materia in selectProduto)
             {
                 lbl_MateriaPrima.Text = materia.Codigo + " - " + materia.Descricao;
             }
@@ -105,7 +102,7 @@ namespace Main.View.PagesFolder.ProcessFolder
             lbl_Descricao.Text = dsc_MateriaPrima;
         }
 
-        public ProcessForms(int id_Processo)
+        public PesoProcessForms(int id_Processo)
         {
             InitializeComponent();
 
@@ -115,7 +112,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                 {"@Id", id_Processo }
             });
 
-            foreach(ProcessosModel proc in selectProcessos)
+            foreach (ProcessosModel proc in selectProcessos)
             {
                 idProduto = proc.Id_Produto;
                 descProcesso = proc.Descricao;
@@ -135,7 +132,7 @@ namespace Main.View.PagesFolder.ProcessFolder
             });
 
 
-            foreach(MateriaPrimaClass materia in selectProduto)
+            foreach (MateriaPrimaClass materia in selectProduto)
             {
                 lbl_qtMinima.Text = materia.Quantidade_minima.ToString();
                 lbl_MateriaPrima.Text = materia.Codigo + " - " + materia.Descricao;
@@ -159,7 +156,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                 btn_SalvarReferencia.ForeColor = Color.FromArgb(64, 64, 64);
                 btn_SalvarReferencia.BackColor = Color.Silver;
             }
-            else if (statusProcesso == 2) 
+            else if (statusProcesso == 2)
             {
                 // PAUSADO CONTAGEM INICIADA
                 btn_IniciarContagem.Enabled = true;
@@ -220,7 +217,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                             }
                         }));
 
-                        if(bloqueiaContag == 0)
+                        if (bloqueiaContag == 0)
                         {
                             valorContagem.Invoke(new MethodInvoker(() =>
                             {
@@ -315,7 +312,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                                     bloqueiaLoop = 1;
                                     bloqueiaValor = 0;
 
-                                    if(stopSup.ElapsedMilliseconds > 8)
+                                    if (stopSup.ElapsedMilliseconds > 8)
                                     {
                                         stopSup.Reset();
                                     }
@@ -430,7 +427,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                     YesOrNo question = new YesOrNo("Deseja finalizar esse processo?");
                     question.ShowDialog();
 
-                    if (question.RESPOSTA) 
+                    if (question.RESPOSTA)
                     {
                         statusProcesso = 3;
                         isTrue = false;
@@ -505,6 +502,16 @@ namespace Main.View.PagesFolder.ProcessFolder
 
         }
 
+        private void panel4_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel7_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
@@ -530,11 +537,10 @@ namespace Main.View.PagesFolder.ProcessFolder
                     btn_SalvarReferencia.BackColor = Color.Silver;
 
                     pesoReferencia = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}") / Convert.ToDecimal(lbl_qtMinima.Text);
-                    Load_Referencia.Visible = false;
                 }
             }
-            catch (Exception ex) 
-            { 
+            catch (Exception ex)
+            {
                 Console.WriteLine(ex.Message);
             }
         }

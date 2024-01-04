@@ -49,6 +49,7 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.dgvDados = new System.Windows.Forms.DataGridView();
             this.iconReceita = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.pcb_next = new System.Windows.Forms.PictureBox();
             this.pcb_return = new System.Windows.Forms.PictureBox();
@@ -205,6 +206,7 @@
             this.btnTwo.TabIndex = 2;
             this.btnTwo.Text = "2";
             this.btnTwo.UseVisualStyleBackColor = true;
+            this.btnTwo.Click += new System.EventHandler(this.btnOne_Click);
             // 
             // btnOne
             // 
@@ -221,6 +223,7 @@
             this.btnOne.TabIndex = 0;
             this.btnOne.Text = "1";
             this.btnOne.UseVisualStyleBackColor = true;
+            this.btnOne.Click += new System.EventHandler(this.btnOne_Click);
             // 
             // panel4
             // 
@@ -246,6 +249,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvDados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvDados.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvDados.BackgroundColor = System.Drawing.Color.White;
             this.dgvDados.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvDados.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -260,7 +264,8 @@
             this.dgvDados.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.iconReceita});
+            this.iconReceita,
+            this.Status});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(247)))), ((int)(((byte)(248)))));
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -290,10 +295,12 @@
             this.dgvDados.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvDados.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.White;
             this.dgvDados.RowTemplate.Height = 35;
+            this.dgvDados.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvDados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDados.Size = new System.Drawing.Size(887, 457);
             this.dgvDados.TabIndex = 59;
             this.dgvDados.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDados_CellDoubleClick);
+            this.dgvDados.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvDados_RowsAdded);
             // 
             // iconReceita
             // 
@@ -308,6 +315,12 @@
             this.iconReceita.Name = "iconReceita";
             this.iconReceita.ReadOnly = true;
             this.iconReceita.Width = 50;
+            // 
+            // Status
+            // 
+            this.Status.HeaderText = "Status";
+            this.Status.Name = "Status";
+            this.Status.ReadOnly = true;
             // 
             // dataGridViewImageColumn1
             // 
@@ -333,6 +346,7 @@
             this.pcb_next.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pcb_next.TabIndex = 62;
             this.pcb_next.TabStop = false;
+            this.pcb_next.Click += new System.EventHandler(this.pcb_next_Click);
             // 
             // pcb_return
             // 
@@ -345,6 +359,7 @@
             this.pcb_return.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pcb_return.TabIndex = 60;
             this.pcb_return.TabStop = false;
+            this.pcb_return.Click += new System.EventHandler(this.pcb_return_Click);
             // 
             // PesagemForms
             // 
@@ -391,7 +406,8 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.DataGridView dgvDados;
-        private System.Windows.Forms.DataGridViewImageColumn iconReceita;
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
+        private System.Windows.Forms.DataGridViewImageColumn iconReceita;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Status;
     }
 }

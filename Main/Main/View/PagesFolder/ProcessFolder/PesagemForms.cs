@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,13 @@ namespace Main.View.PagesFolder.ProcessFolder
     {
         int idUsuario = 0;
         string nomeUsuario = "";
+
+        private int minParam = 0;
+        private int maxParam = 10;
+        private double qRows = 0;
+        private double drows = 0;
+
+        private int counter_press = 1;
 
         public PesagemForms(int id_Usuario, string nome_Usuario)
         {
@@ -34,24 +42,50 @@ namespace Main.View.PagesFolder.ProcessFolder
 
         private void PesagemForms_Load(object sender, EventArgs e)
         {
+            LoadDatabaseInfo();
+        }
+
+        private void LoadDatabaseInfo()
+        {
+            dgvDados.DataSource = null;
+            dgvDados.Rows.Clear();
+
             var Processos = Program.SQL.SelectList("SELECT * FROM Processos", "Processos", null,
             new Dictionary<string, object>());
 
+            qRows = Processos.Count();
+            drows = qRows / 10;
+            quantityPage.Text = $"{Math.Ceiling(qRows / 10)}";
+
+            double aux_minParam = minParam;
+            double aux_maxParam = maxParam;
+
             dgvDados.DataSource = Processos;
+
+            var items = Program.SQL.SelectList("SELECT * FROM ( SELECT *, ROW_NUMBER() OVER (ORDER BY Id ASC) AS row FROM PROCESSOS AS LReceita ) temp WHERE row >= @aux_minParam AND row <= @aux_maxParam", "Processos", null,
+            new Dictionary<string, object>()
+            {
+                {"@aux_minParam", aux_minParam },
+                {"@aux_maxParam", aux_maxParam }
+            });
+
+            dgvDados.DataSource = items;
 
             dgvDados.Columns["Id"].Visible = false;
             dgvDados.Columns["Id_produto"].Visible = false;
             dgvDados.Columns["IdUsuario"].Visible = false;
             dgvDados.Columns["dateend"].Visible = false;
             dgvDados.Columns["dateupdate"].Visible = false;
+            dgvDados.Columns["StatusProcesso"].Visible = false;
 
             dgvDados.Columns["Descricao"].HeaderText = "Descrição";
             dgvDados.Columns["TempoExecucao"].HeaderText = "Tempo de execução";
             dgvDados.Columns["TotalContagem"].HeaderText = "Quantidade";
             dgvDados.Columns["PesoReferencia"].HeaderText = "Peso de referência";
             dgvDados.Columns["PesoTotal"].HeaderText = "Peso total";
-            dgvDados.Columns["StatusProcesso"].HeaderText = "Status do processo";
             dgvDados.Columns["dateinsert"].HeaderText = "Data de inserção";
+            dgvDados.Columns["Status"].DisplayIndex = 10;
+
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
@@ -64,10 +98,11 @@ namespace Main.View.PagesFolder.ProcessFolder
 
             if(txtSearch.Text == "" || txtSearch.Text == "  Pesquisar")
             {
-                dgvDados.DataSource = Processos;
+                LoadDatabaseInfo();
             }
             else
             {
+                Processos.Clear();
                 Processos = Program.SQL.SelectList("SELECT * FROM Processos WHERE Id LIKE '%" + txtSearch.Text + "%' OR Id_produto LIKE '%" + txtSearch.Text + "%' OR Id_usuario LIKE '%" + txtSearch.Text + "%' OR Descricao LIKE '%" + txtSearch.Text + "%' OR Status_processo LIKE '%" + txtSearch.Text + "%'", "Processos", null,
                 new Dictionary<string, object>());
 
@@ -81,14 +116,15 @@ namespace Main.View.PagesFolder.ProcessFolder
                 dgvDados.Columns["IdUsuario"].Visible = false;
                 dgvDados.Columns["dateend"].Visible = false;
                 dgvDados.Columns["dateupdate"].Visible = false;
+                dgvDados.Columns["StatusProcesso"].Visible = false;
 
                 dgvDados.Columns["Descricao"].HeaderText = "Descrição";
                 dgvDados.Columns["TempoExecucao"].HeaderText = "Tempo de execução";
                 dgvDados.Columns["TotalContagem"].HeaderText = "Quantidade";
                 dgvDados.Columns["PesoReferencia"].HeaderText = "Peso de referência";
                 dgvDados.Columns["PesoTotal"].HeaderText = "Peso total";
-                dgvDados.Columns["StatusProcesso"].HeaderText = "Status do processo";
                 dgvDados.Columns["dateinsert"].HeaderText = "Data de inserção";
+                dgvDados.Columns["Status"].DisplayIndex = 10;
             }
         }
 
@@ -119,7 +155,7 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                 if (question.RESPOSTA)
                 {
-                    ProcessForms proc = new ProcessForms(id);
+                    PesoProcessForms proc = new PesoProcessForms(id);
 
                     foreach (Form openForm in Application.OpenForms)
                     {
@@ -136,6 +172,105 @@ namespace Main.View.PagesFolder.ProcessFolder
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+            }
+        }
+
+        private void pcb_return_Click(object sender, EventArgs e)
+        {
+            if (minParam > 0)
+            {
+                if (minParam - 10 >= 0)
+                {
+                    minParam -= 10;
+                    maxParam -= 10;
+                    counter_press -= 1;
+                    ReorderSequence();
+                    LoadDatabaseInfo();
+                }
+            }
+        }
+
+        private void pcb_next_Click(object sender, EventArgs e)
+        {
+            if (minParam + 10 < qRows)
+            {
+                minParam += 10;
+                maxParam += 10;
+                counter_press += 1;
+                ReorderSequence();
+                LoadDatabaseInfo();
+            }
+        }
+
+        private void ReorderSequence()
+        {
+            try
+            {
+                if (counter_press <= 3)
+                {
+                    btnthree.Text = $"{3}";
+                }
+                else
+                {
+                    btnthree.Text = $"{counter_press}";
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private void btnOne_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Button cbtn = (Button)sender;
+
+                if (((Convert.ToInt32(cbtn.Text)-1) * 10) <= qRows)
+                {
+                    maxParam = Convert.ToInt32(cbtn.Text) * 10;
+                    minParam = (Convert.ToInt32(cbtn.Text) * 10) - 10;
+
+                    if (((Convert.ToInt32(cbtn.Text) - 1) * 10) < qRows)
+                    {
+                        counter_press = Convert.ToInt32(cbtn.Text);
+                    }
+
+                    ReorderSequence();
+                    LoadDatabaseInfo();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private void dgvDados_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            int x = 0;
+
+            foreach (DataGridViewRow row in dgvDados.Rows)
+            {
+                if (dgvDados.Rows[x].Cells[10].Value.ToString() == "0")
+                {
+                    row.Cells[1].Value = "Sem referência";
+                }
+                else if (dgvDados.Rows[x].Cells[10].Value.ToString() == "1")
+                {
+                    row.Cells[1].Value = "Referência calculada";
+                }
+                else if (dgvDados.Rows[x].Cells[10].Value.ToString() == "2")
+                {
+                    row.Cells[1].Value = "Contagem iniciada";
+                }
+                else if (dgvDados.Rows[x].Cells[10].Value.ToString() == "3")
+                {
+                    row.Cells[1].Value = "Finalizado";
+                }
+
+                x++;
             }
         }
     }

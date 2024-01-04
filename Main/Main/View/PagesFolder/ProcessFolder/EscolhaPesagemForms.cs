@@ -105,7 +105,7 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                     idInserido = (int)selectID.First();
 
-                    ProcessForms proc = new ProcessForms(idUsuario, nomeUsuario, idMateria, qtMinima, txt_Descricao.Text, idInserido);
+                    PesoProcessForms proc = new PesoProcessForms(idUsuario, nomeUsuario, idMateria, qtMinima, txt_Descricao.Text, idInserido);
 
                     foreach (Form openForm in Application.OpenForms)
                     {

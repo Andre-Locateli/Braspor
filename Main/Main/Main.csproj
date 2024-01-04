@@ -267,6 +267,12 @@
     <Compile Include="View\PagesFolder\ProcessFolder\PesagemForms.Designer.cs">
       <DependentUpon>PesagemForms.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\PagesFolder\ProcessFolder\PesoProcessForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PagesFolder\ProcessFolder\PesoProcessForms.Designer.cs">
+      <DependentUpon>PesoProcessForms.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\PagesFolder\ProcessFolder\ProcessForms.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -382,6 +388,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\PagesFolder\ProcessFolder\PesagemForms.resx">
       <DependentUpon>PesagemForms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PagesFolder\ProcessFolder\PesoProcessForms.resx">
+      <DependentUpon>PesoProcessForms.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\PagesFolder\ProcessFolder\ProcessForms.resx">
       <DependentUpon>ProcessForms.cs</DependentUpon>
