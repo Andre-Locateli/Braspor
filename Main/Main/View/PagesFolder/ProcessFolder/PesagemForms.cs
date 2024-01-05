@@ -128,9 +128,9 @@ namespace Main.View.PagesFolder.ProcessFolder
             }
         }
 
-        private void txtSearch_Click(object sender, EventArgs e)
+        private void txtSearch_Enter(object sender, EventArgs e)
         {
-            if(txtSearch.Text == "  Pesquisar")
+            if (txtSearch.Text == "  Pesquisar")
             {
                 txtSearch.Text = "";
             }
@@ -149,22 +149,31 @@ namespace Main.View.PagesFolder.ProcessFolder
             try
             {
                 int id = Convert.ToInt32(dgvDados.Rows[e.RowIndex].Cells["Id"].Value);
+                string status = Convert.ToString(dgvDados.Rows[e.RowIndex].Cells["Status"].Value);
 
-                YesOrNo question = new YesOrNo("Deseja retomar processo?");
-                question.ShowDialog();
-
-                if (question.RESPOSTA)
+                if (status == "Finalizado")
                 {
-                    PesoProcessForms proc = new PesoProcessForms(id);
+                    InfoPopup info = new InfoPopup("Alerta!", "Esse processo já foi finalizado! \n Crie um novo ou retome um já existente para iniciar uma nova pesagem.");
+                    info.ShowDialog();
+                }
+                else
+                {
+                    YesOrNo question = new YesOrNo("Deseja retomar processo?");
+                    question.ShowDialog();
 
-                    foreach (Form openForm in Application.OpenForms)
+                    if (question.RESPOSTA)
                     {
-                        if (openForm is MainForms)
+                        PesoProcessForms proc = new PesoProcessForms(id);
+
+                        foreach (Form openForm in Application.OpenForms)
                         {
-                            MainForms mainForm = (MainForms)openForm;
-                            mainForm.OpenPage(proc);
-                            this.Close();
-                            return;
+                            if (openForm is MainForms)
+                            {
+                                MainForms mainForm = (MainForms)openForm;
+                                mainForm.OpenPage(proc);
+                                this.Close();
+                                return;
+                            }
                         }
                     }
                 }

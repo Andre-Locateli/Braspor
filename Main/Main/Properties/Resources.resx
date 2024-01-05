@@ -118,9 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="pencil-edit-button" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pencil-edit-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="produtoadd" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\produtoadd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -133,8 +130,8 @@
   <data name="principalIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\principalIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="bandejaAdd" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\bandejaAdd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="5975150_corona_coronavirus_hourglass_timer_virus_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\5975150_corona_coronavirus_hourglass_timer_virus_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="document_27px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\document_27px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -160,8 +157,11 @@
   <data name="userEnable" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\userEnable.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="closePopup" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\closePopup.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ApplicationIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ApplicationIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="caixaIconr" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\caixaIconr.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\refresh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -181,11 +181,20 @@
   <data name="searchIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\searchIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="lfArrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lfArrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_352270_close_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\352270_close_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="pendenteico" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pendenteico.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="flag_icon_true" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\flag_icon_true.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="industrial_scales_connected_filled_99px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\industrial_scales_connected_filled_99px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="menuIcon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\menuIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -193,8 +202,14 @@
   <data name="searchIocn" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\searchIocn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="aephbkLogin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\aephbkLogin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="errorZero" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\errorZero.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="executandoIco" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\executandoIco.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="userDisable" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\userDisable.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -223,6 +238,9 @@
   <data name="vcIconLogin" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\vcIconLogin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="braspor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\braspor.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="services_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\services_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -235,8 +253,8 @@
   <data name="info_64px1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\info_64px1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ApplicationIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ApplicationIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="skfAnim" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\skfAnim.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Vision Collector" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Vision Collector.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -247,6 +265,9 @@
   <data name="FinalizaProcesso" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FinalizaProcesso.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="btnAcess" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btnAcess.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="restart_144px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\restart_144px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -256,11 +277,8 @@
   <data name="btnAcess1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\btnAcess1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="image_2023_04_14T10_59_44_706Z" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image_2023_04_14T10_59_44_706Z.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="executandoIco" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\executandoIco.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="_8664917_window_minimize_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\8664917_window_minimize_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="4115230_cancel_close_delete_icon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\4115230_cancel_close_delete_icon1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -289,9 +307,6 @@
   <data name="arrow_26px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\arrow_26px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="warningImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\warningImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="rightArrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\rightArrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -319,11 +334,14 @@
   <data name="ethernet_off_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ethernet_off_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="lockEnable" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lockEnable.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="lockDisable" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\lockDisable.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="lockEnable" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\lockEnable.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="pencil-edit-button" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pencil-edit-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="errorIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\errorIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -331,8 +349,8 @@
   <data name="logo-aeph-do-brasil" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\logo-aeph-do-brasil.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="btnAcess" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\btnAcess.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="closePopup" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\closePopup.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="round_v_" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\round_v_.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -346,17 +364,17 @@
   <data name="arrowDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\arrowDown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="lfArrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\lfArrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="bandejaAdd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bandejaAdd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="caixaIconr" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\caixaIconr.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="warningImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\warningImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="homepng1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\homepng1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="aephbkLogin" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\aephbkLogin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="image_2023_04_14T10_59_44_706Z" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image_2023_04_14T10_59_44_706Z.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="plusIconShort" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\plusIconShort.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -382,16 +400,7 @@
   <data name="bkLogin" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bkLogin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="skfAnim" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\skfAnim.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="braspor" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\braspor.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="_352270_close_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\352270_close_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="_8664917_window_minimize_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\8664917_window_minimize_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="industrial_scales_connecting_99px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\industrial_scales_connecting_99px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

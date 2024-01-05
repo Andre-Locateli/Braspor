@@ -86,10 +86,10 @@
             this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.Controls.Add(this.txtSearch);
             this.panel2.Controls.Add(this.pictureBox3);
-            this.panel2.Location = new System.Drawing.Point(55, 33);
+            this.panel2.Location = new System.Drawing.Point(31, 33);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(3);
-            this.panel2.Size = new System.Drawing.Size(839, 32);
+            this.panel2.Size = new System.Drawing.Size(887, 32);
             this.panel2.TabIndex = 63;
             // 
             // txtSearch
@@ -101,11 +101,11 @@
             this.txtSearch.ForeColor = System.Drawing.Color.DarkGray;
             this.txtSearch.Location = new System.Drawing.Point(47, 3);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(789, 22);
+            this.txtSearch.Size = new System.Drawing.Size(837, 22);
             this.txtSearch.TabIndex = 50;
             this.txtSearch.Text = "  Pesquisar";
-            this.txtSearch.Click += new System.EventHandler(this.txtSearch_Click);
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            this.txtSearch.Enter += new System.EventHandler(this.txtSearch_Enter);
             this.txtSearch.Leave += new System.EventHandler(this.txtSearch_Leave);
             // 
             // pictureBox3

@@ -21,20 +21,19 @@ namespace Main.View.PagesFolder.ProcessFolder
         string nomeUsuario = "";
         int idProduto = 0;
         int idProcesso = 1;
+        int qtMinima = 0;
 
         string tempoExecucao = "";
         int statusProcesso = 0;
 
         string descProcesso = "";
 
-        int qtminima;
         int countMensagens = 0;
 
         int timeSec, timeMin, timeH;
         string tempoContagem = "";
 
         Boolean tmpExectAtivo;
-
 
         decimal pesoReferencia;
         decimal qtContab = 0;
@@ -56,7 +55,8 @@ namespace Main.View.PagesFolder.ProcessFolder
 
         int bloqueiaValor = 0;
         int bloqueiaLoop = 1;
-        int bloqueiaContag = 0;
+        int bloqueiaContag = 1;
+        int bloqueiaBotaoContag = 0;
 
         //
         bool isTrue = true;
@@ -65,6 +65,8 @@ namespace Main.View.PagesFolder.ProcessFolder
         Stopwatch stopSup = new Stopwatch();
         Stopwatch stopValor = new Stopwatch();
 
+        List<object> selectProcessos = new List<object>();
+
         public PesoProcessForms(int id_Usuario, string nome_Usuario, int id_MateriaPrima, int qt_Minima, string dsc_MateriaPrima, int id_Processo)
         {
             InitializeComponent();
@@ -72,44 +74,22 @@ namespace Main.View.PagesFolder.ProcessFolder
             idUsuario = id_Usuario;
             nomeUsuario = nome_Usuario;
             idProcesso = id_Processo;
-
-            var selectProcessos = Program.SQL.SelectList("SELECT * FROM Processos WHERE Id = @Id", "Processos", null,
-            new Dictionary<string, object>()
-            {
-                {"@Id", id_Processo }
-            });
-
-            foreach (ProcessosModel process in selectProcessos)
-            {
-                descProcesso = process.Descricao;
-            }
-
-            //SerialCommunicationService.InitWithAutoConnect();
-
-            var selectProduto = Program.SQL.SelectList("SELECT * FROM MateriaPrima WHERE Id = @Id", "MateriaPrima", null,
-            new Dictionary<string, object>()
-            {
-                {"@Id", id_MateriaPrima }
-            });
-
-            foreach (MateriaPrimaClass materia in selectProduto)
-            {
-                lbl_MateriaPrima.Text = materia.Codigo + " - " + materia.Descricao;
-            }
-
-            lbl_qtMinima.Text = qt_Minima.ToString();
-            qtminima = qt_Minima;
-            lbl_Descricao.Text = dsc_MateriaPrima;
+            qtMinima = qt_Minima;
         }
 
         public PesoProcessForms(int id_Processo)
         {
             InitializeComponent();
 
-            var selectProcessos = Program.SQL.SelectList("SELECT * FROM Processos WHERE Id = @Id", "Processos", null,
+            idProcesso = id_Processo;
+        }
+
+        private async void ProcessForms_Load(object sender, EventArgs e)
+        {
+            selectProcessos = Program.SQL.SelectList("SELECT * FROM Processos WHERE Id = @Id", "Processos", null,
             new Dictionary<string, object>()
             {
-                {"@Id", id_Processo }
+                {"@Id", idProcesso }
             });
 
             foreach (ProcessosModel proc in selectProcessos)
@@ -123,7 +103,11 @@ namespace Main.View.PagesFolder.ProcessFolder
                 valorPesoTotal = Convert.ToDecimal(proc.PesoTotal);
                 tempoContagem = proc.TempoExecucao;
                 statusProcesso = proc.StatusProcesso;
+                lbl_DataInsert.Text = Convert.ToString(proc.dateinsert);
+                lbl_Horario.Text = tempoExecucao;
             }
+
+            lbl_PesoReferencia.Text = Convert.ToString(pesoReferencia);
 
             var selectProduto = Program.SQL.SelectList("SELECT * FROM MateriaPrima WHERE Id = @Id", "MateriaPrima", null,
             new Dictionary<string, object>()
@@ -131,23 +115,25 @@ namespace Main.View.PagesFolder.ProcessFolder
                 {"@Id", idProduto }
             });
 
-
             foreach (MateriaPrimaClass materia in selectProduto)
             {
                 lbl_qtMinima.Text = materia.Quantidade_minima.ToString();
                 lbl_MateriaPrima.Text = materia.Codigo + " - " + materia.Descricao;
             }
 
-
             lbl_ValorReal.Text = valorTotal.ToString();
+
+            lbl_Descricao.Text = descProcesso;
 
             if (statusProcesso == 0)
             {
                 // PAUSADO SEM REFERÊNCIA
+
             }
             else if (statusProcesso == 1)
             {
                 // PAUSADO COM REFERÊNCIA
+
                 btn_IniciarContagem.Enabled = true;
                 btn_IniciarContagem.ForeColor = Color.Green;
                 btn_IniciarContagem.BackColor = Color.FromArgb(192, 255, 192);
@@ -155,10 +141,14 @@ namespace Main.View.PagesFolder.ProcessFolder
                 btn_SalvarReferencia.Enabled = false;
                 btn_SalvarReferencia.ForeColor = Color.FromArgb(64, 64, 64);
                 btn_SalvarReferencia.BackColor = Color.Silver;
+
+                bloqueiaBotaoContag = 1;
+                bloqueiaContag = 0;
             }
             else if (statusProcesso == 2)
             {
                 // PAUSADO CONTAGEM INICIADA
+
                 btn_IniciarContagem.Enabled = true;
                 btn_IniciarContagem.ForeColor = Color.Green;
                 btn_IniciarContagem.BackColor = Color.FromArgb(192, 255, 192);
@@ -172,12 +162,12 @@ namespace Main.View.PagesFolder.ProcessFolder
                 timeMin = Convert.ToInt32(tempoContagem.Substring(2, 2));
                 timeSec = Convert.ToInt32(tempoContagem.Substring(4, 2));
 
+                bloqueiaBotaoContag = 1;
+                bloqueiaContag = 0;
                 btn_IniciarContagem.Text = "RETOMAR PROCESSO";
             }
-        }
 
-        private void ProcessForms_Load(object sender, EventArgs e)
-        {
+
             int i = 0;
 
             foreach (IndicadorClass ind in SerialCommunicationService.indicador_addr)
@@ -199,32 +189,49 @@ namespace Main.View.PagesFolder.ProcessFolder
                 lbl_Descricao.Text = "Processo sem descrição.";
             }
 
-            Task.Run(() => {
+            if (SerialCommunicationService.SERIALPORT1.IsOpen)
+            {
+                taraReferencia.Tag = Program.Endereco_Referencia;
+                zeroReferencia.Tag = Program.Endereco_Referencia;
+
+                taraContagem.Tag = Program.Endereco_Referencia + 1;
+                zeroContagem.Tag = Program.Endereco_Referencia + 1;
+            }
+
+            await Task.Delay(500);
+
+            Task.Run(() =>
+            {
                 try
                 {
                     while (isTrue)
                     {
-                        valorReferencia.Invoke(new MethodInvoker(() =>
+                        if (bloqueiaContag == 1)
                         {
-                            if ($"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}".Contains("-"))
+                            this.Invoke(new MethodInvoker(() =>
                             {
-                                valorReferencia.Text = "0.000";
-                            }
-                            else
-                            {
-                                valorReferencia.Text = $"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}";
-                                valorReferencia.Text = valorReferencia.Text.Replace(",", ".");
-                            }
-                        }));
+                                if ($"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}".Contains("-"))
+                                {
+                                    valorReferencia.Text = "0.000";
+                                }
+                                else
+                                {
+                                    valorReferencia.Text = $"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}";
+                                    valorReferencia.Text = valorReferencia.Text.Replace(",", ".");
+                                }
+                            }));
+                        }
+
 
                         if (bloqueiaContag == 0)
                         {
-                            valorContagem.Invoke(new MethodInvoker(() =>
+                            this.Invoke(new MethodInvoker(() =>
                             {
                                 valorContagem.Text = $"{SerialCommunicationService.indicador_addr[indiceContador].PS}";
                                 valorContagem.Text = valorContagem.Text.Replace(",", ".");
                             }));
                         }
+
 
                         if (btn_IniciarContagem.Text == "FINALIZAR PROCESSO")
                         {
@@ -263,6 +270,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                             }
                         }
 
+
                         if (bloqueiaLoop == 0)
                         {
                             valorSuporte = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceContador].PS}");
@@ -284,7 +292,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                                         lbl_ValorReal.Text = valorTotal.ToString();
                                     }));
 
-                                    valorPesoTotal = valorPesoTotal + Convert.ToDecimal(valorContagem);
+                                    valorPesoTotal = valorPesoTotal + Convert.ToDecimal(valorContagem.Text);
 
                                     var insertLog = Program.SQL.CRUDCommand("INSERT INTO Log_Processos (Id_processo, Peso_temporeal, Peso_total, Tempo_execucao, dateinsert) VALUES (@Id_processo, @Peso_temporeal, @Peso_total, @Tempo_execucao, @dateinsert)", "Log_Processos",
                                     new Dictionary<string, object>()
@@ -316,6 +324,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                                     {
                                         stopSup.Reset();
                                     }
+
                                     countMensagens = 1;
                                 }
                                 else
@@ -326,23 +335,11 @@ namespace Main.View.PagesFolder.ProcessFolder
                         }
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Console.WriteLine(ex.Message);
                 }
-
-                return Task.CompletedTask;
             });
-
-            //Console.WriteLine("Teste");
-
-            if (SerialCommunicationService.SERIALPORT1.IsOpen)
-            {
-                taraReferencia.Tag = Program.Endereco_Referencia;
-                zeroReferencia.Tag = Program.Endereco_Referencia;
-
-                taraContagem.Tag = Program.Endereco_Referencia + 1;
-                zeroContagem.Tag = Program.Endereco_Referencia + 1;
-            }
         }
 
         private void CommandButtonEventClick(object sender, EventArgs e)
@@ -379,97 +376,111 @@ namespace Main.View.PagesFolder.ProcessFolder
         {
             try
             {
-
-                if (btn_IniciarContagem.Text == "INICIAR CONTAGEM")
+                if (bloqueiaBotaoContag == 1)
                 {
-                    YesOrNo question = new YesOrNo("Deseja iniciar a contagem?");
-                    question.ShowDialog();
-
-                    if (question.RESPOSTA)
+                    if (btn_IniciarContagem.Text == "INICIAR CONTAGEM")
                     {
-                        statusProcesso = 2;
-                        tmpExectAtivo = true;
-                        TimerRelogio.Start();
-                        lbl_Status.Text = "Em andamento";
+                        YesOrNo question = new YesOrNo("Deseja iniciar a contagem?");
+                        question.ShowDialog();
 
-                        SerialCommunicationService.SendCommand(Convert.ToInt32(taraContagem.Tag), 0);
-
-                        this.Invoke(new MethodInvoker(() =>
+                        if (question.RESPOSTA)
                         {
-                            btn_IniciarContagem.Text = "FINALIZAR PROCESSO";
-                        }));
-                    }
-                }
+                            statusProcesso = 2;
+                            tmpExectAtivo = true;
+                            TimerRelogio.Start();
+                            lbl_Status.Text = "Em andamento";
 
-                else if (btn_IniciarContagem.Text == "RETOMAR PROCESSO")
-                {
-                    YesOrNo question = new YesOrNo("Deseja retomar a contagem?");
-                    question.ShowDialog();
+                            SerialCommunicationService.SendCommand(Convert.ToInt32(taraContagem.Tag), 0);
 
-                    if (question.RESPOSTA)
-                    {
-                        statusProcesso = 2;
-                        tmpExectAtivo = true;
-                        TimerRelogio.Start();
-                        lbl_Status.Text = "Em andamento";
-
-                        SerialCommunicationService.SendCommand(Convert.ToInt32(taraContagem.Tag), 0);
-
-                        this.Invoke(new MethodInvoker(() =>
-                        {
-                            btn_IniciarContagem.Text = "FINALIZAR PROCESSO";
-                        }));
-                    }
-                }
-
-                else if (btn_IniciarContagem.Text == "FINALIZAR PROCESSO")
-                {
-                    YesOrNo question = new YesOrNo("Deseja finalizar esse processo?");
-                    question.ShowDialog();
-
-                    if (question.RESPOSTA)
-                    {
-                        statusProcesso = 3;
-                        isTrue = false;
-
-                        var UpdateProcesso = Program.SQL.CRUDCommand("UPDATE Processos SET Descricao = @Descricao, Tempo_execucao = @Tempo_execucao, Total_contagem = @Total_contagem, Peso_Referencia = @Peso_Referencia, Peso_total = @Peso_total, Status_processo = @Status_processo, dateinsert = @dateinsert WHERE Id = @Id\r\n", "Log_Processos",
-                        new Dictionary<string, object>()
-                        {
-                            {"@Id", idProcesso },
-                            {"@Descricao", descProcesso },
-                            {"@Tempo_execucao", lbl_Horario.Text },
-                            {"@Total_contagem", valorTotal },
-                            {"@Peso_Referencia", pesoReferencia },
-                            {"@Peso_total", valorTotal },
-                            {"@Status_processo", statusProcesso },
-                            {"@dateinsert", DateTime.Now }
-                        });
-
-                        await Task.Delay(1000);
-
-                        InfoPopup info = new InfoPopup("Parabéns!", "Processo e contagem registrados com sucesso!", Properties.Resources._299110_check_sign_icon);
-                        info.ShowDialog();
-
-                        MainInfoForms form = new MainInfoForms(idUsuario, nomeUsuario);
-
-                        foreach (Form openForm in Application.OpenForms)
-                        {
-                            if (openForm is MainForms)
+                            this.Invoke(new MethodInvoker(() =>
                             {
-                                MainForms main = (MainForms)openForm;
-                                main.OpenPage(form);
-                                this.Close();
-                                return;
+                                btn_IniciarContagem.Text = "FINALIZAR PROCESSO";
+                            }));
+                        }
+                    }
+
+                    else if (btn_IniciarContagem.Text == "RETOMAR PROCESSO")
+                    {
+                        YesOrNo question = new YesOrNo("Deseja retomar a contagem?");
+                        question.ShowDialog();
+
+                        if (question.RESPOSTA)
+                        {
+                            statusProcesso = 2;
+                            tmpExectAtivo = true;
+                            TimerRelogio.Start();
+                            lbl_Status.Text = "Em andamento";
+
+                            SerialCommunicationService.SendCommand(Convert.ToInt32(taraContagem.Tag), 0);
+
+                            this.Invoke(new MethodInvoker(() =>
+                            {
+                                btn_IniciarContagem.Text = "FINALIZAR PROCESSO";
+                            }));
+                        }
+                    }
+
+                    else if (btn_IniciarContagem.Text == "FINALIZAR PROCESSO")
+                    {
+                        YesOrNo question = new YesOrNo("Deseja finalizar esse processo?");
+                        question.ShowDialog();
+
+                        if (question.RESPOSTA)
+                        {
+                            statusProcesso = 3;
+                            isTrue = false;
+
+                            TimerRelogio.Stop();
+
+                            var UpdateProcesso = Program.SQL.CRUDCommand("UPDATE Processos SET Descricao = @Descricao, Tempo_execucao = @Tempo_execucao, Total_contagem = @Total_contagem, Peso_Referencia = @Peso_Referencia, Peso_total = @Peso_total, Status_processo = @Status_processo, dateinsert = @dateinsert WHERE Id = @Id\r\n", "Log_Processos",
+                            new Dictionary<string, object>()
+                            {
+                                {"@Id", idProcesso },
+                                {"@Descricao", descProcesso },
+                                {"@Tempo_execucao", lbl_Horario.Text },
+                                {"@Total_contagem", valorTotal },
+                                {"@Peso_Referencia", pesoReferencia },
+                                {"@Peso_total", valorTotal },
+                                {"@Status_processo", statusProcesso },
+                                {"@dateinsert", DateTime.Now }
+                            });
+
+                            await Task.Delay(1000);
+
+                            InfoPopup info = new InfoPopup("Parabéns!", "Processo e contagem registrados com sucesso!", Properties.Resources._299110_check_sign_icon);
+                            info.ShowDialog();
+
+                            MainInfoForms form = new MainInfoForms(idUsuario, nomeUsuario);
+
+                            foreach (Form openForm in Application.OpenForms)
+                            {
+                                if (openForm is MainForms)
+                                {
+                                    MainForms main = (MainForms)openForm;
+                                    main.OpenPage(form);
+                                    this.Close();
+                                    return;
+                                }
                             }
                         }
                     }
                 }
-
+                else
+                {
+                    InfoPopup info = new InfoPopup("Erro", "Registre o peso de Referência antes de iniciar a contagem!", Properties.Resources.errorIcon);
+                    info.ShowDialog();
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            VisualizarLogForms visu = new VisualizarLogForms(idProcesso);
+            visu.ShowDialog();
         }
 
         private void TimerRelogio_Tick_1(object sender, EventArgs e)
@@ -497,46 +508,23 @@ namespace Main.View.PagesFolder.ProcessFolder
             }));
         }
 
-        private void lbl_ValorReal_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel4_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel7_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void btn_SalvarReferencia_Click(object sender, EventArgs e)
         {
             try
             {
-                YesOrNo question = new YesOrNo("Confirmar que a quantidade para referência (" + qtminima + ") está correta na balança? Começar contagem?");
-                question.ShowDialog();
-
-                if (question.RESPOSTA)
+                if (bloqueiaBotaoContag == 0)
                 {
-                    statusProcesso = 1;
+                    YesOrNo question = new YesOrNo("Confirmar que a quantidade para referência (" + qtMinima + ") está correta na balança? Começar contagem?");
+                    question.ShowDialog();
 
-                    btn_IniciarContagem.Enabled = true;
-                    btn_IniciarContagem.ForeColor = Color.Green;
-                    btn_IniciarContagem.BackColor = Color.FromArgb(192, 255, 192);
+                    if (question.RESPOSTA)
+                    {
+                        statusProcesso = 1;
 
-                    btn_SalvarReferencia.Enabled = false;
-                    btn_SalvarReferencia.ForeColor = Color.FromArgb(64, 64, 64);
-                    btn_SalvarReferencia.BackColor = Color.Silver;
-
-                    pesoReferencia = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}") / Convert.ToDecimal(lbl_qtMinima.Text);
+                        pesoReferencia = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}") / Convert.ToDecimal(lbl_qtMinima.Text);
+                        bloqueiaContag = 0;
+                        bloqueiaBotaoContag = 1;
+                    }
                 }
             }
             catch (Exception ex)
