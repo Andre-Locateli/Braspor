@@ -48,16 +48,16 @@
             this.valorContagem = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.zeroReferencia = new System.Windows.Forms.PictureBox();
-            this.taraReferencia = new System.Windows.Forms.PictureBox();
+            this.taraContagem = new System.Windows.Forms.PictureBox();
+            this.zeroContagem = new System.Windows.Forms.PictureBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel10 = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
             this.btn_SalvarReferencia = new System.Windows.Forms.Button();
             this.valorReferencia = new System.Windows.Forms.Label();
-            this.taraContagem = new System.Windows.Forms.PictureBox();
-            this.zeroContagem = new System.Windows.Forms.PictureBox();
             this.label12 = new System.Windows.Forms.Label();
+            this.zeroReferencia = new System.Windows.Forms.PictureBox();
+            this.taraReferencia = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.lbl_PesoReferencia = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -68,7 +68,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.label14 = new System.Windows.Forms.Label();
             this.panel12 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pict_Status = new System.Windows.Forms.PictureBox();
             this.lbl_Status = new System.Windows.Forms.Label();
             this.btn_IniciarContagem = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -87,15 +87,15 @@
             this.panel8.SuspendLayout();
             this.panel9.SuspendLayout();
             this.panel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.zeroReferencia)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.taraReferencia)).BeginInit();
-            this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.taraContagem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.zeroContagem)).BeginInit();
+            this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.zeroReferencia)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.taraReferencia)).BeginInit();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel12.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pict_Status)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -139,7 +139,7 @@
             this.panel8.Controls.Add(this.panel14);
             this.panel8.Controls.Add(this.label20);
             this.panel8.Controls.Add(this.lbl_ValorReal);
-            this.panel8.Location = new System.Drawing.Point(456, 433);
+            this.panel8.Location = new System.Drawing.Point(458, 433);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(407, 168);
             this.panel8.TabIndex = 18;
@@ -281,9 +281,9 @@
             this.panel7.Controls.Add(this.valorContagem);
             this.panel7.Controls.Add(this.label13);
             this.panel7.Controls.Add(this.label11);
-            this.panel7.Controls.Add(this.zeroReferencia);
-            this.panel7.Controls.Add(this.taraReferencia);
-            this.panel7.Location = new System.Drawing.Point(456, 213);
+            this.panel7.Controls.Add(this.taraContagem);
+            this.panel7.Controls.Add(this.zeroContagem);
+            this.panel7.Location = new System.Drawing.Point(458, 213);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(407, 200);
             this.panel7.TabIndex = 15;
@@ -333,33 +333,33 @@
             this.label11.Text = "Kg";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // zeroReferencia
+            // taraContagem
             // 
-            this.zeroReferencia.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.zeroReferencia.BackColor = System.Drawing.Color.Transparent;
-            this.zeroReferencia.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.zeroReferencia.Image = ((System.Drawing.Image)(resources.GetObject("zeroReferencia.Image")));
-            this.zeroReferencia.Location = new System.Drawing.Point(103, 147);
-            this.zeroReferencia.Name = "zeroReferencia";
-            this.zeroReferencia.Size = new System.Drawing.Size(76, 43);
-            this.zeroReferencia.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.zeroReferencia.TabIndex = 4;
-            this.zeroReferencia.TabStop = false;
-            this.zeroReferencia.Click += new System.EventHandler(this.CommandButtonEventClick);
+            this.taraContagem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.taraContagem.BackColor = System.Drawing.Color.Transparent;
+            this.taraContagem.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.taraContagem.Image = ((System.Drawing.Image)(resources.GetObject("taraContagem.Image")));
+            this.taraContagem.Location = new System.Drawing.Point(16, 147);
+            this.taraContagem.Name = "taraContagem";
+            this.taraContagem.Size = new System.Drawing.Size(76, 43);
+            this.taraContagem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.taraContagem.TabIndex = 5;
+            this.taraContagem.TabStop = false;
+            this.taraContagem.Click += new System.EventHandler(this.CommandButtonEventClick);
             // 
-            // taraReferencia
+            // zeroContagem
             // 
-            this.taraReferencia.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.taraReferencia.BackColor = System.Drawing.Color.Transparent;
-            this.taraReferencia.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.taraReferencia.Image = ((System.Drawing.Image)(resources.GetObject("taraReferencia.Image")));
-            this.taraReferencia.Location = new System.Drawing.Point(19, 147);
-            this.taraReferencia.Name = "taraReferencia";
-            this.taraReferencia.Size = new System.Drawing.Size(76, 43);
-            this.taraReferencia.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.taraReferencia.TabIndex = 3;
-            this.taraReferencia.TabStop = false;
-            this.taraReferencia.Click += new System.EventHandler(this.CommandButtonEventClick);
+            this.zeroContagem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.zeroContagem.BackColor = System.Drawing.Color.Transparent;
+            this.zeroContagem.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.zeroContagem.Image = ((System.Drawing.Image)(resources.GetObject("zeroContagem.Image")));
+            this.zeroContagem.Location = new System.Drawing.Point(99, 147);
+            this.zeroContagem.Name = "zeroContagem";
+            this.zeroContagem.Size = new System.Drawing.Size(76, 43);
+            this.zeroContagem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.zeroContagem.TabIndex = 6;
+            this.zeroContagem.TabStop = false;
+            this.zeroContagem.Click += new System.EventHandler(this.CommandButtonEventClick);
             // 
             // panel5
             // 
@@ -371,9 +371,9 @@
             this.panel5.Controls.Add(this.label9);
             this.panel5.Controls.Add(this.btn_SalvarReferencia);
             this.panel5.Controls.Add(this.valorReferencia);
-            this.panel5.Controls.Add(this.taraContagem);
-            this.panel5.Controls.Add(this.zeroContagem);
             this.panel5.Controls.Add(this.label12);
+            this.panel5.Controls.Add(this.zeroReferencia);
+            this.panel5.Controls.Add(this.taraReferencia);
             this.panel5.Location = new System.Drawing.Point(25, 213);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(407, 200);
@@ -427,34 +427,6 @@
             this.valorReferencia.Text = "0.000";
             this.valorReferencia.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // taraContagem
-            // 
-            this.taraContagem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.taraContagem.BackColor = System.Drawing.Color.Transparent;
-            this.taraContagem.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.taraContagem.Image = ((System.Drawing.Image)(resources.GetObject("taraContagem.Image")));
-            this.taraContagem.Location = new System.Drawing.Point(14, 147);
-            this.taraContagem.Name = "taraContagem";
-            this.taraContagem.Size = new System.Drawing.Size(76, 43);
-            this.taraContagem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.taraContagem.TabIndex = 5;
-            this.taraContagem.TabStop = false;
-            this.taraContagem.Click += new System.EventHandler(this.CommandButtonEventClick);
-            // 
-            // zeroContagem
-            // 
-            this.zeroContagem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.zeroContagem.BackColor = System.Drawing.Color.Transparent;
-            this.zeroContagem.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.zeroContagem.Image = ((System.Drawing.Image)(resources.GetObject("zeroContagem.Image")));
-            this.zeroContagem.Location = new System.Drawing.Point(96, 147);
-            this.zeroContagem.Name = "zeroContagem";
-            this.zeroContagem.Size = new System.Drawing.Size(76, 43);
-            this.zeroContagem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.zeroContagem.TabIndex = 6;
-            this.zeroContagem.TabStop = false;
-            this.zeroContagem.Click += new System.EventHandler(this.CommandButtonEventClick);
-            // 
             // label12
             // 
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -467,6 +439,34 @@
             this.label12.TabIndex = 10;
             this.label12.Text = "Indicador de Referência:";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // zeroReferencia
+            // 
+            this.zeroReferencia.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.zeroReferencia.BackColor = System.Drawing.Color.Transparent;
+            this.zeroReferencia.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.zeroReferencia.Image = ((System.Drawing.Image)(resources.GetObject("zeroReferencia.Image")));
+            this.zeroReferencia.Location = new System.Drawing.Point(99, 147);
+            this.zeroReferencia.Name = "zeroReferencia";
+            this.zeroReferencia.Size = new System.Drawing.Size(76, 43);
+            this.zeroReferencia.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.zeroReferencia.TabIndex = 4;
+            this.zeroReferencia.TabStop = false;
+            this.zeroReferencia.Click += new System.EventHandler(this.CommandButtonEventClick);
+            // 
+            // taraReferencia
+            // 
+            this.taraReferencia.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.taraReferencia.BackColor = System.Drawing.Color.Transparent;
+            this.taraReferencia.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.taraReferencia.Image = ((System.Drawing.Image)(resources.GetObject("taraReferencia.Image")));
+            this.taraReferencia.Location = new System.Drawing.Point(15, 147);
+            this.taraReferencia.Name = "taraReferencia";
+            this.taraReferencia.Size = new System.Drawing.Size(76, 43);
+            this.taraReferencia.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.taraReferencia.TabIndex = 3;
+            this.taraReferencia.TabStop = false;
+            this.taraReferencia.Click += new System.EventHandler(this.CommandButtonEventClick);
             // 
             // panel4
             // 
@@ -497,7 +497,7 @@
             // label17
             // 
             this.label17.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(102, 115);
+            this.label17.Location = new System.Drawing.Point(103, 115);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(16, 21);
             this.label17.TabIndex = 11;
@@ -570,7 +570,7 @@
             this.panel12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(46)))), ((int)(((byte)(84)))));
             this.panel12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel12.Controls.Add(this.pictureBox1);
+            this.panel12.Controls.Add(this.pict_Status);
             this.panel12.Controls.Add(this.lbl_Status);
             this.panel12.ForeColor = System.Drawing.Color.White;
             this.panel12.Location = new System.Drawing.Point(-1, 36);
@@ -578,21 +578,21 @@
             this.panel12.Size = new System.Drawing.Size(225, 138);
             this.panel12.TabIndex = 13;
             // 
-            // pictureBox1
+            // pict_Status
             // 
-            this.pictureBox1.Image = global::Main.Properties.Resources.industrial_scales_connecting_99px;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 8);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(217, 63);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 10;
-            this.pictureBox1.TabStop = false;
+            this.pict_Status.Image = global::Main.Properties.Resources.await;
+            this.pict_Status.Location = new System.Drawing.Point(3, 9);
+            this.pict_Status.Name = "pict_Status";
+            this.pict_Status.Size = new System.Drawing.Size(217, 63);
+            this.pict_Status.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pict_Status.TabIndex = 10;
+            this.pict_Status.TabStop = false;
             // 
             // lbl_Status
             // 
             this.lbl_Status.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Status.ForeColor = System.Drawing.Color.White;
-            this.lbl_Status.Location = new System.Drawing.Point(3, 74);
+            this.lbl_Status.Location = new System.Drawing.Point(3, 79);
             this.lbl_Status.Name = "lbl_Status";
             this.lbl_Status.Size = new System.Drawing.Size(217, 55);
             this.lbl_Status.TabIndex = 9;
@@ -631,7 +631,7 @@
             this.panel2.Controls.Add(this.label4);
             this.panel2.Location = new System.Drawing.Point(25, 23);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(838, 175);
+            this.panel2.Size = new System.Drawing.Size(840, 175);
             this.panel2.TabIndex = 11;
             // 
             // label8
@@ -647,7 +647,7 @@
             // lbl_DataInsert
             // 
             this.lbl_DataInsert.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_DataInsert.Location = new System.Drawing.Point(237, 108);
+            this.lbl_DataInsert.Location = new System.Drawing.Point(237, 109);
             this.lbl_DataInsert.Name = "lbl_DataInsert";
             this.lbl_DataInsert.Size = new System.Drawing.Size(586, 21);
             this.lbl_DataInsert.TabIndex = 13;
@@ -667,7 +667,7 @@
             // lbl_MateriaPrima
             // 
             this.lbl_MateriaPrima.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            this.lbl_MateriaPrima.Location = new System.Drawing.Point(237, 56);
+            this.lbl_MateriaPrima.Location = new System.Drawing.Point(237, 57);
             this.lbl_MateriaPrima.Name = "lbl_MateriaPrima";
             this.lbl_MateriaPrima.Size = new System.Drawing.Size(586, 22);
             this.lbl_MateriaPrima.TabIndex = 9;
@@ -677,7 +677,7 @@
             // lbl_Descricao
             // 
             this.lbl_Descricao.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Descricao.Location = new System.Drawing.Point(237, 82);
+            this.lbl_Descricao.Location = new System.Drawing.Point(237, 83);
             this.lbl_Descricao.Name = "lbl_Descricao";
             this.lbl_Descricao.Size = new System.Drawing.Size(586, 21);
             this.lbl_Descricao.TabIndex = 11;
@@ -697,7 +697,7 @@
             // lbl_Horario
             // 
             this.lbl_Horario.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            this.lbl_Horario.Location = new System.Drawing.Point(237, 134);
+            this.lbl_Horario.Location = new System.Drawing.Point(237, 135);
             this.lbl_Horario.Name = "lbl_Horario";
             this.lbl_Horario.Size = new System.Drawing.Size(586, 21);
             this.lbl_Horario.TabIndex = 0;
@@ -747,16 +747,16 @@
             this.panel9.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.zeroReferencia)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.taraReferencia)).EndInit();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.taraContagem)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.zeroContagem)).EndInit();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.zeroReferencia)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.taraReferencia)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel12.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pict_Status)).EndInit();
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -815,6 +815,6 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pict_Status;
     }
 }

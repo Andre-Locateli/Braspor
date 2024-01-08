@@ -133,8 +133,8 @@
   <data name="5975150_corona_coronavirus_hourglass_timer_virus_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\5975150_corona_coronavirus_hourglass_timer_virus_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="document_27px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\document_27px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="industrial_scales_connecting_99px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\industrial_scales_connecting_99px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="134216_menu_lines_hamburger_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\134216_menu_lines_hamburger_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -153,6 +153,9 @@
   </data>
   <data name="bandejaIconr" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bandejaIconr.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_27px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document_27px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="userEnable" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\userEnable.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -193,6 +196,9 @@
   <data name="flag_icon_true" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\flag_icon_true.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="industrial_scales_connected_filled_99px (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\industrial_scales_connected_filled_99px (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="industrial_scales_connected_filled_99px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\industrial_scales_connected_filled_99px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -213,6 +219,9 @@
   </data>
   <data name="userDisable" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\userDisable.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="rightArrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\rightArrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="arrowMain" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\arrowMain.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -307,8 +316,8 @@
   <data name="arrow_26px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\arrow_26px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="rightArrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\rightArrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="closePopup" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\closePopup.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="editIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\editIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -334,9 +343,6 @@
   <data name="ethernet_off_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ethernet_off_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="lockEnable" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\lockEnable.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="lockDisable" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\lockDisable.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -349,8 +355,8 @@
   <data name="logo-aeph-do-brasil" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\logo-aeph-do-brasil.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="closePopup" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\closePopup.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="lockEnable" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lockEnable.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="round_v_" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\round_v_.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -400,7 +406,7 @@
   <data name="bkLogin" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bkLogin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="industrial_scales_connecting_99px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\industrial_scales_connecting_99px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="await" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\await.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

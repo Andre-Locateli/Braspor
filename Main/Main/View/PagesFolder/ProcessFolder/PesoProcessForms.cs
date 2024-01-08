@@ -23,6 +23,8 @@ namespace Main.View.PagesFolder.ProcessFolder
         int idProcesso = 1;
         int qtMinima = 0;
 
+        Image[] imgs_peso;
+
         string tempoExecucao = "";
         int statusProcesso = 0;
 
@@ -71,6 +73,13 @@ namespace Main.View.PagesFolder.ProcessFolder
         {
             InitializeComponent();
 
+            imgs_peso = new Image[]
+            {
+                Properties.Resources.await,
+                Properties.Resources.industrial_scales_connecting_99px,
+                Properties.Resources.industrial_scales_connected_filled_99px__1_
+            };
+
             idUsuario = id_Usuario;
             nomeUsuario = nome_Usuario;
             idProcesso = id_Processo;
@@ -80,6 +89,13 @@ namespace Main.View.PagesFolder.ProcessFolder
         public PesoProcessForms(int id_Processo)
         {
             InitializeComponent();
+
+            imgs_peso = new Image[]
+            {
+                Properties.Resources.await,
+                Properties.Resources.industrial_scales_connecting_99px,
+                Properties.Resources.industrial_scales_connected_filled_99px__1_
+            };
 
             idProcesso = id_Processo;
         }
@@ -109,6 +125,11 @@ namespace Main.View.PagesFolder.ProcessFolder
 
             lbl_PesoReferencia.Text = Convert.ToString(pesoReferencia);
 
+            if(lbl_Horario.Text == "")
+            {
+                lbl_Horario.Text = "00:00:00";
+            }
+
             var selectProduto = Program.SQL.SelectList("SELECT * FROM MateriaPrima WHERE Id = @Id", "MateriaPrima", null,
             new Dictionary<string, object>()
             {
@@ -117,6 +138,7 @@ namespace Main.View.PagesFolder.ProcessFolder
 
             foreach (MateriaPrimaClass materia in selectProduto)
             {
+                qtMinima = materia.Quantidade_minima;
                 lbl_qtMinima.Text = materia.Quantidade_minima.ToString();
                 lbl_MateriaPrima.Text = materia.Codigo + " - " + materia.Descricao;
             }
@@ -142,6 +164,16 @@ namespace Main.View.PagesFolder.ProcessFolder
                 btn_SalvarReferencia.ForeColor = Color.FromArgb(64, 64, 64);
                 btn_SalvarReferencia.BackColor = Color.Silver;
 
+                pict_Status.Image = imgs_peso[1];
+
+                // STATUS
+                lbl_Status.Invoke(new MethodInvoker(() =>
+                {
+                    lbl_Status.Text = "";
+                    lbl_Status.Text = "REFERÊNCIA REGISTRADA. INICIE A CONTAGEM.";
+                    lbl_Status.Refresh();
+                }));
+
                 bloqueiaBotaoContag = 1;
                 bloqueiaContag = 0;
             }
@@ -161,6 +193,14 @@ namespace Main.View.PagesFolder.ProcessFolder
                 timeH = Convert.ToInt32(tempoContagem.Substring(0, 2));
                 timeMin = Convert.ToInt32(tempoContagem.Substring(2, 2));
                 timeSec = Convert.ToInt32(tempoContagem.Substring(4, 2));
+
+                //STATUS
+                lbl_Status.Invoke(new MethodInvoker(() =>
+                {
+                    lbl_Status.Text = "";
+                    lbl_Status.Text = "AGUARDANDO RETOMADA DE PROCESSO...";
+                }));
+                //
 
                 bloqueiaBotaoContag = 1;
                 bloqueiaContag = 0;
@@ -200,6 +240,19 @@ namespace Main.View.PagesFolder.ProcessFolder
 
             await Task.Delay(500);
 
+            string peso = $"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}";
+            YesOrNo question = new YesOrNo("Deseja efetuar tara antes de iniciar a pesagem? \n (Aviso: Caso haja um produto na balança, retire-o antes de efetuar a tara)");
+            question.ShowDialog();
+
+            if (question.RESPOSTA)
+            {
+                SerialCommunicationService.SendCommand(Convert.ToInt32(taraContagem.Tag), 0);
+
+                await Task.Delay(250);
+
+                SerialCommunicationService.SendCommand(Convert.ToInt32(taraReferencia.Tag), 0);
+            }
+
             Task.Run(() =>
             {
                 try
@@ -227,8 +280,15 @@ namespace Main.View.PagesFolder.ProcessFolder
                         {
                             this.Invoke(new MethodInvoker(() =>
                             {
+                            if ($"{SerialCommunicationService.indicador_addr[indiceContador].PS}".Contains("-"))
+                            {
+                                valorContagem.Text = "0.000";
+                            }
+                            else
+                            {
                                 valorContagem.Text = $"{SerialCommunicationService.indicador_addr[indiceContador].PS}";
                                 valorContagem.Text = valorContagem.Text.Replace(",", ".");
+                            }
                             }));
                         }
 
@@ -239,6 +299,11 @@ namespace Main.View.PagesFolder.ProcessFolder
                             qtContab = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceContador].PS}") / pesoReferencia;
 
                             valorSuporte = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceContador].PS}");
+
+                            if (qtContab <= 0)
+                            {
+                                qtContab = 0;
+                            }
 
                             this.Invoke(new MethodInvoker(() =>
                             {
@@ -253,6 +318,16 @@ namespace Main.View.PagesFolder.ProcessFolder
                             {
                                 valorSecSup = valorSuporte;
                                 stopValor.Start();
+
+                                //STATUS
+                                lbl_Status.Invoke(new MethodInvoker(() =>
+                                {
+                                    pict_Status.Image = imgs_peso[0];
+
+                                    lbl_Status.Text = "";
+                                    lbl_Status.Text = "PESANDO...";
+                                }));
+                                //
                             }
 
                             valorSuporte = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceContador].PS}");
@@ -261,9 +336,18 @@ namespace Main.View.PagesFolder.ProcessFolder
                             {
                                 if (valorSecSup == valorSuporte)
                                 {
+                                    //STATUS
+                                    this.Invoke(new MethodInvoker(() =>
+                                    {
+                                        pict_Status.Image = imgs_peso[1];
+
+                                        lbl_Status.Text = "";
+                                        lbl_Status.Text = "PESO ESTABILIZADO. RETIRE A MATÉRIA-PRIMA.";
+                                    }));
+                                    //
+
                                     bloqueiaLoop = 0;
                                     bloqueiaValor = 1;
-                                    SerialCommunicationService.SendCommand(Convert.ToInt32(taraContagem.Tag), 0);
                                 }
 
                                 stopValor.Reset();
@@ -291,6 +375,19 @@ namespace Main.View.PagesFolder.ProcessFolder
                                     {
                                         lbl_ValorReal.Text = valorTotal.ToString();
                                     }));
+
+
+                                    //STATUS
+                                    this.Invoke(new MethodInvoker(() =>
+                                    {
+                                        pict_Status.Image = imgs_peso[2];
+
+                                        lbl_Status.Text = "";
+                                        lbl_Status.Text = "PESO REGISTRADO. AGUARDANDO MATÉRIA-PRIMA...";
+                                    }));
+                                    //
+
+                                    SerialCommunicationService.SendCommand(Convert.ToInt32(taraContagem.Tag), 0);
 
                                     valorPesoTotal = valorPesoTotal + Convert.ToDecimal(valorContagem.Text);
 
@@ -332,6 +429,11 @@ namespace Main.View.PagesFolder.ProcessFolder
                                     stopSup.Reset();
                                 }
                             }
+
+                            this.Invoke(new MethodInvoker(() =>
+                            {
+                                lbl_Status.Refresh();
+                            }));
                         }
                     }
                 }
@@ -388,14 +490,23 @@ namespace Main.View.PagesFolder.ProcessFolder
                             statusProcesso = 2;
                             tmpExectAtivo = true;
                             TimerRelogio.Start();
-                            lbl_Status.Text = "Em andamento";
 
-                            SerialCommunicationService.SendCommand(Convert.ToInt32(taraContagem.Tag), 0);
+                            //STATUS
+                            //lbl_Status.Invoke(new MethodInvoker(() =>
+                            //{
+                            lbl_Status.Text = "";
+                            lbl_Status.Text = "PESANDO...";
+                            //}));
+                            //
 
-                            this.Invoke(new MethodInvoker(() =>
-                            {
-                                btn_IniciarContagem.Text = "FINALIZAR PROCESSO";
-                            }));
+                            btn_IniciarContagem.Text = "";
+                            btn_IniciarContagem.Text = "FINALIZAR PROCESSO";
+
+                            btn_IniciarContagem.Enabled = true;
+                            btn_IniciarContagem.ForeColor = Color.White;
+                            btn_IniciarContagem.BackColor = Color.FromArgb(255, 0, 0);
+
+                            btn_IniciarContagem.Refresh();
                         }
                     }
 
@@ -409,9 +520,20 @@ namespace Main.View.PagesFolder.ProcessFolder
                             statusProcesso = 2;
                             tmpExectAtivo = true;
                             TimerRelogio.Start();
-                            lbl_Status.Text = "Em andamento";
 
-                            SerialCommunicationService.SendCommand(Convert.ToInt32(taraContagem.Tag), 0);
+                            //////////////////SerialCommunicationService.SendCommand(Convert.ToInt32(taraContagem.Tag), 0);
+
+                            //STATUS
+                            //lbl_Status.Invoke(new MethodInvoker(() =>
+                            //{
+                            lbl_Status.Text = "";
+                            lbl_Status.Text = "AGUARDANDO MATÉRIA-PRIMA...";
+                            //}));
+                            //
+
+                            btn_IniciarContagem.Enabled = true;
+                            btn_IniciarContagem.ForeColor = Color.White;
+                            btn_IniciarContagem.BackColor = Color.FromArgb(255, 0, 0);
 
                             this.Invoke(new MethodInvoker(() =>
                             {
@@ -521,7 +643,26 @@ namespace Main.View.PagesFolder.ProcessFolder
                     {
                         statusProcesso = 1;
 
+                        pict_Status.Image = imgs_peso[1];
+
+                        lbl_Status.Text = "";
+                        lbl_Status.Text = "REFERÊNCIA REGISTRADA. INICIE A CONTAGEM.";
+
+                        var UpdateProcesso = Program.SQL.CRUDCommand("UPDATE Processos SET Peso_Referencia = @Peso_Referencia, Status_processo = @Status_processo WHERE Id = @Id\r\n", "Log_Processos",
+                        new Dictionary<string, object>()
+                        {
+                            {"@Id", idProcesso },
+                            {"@Peso_Referencia", pesoReferencia },
+                            {"@Status_processo", statusProcesso },
+                        });
+
+                        lbl_Status.Refresh();
+
                         pesoReferencia = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}") / Convert.ToDecimal(lbl_qtMinima.Text);
+                        lbl_PesoReferencia.Text = pesoReferencia.ToString();
+
+                        lbl_PesoReferencia.Refresh();
+
                         bloqueiaContag = 0;
                         bloqueiaBotaoContag = 1;
                     }

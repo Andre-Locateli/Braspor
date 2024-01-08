@@ -588,6 +588,8 @@
     <None Include="Resources\5975150_corona_coronavirus_hourglass_timer_virus_icon.png" />
     <None Include="Resources\industrial_scales_connected_filled_99px.png" />
     <None Include="Resources\industrial_scales_connecting_99px.png" />
+    <None Include="Resources\industrial_scales_connected_filled_99px %281%29.png" />
+    <None Include="Resources\await.png" />
     <Content Include="[MKT] Software Vision Control - Icone %282018%29 [MAIOR].ico" />
   </ItemGroup>
   <ItemGroup>

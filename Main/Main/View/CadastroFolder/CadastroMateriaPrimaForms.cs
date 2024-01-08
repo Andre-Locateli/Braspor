@@ -75,6 +75,7 @@ namespace Main.View.CadastroFolder
             {
                 dgv_dados.DataSource = Program.SQL.SelectDataGrid("SELECT Id, Codigo as [Código], Descricao as [Descrição], Tolerancia_erro as [Tolerância de erro(%)], quantidade_minima as [Quantidade Miníma], bit_status as [Disponível?] FROM MateriaPrima", "MateriaPrima");
                 dgv_dados.Columns[2].Visible = false;
+                dgv_dados.Columns[5].Visible = false;
             }
             catch (Exception)
             {

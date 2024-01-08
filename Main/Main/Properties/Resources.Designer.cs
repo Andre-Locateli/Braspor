@@ -253,6 +253,16 @@ namespace Main.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap await {
+            get {
+                object obj = ResourceManager.GetObject("await", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap bandejaAdd {
             get {
                 object obj = ResourceManager.GetObject("bandejaAdd", resourceCulture);
@@ -546,6 +556,16 @@ namespace Main.Properties {
         internal static System.Drawing.Bitmap industrial_scales_connected_filled_99px {
             get {
                 object obj = ResourceManager.GetObject("industrial_scales_connected_filled_99px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap industrial_scales_connected_filled_99px__1_ {
+            get {
+                object obj = ResourceManager.GetObject("industrial_scales_connected_filled_99px (1)", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

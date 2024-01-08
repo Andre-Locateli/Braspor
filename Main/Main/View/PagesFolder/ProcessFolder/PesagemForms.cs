@@ -60,9 +60,9 @@ namespace Main.View.PagesFolder.ProcessFolder
             double aux_minParam = minParam;
             double aux_maxParam = maxParam;
 
-            dgvDados.DataSource = Processos;
+            //dgvDados.DataSource = Processos;
 
-            var items = Program.SQL.SelectList("SELECT * FROM ( SELECT *, ROW_NUMBER() OVER (ORDER BY Id ASC) AS row FROM PROCESSOS AS LReceita ) temp WHERE row >= @aux_minParam AND row <= @aux_maxParam", "Processos", null,
+            var items = Program.SQL.SelectList("SELECT * FROM ( SELECT *, ROW_NUMBER() OVER (ORDER BY dateinsert DESC) AS row FROM PROCESSOS AS LReceita ) temp WHERE row >= @aux_minParam AND row <= @aux_maxParam", "Processos", null,
             new Dictionary<string, object>()
             {
                 {"@aux_minParam", aux_minParam },
@@ -103,7 +103,7 @@ namespace Main.View.PagesFolder.ProcessFolder
             else
             {
                 Processos.Clear();
-                Processos = Program.SQL.SelectList("SELECT * FROM Processos WHERE Id LIKE '%" + txtSearch.Text + "%' OR Id_produto LIKE '%" + txtSearch.Text + "%' OR Id_usuario LIKE '%" + txtSearch.Text + "%' OR Descricao LIKE '%" + txtSearch.Text + "%' OR Status_processo LIKE '%" + txtSearch.Text + "%'", "Processos", null,
+                Processos = Program.SQL.SelectList("SELECT * FROM Processos WHERE Id LIKE '%" + txtSearch.Text + "%' OR Id_produto LIKE '%" + txtSearch.Text + "%' OR Id_usuario LIKE '%" + txtSearch.Text + "%' OR Descricao LIKE '%" + txtSearch.Text + "%' OR Status_processo LIKE '%" + txtSearch.Text + "%' ORDER BY Status_processo", "Processos", null,
                 new Dictionary<string, object>());
 
                 dgvDados.DataSource = Processos;
