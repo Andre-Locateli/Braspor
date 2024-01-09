@@ -1,5 +1,7 @@
-﻿using Main.Model;
+﻿using iTextSharp.text.html.simpleparser;
+using Main.Model;
 using Main.Service;
+using Main.Helper;
 using Main.View.MainFolder;
 using Main.View.PopupFolder;
 using System;
@@ -12,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using StyleSheet = Main.Helper.StyleSheet;
 
 namespace Main.View.PagesFolder.ProcessFolder
 {
@@ -473,6 +476,7 @@ namespace Main.View.PagesFolder.ProcessFolder
 
         private void ProcessForms_SizeChanged(object sender, EventArgs e)
         {
+            StyleSheet.RedrawAll(this);
             this.Invalidate();
             this.Refresh();
             this.Update();
@@ -607,6 +611,28 @@ namespace Main.View.PagesFolder.ProcessFolder
         {
             VisualizarLogForms visu = new VisualizarLogForms(idProcesso);
             visu.ShowDialog();
+        }
+
+        private void PesoProcessForms_Resize(object sender, EventArgs e)
+        {
+            this.Invoke(new MethodInvoker(() =>
+            {
+                panel6.Width = this.Size.Width;
+                panel6.Height = this.Size.Height;
+            }));
+
+            tableLayoutPanel1.Width = this.Size.Width;
+            tableLayoutPanel1.Height = this.Size.Height;
+
+            StyleSheet.RedrawAll(this);
+            this.Invalidate();
+            this.Refresh();
+            this.Update();
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
         private void TimerRelogio_Tick_1(object sender, EventArgs e)
