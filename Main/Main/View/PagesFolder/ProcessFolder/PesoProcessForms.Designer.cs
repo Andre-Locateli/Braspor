@@ -78,8 +78,6 @@
             this.taraReferencia = new System.Windows.Forms.PictureBox();
             this.panel16 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.panel15 = new System.Windows.Forms.Panel();
-            this.lbl_PesoReferencia = new System.Windows.Forms.Label();
             this.lbl_qtMinima = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.panel19 = new System.Windows.Forms.Panel();
@@ -88,6 +86,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.TimerRelogio = new System.Windows.Forms.Timer(this.components);
             this.panel21 = new System.Windows.Forms.Panel();
+            this.lbl_PesoReferencia = new System.Windows.Forms.Label();
             this.panel6.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel17.SuspendLayout();
@@ -107,7 +106,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.taraReferencia)).BeginInit();
             this.panel16.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.panel15.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel6
@@ -167,26 +165,26 @@
             // 
             this.panel12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(46)))), ((int)(((byte)(84)))));
             this.panel12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel12.Controls.Add(this.lbl_Status);
-            this.panel12.Controls.Add(this.panel20);
             this.panel12.Controls.Add(this.pict_Status);
+            this.panel12.Controls.Add(this.panel20);
+            this.panel12.Controls.Add(this.lbl_Status);
             this.panel12.Controls.Add(this.panel21);
-            this.panel12.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel12.ForeColor = System.Drawing.Color.White;
             this.panel12.Location = new System.Drawing.Point(0, 27);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(258, 168);
+            this.panel12.Size = new System.Drawing.Size(258, 167);
             this.panel12.TabIndex = 13;
             // 
             // lbl_Status
             // 
             this.lbl_Status.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(46)))), ((int)(((byte)(84)))));
-            this.lbl_Status.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lbl_Status.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lbl_Status.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Status.ForeColor = System.Drawing.Color.White;
-            this.lbl_Status.Location = new System.Drawing.Point(0, 112);
+            this.lbl_Status.Location = new System.Drawing.Point(0, 129);
             this.lbl_Status.Name = "lbl_Status";
-            this.lbl_Status.Size = new System.Drawing.Size(256, 66);
+            this.lbl_Status.Size = new System.Drawing.Size(256, 36);
             this.lbl_Status.TabIndex = 9;
             this.lbl_Status.Text = "AGUARDANDO REGISTRO DE REFERÊNCIA...";
             this.lbl_Status.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -194,8 +192,8 @@
             // panel20
             // 
             this.panel20.BackColor = System.Drawing.Color.Transparent;
-            this.panel20.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel20.Location = new System.Drawing.Point(0, 102);
+            this.panel20.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel20.Location = new System.Drawing.Point(0, 119);
             this.panel20.Name = "panel20";
             this.panel20.Size = new System.Drawing.Size(256, 10);
             this.panel20.TabIndex = 11;
@@ -203,11 +201,11 @@
             // pict_Status
             // 
             this.pict_Status.BackColor = System.Drawing.Color.Transparent;
-            this.pict_Status.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pict_Status.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pict_Status.Image = global::Main.Properties.Resources.await;
             this.pict_Status.Location = new System.Drawing.Point(0, 15);
             this.pict_Status.Name = "pict_Status";
-            this.pict_Status.Size = new System.Drawing.Size(256, 87);
+            this.pict_Status.Size = new System.Drawing.Size(256, 104);
             this.pict_Status.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pict_Status.TabIndex = 10;
             this.pict_Status.TabStop = false;
@@ -633,6 +631,7 @@
             // 
             this.btn_SalvarReferencia.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_SalvarReferencia.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(176)))), ((int)(((byte)(80)))));
+            this.btn_SalvarReferencia.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_SalvarReferencia.FlatAppearance.BorderSize = 0;
             this.btn_SalvarReferencia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_SalvarReferencia.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -704,53 +703,34 @@
             // 
             this.panel4.BackColor = System.Drawing.Color.White;
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Controls.Add(this.panel15);
             this.panel4.Controls.Add(this.lbl_qtMinima);
+            this.panel4.Controls.Add(this.lbl_PesoReferencia);
             this.panel4.Controls.Add(this.label6);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(254, 224);
+            this.panel4.Padding = new System.Windows.Forms.Padding(5);
+            this.panel4.Size = new System.Drawing.Size(254, 255);
             this.panel4.TabIndex = 13;
-            // 
-            // panel15
-            // 
-            this.panel15.Controls.Add(this.lbl_PesoReferencia);
-            this.panel15.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel15.Location = new System.Drawing.Point(0, 84);
-            this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(252, 56);
-            this.panel15.TabIndex = 13;
-            // 
-            // lbl_PesoReferencia
-            // 
-            this.lbl_PesoReferencia.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lbl_PesoReferencia.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_PesoReferencia.Location = new System.Drawing.Point(0, 0);
-            this.lbl_PesoReferencia.Name = "lbl_PesoReferencia";
-            this.lbl_PesoReferencia.Size = new System.Drawing.Size(252, 21);
-            this.lbl_PesoReferencia.TabIndex = 12;
-            this.lbl_PesoReferencia.Text = "1 folha ≅";
-            this.lbl_PesoReferencia.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbl_qtMinima
             // 
-            this.lbl_qtMinima.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lbl_qtMinima.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_qtMinima.Location = new System.Drawing.Point(0, 44);
+            this.lbl_qtMinima.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_qtMinima.Font = new System.Drawing.Font("Segoe UI", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_qtMinima.Location = new System.Drawing.Point(5, 70);
             this.lbl_qtMinima.Name = "lbl_qtMinima";
-            this.lbl_qtMinima.Size = new System.Drawing.Size(252, 40);
+            this.lbl_qtMinima.Size = new System.Drawing.Size(242, 112);
             this.lbl_qtMinima.TabIndex = 8;
             this.lbl_qtMinima.Text = "0";
-            this.lbl_qtMinima.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lbl_qtMinima.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label6
             // 
             this.label6.Dock = System.Windows.Forms.DockStyle.Top;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.label6.Location = new System.Drawing.Point(0, 0);
+            this.label6.Location = new System.Drawing.Point(5, 5);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(252, 44);
+            this.label6.Size = new System.Drawing.Size(242, 65);
             this.label6.TabIndex = 2;
             this.label6.Text = "Quantidade para Referência:";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -766,6 +746,7 @@
             // btn_IniciarContagem
             // 
             this.btn_IniciarContagem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(176)))), ((int)(((byte)(80)))));
+            this.btn_IniciarContagem.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_IniciarContagem.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btn_IniciarContagem.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btn_IniciarContagem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -790,6 +771,7 @@
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(46)))), ((int)(((byte)(84)))));
+            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -816,6 +798,17 @@
             this.panel21.Name = "panel21";
             this.panel21.Size = new System.Drawing.Size(256, 15);
             this.panel21.TabIndex = 12;
+            // 
+            // lbl_PesoReferencia
+            // 
+            this.lbl_PesoReferencia.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lbl_PesoReferencia.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_PesoReferencia.Location = new System.Drawing.Point(5, 182);
+            this.lbl_PesoReferencia.Name = "lbl_PesoReferencia";
+            this.lbl_PesoReferencia.Size = new System.Drawing.Size(242, 66);
+            this.lbl_PesoReferencia.TabIndex = 13;
+            this.lbl_PesoReferencia.Text = "1 folha ≅";
+            this.lbl_PesoReferencia.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // PesoProcessForms
             // 
@@ -849,7 +842,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.taraReferencia)).EndInit();
             this.panel16.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
-            this.panel15.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -896,7 +888,6 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Panel panel13;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Label lbl_PesoReferencia;
         private System.Windows.Forms.Panel panel14;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label5;
@@ -907,12 +898,12 @@
         private System.Windows.Forms.Panel panel17;
         private System.Windows.Forms.Panel panel18;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Panel panel15;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel19;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panel20;
         private System.Windows.Forms.Panel panel21;
+        private System.Windows.Forms.Label lbl_PesoReferencia;
     }
 }
