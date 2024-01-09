@@ -67,6 +67,8 @@ namespace Main.View.PagesFolder.ProcessFolder
         bool isTrue = true;
         bool isAtivo = true;
 
+        int startSupTimer = 0;
+
         Stopwatch stopSup = new Stopwatch();
         Stopwatch stopValor = new Stopwatch();
 
@@ -126,7 +128,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                 lbl_Horario.Text = tempoExecucao;
             }
 
-            lbl_PesoReferencia.Text = Convert.ToString(pesoReferencia);
+            lbl_PesoReferencia.Text = "1 folha ≅ " + Convert.ToString(pesoReferencia);
 
             if(lbl_Horario.Text == "")
             {
@@ -266,38 +268,19 @@ namespace Main.View.PagesFolder.ProcessFolder
                 {
                     while (isTrue)
                     {
-                        if (bloqueiaContag == 1)
+                        this.Invoke(new MethodInvoker(() =>
                         {
-                            this.Invoke(new MethodInvoker(() =>
-                            {
-                                if ($"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}".Contains("-"))
-                                {
-                                    valorReferencia.Text = "0.000";
-                                }
-                                else
-                                {
-                                    valorReferencia.Text = $"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}";
-                                    valorReferencia.Text = valorReferencia.Text.Replace(",", ".");
-                                }
-                            }));
-                        }
+                            valorReferencia.Text = $"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}";
+                            valorReferencia.Text = valorReferencia.Text.Replace(",", ".");
+                            valorReferencia.Refresh();
+                        }));
 
 
-                        if (bloqueiaContag == 0)
+                        this.Invoke(new MethodInvoker(() =>
                         {
-                            this.Invoke(new MethodInvoker(() =>
-                            {
-                            if ($"{SerialCommunicationService.indicador_addr[indiceContador].PS}".Contains("-"))
-                            {
-                                valorContagem.Text = "0.000";
-                            }
-                            else
-                            {
-                                valorContagem.Text = $"{SerialCommunicationService.indicador_addr[indiceContador].PS}";
-                                valorContagem.Text = valorContagem.Text.Replace(",", ".");
-                            }
-                            }));
-                        }
+                            valorContagem.Text = $"{SerialCommunicationService.indicador_addr[indiceContador].PS}";
+                            valorContagem.Text = valorContagem.Text.Replace(",", ".");
+                        }));
 
 
                         if (btn_IniciarContagem.Text == "FINALIZAR PROCESSO")
@@ -331,6 +314,11 @@ namespace Main.View.PagesFolder.ProcessFolder
                                 {
                                     pict_Status.Image = imgs_peso[0];
 
+                                    pict_Status.BackColor = Color.DarkOrange;
+                                    panel12.BackColor = Color.DarkOrange;
+                                    panel20.BackColor = Color.DarkOrange;
+                                    lbl_Status.BackColor = Color.DarkOrange;
+
                                     lbl_Status.Text = "";
                                     lbl_Status.Text = "PESANDO...";
                                 }));
@@ -343,6 +331,11 @@ namespace Main.View.PagesFolder.ProcessFolder
                             {
                                 if (valorSecSup == valorSuporte)
                                 {
+                                    pict_Status.BackColor = Color.FromArgb(41, 46, 84);
+                                    panel12.BackColor = Color.FromArgb(41, 46, 84);
+                                    panel20.BackColor = Color.FromArgb(41, 46, 84);
+                                    lbl_Status.BackColor = Color.FromArgb(41, 46, 84);
+
                                     //STATUS
                                     this.Invoke(new MethodInvoker(() =>
                                     {
@@ -383,6 +376,10 @@ namespace Main.View.PagesFolder.ProcessFolder
                                         lbl_ValorReal.Text = valorTotal.ToString();
                                     }));
 
+                                    pict_Status.BackColor = Color.SeaGreen;
+                                    panel12.BackColor = Color.SeaGreen;
+                                    panel20.BackColor = Color.SeaGreen;
+                                    lbl_Status.BackColor = Color.SeaGreen;
 
                                     //STATUS
                                     this.Invoke(new MethodInvoker(() =>
@@ -433,8 +430,12 @@ namespace Main.View.PagesFolder.ProcessFolder
                                 }
                                 else
                                 {
-                                                                lbl_Status.Text = "";
-                            lbl_Status.Text = "PESANDO...";
+                                    //stopSup.Stop();
+                                    //if (valorSecSup != valorSuporte && valorSuporte > 0)
+                                    //{
+                                    //    bloqueiaLoop = 0;
+                                    //    bloqueiaValor = 0;
+                                    //}
                                     stopSup.Reset();
                                 }
                             }
@@ -476,13 +477,13 @@ namespace Main.View.PagesFolder.ProcessFolder
             }
         }
 
-        private void ProcessForms_SizeChanged(object sender, EventArgs e)
-        {
-            StyleSheet.RedrawAll(this);
-            this.Invalidate();
-            this.Refresh();
-            this.Update();
-        }
+        //private void ProcessForms_SizeChanged(object sender, EventArgs e)
+        //{
+        //    StyleSheet.RedrawAll(this);
+        //    this.Invalidate();
+        //    this.Refresh();
+        //    this.Update();
+        //}
 
         private async void btn_IniciarContagem_Click(object sender, EventArgs e)
         {
@@ -504,6 +505,11 @@ namespace Main.View.PagesFolder.ProcessFolder
                             //STATUS
                             //lbl_Status.Invoke(new MethodInvoker(() =>
                             //{
+                            pict_Status.BackColor = Color.DarkOrange;
+                            panel12.BackColor = Color.DarkOrange;
+                            panel20.BackColor = Color.DarkOrange;
+                            lbl_Status.BackColor = Color.DarkOrange;
+
                             lbl_Status.Text = "";
                             lbl_Status.Text = "PESANDO...";
                             //}));
@@ -615,46 +621,16 @@ namespace Main.View.PagesFolder.ProcessFolder
             visu.ShowDialog();
         }
 
-        private void PesoProcessForms_Resize(object sender, EventArgs e)
+        private void tableLayoutPanel1_Resize(object sender, EventArgs e)
         {
-            this.Invoke(new MethodInvoker(() =>
-            {
-                panel6.Width = this.Size.Width;
-                panel6.Height = this.Size.Height;
-            }));
-
             tableLayoutPanel1.Width = this.Size.Width;
             tableLayoutPanel1.Height = this.Size.Height;
 
+            //this.Refresh();
+            //this.Update();
             StyleSheet.RedrawAll(this);
-            this.Invalidate();
-            this.Refresh();
-            this.Update();
-        }
 
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void lbl_qtMinima_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel15_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label12_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel5_Paint(object sender, PaintEventArgs e)
-        {
-
+            tableLayoutPanel1.Invalidate();
         }
 
         private void TimerRelogio_Tick_1(object sender, EventArgs e)
@@ -686,34 +662,6 @@ namespace Main.View.PagesFolder.ProcessFolder
         {
             try
             {
-                YesOrNo iniciarContagem = new YesOrNo("Deseja iniciar a contagem?");
-                iniciarContagem.ShowDialog();
-
-                if (iniciarContagem.RESPOSTA)
-                {
-                    statusProcesso = 2;
-                    tmpExectAtivo = true;
-                    TimerRelogio.Start();
-
-                    //STATUS
-                    //lbl_Status.Invoke(new MethodInvoker(() =>
-                    //{
-                    lbl_Status.Text = "";
-                    lbl_Status.Text = "PESANDO...";
-                    //}));
-                    //
-
-                    btn_IniciarContagem.Text = "";
-                    btn_IniciarContagem.Text = "FINALIZAR PROCESSO";
-
-                    btn_IniciarContagem.Enabled = true;
-                    btn_IniciarContagem.ForeColor = Color.White;
-                    btn_IniciarContagem.BackColor = Color.FromArgb(255, 0, 0);
-
-                    btn_IniciarContagem.Refresh();
-                }
-
-
                 if (bloqueiaBotaoContag == 0)
                 {
                     YesOrNo question = new YesOrNo("Confirmar que a quantidade para referência (" + qtMinima + ") está correta na balança? Começar contagem?");
@@ -742,9 +690,43 @@ namespace Main.View.PagesFolder.ProcessFolder
                         taraReferencia.Enabled = false;
 
                         pesoReferencia = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}") / Convert.ToDecimal(lbl_qtMinima.Text);
-                        lbl_PesoReferencia.Text = pesoReferencia.ToString();
+                        lbl_PesoReferencia.Text = "1 folha ≅ " + pesoReferencia.ToString();
 
                         lbl_PesoReferencia.Refresh();
+
+
+                        YesOrNo iniciarContagem = new YesOrNo("Deseja iniciar a contagem?");
+                        iniciarContagem.ShowDialog();
+
+                        if (iniciarContagem.RESPOSTA)
+                        {
+                            statusProcesso = 2;
+                            tmpExectAtivo = true;
+                            TimerRelogio.Start();
+
+                            //STATUS
+                            //lbl_Status.Invoke(new MethodInvoker(() =>
+                            //{
+                            pict_Status.BackColor = Color.DarkOrange;
+                            panel12.BackColor = Color.DarkOrange;
+                            panel20.BackColor = Color.DarkOrange;
+                            lbl_Status.BackColor = Color.DarkOrange;
+
+                            lbl_Status.Text = "";
+                            lbl_Status.Text = "PESANDO...";
+                            //}));
+                            //
+
+                            btn_IniciarContagem.Text = "";
+                            btn_IniciarContagem.Text = "FINALIZAR PROCESSO";
+
+                            btn_IniciarContagem.Enabled = true;
+                            btn_IniciarContagem.ForeColor = Color.White;
+                            btn_IniciarContagem.BackColor = Color.FromArgb(255, 0, 0);
+
+                            btn_IniciarContagem.Refresh();
+                        }
+
 
                         bloqueiaContag = 0;
                         bloqueiaBotaoContag = 1;
