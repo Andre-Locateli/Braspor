@@ -433,6 +433,8 @@ namespace Main.View.PagesFolder.ProcessFolder
                                 }
                                 else
                                 {
+                                                                lbl_Status.Text = "";
+                            lbl_Status.Text = "PESANDO...";
                                     stopSup.Reset();
                                 }
                             }
@@ -635,6 +637,26 @@ namespace Main.View.PagesFolder.ProcessFolder
 
         }
 
+        private void lbl_qtMinima_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel15_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel5_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
         private void TimerRelogio_Tick_1(object sender, EventArgs e)
         {
             if (tmpExectAtivo)
@@ -664,6 +686,34 @@ namespace Main.View.PagesFolder.ProcessFolder
         {
             try
             {
+                YesOrNo iniciarContagem = new YesOrNo("Deseja iniciar a contagem?");
+                iniciarContagem.ShowDialog();
+
+                if (iniciarContagem.RESPOSTA)
+                {
+                    statusProcesso = 2;
+                    tmpExectAtivo = true;
+                    TimerRelogio.Start();
+
+                    //STATUS
+                    //lbl_Status.Invoke(new MethodInvoker(() =>
+                    //{
+                    lbl_Status.Text = "";
+                    lbl_Status.Text = "PESANDO...";
+                    //}));
+                    //
+
+                    btn_IniciarContagem.Text = "";
+                    btn_IniciarContagem.Text = "FINALIZAR PROCESSO";
+
+                    btn_IniciarContagem.Enabled = true;
+                    btn_IniciarContagem.ForeColor = Color.White;
+                    btn_IniciarContagem.BackColor = Color.FromArgb(255, 0, 0);
+
+                    btn_IniciarContagem.Refresh();
+                }
+
+
                 if (bloqueiaBotaoContag == 0)
                 {
                     YesOrNo question = new YesOrNo("Confirmar que a quantidade para referência (" + qtMinima + ") está correta na balança? Começar contagem?");
@@ -687,6 +737,9 @@ namespace Main.View.PagesFolder.ProcessFolder
                         });
 
                         lbl_Status.Refresh();
+
+                        zeroReferencia.Enabled = false;
+                        taraReferencia.Enabled = false;
 
                         pesoReferencia = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}") / Convert.ToDecimal(lbl_qtMinima.Text);
                         lbl_PesoReferencia.Text = pesoReferencia.ToString();
