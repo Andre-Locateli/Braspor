@@ -86,6 +86,8 @@ namespace Main.View.PagesFolder.ProcessFolder
             dgvDados.Columns["dateinsert"].HeaderText = "Data de inserção";
             dgvDados.Columns["Status"].DisplayIndex = 10;
 
+            ReorderButtons();
+
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
@@ -248,6 +250,29 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                     ReorderSequence();
                     LoadDatabaseInfo();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private void ReorderButtons()
+        {
+            try
+            {
+                if (counter_press + 2 > 3 && counter_press < Convert.ToInt32(quantityPage.Text))
+                {
+                    btnOne.Invoke(new MethodInvoker(delegate { btnOne.Text = (counter_press + 2 - 3).ToString(); }));
+                    btnTwo.Invoke(new MethodInvoker(delegate { btnTwo.Text = (counter_press + 2 - 2).ToString(); }));
+                    btnthree.Invoke(new MethodInvoker(delegate { btnthree.Text = (counter_press + 2 - 1).ToString(); }));
+                }
+                else if (counter_press + 1 < 3)
+                {
+                    btnOne.Invoke(new MethodInvoker(delegate { btnOne.Text = "1"; }));
+                    btnTwo.Invoke(new MethodInvoker(delegate { btnTwo.Text = "2"; }));
+                    btnthree.Invoke(new MethodInvoker(delegate { btnthree.Text = "3"; }));
                 }
             }
             catch (Exception ex)

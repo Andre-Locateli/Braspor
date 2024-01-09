@@ -210,6 +210,7 @@ namespace Main.View.PagesFolder.ProcessFolder
 
             int i = 0;
 
+  
             foreach (IndicadorClass ind in SerialCommunicationService.indicador_addr)
             {
                 if (ind.indicador.addr == Program.Endereco_Referencia)
@@ -224,10 +225,12 @@ namespace Main.View.PagesFolder.ProcessFolder
                 i++;
             }
 
+
             if (lbl_Descricao.Text == "")
             {
                 lbl_Descricao.Text = "Processo sem descrição.";
             }
+
 
             if (SerialCommunicationService.SERIALPORT1.IsOpen)
             {
@@ -237,6 +240,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                 taraContagem.Tag = Program.Endereco_Referencia + 1;
                 zeroContagem.Tag = Program.Endereco_Referencia + 1;
             }
+
 
             await Task.Delay(500);
 

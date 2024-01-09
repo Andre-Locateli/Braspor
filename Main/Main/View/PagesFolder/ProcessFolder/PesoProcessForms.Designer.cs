@@ -82,6 +82,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.TimerRelogio = new System.Windows.Forms.Timer(this.components);
+            this.panel15 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -97,6 +98,7 @@
             this.panel12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pict_Status)).BeginInit();
             this.panel2.SuspendLayout();
+            this.panel15.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -116,11 +118,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel6.AutoSize = true;
             this.panel6.BackColor = System.Drawing.Color.White;
+            this.panel6.Controls.Add(this.panel15);
             this.panel6.Controls.Add(this.panel8);
             this.panel6.Controls.Add(this.panel9);
             this.panel6.Controls.Add(this.button2);
-            this.panel6.Controls.Add(this.panel7);
-            this.panel6.Controls.Add(this.panel5);
             this.panel6.Controls.Add(this.panel4);
             this.panel6.Controls.Add(this.panel3);
             this.panel6.Controls.Add(this.btn_IniciarContagem);
@@ -141,7 +142,7 @@
             this.panel8.Controls.Add(this.lbl_ValorReal);
             this.panel8.Location = new System.Drawing.Point(458, 433);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(407, 168);
+            this.panel8.Size = new System.Drawing.Size(407, 143);
             this.panel8.TabIndex = 18;
             // 
             // label5
@@ -151,7 +152,7 @@
             this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(125)))), ((int)(((byte)(150)))));
             this.label5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label5.Location = new System.Drawing.Point(240, 93);
+            this.label5.Location = new System.Drawing.Point(249, 79);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(68, 21);
             this.label5.TabIndex = 16;
@@ -163,7 +164,7 @@
             this.panel14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.panel14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(125)))), ((int)(((byte)(150)))));
             this.panel14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(125)))), ((int)(((byte)(150)))));
-            this.panel14.Location = new System.Drawing.Point(25, 23);
+            this.panel14.Location = new System.Drawing.Point(25, 25);
             this.panel14.Name = "panel14";
             this.panel14.Size = new System.Drawing.Size(356, 1);
             this.panel14.TabIndex = 14;
@@ -174,7 +175,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label20.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(125)))), ((int)(((byte)(150)))));
-            this.label20.Location = new System.Drawing.Point(18, 3);
+            this.label20.Location = new System.Drawing.Point(22, 2);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(365, 21);
             this.label20.TabIndex = 15;
@@ -185,7 +186,7 @@
             // 
             this.lbl_ValorReal.Font = new System.Drawing.Font("Microsoft JhengHei", 39.75F, System.Drawing.FontStyle.Bold);
             this.lbl_ValorReal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(125)))), ((int)(((byte)(150)))));
-            this.lbl_ValorReal.Location = new System.Drawing.Point(2, 59);
+            this.lbl_ValorReal.Location = new System.Drawing.Point(11, 45);
             this.lbl_ValorReal.Name = "lbl_ValorReal";
             this.lbl_ValorReal.Size = new System.Drawing.Size(247, 62);
             this.lbl_ValorReal.TabIndex = 12;
@@ -203,7 +204,7 @@
             this.panel9.Controls.Add(this.lbl_QtContab);
             this.panel9.Location = new System.Drawing.Point(25, 433);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(407, 168);
+            this.panel9.Size = new System.Drawing.Size(407, 143);
             this.panel9.TabIndex = 17;
             // 
             // label1
@@ -213,7 +214,7 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(125)))), ((int)(((byte)(150)))));
             this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label1.Location = new System.Drawing.Point(240, 93);
+            this.label1.Location = new System.Drawing.Point(247, 79);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(68, 21);
             this.label1.TabIndex = 13;
@@ -225,7 +226,7 @@
             this.panel13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.panel13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(125)))), ((int)(((byte)(150)))));
             this.panel13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(125)))), ((int)(((byte)(150)))));
-            this.panel13.Location = new System.Drawing.Point(27, 25);
+            this.panel13.Location = new System.Drawing.Point(26, 25);
             this.panel13.Name = "panel13";
             this.panel13.Size = new System.Drawing.Size(356, 1);
             this.panel13.TabIndex = 11;
@@ -237,7 +238,7 @@
             this.label19.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(125)))), ((int)(((byte)(150)))));
             this.label19.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label19.Location = new System.Drawing.Point(23, 5);
+            this.label19.Location = new System.Drawing.Point(23, 2);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(360, 21);
             this.label19.TabIndex = 12;
@@ -248,7 +249,7 @@
             // 
             this.lbl_QtContab.Font = new System.Drawing.Font("Microsoft JhengHei", 39.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_QtContab.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(125)))), ((int)(((byte)(150)))));
-            this.lbl_QtContab.Location = new System.Drawing.Point(2, 59);
+            this.lbl_QtContab.Location = new System.Drawing.Point(9, 45);
             this.lbl_QtContab.Name = "lbl_QtContab";
             this.lbl_QtContab.Size = new System.Drawing.Size(247, 62);
             this.lbl_QtContab.TabIndex = 1;
@@ -273,8 +274,7 @@
             // 
             // panel7
             // 
-            this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(125)))), ((int)(((byte)(150)))));
             this.panel7.Controls.Add(this.panel11);
@@ -283,16 +283,16 @@
             this.panel7.Controls.Add(this.label11);
             this.panel7.Controls.Add(this.taraContagem);
             this.panel7.Controls.Add(this.zeroContagem);
-            this.panel7.Location = new System.Drawing.Point(458, 213);
+            this.panel7.Location = new System.Drawing.Point(430, 6);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(407, 200);
+            this.panel7.Size = new System.Drawing.Size(407, 191);
             this.panel7.TabIndex = 15;
             // 
             // panel11
             // 
             this.panel11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.panel11.BackColor = System.Drawing.Color.White;
-            this.panel11.Location = new System.Drawing.Point(24, 23);
+            this.panel11.Location = new System.Drawing.Point(24, 20);
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(360, 1);
             this.panel11.TabIndex = 11;
@@ -339,7 +339,7 @@
             this.taraContagem.BackColor = System.Drawing.Color.Transparent;
             this.taraContagem.Cursor = System.Windows.Forms.Cursors.Hand;
             this.taraContagem.Image = ((System.Drawing.Image)(resources.GetObject("taraContagem.Image")));
-            this.taraContagem.Location = new System.Drawing.Point(16, 147);
+            this.taraContagem.Location = new System.Drawing.Point(16, 138);
             this.taraContagem.Name = "taraContagem";
             this.taraContagem.Size = new System.Drawing.Size(76, 43);
             this.taraContagem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -353,7 +353,7 @@
             this.zeroContagem.BackColor = System.Drawing.Color.Transparent;
             this.zeroContagem.Cursor = System.Windows.Forms.Cursors.Hand;
             this.zeroContagem.Image = ((System.Drawing.Image)(resources.GetObject("zeroContagem.Image")));
-            this.zeroContagem.Location = new System.Drawing.Point(99, 147);
+            this.zeroContagem.Location = new System.Drawing.Point(99, 138);
             this.zeroContagem.Name = "zeroContagem";
             this.zeroContagem.Size = new System.Drawing.Size(76, 43);
             this.zeroContagem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -363,9 +363,8 @@
             // 
             // panel5
             // 
-            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(125)))), ((int)(((byte)(150)))));
             this.panel5.Controls.Add(this.panel10);
             this.panel5.Controls.Add(this.label9);
@@ -374,16 +373,16 @@
             this.panel5.Controls.Add(this.label12);
             this.panel5.Controls.Add(this.zeroReferencia);
             this.panel5.Controls.Add(this.taraReferencia);
-            this.panel5.Location = new System.Drawing.Point(25, 213);
+            this.panel5.Location = new System.Drawing.Point(3, 6);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(407, 200);
+            this.panel5.Size = new System.Drawing.Size(407, 191);
             this.panel5.TabIndex = 14;
             // 
             // panel10
             // 
             this.panel10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.panel10.BackColor = System.Drawing.Color.White;
-            this.panel10.Location = new System.Drawing.Point(24, 23);
+            this.panel10.Location = new System.Drawing.Point(24, 18);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(360, 1);
             this.panel10.TabIndex = 9;
@@ -408,7 +407,7 @@
             this.btn_SalvarReferencia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_SalvarReferencia.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_SalvarReferencia.ForeColor = System.Drawing.Color.White;
-            this.btn_SalvarReferencia.Location = new System.Drawing.Point(206, 147);
+            this.btn_SalvarReferencia.Location = new System.Drawing.Point(206, 138);
             this.btn_SalvarReferencia.Name = "btn_SalvarReferencia";
             this.btn_SalvarReferencia.Size = new System.Drawing.Size(188, 43);
             this.btn_SalvarReferencia.TabIndex = 7;
@@ -433,7 +432,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.White;
-            this.label12.Location = new System.Drawing.Point(0, 3);
+            this.label12.Location = new System.Drawing.Point(0, 1);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(407, 21);
             this.label12.TabIndex = 10;
@@ -446,7 +445,7 @@
             this.zeroReferencia.BackColor = System.Drawing.Color.Transparent;
             this.zeroReferencia.Cursor = System.Windows.Forms.Cursors.Hand;
             this.zeroReferencia.Image = ((System.Drawing.Image)(resources.GetObject("zeroReferencia.Image")));
-            this.zeroReferencia.Location = new System.Drawing.Point(99, 147);
+            this.zeroReferencia.Location = new System.Drawing.Point(99, 138);
             this.zeroReferencia.Name = "zeroReferencia";
             this.zeroReferencia.Size = new System.Drawing.Size(76, 43);
             this.zeroReferencia.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -460,7 +459,7 @@
             this.taraReferencia.BackColor = System.Drawing.Color.Transparent;
             this.taraReferencia.Cursor = System.Windows.Forms.Cursors.Hand;
             this.taraReferencia.Image = ((System.Drawing.Image)(resources.GetObject("taraReferencia.Image")));
-            this.taraReferencia.Location = new System.Drawing.Point(15, 147);
+            this.taraReferencia.Location = new System.Drawing.Point(15, 138);
             this.taraReferencia.Name = "taraReferencia";
             this.taraReferencia.Size = new System.Drawing.Size(76, 43);
             this.taraReferencia.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -729,6 +728,18 @@
             this.TimerRelogio.Interval = 1000;
             this.TimerRelogio.Tick += new System.EventHandler(this.TimerRelogio_Tick_1);
             // 
+            // panel15
+            // 
+            this.panel15.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel15.Controls.Add(this.panel5);
+            this.panel15.Controls.Add(this.panel7);
+            this.panel15.Location = new System.Drawing.Point(25, 213);
+            this.panel15.Name = "panel15";
+            this.panel15.Size = new System.Drawing.Size(840, 200);
+            this.panel15.TabIndex = 19;
+            // 
             // PesoProcessForms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -758,6 +769,7 @@
             this.panel12.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pict_Status)).EndInit();
             this.panel2.ResumeLayout(false);
+            this.panel15.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -816,5 +828,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pict_Status;
+        private System.Windows.Forms.Panel panel15;
     }
 }
