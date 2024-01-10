@@ -427,7 +427,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                                     bloqueiaLoop = 1;
                                     bloqueiaValor = 0;
 
-                                    if (stopSup.ElapsedMilliseconds > 8
+                                    if (stopSup.ElapsedMilliseconds > 8)
                                     {
                                         stopSup.Reset();
                                     }
