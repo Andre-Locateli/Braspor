@@ -442,8 +442,15 @@ namespace Main.View.PagesFolder
                 if (question.RESPOSTA)
                 {
                     dgv_dados.DataSource = Program.SQL.SelectDataGrid("SELECT M.Descricao AS 'Matéria Prima', U.Nome AS 'Nome Operador', P.Descricao AS 'Descrição Produto', P.Tempo_execucao AS 'Tempo execução', P.Total_contagem AS 'Contagem total de itens' , P.Peso_total AS 'Peso total do processo', P.dateinsert AS 'Data Inicio', P.dateend AS 'Data Fim' FROM Processos P INNER JOIN Usuario U ON P.Id_usuario = U.Id INNER JOIN MateriaPrima M ON P.Id_produto = M.Id", "Processos");
-
+                    
+                    if (dgv_dados.Rows.Count > 0)
+                    {
+                        lblNoDATA.Visible = false;
+                    
+                    }
                     ExportToExcel(dgv_dados);
+
+
                 }
             }
             catch (Exception)
