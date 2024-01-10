@@ -109,6 +109,8 @@ namespace Main.View.PagesFolder.ProcessFolder
 
         private async void ProcessForms_Load(object sender, EventArgs e)
         {
+            try
+            {
             selectProcessos = Program.SQL.SelectList("SELECT * FROM Processos WHERE Id = @Id", "Processos", null,
             new Dictionary<string, object>()
             {
@@ -511,6 +513,11 @@ namespace Main.View.PagesFolder.ProcessFolder
                     Console.WriteLine(ex.Message);
                 }
             });
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         private void CommandButtonEventClick(object sender, EventArgs e)
@@ -678,18 +685,6 @@ namespace Main.View.PagesFolder.ProcessFolder
         {
             VisualizarLogForms visu = new VisualizarLogForms(idProcesso);
             visu.ShowDialog();
-        }
-
-        private void tableLayoutPanel1_Resize(object sender, EventArgs e)
-        {
-            tableLayoutPanel1.Width = this.Size.Width;
-            tableLayoutPanel1.Height = this.Size.Height;
-
-            //this.Refresh();
-            //this.Update();
-            StyleSheet.RedrawAll(this);
-
-            tableLayoutPanel1.Invalidate();
         }
 
         private void lbl_Descricao_Click(object sender, EventArgs e)

@@ -138,7 +138,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 68.21522F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1136, 650);
             this.tableLayoutPanel1.TabIndex = 20;
-            this.tableLayoutPanel1.Resize += new System.EventHandler(this.tableLayoutPanel1_Resize);
             // 
             // panel17
             // 
