@@ -79,7 +79,7 @@
             this.dgvDados.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvDados.EnableHeadersVisualStyles = false;
             this.dgvDados.GridColor = System.Drawing.Color.White;
-            this.dgvDados.Location = new System.Drawing.Point(28, 50);
+            this.dgvDados.Location = new System.Drawing.Point(-1, 50);
             this.dgvDados.MultiSelect = false;
             this.dgvDados.Name = "dgvDados";
             this.dgvDados.ReadOnly = true;
@@ -99,7 +99,7 @@
             this.dgvDados.RowTemplate.Height = 35;
             this.dgvDados.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvDados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDados.Size = new System.Drawing.Size(761, 373);
+            this.dgvDados.Size = new System.Drawing.Size(819, 412);
             this.dgvDados.TabIndex = 60;
             // 
             // iconReceita

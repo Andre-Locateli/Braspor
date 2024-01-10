@@ -58,8 +58,9 @@ namespace Main.View.PagesFolder.ProcessFolder
 
         int valorTotal = 0;
 
-        int bloqueiaValor = 0;
         int bloqueiaLoop = 1;
+        int bloqueiaValor = 0;
+        int bloqueiaCheck = 0;
         int bloqueiaContag = 1;
         int bloqueiaBotaoContag = 0;
 
@@ -71,6 +72,7 @@ namespace Main.View.PagesFolder.ProcessFolder
 
         Stopwatch stopSup = new Stopwatch();
         Stopwatch stopValor = new Stopwatch();
+        Stopwatch stopCheck = new Stopwatch();
 
         List<object> selectProcessos = new List<object>();
 
@@ -262,7 +264,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                 SerialCommunicationService.SendCommand(Convert.ToInt32(taraReferencia.Tag), 0);
             }
 
-            Task.Run(() =>
+            Task.Run(async () =>
             {
                 try
                 {
@@ -342,7 +344,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                                         pict_Status.Image = imgs_peso[1];
 
                                         lbl_Status.Text = "";
-                                        lbl_Status.Text = "PESO ESTABILIZADO. RETIRE A MATÉRIA-PRIMA.";
+                                        lbl_Status.Text = "PESO ESTABILIZADO. RETIRE OU ADICIONE MAIS MATÉRIA-PRIMA.";
                                     }));
                                     //
 
@@ -359,14 +361,65 @@ namespace Main.View.PagesFolder.ProcessFolder
                         {
                             valorSuporte = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceContador].PS}");
 
-                            if (valorSuporte <= 0)
+                            if (valorSecSup != valorSuporte)
                             {
-                                stopSup.Start();
+                                stopCheck.Start();
+
+                                if (valorSuporte == 0)
+                                {
+                                    pict_Status.BackColor = Color.SteelBlue;
+                                    panel12.BackColor = Color.SteelBlue;
+                                    panel20.BackColor = Color.SteelBlue;
+                                    lbl_Status.BackColor = Color.SteelBlue;
+
+                                    this.Invoke(new MethodInvoker(() =>
+                                    {
+                                        lbl_Status.Text = "";
+                                        lbl_Status.Text = "REGISTRANDO PESO. AGUARDE...";
+                                    }));
+                                }
+                                else
+                                {
+                                    pict_Status.BackColor = Color.DarkOrange;
+                                    panel12.BackColor = Color.DarkOrange;
+                                    panel20.BackColor = Color.DarkOrange;
+                                    lbl_Status.BackColor = Color.DarkOrange;
+
+                                    this.Invoke(new MethodInvoker(() =>
+                                    {
+                                        lbl_Status.Text = "";
+                                        lbl_Status.Text = "PESANDO...";
+                                    }));
+                                }
                             }
 
-                            if (valorSecSup != valorSuporte && valorSuporte > 0)
+
+                            if (stopCheck.ElapsedMilliseconds > 5000)
                             {
-                                stopSup.Start();
+                                valorSuporte = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceContador].PS}");
+
+                                if (valorSuporte > 0)
+                                {
+                                    bloqueiaLoop = 1;
+                                    bloqueiaValor = 0;
+                                    stopCheck.Reset();
+                                }
+                                else
+                                {
+                                    pict_Status.BackColor = Color.SteelBlue;
+                                    panel12.BackColor = Color.SteelBlue;
+                                    panel20.BackColor = Color.SteelBlue;
+                                    lbl_Status.BackColor = Color.SteelBlue;
+
+                                    this.Invoke(new MethodInvoker(() =>
+                                    {
+                                        lbl_Status.Text = "";
+                                        lbl_Status.Text = "REGISTRANDO PESO. AGUARDE...";
+                                    }));
+
+                                    stopSup.Start();
+                                    stopCheck.Reset();
+                                }
                             }
 
 
@@ -637,6 +690,21 @@ namespace Main.View.PagesFolder.ProcessFolder
             StyleSheet.RedrawAll(this);
 
             tableLayoutPanel1.Invalidate();
+        }
+
+        private void lbl_Descricao_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbl_MateriaPrima_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
         private void TimerRelogio_Tick_1(object sender, EventArgs e)

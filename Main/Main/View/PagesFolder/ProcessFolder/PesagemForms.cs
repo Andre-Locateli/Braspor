@@ -21,7 +21,7 @@ namespace Main.View.PagesFolder.ProcessFolder
         string nomeUsuario = "";
 
         private int minParam = 0;
-        private int maxParam = 10;
+        private int maxParam = 15;
         private double qRows = 0;
         private double drows = 0;
 
@@ -190,10 +190,10 @@ namespace Main.View.PagesFolder.ProcessFolder
         {
             if (minParam > 0)
             {
-                if (minParam - 10 >= 0)
+                if (minParam - 15 >= 0)
                 {
-                    minParam -= 10;
-                    maxParam -= 10;
+                    minParam -= 15;
+                    maxParam -= 15;
                     counter_press -= 1;
                     ReorderSequence();
                     LoadDatabaseInfo();
@@ -203,10 +203,10 @@ namespace Main.View.PagesFolder.ProcessFolder
 
         private void pcb_next_Click(object sender, EventArgs e)
         {
-            if (minParam + 10 < qRows)
+            if (minParam + 15 < qRows)
             {
-                minParam += 10;
-                maxParam += 10;
+                minParam += 15;
+                maxParam += 15;
                 counter_press += 1;
                 ReorderSequence();
                 LoadDatabaseInfo();
@@ -238,12 +238,12 @@ namespace Main.View.PagesFolder.ProcessFolder
             {
                 Button cbtn = (Button)sender;
 
-                if (((Convert.ToInt32(cbtn.Text)-1) * 10) <= qRows)
+                if (((Convert.ToInt32(cbtn.Text)-1) * 15) <= qRows)
                 {
-                    maxParam = Convert.ToInt32(cbtn.Text) * 10;
-                    minParam = (Convert.ToInt32(cbtn.Text) * 10) - 10;
+                    maxParam = Convert.ToInt32(cbtn.Text) * 15;
+                    minParam = (Convert.ToInt32(cbtn.Text) * 15) - 15;
 
-                    if (((Convert.ToInt32(cbtn.Text) - 1) * 10) < qRows)
+                    if (((Convert.ToInt32(cbtn.Text) - 1) * 15) < qRows)
                     {
                         counter_press = Convert.ToInt32(cbtn.Text);
                     }
@@ -302,6 +302,17 @@ namespace Main.View.PagesFolder.ProcessFolder
                 else if (dgvDados.Rows[x].Cells[10].Value.ToString() == "3")
                 {
                     row.Cells[1].Value = "Finalizado";
+                }
+
+ 
+                if (dgvDados.Rows[x].Cells[5].Value.ToString() == "")
+                {
+                    row.Cells[5].Value = "Processo sem descrição.";
+                }
+
+                if (dgvDados.Rows[x].Cells[6].Value.ToString() == "")
+                {
+                    row.Cells[6].Value = "00:00:00";
                 }
 
                 x++;

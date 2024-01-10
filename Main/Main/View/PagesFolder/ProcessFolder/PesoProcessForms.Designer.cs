@@ -35,9 +35,10 @@
             this.panel17 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel12 = new System.Windows.Forms.Panel();
-            this.lbl_Status = new System.Windows.Forms.Label();
-            this.panel20 = new System.Windows.Forms.Panel();
             this.pict_Status = new System.Windows.Forms.PictureBox();
+            this.panel20 = new System.Windows.Forms.Panel();
+            this.lbl_Status = new System.Windows.Forms.Label();
+            this.panel21 = new System.Windows.Forms.Panel();
             this.label14 = new System.Windows.Forms.Label();
             this.panel18 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -79,14 +80,13 @@
             this.panel16 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.lbl_qtMinima = new System.Windows.Forms.Label();
+            this.lbl_PesoReferencia = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.panel19 = new System.Windows.Forms.Panel();
             this.btn_IniciarContagem = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.TimerRelogio = new System.Windows.Forms.Timer(this.components);
-            this.panel21 = new System.Windows.Forms.Panel();
-            this.lbl_PesoReferencia = new System.Windows.Forms.Label();
             this.panel6.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel17.SuspendLayout();
@@ -176,28 +176,6 @@
             this.panel12.Size = new System.Drawing.Size(258, 167);
             this.panel12.TabIndex = 13;
             // 
-            // lbl_Status
-            // 
-            this.lbl_Status.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(46)))), ((int)(((byte)(84)))));
-            this.lbl_Status.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lbl_Status.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Status.ForeColor = System.Drawing.Color.White;
-            this.lbl_Status.Location = new System.Drawing.Point(0, 129);
-            this.lbl_Status.Name = "lbl_Status";
-            this.lbl_Status.Size = new System.Drawing.Size(256, 36);
-            this.lbl_Status.TabIndex = 9;
-            this.lbl_Status.Text = "AGUARDANDO REGISTRO DE REFERÊNCIA...";
-            this.lbl_Status.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // panel20
-            // 
-            this.panel20.BackColor = System.Drawing.Color.Transparent;
-            this.panel20.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel20.Location = new System.Drawing.Point(0, 119);
-            this.panel20.Name = "panel20";
-            this.panel20.Size = new System.Drawing.Size(256, 10);
-            this.panel20.TabIndex = 11;
-            // 
             // pict_Status
             // 
             this.pict_Status.BackColor = System.Drawing.Color.Transparent;
@@ -205,10 +183,41 @@
             this.pict_Status.Image = global::Main.Properties.Resources.await;
             this.pict_Status.Location = new System.Drawing.Point(0, 15);
             this.pict_Status.Name = "pict_Status";
-            this.pict_Status.Size = new System.Drawing.Size(256, 104);
+            this.pict_Status.Size = new System.Drawing.Size(256, 94);
             this.pict_Status.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pict_Status.TabIndex = 10;
             this.pict_Status.TabStop = false;
+            // 
+            // panel20
+            // 
+            this.panel20.BackColor = System.Drawing.Color.Transparent;
+            this.panel20.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel20.Location = new System.Drawing.Point(0, 109);
+            this.panel20.Name = "panel20";
+            this.panel20.Size = new System.Drawing.Size(256, 10);
+            this.panel20.TabIndex = 11;
+            // 
+            // lbl_Status
+            // 
+            this.lbl_Status.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(46)))), ((int)(((byte)(84)))));
+            this.lbl_Status.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lbl_Status.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Status.ForeColor = System.Drawing.Color.White;
+            this.lbl_Status.Location = new System.Drawing.Point(0, 119);
+            this.lbl_Status.Name = "lbl_Status";
+            this.lbl_Status.Size = new System.Drawing.Size(256, 46);
+            this.lbl_Status.TabIndex = 9;
+            this.lbl_Status.Text = "AGUARDANDO REGISTRO DE REFERÊNCIA...";
+            this.lbl_Status.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // panel21
+            // 
+            this.panel21.BackColor = System.Drawing.Color.Transparent;
+            this.panel21.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel21.Location = new System.Drawing.Point(0, 0);
+            this.panel21.Name = "panel21";
+            this.panel21.Size = new System.Drawing.Size(256, 15);
+            this.panel21.TabIndex = 12;
             // 
             // label14
             // 
@@ -248,11 +257,12 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(852, 196);
             this.panel2.TabIndex = 11;
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // label8
             // 
             this.label8.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(19, 17);
+            this.label8.Location = new System.Drawing.Point(18, 6);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(382, 37);
             this.label8.TabIndex = 14;
@@ -262,9 +272,9 @@
             // lbl_DataInsert
             // 
             this.lbl_DataInsert.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_DataInsert.Location = new System.Drawing.Point(237, 118);
+            this.lbl_DataInsert.Location = new System.Drawing.Point(237, 49);
             this.lbl_DataInsert.Name = "lbl_DataInsert";
-            this.lbl_DataInsert.Size = new System.Drawing.Size(586, 21);
+            this.lbl_DataInsert.Size = new System.Drawing.Size(601, 21);
             this.lbl_DataInsert.TabIndex = 13;
             this.lbl_DataInsert.Text = "04/01/2023 16:21:00";
             this.lbl_DataInsert.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -272,7 +282,7 @@
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.label2.Location = new System.Drawing.Point(19, 117);
+            this.label2.Location = new System.Drawing.Point(19, 48);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(212, 21);
             this.label2.TabIndex = 12;
@@ -282,27 +292,28 @@
             // lbl_MateriaPrima
             // 
             this.lbl_MateriaPrima.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            this.lbl_MateriaPrima.Location = new System.Drawing.Point(237, 66);
+            this.lbl_MateriaPrima.Location = new System.Drawing.Point(237, 101);
             this.lbl_MateriaPrima.Name = "lbl_MateriaPrima";
-            this.lbl_MateriaPrima.Size = new System.Drawing.Size(586, 22);
+            this.lbl_MateriaPrima.Size = new System.Drawing.Size(601, 22);
             this.lbl_MateriaPrima.TabIndex = 9;
             this.lbl_MateriaPrima.Text = "499910 - FOLHA A7";
             this.lbl_MateriaPrima.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lbl_MateriaPrima.Click += new System.EventHandler(this.lbl_MateriaPrima_Click);
             // 
             // lbl_Descricao
             // 
             this.lbl_Descricao.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Descricao.Location = new System.Drawing.Point(237, 92);
+            this.lbl_Descricao.Location = new System.Drawing.Point(237, 129);
             this.lbl_Descricao.Name = "lbl_Descricao";
-            this.lbl_Descricao.Size = new System.Drawing.Size(586, 21);
+            this.lbl_Descricao.Size = new System.Drawing.Size(601, 56);
             this.lbl_Descricao.TabIndex = 11;
-            this.lbl_Descricao.Text = "Operação sem descrição.";
-            this.lbl_Descricao.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lbl_Descricao.Text = "Processo sem descrição.";
+            this.lbl_Descricao.Click += new System.EventHandler(this.lbl_Descricao_Click);
             // 
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(19, 65);
+            this.label3.Location = new System.Drawing.Point(19, 100);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(212, 21);
             this.label3.TabIndex = 1;
@@ -312,9 +323,9 @@
             // lbl_Horario
             // 
             this.lbl_Horario.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            this.lbl_Horario.Location = new System.Drawing.Point(237, 144);
+            this.lbl_Horario.Location = new System.Drawing.Point(237, 75);
             this.lbl_Horario.Name = "lbl_Horario";
-            this.lbl_Horario.Size = new System.Drawing.Size(586, 21);
+            this.lbl_Horario.Size = new System.Drawing.Size(601, 21);
             this.lbl_Horario.TabIndex = 0;
             this.lbl_Horario.Text = "00:00:00";
             this.lbl_Horario.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -322,7 +333,7 @@
             // label10
             // 
             this.label10.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.label10.Location = new System.Drawing.Point(19, 91);
+            this.label10.Location = new System.Drawing.Point(19, 126);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(212, 21);
             this.label10.TabIndex = 10;
@@ -332,7 +343,7 @@
             // label4
             // 
             this.label4.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.label4.Location = new System.Drawing.Point(19, 143);
+            this.label4.Location = new System.Drawing.Point(19, 74);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(212, 21);
             this.label4.TabIndex = 2;
@@ -724,6 +735,17 @@
             this.lbl_qtMinima.Text = "0";
             this.lbl_qtMinima.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lbl_PesoReferencia
+            // 
+            this.lbl_PesoReferencia.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lbl_PesoReferencia.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_PesoReferencia.Location = new System.Drawing.Point(5, 182);
+            this.lbl_PesoReferencia.Name = "lbl_PesoReferencia";
+            this.lbl_PesoReferencia.Size = new System.Drawing.Size(242, 66);
+            this.lbl_PesoReferencia.TabIndex = 13;
+            this.lbl_PesoReferencia.Text = "1 folha ≅";
+            this.lbl_PesoReferencia.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
             // label6
             // 
             this.label6.Dock = System.Windows.Forms.DockStyle.Top;
@@ -789,26 +811,6 @@
             // 
             this.TimerRelogio.Interval = 1000;
             this.TimerRelogio.Tick += new System.EventHandler(this.TimerRelogio_Tick_1);
-            // 
-            // panel21
-            // 
-            this.panel21.BackColor = System.Drawing.Color.Transparent;
-            this.panel21.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel21.Location = new System.Drawing.Point(0, 0);
-            this.panel21.Name = "panel21";
-            this.panel21.Size = new System.Drawing.Size(256, 15);
-            this.panel21.TabIndex = 12;
-            // 
-            // lbl_PesoReferencia
-            // 
-            this.lbl_PesoReferencia.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lbl_PesoReferencia.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_PesoReferencia.Location = new System.Drawing.Point(5, 182);
-            this.lbl_PesoReferencia.Name = "lbl_PesoReferencia";
-            this.lbl_PesoReferencia.Size = new System.Drawing.Size(242, 66);
-            this.lbl_PesoReferencia.TabIndex = 13;
-            this.lbl_PesoReferencia.Text = "1 folha ≅";
-            this.lbl_PesoReferencia.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // PesoProcessForms
             // 
