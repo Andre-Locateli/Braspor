@@ -273,27 +273,31 @@ namespace Main.View.PagesFolder.ProcessFolder
             {
                 try
                 {
-                    long numero = 0;
-                    long numero2 = 0;
-                    Stopwatch stop = new Stopwatch();
+                    //long numero = 0;
+                    //long numero2 = 0;
+                    //Stopwatch stop = new Stopwatch();
 
-                    stop.Start();
+                    //stop.Start();
 
                     while (isTrue)
                     {
-                        numero = stop.ElapsedMilliseconds;
+                        //numero = stop.ElapsedMilliseconds;
 
-                        if (numero > 100)
-                        {
+                        //if (numero > 100)
+                        //{
+
 
                             string val = $"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}";
-                            string val2 = $"{SerialCommunicationService.indicador_addr[indiceContador].PS}";
+                        string val2 = $"{SerialCommunicationService.indicador_addr[indiceContador].PS}";
 
-                            this.Invoke(new MethodInvoker(() =>
+                        await Task.Delay(1);
+
+                        this.Invoke(new MethodInvoker(() =>
                             {
                                 valorReferencia.Text = val;
                                 valorReferencia.Text = valorReferencia.Text.Replace(",", ".");
                                 valorReferencia.Refresh();
+                                Console.WriteLine(val);
                             }));
 
                             this.Invoke(new MethodInvoker(() =>
@@ -304,7 +308,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                             }));
 
 
-                        }
+                        //}
 
 
                         if (btn_IniciarContagem.Text == "FINALIZAR PROCESSO")
