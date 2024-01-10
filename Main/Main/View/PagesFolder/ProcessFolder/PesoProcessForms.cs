@@ -364,6 +364,12 @@ namespace Main.View.PagesFolder.ProcessFolder
                                 stopSup.Start();
                             }
 
+                            if (valorSecSup != valorSuporte && valorSuporte > 0)
+                            {
+                                stopSup.Start();
+                            }
+
+
                             if (stopSup.ElapsedMilliseconds > 5000)
                             {
                                 if (valorSuporte <= 0)
@@ -421,7 +427,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                                     bloqueiaLoop = 1;
                                     bloqueiaValor = 0;
 
-                                    if (stopSup.ElapsedMilliseconds > 8)
+                                    if (stopSup.ElapsedMilliseconds > 8
                                     {
                                         stopSup.Reset();
                                     }

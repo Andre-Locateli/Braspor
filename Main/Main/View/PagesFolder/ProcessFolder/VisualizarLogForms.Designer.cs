@@ -37,7 +37,9 @@
             this.iconReceita = new System.Windows.Forms.DataGridViewImageColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.X = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDados)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvDados
@@ -77,7 +79,7 @@
             this.dgvDados.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvDados.EnableHeadersVisualStyles = false;
             this.dgvDados.GridColor = System.Drawing.Color.White;
-            this.dgvDados.Location = new System.Drawing.Point(12, 55);
+            this.dgvDados.Location = new System.Drawing.Point(28, 50);
             this.dgvDados.MultiSelect = false;
             this.dgvDados.Name = "dgvDados";
             this.dgvDados.ReadOnly = true;
@@ -97,7 +99,7 @@
             this.dgvDados.RowTemplate.Height = 35;
             this.dgvDados.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvDados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDados.Size = new System.Drawing.Size(792, 392);
+            this.dgvDados.Size = new System.Drawing.Size(761, 373);
             this.dgvDados.TabIndex = 60;
             // 
             // iconReceita
@@ -118,7 +120,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(222, 9);
+            this.label1.Location = new System.Drawing.Point(228, 10);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(363, 32);
             this.label1.TabIndex = 61;
@@ -128,30 +130,40 @@
             // 
             this.X.AutoSize = true;
             this.X.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.X.Location = new System.Drawing.Point(775, 9);
+            this.X.Location = new System.Drawing.Point(787, 11);
             this.X.Name = "X";
             this.X.Size = new System.Drawing.Size(29, 32);
             this.X.TabIndex = 62;
             this.X.Text = "X";
             this.X.Click += new System.EventHandler(this.X_Click);
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.X);
+            this.panel1.Location = new System.Drawing.Point(-1, -1);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(819, 50);
+            this.panel1.TabIndex = 63;
+            // 
             // VisualizarLogForms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.LightGray;
             this.ClientSize = new System.Drawing.Size(816, 459);
             this.ControlBox = false;
-            this.Controls.Add(this.X);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.dgvDados);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "VisualizarLogForms";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.VisualizarLogForms_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDados)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -161,5 +173,6 @@
         private System.Windows.Forms.DataGridViewImageColumn iconReceita;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label X;
+        private System.Windows.Forms.Panel panel1;
     }
 }

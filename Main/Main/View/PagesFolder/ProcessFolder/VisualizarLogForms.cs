@@ -29,7 +29,14 @@ namespace Main.View.PagesFolder.ProcessFolder
                 {"@Id", idProcesso }
             });
 
-            dgvDados.DataSource = Processos;    
+            dgvDados.DataSource = Processos;
+
+            dgvDados.Columns["Id"].Visible = false;
+            dgvDados.Columns["Id_processo"].Visible = false;
+            dgvDados.Columns["Peso_temporeal"].HeaderText = "Peso adicionado";
+            dgvDados.Columns["Peso_total"].HeaderText = "Peso total";
+            dgvDados.Columns["Tempo_execucao"].HeaderText = "Tempo de execução";
+            dgvDados.Columns["dateinsert"].HeaderText = "Data de inserção";
         }
 
         private void X_Click(object sender, EventArgs e)
