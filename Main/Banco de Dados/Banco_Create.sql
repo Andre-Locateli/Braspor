@@ -143,11 +143,11 @@ CREATE TABLE [dbo].[MateriaPrima] (
     [Id]					NUMERIC (18)   IDENTITY (1, 1) NOT NULL,
     [Codigo]				VARCHAR (20)   NULL,
 	[Descricao]				VARCHAR (200)  NULL,
-	[Tolerancia_erro]		VARCHAR (20)   NULL,
-	[quantidade_minima]		VARCHAR (20)   NULL,
+	[Tolerancia_erro]		REAL		   NULL,
+	[quantidade_minima]		INT			   NULL,
 	[bit_status]			BIT			   NULL,
-	[dateinsert] DATETIME2 (2) NULL,
-	[dateupdate] DATETIME2 (2) NULL,
+	[dateinsert]			DATETIME2 (2)  NULL,
+	[dateupdate]			DATETIME2 (2)  NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
@@ -175,6 +175,17 @@ CREATE TABLE [dbo].[Log_Processos] (
 	[Peso_total]		REAL NOT NULL,
 	[Tempo_execucao]	VARCHAR(20),
 	[dateinsert]		DATETIME2(7)
+)
+
+GO
+CREATE TABLE [dbo].[Historico_Acoes] (
+	[Id]				INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	[Id_usuario]		INT NOT NULL,
+	[Nome_usuario]		VARCHAR(500) NOT NULL,
+	[Acao]				VARCHAR(500) NOT NULL,
+	[Descricao]			VARCHAR(MAX) NOT NULL,
+	[dateinsert]		DATETIME NOT NULL,
+	[dateupdate]		DATETIME NULL,
 )
 
 ~

@@ -208,6 +208,7 @@
             this.lbl_Status.TabIndex = 9;
             this.lbl_Status.Text = "AGUARDANDO REGISTRO DE REFERÊNCIA...";
             this.lbl_Status.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lbl_Status.Click += new System.EventHandler(this.lbl_Status_Click);
             // 
             // panel21
             // 
@@ -602,6 +603,7 @@
             this.panel5.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.panel5.Size = new System.Drawing.Size(410, 240);
             this.panel5.TabIndex = 14;
+            this.panel5.Paint += new System.Windows.Forms.PaintEventHandler(this.panel5_Paint);
             // 
             // label7
             // 

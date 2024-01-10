@@ -273,43 +273,26 @@ namespace Main.View.PagesFolder.ProcessFolder
             {
                 try
                 {
-                    //long numero = 0;
-                    //long numero2 = 0;
-                    //Stopwatch stop = new Stopwatch();
-
-                    //stop.Start();
-
                     while (isTrue)
                     {
-                        //numero = stop.ElapsedMilliseconds;
-
-                        //if (numero > 100)
-                        //{
-
-
-                            string val = $"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}";
+                        string val = $"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}";
                         string val2 = $"{SerialCommunicationService.indicador_addr[indiceContador].PS}";
 
                         await Task.Delay(1);
 
                         this.Invoke(new MethodInvoker(() =>
-                            {
-                                valorReferencia.Text = val;
-                                valorReferencia.Text = valorReferencia.Text.Replace(",", ".");
-                                valorReferencia.Refresh();
-                                Console.WriteLine(val);
-                            }));
+                        {
+                            valorReferencia.Text = val;
+                            valorReferencia.Text = valorReferencia.Text.Replace(",", ".");
+                            valorReferencia.Refresh();
+                        }));
 
-                            this.Invoke(new MethodInvoker(() =>
-                            {
-                                valorContagem.Text = val2;
-                                valorContagem.Text = valorContagem.Text.Replace(",", ".");
-                                valorContagem.Refresh();
-                            }));
-
-
-                        //}
-
+                        this.Invoke(new MethodInvoker(() =>
+                        {
+                            valorContagem.Text = val2;
+                            valorContagem.Text = valorContagem.Text.Replace(",", ".");
+                            valorContagem.Refresh();
+                        }));
 
                         if (btn_IniciarContagem.Text == "FINALIZAR PROCESSO")
                         {
@@ -330,9 +313,9 @@ namespace Main.View.PagesFolder.ProcessFolder
                         }
 
 
-                        if (valorSuporte > 0 && btn_IniciarContagem.Text == "FINALIZAR PROCESSO")
+                        if (btn_IniciarContagem.Text == "FINALIZAR PROCESSO")
                         {
-                            if (bloqueiaValor == 0)
+                            if (bloqueiaValor == 0 && valorSuporte > 0)
                             {
                                 valorSecSup = valorSuporte;
                                 stopValor.Start();
@@ -352,13 +335,54 @@ namespace Main.View.PagesFolder.ProcessFolder
                                 }));
                                 //
                             }
+                            else if (bloqueiaValor == 0 && valorSuporte <= 0)
+                            {
+                                if(valorTotal == 0)
+                                {
+                                    //STATUS
+                                    lbl_Status.Invoke(new MethodInvoker(() =>
+                                    {
+                                        pict_Status.BackColor = Color.FromArgb(41, 46, 84);
+                                        panel12.BackColor = Color.FromArgb(41, 46, 84);
+                                        panel20.BackColor = Color.FromArgb(41, 46, 84);
+                                        lbl_Status.BackColor = Color.FromArgb(41, 46, 84);
+
+                                        lbl_Status.Text = "";
+                                        lbl_Status.Text = "AGUARDANDO MATÉRIA-PRIMA...";
+                                    }));
+                                    //
+                                }
+                                else
+                                {
+                                    pict_Status.BackColor = Color.SeaGreen;
+                                    panel12.BackColor = Color.SeaGreen;
+                                    panel20.BackColor = Color.SeaGreen;
+                                    lbl_Status.BackColor = Color.SeaGreen;
+
+                                    //STATUS
+                                    this.Invoke(new MethodInvoker(() =>
+                                    {
+                                        pict_Status.Image = imgs_peso[2];
+
+                                        lbl_Status.Text = "";
+                                        lbl_Status.Text = "PESO REGISTRADO. AGUARDANDO MATÉRIA-PRIMA...";
+                                    }));
+                                    //
+                                }
+                            }
 
                             valorSuporte = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceContador].PS}");
 
-                            if (stopValor.ElapsedMilliseconds > 5000)
+                            if (stopValor.ElapsedMilliseconds > 3000)
                             {
+                                await Task.Delay(1000);
+
+                                valorSuporte = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceContador].PS}");
+
                                 if (valorSecSup == valorSuporte)
                                 {
+                                    valorPesoTotal = valorPesoTotal + Convert.ToDecimal(val2);
+
                                     pict_Status.BackColor = Color.FromArgb(41, 46, 84);
                                     panel12.BackColor = Color.FromArgb(41, 46, 84);
                                     panel20.BackColor = Color.FromArgb(41, 46, 84);
@@ -420,7 +444,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                             }
 
 
-                            if (stopCheck.ElapsedMilliseconds > 5000)
+                            if (stopCheck.ElapsedMilliseconds > 3500)
                             {
                                 valorSuporte = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceContador].PS}");
 
@@ -449,7 +473,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                             }
 
 
-                            if (stopSup.ElapsedMilliseconds > 5000)
+                            if (stopSup.ElapsedMilliseconds > 3500)
                             {
                                 if (valorSuporte <= 0)
                                 {
@@ -461,24 +485,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                                         lbl_ValorReal.Text = valorTotal.ToString();
                                     }));
 
-                                    pict_Status.BackColor = Color.SeaGreen;
-                                    panel12.BackColor = Color.SeaGreen;
-                                    panel20.BackColor = Color.SeaGreen;
-                                    lbl_Status.BackColor = Color.SeaGreen;
-
-                                    //STATUS
-                                    this.Invoke(new MethodInvoker(() =>
-                                    {
-                                        pict_Status.Image = imgs_peso[2];
-
-                                        lbl_Status.Text = "";
-                                        lbl_Status.Text = "PESO REGISTRADO. AGUARDANDO MATÉRIA-PRIMA...";
-                                    }));
-                                    //
-
                                     SerialCommunicationService.SendCommand(Convert.ToInt32(taraContagem.Tag), 0);
-
-                                    valorPesoTotal = valorPesoTotal + Convert.ToDecimal(valorContagem.Text);
 
                                     var insertLog = Program.SQL.CRUDCommand("INSERT INTO Log_Processos (Id_processo, Peso_temporeal, Peso_total, Tempo_execucao, dateinsert) VALUES (@Id_processo, @Peso_temporeal, @Peso_total, @Tempo_execucao, @dateinsert)", "Log_Processos",
                                     new Dictionary<string, object>()
@@ -595,13 +602,13 @@ namespace Main.View.PagesFolder.ProcessFolder
                             //STATUS
                             //lbl_Status.Invoke(new MethodInvoker(() =>
                             //{
-                            pict_Status.BackColor = Color.DarkOrange;
-                            panel12.BackColor = Color.DarkOrange;
-                            panel20.BackColor = Color.DarkOrange;
-                            lbl_Status.BackColor = Color.DarkOrange;
+                            pict_Status.BackColor = Color.FromArgb(41, 46, 84);
+                            panel12.BackColor = Color.FromArgb(41, 46, 84);
+                            panel20.BackColor = Color.FromArgb(41, 46, 84);
+                            lbl_Status.BackColor = Color.FromArgb(41, 46, 84);
 
                             lbl_Status.Text = "";
-                            lbl_Status.Text = "PESANDO...";
+                            lbl_Status.Text = "AGUARDANDO MATÉRIA-PRIMA...";
                             //}));
                             //
 
@@ -731,6 +738,16 @@ namespace Main.View.PagesFolder.ProcessFolder
 
         }
 
+        private void panel5_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void lbl_Status_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void TimerRelogio_Tick_1(object sender, EventArgs e)
         {
             if (tmpExectAtivo)
@@ -805,13 +822,13 @@ namespace Main.View.PagesFolder.ProcessFolder
                             //STATUS
                             //lbl_Status.Invoke(new MethodInvoker(() =>
                             //{
-                            pict_Status.BackColor = Color.DarkOrange;
-                            panel12.BackColor = Color.DarkOrange;
-                            panel20.BackColor = Color.DarkOrange;
-                            lbl_Status.BackColor = Color.DarkOrange;
+                            pict_Status.BackColor = Color.FromArgb(41, 46, 84);
+                            panel12.BackColor = Color.FromArgb(41, 46, 84);
+                            panel20.BackColor = Color.FromArgb(41, 46, 84);
+                            lbl_Status.BackColor = Color.FromArgb(41, 46, 84);
 
                             lbl_Status.Text = "";
-                            lbl_Status.Text = "PESANDO...";
+                            lbl_Status.Text = "AGUARDANDO MATÉRIA-PRIMA...";
                             //}));
                             //
 
