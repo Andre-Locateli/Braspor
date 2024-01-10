@@ -15,6 +15,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using StyleSheet = Main.Helper.StyleSheet;
+using System.Numerics;
 
 namespace Main.View.PagesFolder.ProcessFolder
 {
@@ -266,25 +267,44 @@ namespace Main.View.PagesFolder.ProcessFolder
                 SerialCommunicationService.SendCommand(Convert.ToInt32(taraReferencia.Tag), 0);
             }
 
+
+
             Task.Run(async () =>
             {
                 try
                 {
+                    long numero = 0;
+                    long numero2 = 0;
+                    Stopwatch stop = new Stopwatch();
+
+                    stop.Start();
+
                     while (isTrue)
                     {
-                        this.Invoke(new MethodInvoker(() =>
+                        numero = stop.ElapsedMilliseconds;
+
+                        if (numero > 100)
                         {
-                            valorReferencia.Text = $"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}";
-                            valorReferencia.Text = valorReferencia.Text.Replace(",", ".");
-                            valorReferencia.Refresh();
-                        }));
+
+                            string val = $"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}";
+                            string val2 = $"{SerialCommunicationService.indicador_addr[indiceContador].PS}";
+
+                            this.Invoke(new MethodInvoker(() =>
+                            {
+                                valorReferencia.Text = val;
+                                valorReferencia.Text = valorReferencia.Text.Replace(",", ".");
+                                valorReferencia.Refresh();
+                            }));
+
+                            this.Invoke(new MethodInvoker(() =>
+                            {
+                                valorContagem.Text = val2;
+                                valorContagem.Text = valorContagem.Text.Replace(",", ".");
+                                valorContagem.Refresh();
+                            }));
 
 
-                        this.Invoke(new MethodInvoker(() =>
-                        {
-                            valorContagem.Text = $"{SerialCommunicationService.indicador_addr[indiceContador].PS}";
-                            valorContagem.Text = valorContagem.Text.Replace(",", ".");
-                        }));
+                        }
 
 
                         if (btn_IniciarContagem.Text == "FINALIZAR PROCESSO")
@@ -698,6 +718,11 @@ namespace Main.View.PagesFolder.ProcessFolder
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void valorContagem_Click(object sender, EventArgs e)
         {
 
         }

@@ -470,6 +470,7 @@
             this.valorContagem.TabIndex = 1;
             this.valorContagem.Text = "0.000";
             this.valorContagem.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.valorContagem.Click += new System.EventHandler(this.valorContagem_Click);
             // 
             // panel11
             // 
