@@ -278,6 +278,17 @@ namespace Main.View.PagesFolder.ProcessFolder
                         string val = $"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}";
                         string val2 = $"{SerialCommunicationService.indicador_addr[indiceContador].PS}";
 
+
+                        if (SerialCommunicationService.SERIALPORT1.IsOpen == true)
+                        {
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("DESCONECTOU");
+                        }
+
+
                         await Task.Delay(1);
 
                         this.Invoke(new MethodInvoker(() =>
@@ -662,6 +673,17 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                         if (question.RESPOSTA)
                         {
+                            if (lbl_QtContab.Text != "0")
+                            {
+                                YesOrNo pergunta = new YesOrNo("Ainda há matéria-prima na balança, gostaria de contabilizar essa matéria-prima na contagem final?");
+                                pergunta.ShowDialog();
+
+                                if (pergunta.RESPOSTA)
+                                {
+                                    valorTotal += Convert.ToInt32(qtContabTotal);
+                                }
+                            }
+
                             statusProcesso = 3;
                             isTrue = false;
 
@@ -718,36 +740,6 @@ namespace Main.View.PagesFolder.ProcessFolder
             visu.ShowDialog();
         }
 
-        private void lbl_Descricao_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lbl_MateriaPrima_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void valorContagem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel5_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void lbl_Status_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void TimerRelogio_Tick_1(object sender, EventArgs e)
         {
             if (tmpExectAtivo)
@@ -777,75 +769,108 @@ namespace Main.View.PagesFolder.ProcessFolder
         {
             try
             {
-                if (bloqueiaBotaoContag == 0)
+                string valorRef = $"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}";
+
+                if (Convert.ToDecimal(valorRef) > 0.0005M)
                 {
-                    YesOrNo question = new YesOrNo("Confirmar que a quantidade para referência (" + qtMinima + ") está correta na balança? Começar contagem?");
-                    question.ShowDialog();
-
-                    if (question.RESPOSTA)
+                    if (bloqueiaBotaoContag == 0)
                     {
-                        statusProcesso = 1;
+                        YesOrNo question = new YesOrNo("Confirmar que a quantidade para referência (" + qtMinima + ") está correta na balança? Começar contagem?");
+                        question.ShowDialog();
 
-                        pict_Status.Image = imgs_peso[1];
-
-                        lbl_Status.Text = "";
-                        lbl_Status.Text = "REFERÊNCIA REGISTRADA. INICIE A CONTAGEM.";
-
-                        var UpdateProcesso = Program.SQL.CRUDCommand("UPDATE Processos SET Peso_Referencia = @Peso_Referencia, Status_processo = @Status_processo WHERE Id = @Id\r\n", "Log_Processos",
-                        new Dictionary<string, object>()
+                        if (question.RESPOSTA)
                         {
+                            statusProcesso = 1;
+
+                            pict_Status.Image = imgs_peso[1];
+
+                            lbl_Status.Text = "";
+                            lbl_Status.Text = "REFERÊNCIA REGISTRADA. INICIE A CONTAGEM.";
+
+                            var UpdateProcesso = Program.SQL.CRUDCommand("UPDATE Processos SET Peso_Referencia = @Peso_Referencia, Status_processo = @Status_processo WHERE Id = @Id\r\n", "Log_Processos",
+                            new Dictionary<string, object>()
+                            {
                             {"@Id", idProcesso },
                             {"@Peso_Referencia", pesoReferencia },
                             {"@Status_processo", statusProcesso },
-                        });
+                            });
 
-                        lbl_Status.Refresh();
+                            lbl_Status.Refresh();
 
-                        zeroReferencia.Enabled = false;
-                        taraReferencia.Enabled = false;
+                            zeroReferencia.Enabled = false;
+                            taraReferencia.Enabled = false;
 
-                        pesoReferencia = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}") / Convert.ToDecimal(lbl_qtMinima.Text);
-                        lbl_PesoReferencia.Text = "1 folha ≅ " + pesoReferencia.ToString();
+                            pesoReferencia = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}") / Convert.ToDecimal(lbl_qtMinima.Text);
+                            lbl_PesoReferencia.Text = "1 folha ≅ " + pesoReferencia.ToString();
 
-                        lbl_PesoReferencia.Refresh();
+                            lbl_PesoReferencia.Refresh();
 
 
-                        YesOrNo iniciarContagem = new YesOrNo("Deseja iniciar a contagem?");
-                        iniciarContagem.ShowDialog();
+                            YesOrNo iniciarContagem = new YesOrNo("Deseja iniciar a contagem?");
+                            iniciarContagem.ShowDialog();
 
-                        if (iniciarContagem.RESPOSTA)
-                        {
-                            statusProcesso = 2;
-                            tmpExectAtivo = true;
-                            TimerRelogio.Start();
+                            if (iniciarContagem.RESPOSTA)
+                            {
+                                statusProcesso = 2;
+                                tmpExectAtivo = true;
+                                TimerRelogio.Start();
 
-                            //STATUS
-                            //lbl_Status.Invoke(new MethodInvoker(() =>
-                            //{
-                            pict_Status.BackColor = Color.FromArgb(41, 46, 84);
-                            panel12.BackColor = Color.FromArgb(41, 46, 84);
-                            panel20.BackColor = Color.FromArgb(41, 46, 84);
-                            lbl_Status.BackColor = Color.FromArgb(41, 46, 84);
 
-                            lbl_Status.Text = "";
-                            lbl_Status.Text = "AGUARDANDO MATÉRIA-PRIMA...";
-                            //}));
-                            //
 
-                            btn_IniciarContagem.Text = "";
-                            btn_IniciarContagem.Text = "FINALIZAR PROCESSO";
+                                //STATUS
+                                pict_Status.BackColor = Color.FromArgb(41, 46, 84);
+                                panel12.BackColor = Color.FromArgb(41, 46, 84);
+                                panel20.BackColor = Color.FromArgb(41, 46, 84);
+                                lbl_Status.BackColor = Color.FromArgb(41, 46, 84);
 
-                            btn_IniciarContagem.Enabled = true;
-                            btn_IniciarContagem.ForeColor = Color.White;
-                            btn_IniciarContagem.BackColor = Color.FromArgb(255, 0, 0);
+                                lbl_Status.Text = "";
+                                lbl_Status.Text = "AGUARDANDO MATÉRIA-PRIMA...";
 
-                            btn_IniciarContagem.Refresh();
+
+
+                                btn_IniciarContagem.Enabled = true;
+                                btn_IniciarContagem.ForeColor = Color.White;
+                                btn_IniciarContagem.BackColor = Color.FromArgb(255, 0, 0);
+
+                                btn_IniciarContagem.Text = "";
+                                btn_IniciarContagem.Text = "FINALIZAR PROCESSO";
+
+
+
+                                btn_IniciarContagem.Enabled = true;
+                                btn_IniciarContagem.ForeColor = Color.White;
+                                btn_IniciarContagem.BackColor = Color.FromArgb(255, 0, 0);
+
+                                btn_IniciarContagem.Refresh();
+                            }
+                            else
+                            {
+                                btn_IniciarContagem.Enabled = true;
+                                btn_IniciarContagem.ForeColor = Color.Green;
+                                btn_IniciarContagem.BackColor = Color.FromArgb(192, 255, 192);
+                            }
+
+
+                            this.Invoke(new MethodInvoker(() =>
+                            {
+                                btn_SalvarReferencia.Enabled = false;
+                                btn_SalvarReferencia.ForeColor = Color.FromArgb(64, 64, 64);
+                                btn_SalvarReferencia.BackColor = Color.Silver;
+                            }));
+
+
+                            bloqueiaContag = 0;
+                            bloqueiaBotaoContag = 1;
+
+                            btn_SalvarReferencia.Refresh();
+                            btn_SalvarReferencia.Enabled = false;
                         }
-
-
-                        bloqueiaContag = 0;
-                        bloqueiaBotaoContag = 1;
                     }
+                }
+                else
+                {
+                    InfoPopup info = new InfoPopup("Erro", "O peso de referência não pode ser zero ou negativo!", Properties.Resources.errorIcon);
+                    info.ShowDialog();
                 }
             }
             catch (Exception ex)

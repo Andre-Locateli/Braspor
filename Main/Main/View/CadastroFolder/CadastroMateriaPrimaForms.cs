@@ -86,58 +86,81 @@ namespace Main.View.CadastroFolder
         {
             try
             {
-                int disponivelCk = 0;
-                if (disponivelCheck.Checked)
+                var selectProduto = Program.SQL.SelectList("SELECT * FROM MateriaPrima WHERE Codigo = @Codigo", "MateriaPrima", null,
+                new Dictionary<string, object>()
                 {
-                    disponivelCk = 1;
+                    {"@Codigo", txtCodigo.Text }
+                });
+
+                if (selectProduto.Count == 0)
+                {
+                    int disponivelCk = 0;
+                    if (disponivelCheck.Checked)
+                    {
+                        disponivelCk = 1;
+                    }
+                    else
+                    {
+                        disponivelCk = 0;
+                    }
+
+                    if (string.IsNullOrWhiteSpace(txtDescricao.Text)) { btnPaintBorder_Click(txtDescricao); return; }
+                    if (string.IsNullOrWhiteSpace(txtCodigo.Text)) { btnPaintBorder_Click(txtCodigo); return; }
+                    if (string.IsNullOrWhiteSpace(txtQtMinima.Text)) { btnPaintBorder_Click(txtQtMinima); return; }
+
+                    if (!apenasNumero.IsMatch(txtQtMinima.Text))
+                    {
+                        btnPaintBorder_Click(txtQtMinima);
+                        return;
+                    }
+
+                    this.Refresh();
+
+
+                    if (Convert.ToInt32(txtQtMinima.Text) > 0)
+                    {
+                        if (Program.SQL.CRUDCommand("INSERT INTO MateriaPrima (Codigo, Descricao, Tolerancia_erro, quantidade_minima, bit_status, dateinsert) VALUES (@Codigo, @Descricao, @Tolerancia_erro, @quantidade_minima, @bit_status, @dateinsert)", "MateriaPrima",
+                            new Dictionary<string, object>()
+                            {
+                                {"@Codigo", txtCodigo.Text },
+                                {"@Descricao", txtDescricao.Text },
+                                {"@Tolerancia_erro", pctTolerancia },
+                                {"@quantidade_minima", Convert.ToInt32(txtQtMinima.Text) },
+                                {"@bit_status", disponivelCk },
+                                {"@dateinsert", DateTime.Now}}))
+                            {
+                            var insertHistorico = Program.SQL.CRUDCommand("INSERT INTO Historico_Acoes (Id_usuario, Nome_usuario, Acao, Descricao, dateinsert) VALUES (@Id_usuario, @Nome_usuario, @Acao, @Descricao, @dateinsert)", "Historico_Acoes",
+                            new Dictionary<string, object>()
+                            {
+                                {"@Id_usuario", idUsuario},
+                                {"@Nome_usuario", nomeUsuario},
+                                {"@Acao", "Inserção de Matéria-prima"},
+                                {"@Descricao", "Matéria-prima: " + txtCodigo.Text + " - " + txtDescricao.Text },
+                                {"@dateinsert", DateTime.Now}
+                            });
+
+                            btnNovoUser_Click(sender, e);
+                            btnEditarUser.Visible = false;
+                            btnSalvarUser.Visible = true;
+                            btnNovoUser.Visible = true;
+
+                            LoadProductDB();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Erro ao adicionar item");
+                        }
+                    }
+                    else
+                    {
+                        InfoPopup info = new InfoPopup("Erro", "A quantidade miníma não pode ser zero ou negativa!", Properties.Resources.errorIcon);
+                        info.ShowDialog();
+                    }
                 }
                 else
                 {
-                    disponivelCk = 0;
-                }
-
-                if (string.IsNullOrWhiteSpace(txtDescricao.Text)) { btnPaintBorder_Click(txtDescricao); return; }
-                if (string.IsNullOrWhiteSpace(txtCodigo.Text)) { btnPaintBorder_Click(txtCodigo); return; }
-                if (string.IsNullOrWhiteSpace(txtQtMinima.Text)) { btnPaintBorder_Click(txtQtMinima); return; }
-
-                if (!apenasNumero.IsMatch(txtQtMinima.Text))
-                {
-                    btnPaintBorder_Click(txtQtMinima);
-                    return;
-                }
-
-                this.Refresh();
-
-                if (Program.SQL.CRUDCommand("INSERT INTO MateriaPrima (Codigo, Descricao, Tolerancia_erro, quantidade_minima, bit_status, dateinsert) VALUES (@Codigo, @Descricao, @Tolerancia_erro, @quantidade_minima, @bit_status, @dateinsert)", "MateriaPrima", 
-                    new Dictionary<string, object>()
-                    {
-                        {"@Codigo", txtCodigo.Text },
-                        {"@Descricao", txtDescricao.Text },
-                        {"@Tolerancia_erro", pctTolerancia },
-                        {"@quantidade_minima", Convert.ToInt32(txtQtMinima.Text) },
-                        {"@bit_status", disponivelCk },
-                        {"@dateinsert", DateTime.Now}}))
-                {
-                    var insertHistorico = Program.SQL.CRUDCommand("INSERT INTO Historico_Acoes (Id_usuario, Nome_usuario, Acao, Descricao, dateinsert) VALUES (@Id_usuario, @Nome_usuario, @Acao, @Descricao, @dateinsert)", "Historico_Acoes",
-                    new Dictionary<string, object>()
-                    {
-                        {"@Id_usuario", idUsuario},
-                        {"@Nome_usuario", nomeUsuario},
-                        {"@Acao", "Inserção de Matéria-prima"},
-                        {"@Descricao", "Matéria-prima: " + txtCodigo.Text + " - " + txtDescricao.Text },
-                        {"@dateinsert", DateTime.Now}
-                    });
-
-                    btnNovoUser_Click(sender, e);
-                    btnEditarUser.Visible = true;
-                    btnSalvarUser.Visible = false;
-                    btnNovoUser.Visible = true;
-
-                    LoadProductDB();
-                }
-                else
-                {
-                    MessageBox.Show("Erro ao adicionar item");
+                    InfoPopup info = new InfoPopup("Erro", "Uma matéria-prima com esse código já foi registrada!", Properties.Resources.errorIcon);
+                    info.ShowDialog();
                 }
             }
             catch (Exception)
@@ -156,6 +179,9 @@ namespace Main.View.CadastroFolder
                 txtQtMinima.Text = "";
                 tkbr_Tolerancia.Value = 0;
                 disponivelCheck.Checked = false;
+                btnSalvarUser.Visible = true;
+                btnEditarUser.Visible = false;
+                btnNovoUser.Visible = true;
                 LoadProductDB();
             }
             catch (Exception)
@@ -210,7 +236,7 @@ namespace Main.View.CadastroFolder
                     btnNovoUser_Click(sender, e);
                     btnEditarUser.Visible = false;
                     btnSalvarUser.Visible = true;
-                    btnNovoUser.Visible = false;
+                    btnNovoUser.Visible = true;
                     LoadProductDB();
                 }
                 else

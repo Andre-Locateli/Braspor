@@ -208,7 +208,6 @@
             this.lbl_Status.TabIndex = 9;
             this.lbl_Status.Text = "AGUARDANDO REGISTRO DE REFERÊNCIA...";
             this.lbl_Status.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.lbl_Status.Click += new System.EventHandler(this.lbl_Status_Click);
             // 
             // panel21
             // 
@@ -257,7 +256,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(852, 196);
             this.panel2.TabIndex = 11;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // label8
             // 
@@ -298,7 +296,6 @@
             this.lbl_MateriaPrima.TabIndex = 9;
             this.lbl_MateriaPrima.Text = "499910 - FOLHA A7";
             this.lbl_MateriaPrima.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lbl_MateriaPrima.Click += new System.EventHandler(this.lbl_MateriaPrima_Click);
             // 
             // lbl_Descricao
             // 
@@ -308,7 +305,6 @@
             this.lbl_Descricao.Size = new System.Drawing.Size(601, 56);
             this.lbl_Descricao.TabIndex = 11;
             this.lbl_Descricao.Text = "Processo sem descrição.";
-            this.lbl_Descricao.Click += new System.EventHandler(this.lbl_Descricao_Click);
             // 
             // label3
             // 
@@ -471,7 +467,6 @@
             this.valorContagem.TabIndex = 1;
             this.valorContagem.Text = "0.000";
             this.valorContagem.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.valorContagem.Click += new System.EventHandler(this.valorContagem_Click);
             // 
             // panel11
             // 
@@ -603,7 +598,6 @@
             this.panel5.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.panel5.Size = new System.Drawing.Size(410, 240);
             this.panel5.TabIndex = 14;
-            this.panel5.Paint += new System.Windows.Forms.PaintEventHandler(this.panel5_Paint);
             // 
             // label7
             // 
@@ -649,7 +643,7 @@
             this.btn_SalvarReferencia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_SalvarReferencia.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_SalvarReferencia.ForeColor = System.Drawing.Color.White;
-            this.btn_SalvarReferencia.Location = new System.Drawing.Point(248, 188);
+            this.btn_SalvarReferencia.Location = new System.Drawing.Point(252, 188);
             this.btn_SalvarReferencia.Name = "btn_SalvarReferencia";
             this.btn_SalvarReferencia.Size = new System.Drawing.Size(152, 43);
             this.btn_SalvarReferencia.TabIndex = 7;
@@ -769,13 +763,13 @@
             // 
             // btn_IniciarContagem
             // 
-            this.btn_IniciarContagem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(176)))), ((int)(((byte)(80)))));
+            this.btn_IniciarContagem.BackColor = System.Drawing.Color.Silver;
             this.btn_IniciarContagem.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_IniciarContagem.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btn_IniciarContagem.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btn_IniciarContagem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_IniciarContagem.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.btn_IniciarContagem.ForeColor = System.Drawing.Color.Transparent;
+            this.btn_IniciarContagem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btn_IniciarContagem.Location = new System.Drawing.Point(3, 275);
             this.btn_IniciarContagem.Name = "btn_IniciarContagem";
             this.btn_IniciarContagem.Size = new System.Drawing.Size(254, 71);

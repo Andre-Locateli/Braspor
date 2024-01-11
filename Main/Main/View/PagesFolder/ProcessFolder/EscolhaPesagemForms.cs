@@ -22,6 +22,8 @@ namespace Main.View.PagesFolder.ProcessFolder
         int codLength = 0;
         string CodSubs = "";
 
+        List<object> listaMateriaPrima = new List<object>();
+
         public EscolhaPesagemForms(int id_Usuario, string nome_Usuario)
         {
             InitializeComponent();
@@ -32,17 +34,34 @@ namespace Main.View.PagesFolder.ProcessFolder
 
         private void EscolhaPesagemForms_Load(object sender, EventArgs e)
         {
-            var listaMateriaPrima = Program.SQL.SelectList("SELECT * FROM MateriaPrima", "MateriaPrima", null,
-            new Dictionary<string, object>());
+            //listaMateriaPrima = Program.SQL.SelectList("SELECT * FROM MateriaPrima", "MateriaPrima", null,
+            //new Dictionary<string, object>());
 
-            foreach (MateriaPrimaClass materia in listaMateriaPrima)
-            {
-                CodDesc = materia.Codigo + " - " + materia.Descricao;
-                codLength = materia.Codigo.Length;
-                cb_MateriaPrima.Items.Add(CodDesc);
-            }
+            //foreach (MateriaPrimaClass materia in listaMateriaPrima)
+            //{
+            //    CodDesc = materia.Codigo + " - " + materia.Descricao;
+            //    codLength = materia.Codigo.Length;
+            //    cb_MateriaPrima.Items.Add(CodDesc);
+            //}
+
+            LoadComboBox(cb_MateriaPrima, "SELECT * FROM MateriaPrima", "MateriaPrima", new Dictionary<string, object>(), "Descricao");
 
             cb_MateriaPrima.SelectedIndex = 0;
+        }
+
+        public void LoadComboBox(ComboBox cb, string consulta, string tabela, Dictionary<string, object> parameter, string parameter_name)
+        {
+            try
+            {
+                List<object> items = Program.SQL.SelectList(consulta, tabela, null, parameter);
+
+                cb.DataSource = items;
+                cb.DisplayMember = parameter_name;
+                cb.SelectedItem = null;
+            }
+            catch (Exception)
+            {
+            }
         }
 
         private void X_Click(object sender, EventArgs e)
@@ -52,6 +71,11 @@ namespace Main.View.PagesFolder.ProcessFolder
 
         private async void btn_Confirmar_Click(object sender, EventArgs e)
         {
+            if (cb_MateriaPrima.SelectedItem == null)
+            {
+                return;
+            }
+
             if (cb_MateriaPrima.Text == "")
             {
                 InfoPopup info = new InfoPopup("Erro", "Selecione a Matéria-prima para pesagem!", Properties.Resources.errorIcon);
@@ -64,24 +88,23 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                 if(question.RESPOSTA)
                 {
-                    CodSubs = cb_MateriaPrima.Text.Substring(0, codLength);
+                    MateriaPrimaClass materia = (MateriaPrimaClass)cb_MateriaPrima.SelectedItem;
 
                     int idMateria = 0;
                     int qtMinima = 0;
 
-                    var listaMateriaPrima = Program.SQL.SelectList("SELECT * FROM MateriaPrima WHERE Codigo = @Codigo", "MateriaPrima", null,
+                    var listaMateriaPrima = Program.SQL.SelectList("SELECT * FROM MateriaPrima WHERE Id = @Id", "MateriaPrima", null,
                     new Dictionary<string, object>()
                     {
-                        {"@Codigo", CodSubs }
+                        {"@Id", materia.Id }
                     });
 
-                    foreach (MateriaPrimaClass materia in listaMateriaPrima)
-                    {
-                        idMateria = materia.Id;
-                        qtMinima = materia.Quantidade_minima;
-                    }
+
+                    idMateria = materia.Id;
+                    qtMinima = materia.Quantidade_minima;
 
                     DateTime dataInsertBanco = DateTime.Now;
+
 
                     var insertBanco = Program.SQL.CRUDCommand("INSERT INTO Processos (Id_produto, Id_usuario, Descricao, Status_processo, dateinsert) VALUES (@Id_produto, @Id_usuario, @Descricao, @Status_processo, @dateinsert)", "Processos",
                     new Dictionary<string, object>()
@@ -129,7 +152,10 @@ namespace Main.View.PagesFolder.ProcessFolder
 
         private void cb_MateriaPrima_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CodSubs = cb_MateriaPrima.Text.Substring(0, codLength);
+            if (cb_MateriaPrima.SelectedItem == null)
+            {
+                return;
+            }
 
             var listaMateriaPrima = Program.SQL.SelectList("SELECT * FROM MateriaPrima WHERE Codigo = @Codigo", "MateriaPrima", null,
             new Dictionary<string, object>()
@@ -137,10 +163,14 @@ namespace Main.View.PagesFolder.ProcessFolder
                 {"@Codigo", CodSubs }
             });
 
-            foreach (MateriaPrimaClass materia in listaMateriaPrima)
-            {
-                lbl_QtMateriaPrima.Text = "Quantidade mínima para referência: " + materia.Quantidade_minima.ToString() + " un.";
-            }
+            MateriaPrimaClass materia = (MateriaPrimaClass)cb_MateriaPrima.SelectedItem;
+
+            //foreach (MateriaPrimaClass materia in listaMateriaPrima)
+            //{
+
+            lbl_QtMateriaPrima.Text = "Quantidade mínima para referência: " + materia.Quantidade_minima + " un.";
+
+            //}
 
             lbl_QtMateriaPrima.Visible = true;
         }
