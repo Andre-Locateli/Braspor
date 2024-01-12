@@ -190,11 +190,16 @@ namespace Main.View.PagesFolder.Configuration
         private void DeviceChangeEvent(object sender, System.Management.EventArrivedEventArgs e)
         {
             // Atualiza a lista de portas disponíveis
-            string[] portNames = SerialPort.GetPortNames();
-            cbPortaSerial01.Invoke(new Action(() => cbPortaSerial01.Items.Clear()));
-            cbPortaSerial01.Invoke(new Action(() => cbPortaSerial01.Items.AddRange(portNames)));
-            cbPortaSerial2.Invoke(new Action(() => cbPortaSerial2.Items.Clear()));
-            cbPortaSerial2.Invoke(new Action(() => cbPortaSerial2.Items.AddRange(portNames)));
+            try
+            {
+                string[] portNames = SerialPort.GetPortNames();
+                cbPortaSerial01.Invoke(new Action(() => cbPortaSerial01.Items.Clear()));
+                cbPortaSerial01.Invoke(new Action(() => cbPortaSerial01.Items.AddRange(portNames)));
+                cbPortaSerial2.Invoke(new Action(() => cbPortaSerial2.Items.Clear()));
+                cbPortaSerial2.Invoke(new Action(() => cbPortaSerial2.Items.AddRange(portNames)));
+            }
+            catch (Exception ex)
+            { }
         }
 
         private void btnClose_Click(object sender, EventArgs e)

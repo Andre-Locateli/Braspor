@@ -45,6 +45,7 @@ namespace Main.View.PagesFolder.ProcessFolder
         decimal qtContab = 0;
         decimal qtContabTotal = 0;
         decimal valorPesoTotal = 0;
+        decimal valorPesoTotalSup = 0;
 
         //Comunicação
         public System.Timers.Timer tmRead = new System.Timers.Timer();
@@ -285,7 +286,24 @@ namespace Main.View.PagesFolder.ProcessFolder
                         }
                         else
                         {
-                            MessageBox.Show("DESCONECTOU");
+                            this.Invoke(new MethodInvoker(() =>
+                            {
+                                PesagemForms form = new PesagemForms(idUsuario, nomeUsuario);
+
+                                foreach (Form openForm in Application.OpenForms)
+                                {
+                                    if (openForm is MainForms)
+                                    {
+                                        MainForms main = (MainForms)openForm;
+                                        main.OpenPage(form);
+                                        this.Close();
+                                        return;
+                                    }
+                                }
+                            }));
+
+                            InfoPopup info = new InfoPopup("Erro!", "A conexão com a balança foi interrompida. Reconecte para retornar ao processo! \n Fechando...", Properties.Resources.errorIcon);
+                            info.ShowDialog();
                         }
 
 
@@ -392,7 +410,7 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                                 if (valorSecSup == valorSuporte)
                                 {
-                                    valorPesoTotal = valorPesoTotal + Convert.ToDecimal(val2);
+                                    valorPesoTotalSup = valorPesoTotalSup + Convert.ToDecimal(val2);
 
                                     pict_Status.BackColor = Color.FromArgb(41, 46, 84);
                                     panel12.BackColor = Color.FromArgb(41, 46, 84);
@@ -455,7 +473,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                             }
 
 
-                            if (stopCheck.ElapsedMilliseconds > 3500)
+                            if (stopCheck.ElapsedMilliseconds > 4000)
                             {
                                 valorSuporte = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceContador].PS}");
 
@@ -463,6 +481,9 @@ namespace Main.View.PagesFolder.ProcessFolder
                                 {
                                     bloqueiaLoop = 1;
                                     bloqueiaValor = 0;
+
+                                    valorPesoTotalSup = 0;
+
                                     stopCheck.Reset();
                                 }
                                 else
@@ -477,6 +498,8 @@ namespace Main.View.PagesFolder.ProcessFolder
                                         lbl_Status.Text = "";
                                         lbl_Status.Text = "REGISTRANDO PESO. AGUARDE...";
                                     }));
+
+                                    valorPesoTotal = valorPesoTotal + valorPesoTotalSup;
 
                                     stopSup.Start();
                                     stopCheck.Reset();
@@ -496,13 +519,15 @@ namespace Main.View.PagesFolder.ProcessFolder
                                         lbl_ValorReal.Text = valorTotal.ToString();
                                     }));
 
+
+
                                     SerialCommunicationService.SendCommand(Convert.ToInt32(taraContagem.Tag), 0);
 
                                     var insertLog = Program.SQL.CRUDCommand("INSERT INTO Log_Processos (Id_processo, Peso_temporeal, Peso_total, Tempo_execucao, dateinsert) VALUES (@Id_processo, @Peso_temporeal, @Peso_total, @Tempo_execucao, @dateinsert)", "Log_Processos",
                                     new Dictionary<string, object>()
                                     {
                                         {"@Id_processo", idProcesso },
-                                        {"@Peso_temporeal", qtContabTotal },
+                                        {"@Peso_temporeal", Convert.ToInt32(qtContabTotal) },
                                         {"@Peso_total", valorTotal },
                                         {"@Tempo_execucao", lbl_Horario.Text },
                                         {"@dateinsert", DateTime.Now}
@@ -740,6 +765,11 @@ namespace Main.View.PagesFolder.ProcessFolder
             visu.ShowDialog();
         }
 
+        private void valorContagem_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void TimerRelogio_Tick_1(object sender, EventArgs e)
         {
             if (tmpExectAtivo)
@@ -775,7 +805,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                 {
                     if (bloqueiaBotaoContag == 0)
                     {
-                        YesOrNo question = new YesOrNo("Confirmar que a quantidade para referência (" + qtMinima + ") está correta na balança? Começar contagem?");
+                        YesOrNo question = new YesOrNo("Confirmar que a quantidade para referência (" + qtMinima + ") está correta na balança?");
                         question.ShowDialog();
 
                         if (question.RESPOSTA)
@@ -790,9 +820,9 @@ namespace Main.View.PagesFolder.ProcessFolder
                             var UpdateProcesso = Program.SQL.CRUDCommand("UPDATE Processos SET Peso_Referencia = @Peso_Referencia, Status_processo = @Status_processo WHERE Id = @Id\r\n", "Log_Processos",
                             new Dictionary<string, object>()
                             {
-                            {"@Id", idProcesso },
-                            {"@Peso_Referencia", pesoReferencia },
-                            {"@Status_processo", statusProcesso },
+                                {"@Id", idProcesso },
+                                {"@Peso_Referencia", pesoReferencia },
+                                {"@Status_processo", statusProcesso },
                             });
 
                             lbl_Status.Refresh();

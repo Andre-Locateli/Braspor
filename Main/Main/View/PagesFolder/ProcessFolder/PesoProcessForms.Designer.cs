@@ -467,6 +467,7 @@
             this.valorContagem.TabIndex = 1;
             this.valorContagem.Text = "0.000";
             this.valorContagem.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.valorContagem.Click += new System.EventHandler(this.valorContagem_Click);
             // 
             // panel11
             // 
@@ -643,7 +644,7 @@
             this.btn_SalvarReferencia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_SalvarReferencia.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_SalvarReferencia.ForeColor = System.Drawing.Color.White;
-            this.btn_SalvarReferencia.Location = new System.Drawing.Point(252, 188);
+            this.btn_SalvarReferencia.Location = new System.Drawing.Point(254, 188);
             this.btn_SalvarReferencia.Name = "btn_SalvarReferencia";
             this.btn_SalvarReferencia.Size = new System.Drawing.Size(152, 43);
             this.btn_SalvarReferencia.TabIndex = 7;
