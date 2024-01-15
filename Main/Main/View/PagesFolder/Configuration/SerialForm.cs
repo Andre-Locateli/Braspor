@@ -187,19 +187,27 @@ namespace Main.View.PagesFolder.Configuration
                 MessageBox.Show(ex.Message);
             }
         }
+
         private void DeviceChangeEvent(object sender, System.Management.EventArrivedEventArgs e)
         {
             // Atualiza a lista de portas disponíveis
-            try
+            string[] portNames = SerialPort.GetPortNames();
+            if (IsHandleCreated)
             {
-                string[] portNames = SerialPort.GetPortNames();
                 cbPortaSerial01.Invoke(new Action(() => cbPortaSerial01.Items.Clear()));
+            }
+            if (IsHandleCreated)
+            {
                 cbPortaSerial01.Invoke(new Action(() => cbPortaSerial01.Items.AddRange(portNames)));
+            }
+            if (IsHandleCreated)
+            {
                 cbPortaSerial2.Invoke(new Action(() => cbPortaSerial2.Items.Clear()));
+            }
+            if (IsHandleCreated)
+            {
                 cbPortaSerial2.Invoke(new Action(() => cbPortaSerial2.Items.AddRange(portNames)));
             }
-            catch (Exception ex)
-            { }
         }
 
         private void btnClose_Click(object sender, EventArgs e)

@@ -53,6 +53,8 @@ namespace Main.Service
             try
             {
 
+                indicador_addr.Clear();
+
                 if (Program._autoconnect_1)
                 {
                     if (!SERIALPORT1.IsOpen) { SERIALPORT1.Open(); }
@@ -100,6 +102,9 @@ namespace Main.Service
         {
             try
             {
+
+                indicador_addr.Clear();
+
                 //indicador_watchdogTime.Clear();
                 try
                 {

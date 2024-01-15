@@ -134,6 +134,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                 lbl_Horario.Text = tempoExecucao;
             }
 
+
             lbl_PesoReferencia.Text = "1 folha ≅ " + Convert.ToString(pesoReferencia);
 
             if(lbl_Horario.Text == "")
@@ -466,6 +467,7 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                                     this.Invoke(new MethodInvoker(() =>
                                     {
+                                        pict_Status.Image = imgs_peso[0];
                                         lbl_Status.Text = "";
                                         lbl_Status.Text = "PESANDO...";
                                     }));

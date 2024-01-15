@@ -151,6 +151,10 @@ namespace Main.View.PagesFolder.ProcessFolder
                 dgvDados.Columns["dateinsert"].HeaderText = "Data de inserção";
                 dgvDados.Columns["Status"].DisplayIndex = 10;
             }
+            else
+            {
+                dgvDados.Columns["Status"].Visible = false;
+            }
         }
 
         private void txtSearch_Enter(object sender, EventArgs e)

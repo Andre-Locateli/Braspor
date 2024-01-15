@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tmTime = new System.Windows.Forms.Timer(this.components);
             this.panel5 = new System.Windows.Forms.Panel();
             this.button5 = new System.Windows.Forms.Button();
@@ -82,10 +82,10 @@
             // 
             this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel5.BackColor = System.Drawing.Color.White;
-            this.panel5.Controls.Add(this.button5);
             this.panel5.Controls.Add(this.button4);
-            this.panel5.Controls.Add(this.button2);
             this.panel5.Controls.Add(this.button1);
+            this.panel5.Controls.Add(this.button2);
+            this.panel5.Controls.Add(this.button5);
             this.panel5.Controls.Add(this.panel7);
             this.panel5.Location = new System.Drawing.Point(748, 12);
             this.panel5.Name = "panel5";
@@ -104,13 +104,13 @@
             this.button5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(49)))), ((int)(((byte)(97)))));
             this.button5.Image = global::Main.Properties.Resources.arrowMain;
             this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button5.Location = new System.Drawing.Point(2, 138);
+            this.button5.Location = new System.Drawing.Point(2, 39);
             this.button5.Name = "button5";
             this.button5.Padding = new System.Windows.Forms.Padding(0, 0, 60, 0);
             this.button5.Size = new System.Drawing.Size(204, 33);
             this.button5.TabIndex = 5;
             this.button5.Tag = "Produto";
-            this.button5.Text = "Produto   ";
+            this.button5.Text = "Matéria-prima  ";
             this.button5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button5.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.button5.UseVisualStyleBackColor = true;
@@ -119,20 +119,19 @@
             // button4
             // 
             this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button4.Dock = System.Windows.Forms.DockStyle.Top;
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(49)))), ((int)(((byte)(97)))));
             this.button4.Image = global::Main.Properties.Resources.arrowMain;
             this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button4.Location = new System.Drawing.Point(2, 105);
+            this.button4.Location = new System.Drawing.Point(2, 138);
             this.button4.Name = "button4";
             this.button4.Padding = new System.Windows.Forms.Padding(0, 0, 60, 0);
             this.button4.Size = new System.Drawing.Size(204, 33);
             this.button4.TabIndex = 4;
             this.button4.Tag = "Usuario";
-            this.button4.Text = "Usuario   ";
+            this.button4.Text = "Usuário  ";
             this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button4.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.button4.UseVisualStyleBackColor = true;
@@ -154,7 +153,7 @@
             this.button2.Size = new System.Drawing.Size(204, 33);
             this.button2.TabIndex = 2;
             this.button2.Tag = "Relatorio";
-            this.button2.Text = "Relatório   ";
+            this.button2.Text = "Relatório  ";
             this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.button2.UseVisualStyleBackColor = true;
@@ -170,13 +169,13 @@
             this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(49)))), ((int)(((byte)(97)))));
             this.button1.Image = global::Main.Properties.Resources.arrowMain;
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button1.Location = new System.Drawing.Point(2, 39);
+            this.button1.Location = new System.Drawing.Point(2, 105);
             this.button1.Name = "button1";
             this.button1.Padding = new System.Windows.Forms.Padding(0, 0, 60, 0);
             this.button1.Size = new System.Drawing.Size(204, 33);
             this.button1.TabIndex = 1;
             this.button1.Tag = "Pesagem";
-            this.button1.Text = "Pesagem   ";
+            this.button1.Text = "Pesagem  ";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.button1.UseVisualStyleBackColor = true;
@@ -229,28 +228,28 @@
             this.dgv_avisos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgv_avisos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgv_avisos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_avisos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_avisos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dgv_avisos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_avisos.ColumnHeadersVisible = false;
             this.dgv_avisos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.warningIcon,
             this.trashIcon});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_avisos.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_avisos.DefaultCellStyle = dataGridViewCellStyle10;
             this.dgv_avisos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_avisos.Location = new System.Drawing.Point(2, 39);
             this.dgv_avisos.Name = "dgv_avisos";
@@ -396,11 +395,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(49)))), ((int)(((byte)(97)))));
-            this.label5.Location = new System.Drawing.Point(29, 102);
+            this.label5.Location = new System.Drawing.Point(3, 102);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(174, 59);
+            this.label5.Size = new System.Drawing.Size(224, 59);
             this.label5.TabIndex = 5;
-            this.label5.Text = "Quantidade Mês";
+            this.label5.Text = "Processos finalizados (Mês)";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel9
@@ -443,11 +442,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(49)))), ((int)(((byte)(97)))));
-            this.label4.Location = new System.Drawing.Point(29, 102);
+            this.label4.Location = new System.Drawing.Point(3, 102);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(175, 59);
+            this.label4.Size = new System.Drawing.Size(226, 59);
             this.label4.TabIndex = 4;
-            this.label4.Text = "Quantidade Hoje";
+            this.label4.Text = "Quantidade pesada (Hoje)";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel3
@@ -490,11 +489,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(49)))), ((int)(((byte)(97)))));
-            this.label3.Location = new System.Drawing.Point(29, 102);
+            this.label3.Location = new System.Drawing.Point(5, 102);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(175, 59);
+            this.label3.Size = new System.Drawing.Size(221, 59);
             this.label3.TabIndex = 3;
-            this.label3.Text = "Processos Hoje";
+            this.label3.Text = "Processos criados (Hoje)";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cartesianChart1
