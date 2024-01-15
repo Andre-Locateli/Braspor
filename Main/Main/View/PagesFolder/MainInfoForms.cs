@@ -57,7 +57,7 @@ namespace Main.View.PagesFolder
                 dgv_avisos.RowTemplate.Height = 90;
                 tmTime.Enabled = true;
 
-                var qtd_pesagens = Program.SQL.SelectList($"SELECT * FROM Processos WHERE CONVERT(DATE, dateinsert) = '{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}' AND Status_processo = 2", "Processos");
+                var qtd_pesagens = Program.SQL.SelectList($"SELECT * FROM Processos WHERE CONVERT(DATE, dateinsert) = '{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}'", "Processos");
                 lbl_hoje.Text = $"{qtd_pesagens.Count()}";
 
                 var qtd_folhas = Program.SQL.SelectList($"SELECT SUM(Total_contagem) AS QtdTotal FROM Processos WHERE CONVERT(DATE, dateinsert) = '{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}' AND Status_processo = 2", "Processos", "QtdTotal");
@@ -68,7 +68,7 @@ namespace Main.View.PagesFolder
                 }
                 else { lblqtdFolhas.Text = "0"; }
      
-                var qtd_mes = Program.SQL.SelectList($"SELECT * FROM Processos WHERE CONVERT(DATE, dateinsert) >= '{DateTime.Now.Year}-{DateTime.Now.Month}-01' AND CONVERT(DATE, dateinsert) <= '{DateTime.Now.Year}-{DateTime.Now.Month}-31'", "Processos");
+                var qtd_mes = Program.SQL.SelectList($"SELECT * FROM Processos WHERE CONVERT(DATE, dateinsert) >= '{DateTime.Now.Year}-{DateTime.Now.Month}-01' AND CONVERT(DATE, dateinsert) <= '{DateTime.Now.Year}-{DateTime.Now.Month}-31' And Status_processo = 3", "Processos");
                 lbl_prevista.Text = $"{qtd_mes.Count()}";
 
                 double[] valores_dias = new double[33];
