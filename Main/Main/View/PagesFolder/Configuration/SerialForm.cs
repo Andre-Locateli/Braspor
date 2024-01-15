@@ -231,7 +231,7 @@ namespace Main.View.PagesFolder.Configuration
                     XmlElement xml_Autoconnect_1 = (XmlElement)doc.SelectSingleNode("//AutoConnect_1");
                     if (xml_PortaSerial_1 != null && xml_BaudRate_1 != null && xml_StopBit_1 != null && xml_Autoconnect_1 != null)
                     {
-                        xml_Balanca_1.InnerText = cbBalanca01.Texts;
+                        //xml_Balanca_1.InnerText = cbBalanca01.Texts;
                         //Program.CFG.balanca_1 = cbBalanca01.Texts;
                         xml_PortaSerial_1.InnerText = SerialCommunicationService.SERIALPORT1.PortName;
                         xml_BaudRate_1.InnerText = SerialCommunicationService.SERIALPORT1.BaudRate.ToString();

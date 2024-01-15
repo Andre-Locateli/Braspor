@@ -106,6 +106,7 @@
             // 
             this.cb_MateriaPrima.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.cb_MateriaPrima.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_MateriaPrima.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_MateriaPrima.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.cb_MateriaPrima.FormattingEnabled = true;
             this.cb_MateriaPrima.Location = new System.Drawing.Point(39, 54);
