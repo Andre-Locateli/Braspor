@@ -60,7 +60,7 @@ namespace Main.View.PagesFolder
                 var qtd_pesagens = Program.SQL.SelectList($"SELECT * FROM Processos WHERE CONVERT(DATE, dateinsert) = '{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}'", "Processos");
                 lbl_hoje.Text = $"{qtd_pesagens.Count()}";
 
-                var qtd_folhas = Program.SQL.SelectList($"SELECT SUM(Total_contagem) AS QtdTotal FROM Processos WHERE CONVERT(DATE, dateinsert) = '{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}' AND Status_processo = 2", "Processos", "QtdTotal");
+                var qtd_folhas = Program.SQL.SelectList($"SELECT SUM(Total_contagem) AS QtdTotal FROM Processos WHERE CONVERT(DATE, dateinsert) = '{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}' AND Status_processo = 3", "Processos", "QtdTotal");
 
                 if (qtd_folhas.Count > 0)
                 {
@@ -155,8 +155,8 @@ namespace Main.View.PagesFolder
         {
             dgv_avisos.Columns[2].Visible = false;
 
-            dgv_avisos.Columns[0].DisplayIndex = 2;
-            dgv_avisos.Columns[1].DisplayIndex = 3;
+           // dgv_avisos.Columns[0].DisplayIndex = 2;
+            //dgv_avisos.Columns[1].DisplayIndex = 3;
             dgv_avisos.Columns[3].HeaderText = "";
         }
 
