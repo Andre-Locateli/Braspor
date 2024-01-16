@@ -23,7 +23,7 @@ namespace Main.View.PagesFolder.ProcessFolder
 
         private void VisualizarLogForms_Load(object sender, EventArgs e)
         {
-            var Processos = Program.SQL.SelectList("SELECT * FROM Log_Processos Where Id_processo = @Id", "Log_Processos", null,
+            var Processos = Program.SQL.SelectList("SELECT * FROM Log_Processos Where Id_processo = @Id AND Peso_temporeal > 0", "Log_Processos", null,
             new Dictionary<string, object>()
             {
                 {"@Id", idProcesso }

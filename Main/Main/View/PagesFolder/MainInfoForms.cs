@@ -65,8 +65,16 @@ namespace Main.View.PagesFolder
                 if (qtd_folhas.Count > 0)
                 {
                     lblqtdFolhas.Text = $"{qtd_folhas[0]}";
+
+                    if (lblqtdFolhas.Text == "")
+                    {
+                        lblqtdFolhas.Text = "0";
+                    }
                 }
-                else { lblqtdFolhas.Text = "0"; }
+                else 
+                { 
+                    lblqtdFolhas.Text = "0";
+                }
      
                 var qtd_mes = Program.SQL.SelectList($"SELECT * FROM Processos WHERE CONVERT(DATE, dateinsert) >= '{DateTime.Now.Year}-{DateTime.Now.Month}-01' AND CONVERT(DATE, dateinsert) <= '{DateTime.Now.Year}-{DateTime.Now.Month}-31' And Status_processo = 3", "Processos");
                 lbl_prevista.Text = $"{qtd_mes.Count()}";
