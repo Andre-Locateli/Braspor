@@ -113,7 +113,7 @@ namespace Main.View.LoginFolder
 
                         Program._permissaoUsuario = permissao;
                         SaveLoginInfo(ch_ultimoAcesso.Checked);
-
+                        Program.com = new CommunicationForms();
                         this.Hide();
                         SerialCommunicationService.InitWithAutoConnect();
                         MainForms main = new MainForms(user.Id, user.Nome);
