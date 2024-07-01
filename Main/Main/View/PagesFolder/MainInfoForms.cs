@@ -155,8 +155,8 @@ namespace Main.View.PagesFolder
         {
             dgv_avisos.Columns[2].Visible = false;
 
-            dgv_avisos.Columns[0].DisplayIndex = 2;
-            dgv_avisos.Columns[1].DisplayIndex = 3;
+           // dgv_avisos.Columns[0].DisplayIndex = 2;
+            //dgv_avisos.Columns[1].DisplayIndex = 3;
             dgv_avisos.Columns[3].HeaderText = "";
         }
 

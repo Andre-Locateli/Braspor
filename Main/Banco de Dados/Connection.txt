@@ -1,1 +1,7 @@
 Data Source=.\SQLEXPRESS;Initial Catalog=VC_SKF;Integrated Security=True;Encrypt=False;TrustServerCertificate=False
+
+Data Source=10.0.0.12\SQLEXPRESS;Initial Catalog=VC_BRASPOR; User ID=sa; Pwd=AEPH1234*#
+
+
+
+SENHA PARA ADMIN: 21232f297a57a5a743894a0e4a801fc3
