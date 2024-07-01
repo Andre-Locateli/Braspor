@@ -16,6 +16,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using StyleSheet = Main.Helper.StyleSheet;
 using System.Numerics;
+using Microsoft.VisualBasic;
+using Main.Model.EtiquetaFolder;
+using System.Drawing.Printing;
+using ZPL;
+using ZXing;
 
 namespace Main.View.PagesFolder.ProcessFolder
 {
@@ -41,7 +46,7 @@ namespace Main.View.PagesFolder.ProcessFolder
 
         Boolean tmpExectAtivo;
 
-        decimal pesoReferencia;
+        decimal Gramatura;
         decimal qtContab = 0;
         decimal qtContabTotal = 0;
         decimal valorPesoTotal = 0;
@@ -78,9 +83,13 @@ namespace Main.View.PagesFolder.ProcessFolder
 
         List<object> selectProcessos = new List<object>();
 
-        public PesoProcessForms(int id_Usuario, string nome_Usuario, int id_MateriaPrima, int qt_Minima, string dsc_MateriaPrima, int id_Processo)
+        private List<Object> _impressoras = new List<Object>();
+
+
+        public PesoProcessForms(int id_Usuario, string nome_Usuario, int qt_Folhas, int id_Processo)
         {
             InitializeComponent();
+            this.DoubleBuffered = true;
 
             imgs_peso = new Image[]
             {
@@ -92,12 +101,13 @@ namespace Main.View.PagesFolder.ProcessFolder
             idUsuario = id_Usuario;
             nomeUsuario = nome_Usuario;
             idProcesso = id_Processo;
-            qtMinima = qt_Minima;
+            qtMinima = qt_Folhas;
         }
 
         public PesoProcessForms(int id_Processo)
         {
             InitializeComponent();
+            this.DoubleBuffered = true;
 
             imgs_peso = new Image[]
             {
@@ -113,479 +123,506 @@ namespace Main.View.PagesFolder.ProcessFolder
         {
             try
             {
-            selectProcessos = Program.SQL.SelectList("SELECT * FROM Processos WHERE Id = @Id", "Processos", null,
-            new Dictionary<string, object>()
-            {
-                {"@Id", idProcesso }
-            });
+                LoadImpressoras();
 
-            foreach (ProcessosModel proc in selectProcessos)
-            {
-                idProduto = proc.Id_Produto;
-                descProcesso = proc.Descricao;
-                lbl_Descricao.Text = proc.Descricao.ToString();
-                tempoExecucao = proc.TempoExecucao;
-                valorTotal = proc.TotalContagem;
-                pesoReferencia = Convert.ToDecimal(proc.PesoReferencia);
-                valorPesoTotal = Convert.ToDecimal(proc.PesoTotal);
-                tempoContagem = proc.TempoExecucao;
-                statusProcesso = proc.StatusProcesso;
-                lbl_DataInsert.Text = Convert.ToString(proc.dateinsert);
-                lbl_Horario.Text = tempoExecucao;
-            }
-
-
-            lbl_PesoReferencia.Text = "1 folha ≅ " + Convert.ToString(pesoReferencia);
-
-            if(lbl_Horario.Text == "")
-            {
-                lbl_Horario.Text = "00:00:00";
-            }
-
-            var selectProduto = Program.SQL.SelectList("SELECT * FROM MateriaPrima WHERE Id = @Id", "MateriaPrima", null,
-            new Dictionary<string, object>()
-            {
-                {"@Id", idProduto }
-            });
-
-            foreach (MateriaPrimaClass materia in selectProduto)
-            {
-                qtMinima = materia.Quantidade_minima;
-                lbl_qtMinima.Text = materia.Quantidade_minima.ToString();
-                lbl_MateriaPrima.Text = materia.Codigo + " - " + materia.Descricao;
-            }
-
-            lbl_ValorReal.Text = valorTotal.ToString();
-
-            lbl_Descricao.Text = descProcesso;
-
-            if (statusProcesso == 0)
-            {
-                // PAUSADO SEM REFERÊNCIA
-
-            }
-            else if (statusProcesso == 1)
-            {
-                // PAUSADO COM REFERÊNCIA
-
-                btn_IniciarContagem.Enabled = true;
-                btn_IniciarContagem.ForeColor = Color.Green;
-                btn_IniciarContagem.BackColor = Color.FromArgb(192, 255, 192);
-
-                btn_SalvarReferencia.Enabled = false;
-                btn_SalvarReferencia.ForeColor = Color.FromArgb(64, 64, 64);
-                btn_SalvarReferencia.BackColor = Color.Silver;
-
-                pict_Status.Image = imgs_peso[1];
-
-                // STATUS
-                lbl_Status.Invoke(new MethodInvoker(() =>
+                selectProcessos = Program.SQL.SelectList("SELECT * FROM Processos WHERE Id = @Id", "Processos", null,
+                new Dictionary<string, object>()
                 {
-                    lbl_Status.Text = "";
-                    lbl_Status.Text = "REFERÊNCIA REGISTRADA. INICIE A CONTAGEM.";
-                    lbl_Status.Refresh();
-                }));
+                    {"@Id", idProcesso }
+                });
 
-                bloqueiaBotaoContag = 1;
-                bloqueiaContag = 0;
-            }
-            else if (statusProcesso == 2)
-            {
-                // PAUSADO CONTAGEM INICIADA
-
-                btn_IniciarContagem.Enabled = true;
-                btn_IniciarContagem.ForeColor = Color.Green;
-                btn_IniciarContagem.BackColor = Color.FromArgb(192, 255, 192);
-
-                btn_SalvarReferencia.Enabled = false;
-                btn_SalvarReferencia.ForeColor = Color.FromArgb(64, 64, 64);
-                btn_SalvarReferencia.BackColor = Color.Silver;
-
-                tempoContagem = tempoContagem.Replace(":", "");
-                timeH = Convert.ToInt32(tempoContagem.Substring(0, 2));
-                timeMin = Convert.ToInt32(tempoContagem.Substring(2, 2));
-                timeSec = Convert.ToInt32(tempoContagem.Substring(4, 2));
-
-                //STATUS
-                lbl_Status.Invoke(new MethodInvoker(() =>
+                foreach (ProcessosModel proc in selectProcessos)
                 {
-                    lbl_Status.Text = "";
-                    lbl_Status.Text = "AGUARDANDO RETOMADA DE PROCESSO...";
-                }));
-                //
+                    idProduto = proc.Id_Produto;
+                    descProcesso = proc.Descricao;
+                    lbl_Descricao.Text = proc.Descricao.ToString();
+                    tempoExecucao = proc.TempoExecucao;
+                    valorTotal = proc.TotalContagem;
+                    Gramatura = Convert.ToDecimal(proc.Gramatura);
+                    valorPesoTotal = Convert.ToDecimal(proc.PesoTotal);
+                    tempoContagem = proc.TempoExecucao;
+                    statusProcesso = proc.StatusProcesso;
+                    lbl_DataInsert.Text = Convert.ToString(proc.dateinsert);
+                    lbl_Horario.Text = tempoExecucao;
 
-                bloqueiaBotaoContag = 1;
-                bloqueiaContag = 0;
-                btn_IniciarContagem.Text = "RETOMAR PROCESSO";
-            }
+                    // Novo
 
-
-            int i = 0;
-
-  
-            foreach (IndicadorClass ind in SerialCommunicationService.indicador_addr)
-            {
-                if (ind.indicador.addr == Program.Endereco_Referencia)
-                {
-                    indiceReferencia = i;
-                }
-                else
-                {
-                    indiceContador = i;
+                    qtMinima = proc.Quantidade;
+                    lbl_qtMinima.Text = proc.Quantidade.ToString();
+                    lbl_MateriaPrima.Text = proc.Numero + " - " + proc.Papel + " " + proc.Formato;
+                    infosprocesso_txt.Text = proc.Cliente + " - " + proc.Op;
                 }
 
-                i++;
-            }
+
+                lbl_PesoReferencia.Text = "1 folha ≅ " + Convert.ToString(Gramatura);
+
+                if (lbl_Horario.Text == "")
+                {
+                    lbl_Horario.Text = "00:00:00";
+                }
+
+                //var selectProduto = Program.SQL.SelectList("SELECT * FROM MateriaPrima WHERE Id = @Id", "MateriaPrima", null,
+                //new Dictionary<string, object>()
+                //{
+                //    {"@Id", idProduto }
+                //});
+
+                //foreach (MateriaPrimaClass materia in selectProduto)
+                //{
+                //    qtMinima = materia.Quantidade_minima;
+                //    lbl_qtMinima.Text = materia.Quantidade_minima.ToString();
+                //    lbl_MateriaPrima.Text = materia.Codigo + " - " + materia.Descricao;
+                //}
+
+                lbl_ValorReal.Text = valorTotal.ToString();
+
+                lbl_Descricao.Text = descProcesso;
+
+                if (statusProcesso == 0)
+                {
+                    // PAUSADO SEM REFERÊNCIA
+
+                }
+                else if (statusProcesso == 1)
+                {
+                    // PAUSADO COM REFERÊNCIA
+
+                    btn_IniciarContagem.Enabled = true;
+                    btn_IniciarContagem.ForeColor = Color.Green;
+                    btn_IniciarContagem.BackColor = Color.FromArgb(192, 255, 192);
+
+                    btn_SalvarReferencia.Enabled = false;
+                    btn_SalvarReferencia.ForeColor = Color.FromArgb(64, 64, 64);
+                    btn_SalvarReferencia.BackColor = Color.Silver;
+
+                    pict_Status.Image = imgs_peso[1];
+
+                    // STATUS
+                    lbl_Status.Invoke(new MethodInvoker(() =>
+                    {
+                        lbl_Status.Text = "";
+                        lbl_Status.Text = "REFERÊNCIA REGISTRADA. INICIE A CONTAGEM.";
+                        lbl_Status.Refresh();
+                    }));
+
+                    bloqueiaBotaoContag = 1;
+                    bloqueiaContag = 0;
+                }
+                else if (statusProcesso == 2)
+                {
+                    // PAUSADO CONTAGEM INICIADA
+
+                    btn_IniciarContagem.Enabled = true;
+                    btn_IniciarContagem.ForeColor = Color.Green;
+                    btn_IniciarContagem.BackColor = Color.FromArgb(192, 255, 192);
+
+                    btn_SalvarReferencia.Enabled = false;
+                    btn_SalvarReferencia.ForeColor = Color.FromArgb(64, 64, 64);
+                    btn_SalvarReferencia.BackColor = Color.Silver;
+
+                    tempoContagem = tempoContagem.Replace(":", "");
+                    timeH = Convert.ToInt32(tempoContagem.Substring(0, 2));
+                    timeMin = Convert.ToInt32(tempoContagem.Substring(2, 2));
+                    timeSec = Convert.ToInt32(tempoContagem.Substring(4, 2));
+
+                    //STATUS
+                    lbl_Status.Invoke(new MethodInvoker(() =>
+                    {
+                        lbl_Status.Text = "";
+                        lbl_Status.Text = "AGUARDANDO RETOMADA DE PROCESSO...";
+                    }));
+                    //
+
+                    bloqueiaBotaoContag = 1;
+                    bloqueiaContag = 0;
+                    btn_IniciarContagem.Text = "RETOMAR PROCESSO";
+                }
 
 
-            if (lbl_Descricao.Text == "")
-            {
-                lbl_Descricao.Text = "Processo sem descrição.";
-            }
+                int i = 0;
 
 
-            if (SerialCommunicationService.SERIALPORT1.IsOpen)
-            {
-                taraReferencia.Tag = Program.Endereco_Referencia;
-                zeroReferencia.Tag = Program.Endereco_Referencia;
+                foreach (IndicadorClass ind in SerialCommunicationService.indicador_addr)
+                {
+                    if (ind.indicador.addr == Program.Endereco_Referencia)
+                    {
+                        indiceReferencia = i;
+                    }
+                    else
+                    {
+                        indiceContador = i;
+                    }
 
-                taraContagem.Tag = Program.Endereco_Referencia + 1;
-                zeroContagem.Tag = Program.Endereco_Referencia + 1;
-            }
-
-
-            await Task.Delay(500);
-
-            string peso = $"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}";
-            YesOrNo question = new YesOrNo("Deseja efetuar tara antes de iniciar a pesagem? \n (Aviso: Caso haja um produto na balança, retire-o antes de efetuar a tara)");
-            question.ShowDialog();
-
-            if (question.RESPOSTA)
-            {
-                SerialCommunicationService.SendCommand(Convert.ToInt32(taraContagem.Tag), 0);
-
-                await Task.Delay(250);
-
-                SerialCommunicationService.SendCommand(Convert.ToInt32(taraReferencia.Tag), 0);
-            }
+                    i++;
+                }
 
 
+                if (lbl_Descricao.Text == "")
+                {
+                    lbl_Descricao.Text = "Processo sem observação.";
+                }
 
-            Task.Run(async () =>
-            {
+
+                if (SerialCommunicationService.SERIALPORT1.IsOpen)
+                {
+                    taraReferencia.Tag = Program.Endereco_Referencia;
+                    zeroReferencia.Tag = Program.Endereco_Referencia;
+
+                    taraContagem.Tag = Program.Endereco_Referencia + 1;
+                    zeroContagem.Tag = Program.Endereco_Referencia + 1;
+                }
+
+
+                await Task.Delay(500);
+
+                string peso = $"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}";
+                YesOrNo question = new YesOrNo("Deseja efetuar tara antes de iniciar a pesagem? \n (Aviso: Caso haja um produto na balança, retire-o antes de efetuar a tara)");
+                question.ShowDialog();
+
                 try
                 {
-                    while (isTrue)
+                    if (question.RESPOSTA)
                     {
-                        string val = $"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}";
-                        string val2 = $"{SerialCommunicationService.indicador_addr[indiceContador].PS}";
+                        SerialCommunicationService.SendCommand(Convert.ToInt32(taraContagem.Tag), 0);
 
+                        await Task.Delay(250);
 
-                        if (SerialCommunicationService.SERIALPORT1.IsOpen == true)
-                        {
-
-                        }
-                        else
-                        {
-                            this.Invoke(new MethodInvoker(() =>
-                            {
-                                PesagemForms form = new PesagemForms(idUsuario, nomeUsuario);
-
-                                foreach (Form openForm in Application.OpenForms)
-                                {
-                                    if (openForm is MainForms)
-                                    {
-                                        MainForms main = (MainForms)openForm;
-                                        main.OpenPage(form);
-                                        this.Close();
-                                        return;
-                                    }
-                                }
-                            }));
-
-                            InfoPopup info = new InfoPopup("Erro!", "A conexão com a balança foi interrompida. Reconecte para retornar ao processo! \n Fechando...", Properties.Resources.errorIcon);
-                            info.ShowDialog();
-                        }
-
-
-                        await Task.Delay(1);
-
-                        this.Invoke(new MethodInvoker(() =>
-                        {
-                            valorReferencia.Text = val;
-                            valorReferencia.Text = valorReferencia.Text.Replace(",", ".");
-                            valorReferencia.Refresh();
-                        }));
-
-                        this.Invoke(new MethodInvoker(() =>
-                        {
-                            valorContagem.Text = val2;
-                            valorContagem.Text = valorContagem.Text.Replace(",", ".");
-                            valorContagem.Refresh();
-                        }));
-
-                        if (btn_IniciarContagem.Text == "FINALIZAR PROCESSO")
-                        {
-                            qtContab = Convert.ToDecimal(valorContagem.Text) / pesoReferencia;
-                            qtContab = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceContador].PS}") / pesoReferencia;
-
-                            valorSuporte = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceContador].PS}");
-
-                            if (qtContab <= 0)
-                            {
-                                qtContab = 0;
-                            }
-
-                            this.Invoke(new MethodInvoker(() =>
-                            {
-                                lbl_QtContab.Text = Convert.ToInt32(qtContab).ToString();
-                            }));
-                        }
-
-
-                        if (btn_IniciarContagem.Text == "FINALIZAR PROCESSO")
-                        {
-                            if (bloqueiaValor == 0 && valorSuporte > 0)
-                            {
-                                valorSecSup = valorSuporte;
-                                stopValor.Start();
-
-                                //STATUS
-                                lbl_Status.Invoke(new MethodInvoker(() =>
-                                {
-                                    pict_Status.Image = imgs_peso[0];
-
-                                    pict_Status.BackColor = Color.DarkOrange;
-                                    panel12.BackColor = Color.DarkOrange;
-                                    panel20.BackColor = Color.DarkOrange;
-                                    lbl_Status.BackColor = Color.DarkOrange;
-
-                                    lbl_Status.Text = "";
-                                    lbl_Status.Text = "PESANDO...";
-                                }));
-                                //
-                            }
-                            else if (bloqueiaValor == 0 && valorSuporte <= 0)
-                            {
-                                if(valorTotal == 0)
-                                {
-                                    //STATUS
-                                    lbl_Status.Invoke(new MethodInvoker(() =>
-                                    {
-                                        pict_Status.BackColor = Color.FromArgb(41, 46, 84);
-                                        panel12.BackColor = Color.FromArgb(41, 46, 84);
-                                        panel20.BackColor = Color.FromArgb(41, 46, 84);
-                                        lbl_Status.BackColor = Color.FromArgb(41, 46, 84);
-
-                                        lbl_Status.Text = "";
-                                        lbl_Status.Text = "AGUARDANDO MATÉRIA-PRIMA...";
-                                    }));
-                                    //
-                                }
-                                else
-                                {
-                                    pict_Status.BackColor = Color.SeaGreen;
-                                    panel12.BackColor = Color.SeaGreen;
-                                    panel20.BackColor = Color.SeaGreen;
-                                    lbl_Status.BackColor = Color.SeaGreen;
-
-                                    //STATUS
-                                    this.Invoke(new MethodInvoker(() =>
-                                    {
-                                        pict_Status.Image = imgs_peso[2];
-
-                                        lbl_Status.Text = "";
-                                        lbl_Status.Text = "PESO REGISTRADO. AGUARDANDO MATÉRIA-PRIMA...";
-                                    }));
-                                    //
-                                }
-                            }
-
-                            valorSuporte = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceContador].PS}");
-
-                            if (stopValor.ElapsedMilliseconds > 3000)
-                            {
-                                await Task.Delay(1000);
-
-                                valorSuporte = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceContador].PS}");
-
-                                if (valorSecSup == valorSuporte)
-                                {
-                                    valorPesoTotalSup = valorPesoTotalSup + Convert.ToDecimal(val2);
-
-                                    pict_Status.BackColor = Color.FromArgb(41, 46, 84);
-                                    panel12.BackColor = Color.FromArgb(41, 46, 84);
-                                    panel20.BackColor = Color.FromArgb(41, 46, 84);
-                                    lbl_Status.BackColor = Color.FromArgb(41, 46, 84);
-
-                                    //STATUS
-                                    this.Invoke(new MethodInvoker(() =>
-                                    {
-                                        pict_Status.Image = imgs_peso[1];
-
-                                        lbl_Status.Text = "";
-                                        lbl_Status.Text = "PESO ESTABILIZADO. RETIRE OU ADICIONE MAIS MATÉRIA-PRIMA.";
-                                    }));
-                                    //
-
-                                    bloqueiaLoop = 0;
-                                    bloqueiaValor = 1;
-                                }
-
-                                stopValor.Reset();
-                            }
-                        }
-
-
-                        if (bloqueiaLoop == 0)
-                        {
-                            valorSuporte = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceContador].PS}");
-
-                            if (valorSecSup != valorSuporte)
-                            {
-                                stopCheck.Start();
-
-                                if (valorSuporte == 0)
-                                {
-                                    pict_Status.BackColor = Color.SteelBlue;
-                                    panel12.BackColor = Color.SteelBlue;
-                                    panel20.BackColor = Color.SteelBlue;
-                                    lbl_Status.BackColor = Color.SteelBlue;
-
-                                    this.Invoke(new MethodInvoker(() =>
-                                    {
-                                        lbl_Status.Text = "";
-                                        lbl_Status.Text = "REGISTRANDO PESO. AGUARDE...";
-                                    }));
-                                }
-                                else
-                                {
-                                    pict_Status.BackColor = Color.DarkOrange;
-                                    panel12.BackColor = Color.DarkOrange;
-                                    panel20.BackColor = Color.DarkOrange;
-                                    lbl_Status.BackColor = Color.DarkOrange;
-
-                                    this.Invoke(new MethodInvoker(() =>
-                                    {
-                                        pict_Status.Image = imgs_peso[0];
-                                        lbl_Status.Text = "";
-                                        lbl_Status.Text = "PESANDO...";
-                                    }));
-                                }
-                            }
-
-
-                            if (stopCheck.ElapsedMilliseconds > 4000)
-                            {
-                                valorSuporte = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceContador].PS}");
-
-                                if (valorSuporte > 0)
-                                {
-                                    bloqueiaLoop = 1;
-                                    bloqueiaValor = 0;
-
-                                    valorPesoTotalSup = 0;
-
-                                    stopCheck.Reset();
-                                }
-                                else
-                                {
-                                    pict_Status.BackColor = Color.SteelBlue;
-                                    panel12.BackColor = Color.SteelBlue;
-                                    panel20.BackColor = Color.SteelBlue;
-                                    lbl_Status.BackColor = Color.SteelBlue;
-
-                                    this.Invoke(new MethodInvoker(() =>
-                                    {
-                                        lbl_Status.Text = "";
-                                        lbl_Status.Text = "REGISTRANDO PESO. AGUARDE...";
-                                    }));
-
-                                    valorPesoTotal = valorPesoTotal + valorPesoTotalSup;
-
-                                    stopSup.Start();
-                                    stopCheck.Reset();
-                                }
-                            }
-
-
-                            if (stopSup.ElapsedMilliseconds > 3500)
-                            {
-                                if (valorSuporte <= 0)
-                                {
-                                    qtContabTotal = valorSecSup / pesoReferencia;
-                                    valorTotal += Convert.ToInt32(qtContabTotal);
-
-                                    this.Invoke(new MethodInvoker(() =>
-                                    {
-                                        lbl_ValorReal.Text = valorTotal.ToString();
-                                    }));
-
-
-
-                                    SerialCommunicationService.SendCommand(Convert.ToInt32(taraContagem.Tag), 0);
-
-                                    var insertLog = Program.SQL.CRUDCommand("INSERT INTO Log_Processos (Id_processo, Peso_temporeal, Peso_total, Tempo_execucao, dateinsert) VALUES (@Id_processo, @Peso_temporeal, @Peso_total, @Tempo_execucao, @dateinsert)", "Log_Processos",
-                                    new Dictionary<string, object>()
-                                    {
-                                        {"@Id_processo", idProcesso },
-                                        {"@Peso_temporeal", Convert.ToInt32(qtContabTotal) },
-                                        {"@Peso_total", valorTotal },
-                                        {"@Tempo_execucao", lbl_Horario.Text },
-                                        {"@dateinsert", DateTime.Now}
-                                    });
-
-
-                                    var UpdateProcesso = Program.SQL.CRUDCommand("UPDATE Processos SET Descricao = @Descricao, Tempo_execucao = @Tempo_execucao, Total_contagem = @Total_contagem, Peso_Referencia = @Peso_Referencia, Peso_total = @Peso_total, Status_processo = @Status_processo WHERE Id = @Id\r\n", "Processos",
-                                    new Dictionary<string, object>()
-                                    {
-                                        {"@Id", idProcesso },
-                                        {"@Descricao", descProcesso },
-                                        {"@Tempo_execucao", lbl_Horario.Text },
-                                        {"@Total_contagem", valorTotal },
-                                        {"@Peso_Referencia", pesoReferencia },
-                                        {"@Peso_total", valorPesoTotal },
-                                        {"@Status_processo", statusProcesso },
-                                    });
-
-                                    bloqueiaLoop = 1;
-                                    bloqueiaValor = 0;
-
-                                    if (stopSup.ElapsedMilliseconds > 8)
-                                    {
-                                        stopSup.Reset();
-                                    }
-
-                                    countMensagens = 1;
-                                }
-                                else
-                                {
-                                    //stopSup.Stop();
-                                    //if (valorSecSup != valorSuporte && valorSuporte > 0)
-                                    //{
-                                    //    bloqueiaLoop = 0;
-                                    //    bloqueiaValor = 0;
-                                    //}
-                                    stopSup.Reset();
-                                }
-                            }
-
-                            this.Invoke(new MethodInvoker(() =>
-                            {
-                                lbl_Status.Refresh();
-                            }));
-                        }
+                        SerialCommunicationService.SendCommand(Convert.ToInt32(taraReferencia.Tag), 0);
                     }
+
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
-            });
+
+
+
+                Task.Run(async () =>
+                {
+                    try
+                    {
+                        while (isTrue)
+                        {
+                            string val = $"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}";
+                            string val2 = $"{SerialCommunicationService.indicador_addr[indiceContador].PS}";
+
+
+                            if (SerialCommunicationService.SERIALPORT1.IsOpen == true)
+                            {
+
+                            }
+                            else
+                            {
+                                this.Invoke(new MethodInvoker(() =>
+                                {
+                                    PesagemForms form = new PesagemForms(idUsuario, nomeUsuario);
+
+                                    foreach (Form openForm in Application.OpenForms)
+                                    {
+                                        if (openForm is MainForms)
+                                        {
+                                            MainForms main = (MainForms)openForm;
+                                            main.OpenPage(form);
+                                            this.Close();
+                                            return;
+                                        }
+                                    }
+                                }));
+
+                                InfoPopup info = new InfoPopup("Erro!", "A conexão com a balança foi interrompida. Reconecte para retornar ao processo! \n Fechando...", Properties.Resources.errorIcon);
+                                info.ShowDialog();
+                            }
+
+
+                            await Task.Delay(1);
+
+                            this.Invoke(new MethodInvoker(() =>
+                            {
+                                valorReferencia.Text = val;
+                                valorReferencia.Text = valorReferencia.Text.Replace(",", ".");
+                                valorReferencia.Refresh();
+                            }));
+
+                            this.Invoke(new MethodInvoker(() =>
+                            {
+                                valorContagem.Text = val2;
+                                valorContagem.Text = valorContagem.Text.Replace(",", ".");
+                                valorContagem.Refresh();
+                            }));
+
+                            if (btn_IniciarContagem.Text == "FINALIZAR PROCESSO")
+                            {
+                                qtContab = Convert.ToDecimal(valorContagem.Text) / Gramatura;
+                                qtContab = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceContador].PS}") / Gramatura;
+
+                                valorSuporte = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceContador].PS}");
+
+                                if (qtContab <= 0)
+                                {
+                                    qtContab = 0;
+                                }
+
+                                this.Invoke(new MethodInvoker(() =>
+                                {
+                                    lbl_QtContab.Text = Convert.ToInt32(qtContab).ToString();
+                                }));
+                            }
+
+
+                            if (btn_IniciarContagem.Text == "FINALIZAR PROCESSO")
+                            {
+                                if (bloqueiaValor == 0 && valorSuporte > 0)
+                                {
+                                    valorSecSup = valorSuporte;
+                                    stopValor.Start();
+
+                                    //STATUS
+                                    lbl_Status.Invoke(new MethodInvoker(() =>
+                                    {
+                                        pict_Status.Image = imgs_peso[0];
+
+                                        pict_Status.BackColor = Color.DarkOrange;
+                                        panel12.BackColor = Color.DarkOrange;
+                                        panel20.BackColor = Color.DarkOrange;
+                                        lbl_Status.BackColor = Color.DarkOrange;
+
+                                        lbl_Status.Text = "";
+                                        lbl_Status.Text = "PESANDO...";
+                                    }));
+                                    //
+                                }
+                                else if (bloqueiaValor == 0 && valorSuporte <= 0)
+                                {
+                                    if (valorTotal == 0)
+                                    {
+                                        //STATUS
+                                        lbl_Status.Invoke(new MethodInvoker(() =>
+                                        {
+                                            pict_Status.BackColor = Color.FromArgb(41, 46, 84);
+                                            panel12.BackColor = Color.FromArgb(41, 46, 84);
+                                            panel20.BackColor = Color.FromArgb(41, 46, 84);
+                                            lbl_Status.BackColor = Color.FromArgb(41, 46, 84);
+
+                                            lbl_Status.Text = "";
+                                            lbl_Status.Text = "AGUARDANDO MATÉRIA-PRIMA...";
+                                        }));
+                                        //
+                                    }
+                                    else
+                                    {
+                                        pict_Status.BackColor = Color.SeaGreen;
+                                        panel12.BackColor = Color.SeaGreen;
+                                        panel20.BackColor = Color.SeaGreen;
+                                        lbl_Status.BackColor = Color.SeaGreen;
+
+                                        //STATUS
+                                        this.Invoke(new MethodInvoker(() =>
+                                        {
+                                            pict_Status.Image = imgs_peso[2];
+
+                                            lbl_Status.Text = "";
+                                            lbl_Status.Text = "PESO REGISTRADO. AGUARDANDO MATÉRIA-PRIMA...";
+                                        }));
+                                        //
+                                    }
+                                }
+
+                                valorSuporte = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceContador].PS}");
+
+                                if (stopValor.ElapsedMilliseconds > 3000)
+                                {
+                                    await Task.Delay(1000);
+
+                                    valorSuporte = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceContador].PS}");
+
+                                    if (valorSecSup == valorSuporte)
+                                    {
+                                        valorPesoTotalSup = valorPesoTotalSup + Convert.ToDecimal(val2);
+
+                                        pict_Status.BackColor = Color.FromArgb(41, 46, 84);
+                                        panel12.BackColor = Color.FromArgb(41, 46, 84);
+                                        panel20.BackColor = Color.FromArgb(41, 46, 84);
+                                        lbl_Status.BackColor = Color.FromArgb(41, 46, 84);
+
+                                        //STATUS
+                                        this.Invoke(new MethodInvoker(() =>
+                                        {
+                                            pict_Status.Image = imgs_peso[1];
+
+                                            lbl_Status.Text = "";
+                                            lbl_Status.Text = "PESO ESTABILIZADO. RETIRE OU ADICIONE MAIS MATÉRIA-PRIMA.";
+                                        }));
+                                        //
+
+                                        bloqueiaLoop = 0;
+                                        bloqueiaValor = 1;
+                                    }
+
+                                    stopValor.Reset();
+                                }
+                            }
+
+
+                            if (bloqueiaLoop == 0)
+                            {
+                                valorSuporte = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceContador].PS}");
+
+                                if (valorSecSup != valorSuporte)
+                                {
+                                    stopCheck.Start();
+
+                                    if (valorSuporte == 0)
+                                    {
+                                        pict_Status.BackColor = Color.SteelBlue;
+                                        panel12.BackColor = Color.SteelBlue;
+                                        panel20.BackColor = Color.SteelBlue;
+                                        lbl_Status.BackColor = Color.SteelBlue;
+
+                                        this.Invoke(new MethodInvoker(() =>
+                                        {
+                                            lbl_Status.Text = "";
+                                            lbl_Status.Text = "REGISTRANDO PESO. AGUARDE...";
+                                        }));
+                                    }
+                                    else
+                                    {
+                                        pict_Status.BackColor = Color.DarkOrange;
+                                        panel12.BackColor = Color.DarkOrange;
+                                        panel20.BackColor = Color.DarkOrange;
+                                        lbl_Status.BackColor = Color.DarkOrange;
+
+                                        this.Invoke(new MethodInvoker(() =>
+                                        {
+                                            pict_Status.Image = imgs_peso[0];
+                                            lbl_Status.Text = "";
+                                            lbl_Status.Text = "PESANDO...";
+                                        }));
+                                    }
+                                }
+
+
+                                if (stopCheck.ElapsedMilliseconds > 4000)
+                                {
+                                    valorSuporte = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceContador].PS}");
+
+                                    if (valorSuporte > 0)
+                                    {
+                                        bloqueiaLoop = 1;
+                                        bloqueiaValor = 0;
+
+                                        valorPesoTotalSup = 0;
+
+                                        stopCheck.Reset();
+                                    }
+                                    else
+                                    {
+                                        pict_Status.BackColor = Color.SteelBlue;
+                                        panel12.BackColor = Color.SteelBlue;
+                                        panel20.BackColor = Color.SteelBlue;
+                                        lbl_Status.BackColor = Color.SteelBlue;
+
+                                        this.Invoke(new MethodInvoker(() =>
+                                        {
+                                            lbl_Status.Text = "";
+                                            lbl_Status.Text = "REGISTRANDO PESO. AGUARDE...";
+                                        }));
+
+                                        valorPesoTotal = valorPesoTotal + valorPesoTotalSup;
+
+                                        stopSup.Start();
+                                        stopCheck.Reset();
+                                    }
+                                }
+
+
+                                if (stopSup.ElapsedMilliseconds > 3500)
+                                {
+                                    if (valorSuporte <= 0)
+                                    {
+                                        try
+                                        {
+
+                                            qtContabTotal = valorSecSup / Gramatura;
+                                            valorTotal += Convert.ToInt32(qtContabTotal);
+
+                                            this.Invoke(new MethodInvoker(() =>
+                                            {
+                                                lbl_ValorReal.Text = valorTotal.ToString();
+                                            }));
+
+                                            string tempoexec = lbl_Horario.Text;
+
+                                            SerialCommunicationService.SendCommand(Convert.ToInt32(taraContagem.Tag), 0);
+
+                                            var insertLog = Program.SQL.CRUDCommand("INSERT INTO Log_Processos (Id_processo, Peso_temporeal, Peso_total, Tempo_execucao, dateinsert) VALUES (@Id_processo, @Peso_temporeal, @Peso_total, @Tempo_execucao, @dateinsert)", "Log_Processos",
+                                            new Dictionary<string, object>()
+                                            {
+                                                {"@Id_processo", idProcesso },
+                                                {"@Peso_temporeal", Convert.ToInt32(qtContabTotal) },
+                                                {"@Peso_total", valorTotal },
+                                                {"@Tempo_execucao", tempoexec },
+                                                {"@dateinsert", DateTime.Now}
+                                            });
+
+                                            //=================================================================================================================//
+
+                                            var UpdateProcesso = Program.SQL.CRUDCommand("UPDATE Processos SET Descricao = @Descricao, Tempo_execucao = @Tempo_execucao, Total_contagem = @Total_contagem, Gramatura = @Gramatura, Peso_total = @Peso_total, Status_processo = @Status_processo WHERE Id = @Id", "Processos",
+                                            new Dictionary<string, object>()
+                                            {
+                                                {"@Id", idProcesso },
+                                                {"@Descricao", descProcesso },
+                                                {"@Tempo_execucao", tempoexec },
+                                                {"@Total_contagem", valorTotal },
+                                                {"@Gramatura", Gramatura },
+                                                {"@Peso_total", valorPesoTotal },
+                                                {"@Status_processo", statusProcesso },
+                                            });
+
+                                            bloqueiaLoop = 1;
+                                            bloqueiaValor = 0;
+
+                                            if (stopSup.ElapsedMilliseconds > 8)
+                                            {
+                                                stopSup.Reset();
+                                            }
+
+                                            countMensagens = 1;
+
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            Console.WriteLine(ex.Message);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        //stopSup.Stop();
+                                        //if (valorSecSup != valorSuporte && valorSuporte > 0)
+                                        //{
+                                        //    bloqueiaLoop = 0;
+                                        //    bloqueiaValor = 0;
+                                        //}
+                                        stopSup.Reset();
+                                    }
+                                }
+
+                                this.Invoke(new MethodInvoker(() =>
+                                {
+                                    lbl_Status.Refresh();
+                                }));
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                });
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -640,6 +677,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                             //STATUS
                             //lbl_Status.Invoke(new MethodInvoker(() =>
                             //{
+
                             pict_Status.BackColor = Color.FromArgb(41, 46, 84);
                             panel12.BackColor = Color.FromArgb(41, 46, 84);
                             panel20.BackColor = Color.FromArgb(41, 46, 84);
@@ -647,6 +685,7 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                             lbl_Status.Text = "";
                             lbl_Status.Text = "AGUARDANDO MATÉRIA-PRIMA...";
+                            
                             //}));
                             //
 
@@ -672,7 +711,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                             tmpExectAtivo = true;
                             TimerRelogio.Start();
 
-                            //////////////////SerialCommunicationService.SendCommand(Convert.ToInt32(taraContagem.Tag), 0);
+                            //SerialCommunicationService.SendCommand(Convert.ToInt32(taraContagem.Tag), 0);
 
                             //STATUS
                             //lbl_Status.Invoke(new MethodInvoker(() =>
@@ -716,23 +755,26 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                             TimerRelogio.Stop();
 
-                            var UpdateProcesso = Program.SQL.CRUDCommand("UPDATE Processos SET Descricao = @Descricao, Tempo_execucao = @Tempo_execucao, Total_contagem = @Total_contagem, Peso_Referencia = @Peso_Referencia, Peso_total = @Peso_total, Status_processo = @Status_processo, dateinsert = @dateinsert WHERE Id = @Id\r\n", "Log_Processos",
+                            var UpdateProcesso = Program.SQL.CRUDCommand("UPDATE Processos SET Descricao = @Descricao, Tempo_execucao = @Tempo_execucao, Total_contagem = @Total_contagem, Gramatura = @Gramatura, Peso_total = @Peso_total, Status_processo = @Status_processo WHERE Id = @Id", "Processos",
                             new Dictionary<string, object>()
                             {
                                 {"@Id", idProcesso },
                                 {"@Descricao", descProcesso },
                                 {"@Tempo_execucao", lbl_Horario.Text },
                                 {"@Total_contagem", valorTotal },
-                                {"@Peso_Referencia", pesoReferencia },
+                                {"@Gramatura", Gramatura },
                                 {"@Peso_total", valorTotal },
-                                {"@Status_processo", statusProcesso },
-                                {"@dateinsert", DateTime.Now }
+                                {"@Status_processo", statusProcesso }
                             });
 
                             await Task.Delay(1000);
 
                             InfoPopup info = new InfoPopup("Parabéns!", "Processo e contagem registrados com sucesso!", Properties.Resources._299110_check_sign_icon);
                             info.ShowDialog();
+
+                            ImpressoraPrint(new EtiquetaInfo() { op = "", cliente = "", peso = "", qtd_folhas = "", tipo_papel = "", formato = "", gramatura = "", data_inicio = "", data_termino = "", horario_inicial = "", horario_final = "", operador = "", turno = "", obs = "" }, 2);
+
+
 
                             MainInfoForms form = new MainInfoForms(idUsuario, nomeUsuario);
 
@@ -816,14 +858,16 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                             pict_Status.Image = imgs_peso[1];
 
+                            Gramatura = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}") / Convert.ToDecimal(lbl_qtMinima.Text);
+
                             lbl_Status.Text = "";
                             lbl_Status.Text = "REFERÊNCIA REGISTRADA. INICIE A CONTAGEM.";
 
-                            var UpdateProcesso = Program.SQL.CRUDCommand("UPDATE Processos SET Peso_Referencia = @Peso_Referencia, Status_processo = @Status_processo WHERE Id = @Id\r\n", "Log_Processos",
+                            var UpdateProcesso = Program.SQL.CRUDCommand("UPDATE Processos SET Gramatura = @Gramatura, Status_processo = @Status_processo WHERE Id = @Id", "Processos",
                             new Dictionary<string, object>()
                             {
                                 {"@Id", idProcesso },
-                                {"@Peso_Referencia", pesoReferencia },
+                                {"@Gramatura", Gramatura },
                                 {"@Status_processo", statusProcesso },
                             });
 
@@ -832,8 +876,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                             zeroReferencia.Enabled = false;
                             taraReferencia.Enabled = false;
 
-                            pesoReferencia = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}") / Convert.ToDecimal(lbl_qtMinima.Text);
-                            lbl_PesoReferencia.Text = "1 folha ≅ " + pesoReferencia.ToString();
+                            lbl_PesoReferencia.Text = "1 folha ≅ " + Gramatura.ToString();
 
                             lbl_PesoReferencia.Refresh();
 
@@ -908,6 +951,298 @@ namespace Main.View.PagesFolder.ProcessFolder
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+            }
+        }
+
+        private void PesoProcessForms_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (btn_IniciarContagem.Text == "FINALIZAR PROCESSO")
+            {
+                string tempoexec = lbl_Horario.Text;
+
+                //=================================================================================================================//
+
+                var UpdateProcesso = Program.SQL.CRUDCommand("UPDATE Processos SET Descricao = @Descricao, Tempo_execucao = @Tempo_execucao, Total_contagem = @Total_contagem, Gramatura = @Gramatura, Peso_total = @Peso_total, Status_processo = @Status_processo WHERE Id = @Id", "Processos",
+                new Dictionary<string, object>()
+                {
+                    {"@Id", idProcesso },
+                    {"@Descricao", descProcesso },
+                    {"@Tempo_execucao", tempoexec },
+                    {"@Total_contagem", valorTotal },
+                    {"@Gramatura", Gramatura },
+                    {"@Peso_total", valorPesoTotal },
+                    {"@Status_processo", statusProcesso },
+                });
+            }
+        }
+
+        public void LoadImpressoras()
+        {
+            Dictionary<string, object> parametros = new Dictionary<string, object>();
+            parametros.Add("@parent", "-");
+            _impressoras = Program.SQL.SelectList("select * from Rede where parent = @parent and tipo = 'Impressora'", "Rede", values: parametros);
+        }
+
+        public async void ImpressoraPrint(EtiquetaInfo etiqueta, int type)
+        {
+            try
+            {
+                foreach (RedeClass impressora in _impressoras)
+                {
+                    string zplCode = "";
+
+                    ZXing.BarcodeWriter brcode = new ZXing.BarcodeWriter();
+
+
+                    selectProcessos = Program.SQL.SelectList("SELECT * FROM Processos WHERE Id = @Id", "Processos", null,
+                    new Dictionary<string, object>()
+                    {
+                        {"@Id", idProcesso }
+                    });
+
+
+                    string lbl_op = "N° Op:";
+                    string lbl_op_r = "000000000";
+
+                    string lbl_cli = "Cliente:";
+                    string lbl_cli_r = "Cliente Padrão";
+
+                    string lbl_peso = "Peso:";
+                    string lbl_peso_r = lbl_ValorReal.Text;
+
+                    string lbl_qtfl = "Qtd Folhas:";
+                    string lbl_qtfl_r = lbl_qtMinima.Text;
+
+                    string lbl_tppl = "Tipo Papel:";
+                    string lbl_tppl_r = "";
+
+                    string lbl_fmt = "Formato:";
+                    string lbl_fmt_r = "";
+
+                    string lbl_gr = "Gram:";
+                    string lbl_gr_r = Gramatura.ToString();
+
+                    string lbl_dtin = "Data Início:";
+                    string lbl_dtin_r = "";
+
+                    string lbl_dtfm = "Data Término:";
+                    string lbl_dtfm_r = DateTime.Now.Date.ToString().Substring(0, 8);
+
+                    string lbl_hrin = "Horário inicial:";
+                    string lbl_hrin_r = "";
+
+                    string lbl_hrfm = "Horário final:";
+                    string lbl_hrfm_r = DateTime.Now.ToString().Substring(11, 8);
+
+                    string lbl_opr = "Operador:";
+                    string lbl_opr_r = Program._usuarioLogado.Nome;
+
+                    string lbl_trn = "Turno:";
+                    string lbl_trn_r = "";
+                    if(DateTime.Now.Hour<=12){lbl_trn_r="Matutino";}else if(DateTime.Now.Hour>12){lbl_trn_r="Vespertino";}
+
+                    string lbl_obs = "Obs:";
+                    string lbl_obs_r = lbl_Descricao.Text;
+
+                    string split1 = "";
+                    string split2 = "";
+                    string split3 = "";
+
+                    if (lbl_obs_r.Length <= 60)
+                    {
+                        split1 = lbl_obs_r;
+                    }
+                    else if (lbl_obs_r.Length > 60 & lbl_obs_r.Length < 120)
+                    {
+                        split1 = lbl_obs_r.Substring(0, 60);
+                        split2 = lbl_obs_r.Substring(60, lbl_obs_r.Length - 60);
+                    }
+                    else if (lbl_obs_r.Length > 60)
+                    {
+                        split1 = lbl_obs_r.Substring(0, 60);
+                        split2 = lbl_obs_r.Substring(60, 60);
+                        split3 = lbl_obs_r.Substring(120);
+                    }
+
+
+
+                    foreach (ProcessosModel proc in selectProcessos)
+                    {
+
+                        lbl_opr_r = proc.Op.ToString();
+                        lbl_cli_r = proc.Cliente.ToString();
+                        lbl_tppl_r = proc.Tipo.ToString();
+                        lbl_fmt_r = proc.Formato.ToString();
+                        lbl_dtin_r = proc.dateinsert.Date.ToString().Substring(0, 8);
+                        lbl_hrin_r = proc.dateinsert.ToString().Substring(11, 8);
+                    }
+
+
+                    System.Drawing.Font f1 = new System.Drawing.Font("Arial", 18, FontStyle.Regular, GraphicsUnit.Pixel);
+                    System.Drawing.Font fmn = new System.Drawing.Font("Arial", 15, FontStyle.Bold, GraphicsUnit.Pixel);
+
+                    System.Drawing.Brush brush = System.Drawing.Brushes.Black;
+
+                    int x = (int)(148 * (96 / 25.4f));
+                    int y = (int)(105 * (96 / 25.4f));
+
+                    Bitmap bitmap = new Bitmap(x, y);
+
+                    int wid = (int)(35 * 96 / 25.4f);
+                    int hei = (int)(12 * 96 / 25.4f);
+
+                    System.Drawing.Pen blackPen = new System.Drawing.Pen(System.Drawing.Color.Black, 2);
+
+                    using (Graphics graphics = Graphics.FromImage(bitmap))
+                    {
+                        graphics.Clear(System.Drawing.Color.White);
+
+                        //Draw Black lines
+
+
+                        //op
+                        graphics.DrawLine(blackPen, 72f, 36f, 200f, 36f);
+
+                        //cliente
+                        graphics.DrawLine(blackPen, 280f, 36f, x - 20, 36f);
+
+                        //peso
+                        graphics.DrawLine(blackPen, 65f, 86f, 200f, 86f);
+
+                        //qtfl
+                        graphics.DrawLine(blackPen, 309f, 86f, 440f, 86f);
+
+                        //tipo papel
+                        graphics.DrawLine(blackPen, 110f, 136f, 225f, 136f);
+
+                        //formato
+                        graphics.DrawLine(blackPen, 314f, 136f, 388f, 136f);
+
+                        //gram
+                        graphics.DrawLine(blackPen, 449f, 136f, 540f, 136f);
+
+                        //data inicio
+                        graphics.DrawLine(blackPen, 110f, 186f, 225f, 186f);
+
+                        //data termino
+                        graphics.DrawLine(blackPen, 355f, 186f, 470f, 186f);
+
+                        //horario inicial
+                        graphics.DrawLine(blackPen, 132f, 236f, 225f, 236f);
+
+                        //horario final
+                        graphics.DrawLine(blackPen, 343f, 236f, 470f, 236f);
+
+                        //operador
+                        graphics.DrawLine(blackPen, 100f, 286f, 340f, 286f);
+
+                        //turno
+                        graphics.DrawLine(blackPen, 404f, 286f, 540f, 286f);
+
+
+
+
+
+                        //op
+                        graphics.DrawString(lbl_op, f1, brush, new PointF(12, 17));
+                        graphics.DrawString(lbl_op_r, f1, brush, new PointF(74, 17));
+
+                        //cliente
+                        graphics.DrawString(lbl_cli, f1, brush, new PointF(210, 17));
+                        graphics.DrawString(lbl_cli_r, f1, brush, new PointF(281, 17));
+
+                        //peso
+                        graphics.DrawString(lbl_peso, f1, brush, new PointF(12, 67));
+                        graphics.DrawString(lbl_peso_r, f1, brush, new PointF(65, 67));
+
+                        //qt folhas
+                        graphics.DrawString(lbl_qtfl, f1, brush, new PointF(208, 67));
+                        graphics.DrawString(lbl_qtfl_r, f1, brush, new PointF(308, 67));
+
+                        //tp papel
+                        graphics.DrawString(lbl_tppl, f1, brush, new PointF(12, 117));
+                        graphics.DrawString(lbl_tppl_r, f1, brush, new PointF(112, 117));
+
+                        //formato
+                        graphics.DrawString(lbl_fmt, f1, brush, new PointF(236, 117));
+                        graphics.DrawString(lbl_fmt_r, f1, brush, new PointF(316, 117));
+
+                        //gram
+                        graphics.DrawString(lbl_gr, f1, brush, new PointF(393, 117));
+                        graphics.DrawString(lbl_gr_r, f1, brush, new PointF(450, 117));
+
+                        //data inicio
+                        graphics.DrawString(lbl_dtin, f1, brush, new PointF(12, 167));
+                        graphics.DrawString(lbl_dtin_r, f1, brush, new PointF(112, 167));
+
+                        //data Término
+                        graphics.DrawString(lbl_dtfm, f1, brush, new PointF(236, 167));
+                        graphics.DrawString(lbl_dtfm_r, f1, brush, new PointF(356, 167));
+
+                        //horário inicial
+                        graphics.DrawString(lbl_hrin, f1, brush, new PointF(12, 217));
+                        graphics.DrawString(lbl_hrin_r, f1, brush, new PointF(132, 217));
+
+                        //horário final
+                        graphics.DrawString(lbl_hrfm, f1, brush, new PointF(236, 217));
+                        graphics.DrawString(lbl_hrfm_r, f1, brush, new PointF(346, 217));
+
+                        graphics.DrawString(lbl_opr, f1, brush, new PointF(12, 267));
+                        graphics.DrawString(lbl_opr_r, f1, brush, new PointF(100, 267));
+
+                        graphics.DrawString(lbl_trn, f1, brush, new PointF(346, 267));
+                        graphics.DrawString(lbl_trn_r, f1, brush, new PointF(406, 267));
+
+                        graphics.DrawString(lbl_obs, f1, brush, new PointF(12, 315));
+                        graphics.DrawString(split1, fmn, brush, new PointF(56, 318));
+                        graphics.DrawString(split2, fmn, brush, new PointF(56, 343));
+                        graphics.DrawString(split3, fmn, brush, new PointF(56, 368));
+
+
+                    }
+
+                    ZPLPrintingService prnSvc = new ZPLPrintingService();
+                    //Bitmap bmp = RotateBitmap(bitmap, 90);
+                    zplCode = await prnSvc.GetImageZPLEncoded(bitmap);
+                    zplCode = zplCode.Replace("#barcode#", lbl_op);
+                    //Console.WriteLine(zplCode);
+
+                    PrintDocument documento = new PrintDocument();
+                    PrinterSettings configImpressora = new PrinterSettings();
+                    PageSettings pageSettings = documento.DefaultPageSettings;
+
+                    string[] impressoras = PrinterSettings.InstalledPrinters.Cast<string>().ToArray();
+                    string name = "";
+                    foreach (string item in impressoras)
+                    {
+
+                        if (item == impressora.impressora) { name = impressora.impressora; }
+                    }
+
+                    //bitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                    PrintPopup print = new PrintPopup(bitmap);
+                    print.ShowDialog();
+
+                    if (!string.IsNullOrWhiteSpace(name))
+                    {
+                        configImpressora.PrinterName = name;
+                        documento.PrinterSettings = configImpressora;
+                        documento.DefaultPageSettings.Landscape = true;
+                    }
+
+                    documento.PrintPage += (sender, args) =>
+                    {
+                        args.Graphics.DrawImage(bitmap, 0, 0); // Ajuste a posição conforme necessário
+                    };
+
+                    documento.Print();
+                }
+
+
+            }
+            catch (Exception)
+            {
+
             }
         }
     }

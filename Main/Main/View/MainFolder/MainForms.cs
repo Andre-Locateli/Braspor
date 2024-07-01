@@ -341,7 +341,7 @@ namespace Main.View.MainFolder
         {
             OpenPage(new RelatorioForms(idUsuario, nomeUsuario));
         }
-
+        
         private void btnClose_Click_1(object sender, EventArgs e)
         {
             try

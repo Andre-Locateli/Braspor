@@ -7,12 +7,15 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Drawing.Printing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
+using ZPL;
+using ZXing;
 
 namespace Main.View.PagesFolder.Configuration
 {
@@ -38,48 +41,54 @@ namespace Main.View.PagesFolder.Configuration
             }
 
         }
-        private void LoadImpressoras()
-        {
-            cbImpressora.Items.Clear();
-            Dictionary<string, object> parametros = new Dictionary<string, object>();
-            parametros.Add("@parent", Program.CFG.Estação);
-            List<Object> result = Program.SQL.SelectList("select full_name from Rede where tipo='Impressora' and (parent = @parent or parent = '-')", "Rede", "full_name", parametros);
-            if(result.Count > 0)
-            {
-                foreach (var item in result)
-                {
-                    cbImpressora.Items.Add(item);
-                }
-            }
-            parametros = new Dictionary<string, object>();
-            parametros.Add("@estacao", Program.CFG.Estação);
-            result = Program.SQL.SelectList("select * from Configuracao where estacao=@estacao", "Configuracao", values: parametros);
-            if (result.Count > 0)
-            {
-                ConfiguracaoClass Config = (ConfiguracaoClass)result[0];
-                parametros.Clear(); parametros.Add("@parent", Program.CFG.Estação);
-                result = Program.SQL.SelectList("select * from Rede where tipo='Impressora' and (parent = @parent or parent = '-')", "Rede", values:parametros);
-                foreach (RedeClass item in result)
-                {
-                    if (item.Id == Config.id_Impressora)
-                    {
-                        cbImpressora.Texts = item.full_name;
-                    }
-                }
-                cbCopias.Texts = Config.copias.ToString();
-            }
-            else
-            {
-                parametros = new Dictionary<string, object>();
-                parametros.Add("@estacao", Program.CFG.Estação);
-                parametros.Add("@id_Impressora", 0);
-                parametros.Add("@id_Etiqueta", 0);
-                parametros.Add("@copias", 1);
-                parametros.Add("@dateinsert", DateTime.Today);
-                Program.SQL.CRUDCommand("insert into Configuracao (estacao, id_Impressora, id_Etiqueta, copias, dateinsert) values (@estacao, @id_Impressora, @id_Etiqueta, @copias, @dateinsert)", "Configuracao", parametros);
-            }
-        }
+        //private void LoadImpressoras()
+        //{
+        //    cbImpressora.Items.Clear();
+        //    Dictionary<string, object> parametros = new Dictionary<string, object>();
+        //    parametros.Add("@parent", Program.CFG.Estação);
+        //    List<Object> result = Program.SQL.SelectList("select full_name from Rede where tipo='Impressora' and (parent = @parent or parent = '-')", "Rede", "full_name", parametros);
+        //    if(result.Count > 0)
+        //    {
+        //        foreach (var item in result)
+        //        {
+        //            cbImpressora.Items.Add(item);
+        //        }
+        //    }
+        //    parametros = new Dictionary<string, object>();
+        //    parametros.Add("@estacao", Program.CFG.Estação);
+        //    result = Program.SQL.SelectList("select * from Configuracao where estacao=@estacao", "Configuracao", values: parametros);
+        //    if (result.Count > 0)
+        //    {
+        //        ConfiguracaoClass Config = (ConfiguracaoClass)result[0];
+        //        parametros.Clear(); parametros.Add("@parent", Program.CFG.Estação);
+        //        result = Program.SQL.SelectList("select * from Rede where tipo='Impressora' and (parent = @parent or parent = '-')", "Rede", values:parametros);
+        //        foreach (RedeClass item in result)
+        //        {
+        //            if (item.Id == Config.id_Impressora)
+        //            {
+        //                cbImpressora.Texts = item.full_name;
+        //            }
+        //        }
+        //        cbCopias.Texts = Config.copias.ToString();
+        //    }
+        //    else
+        //    {
+        //        parametros = new Dictionary<string, object>();
+        //        parametros.Add("@estacao", Program.CFG.Estação);
+        //        parametros.Add("@id_Impressora", 0);
+        //        parametros.Add("@id_Etiqueta", 0);
+        //        parametros.Add("@copias", 1);
+        //        parametros.Add("@dateinsert", DateTime.Today);
+        //        Program.SQL.CRUDCommand("insert into Configuracao (estacao, id_Impressora, id_Etiqueta, copias, dateinsert) values (@estacao, @id_Impressora, @id_Etiqueta, @copias, @dateinsert)", "Configuracao", parametros);
+        //    }
+        //}
 
+        public void LoadImpressoras()
+        {
+            Dictionary<string, object> parametros = new Dictionary<string, object>();
+            parametros.Add("@parent", "-");
+            _impressoras = Program.SQL.SelectList("select * from Rede where parent = @parent and tipo = 'Impressora'", "Rede", values: parametros);
+        }
         private void LoadEtiquetas()
         {
             cbEtiqueta.Items.Clear();
@@ -455,13 +464,248 @@ namespace Main.View.PagesFolder.Configuration
             pnBanco.Visible = false;
         }
 
+
+        private List<Object> _impressoras = new List<Object>();
+
+
+        public async void ImpressoraPrint(EtiquetaInfo etiqueta, int type)
+        {
+            try
+            {
+                foreach (RedeClass impressora in _impressoras)
+                {
+                    string zplCode = "";
+
+                    //Criar novo layout da etiqueta.
+
+                    ZXing.BarcodeWriter brcode = new ZXing.BarcodeWriter();
+
+                    string lbl_op = "N° Op:";
+                    string lbl_op_r = "000000000";       //-//ALTERAR
+                    string lbl_cli = "Cliente:";
+                    string lbl_cli_r = "Cliente Padrão"; //-//ALTERAR
+                    string lbl_peso = "Peso:";
+                    string lbl_peso_r = "1000";          //-//ALTERAR
+                    string lbl_qtfl = "Qtd Folhas:";
+                    string lbl_qtfl_r = "100";           //-//ALTERAR
+                    string lbl_tppl = "Tipo Papel:";
+                    string lbl_tppl_r = "Sulfite";    //-//ALTERAR
+                    string lbl_fmt = "Formato:";
+                    string lbl_fmt_r = "A4";  //-//ALTERAR
+                    string lbl_gr = "Gram:";
+                    string lbl_gr_r = "0,0046";      //-//ALTERAR
+                    string lbl_dtin = "Data Início:";
+                    string lbl_dtin_r = "21/06/2024"; //-//ALTERAR
+                    string lbl_dtfm = "Data Término:";
+                    string lbl_dtfm_r = "21/06/2024"; //-//ALTERAR
+                    string lbl_hrin = "Horário inicial:";
+                    string lbl_hrin_r = "11:30:00"; //-//ALTERAR
+                    string lbl_hrfm = "Horário final:";
+                    string lbl_hrfm_r = "12:00:00";   //-//ALTERAR
+                    string lbl_opr = "Operador:";
+                    string lbl_opr_r = "Operador Padrão";      //-//ALTERAR
+                    string lbl_trn = "Turno:";
+                    string lbl_trn_r = "Matutino";      //-//ALTERAR
+                    string lbl_obs = "Obs:";
+                    string lbl_obs_r = @"3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223172535940812848111745028410270";      //-//ALTERAR
+
+                    string split1 = "";
+                    string split2 = "";
+                    string split3 = "";
+
+                    if (lbl_obs_r.Length <= 60)
+                    {
+                        split1 = lbl_obs_r;
+                    }
+                    else if (lbl_obs_r.Length > 60 & lbl_obs_r.Length < 120)
+                    {
+                        split1 = lbl_obs_r.Substring(0, 60);
+                        split2 = lbl_obs_r.Substring(60, lbl_obs_r.Length - 60);
+                    }
+                    else if (lbl_obs_r.Length > 60)
+                    {
+                        split1 = lbl_obs_r.Substring(0, 60);
+                        split2 = lbl_obs_r.Substring(60, 60);
+                        split3 = lbl_obs_r.Substring(120);
+                    }
+
+
+
+                    System.Drawing.Font f1 = new System.Drawing.Font("Arial", 18, FontStyle.Regular, GraphicsUnit.Pixel);
+                    System.Drawing.Font fmn = new System.Drawing.Font("Arial", 15, FontStyle.Bold, GraphicsUnit.Pixel);
+
+                    System.Drawing.Brush brush = System.Drawing.Brushes.Black;
+
+                    int x = (int)(148 * (96 / 25.4f));
+                    int y = (int)(105 * (96 / 25.4f));
+
+                    Bitmap bitmap = new Bitmap(x, y);
+
+                    int wid = (int)(35 * 96 / 25.4f);
+                    int hei = (int)(12 * 96 / 25.4f);
+
+                    System.Drawing.Pen blackPen = new System.Drawing.Pen(System.Drawing.Color.Black, 2);
+
+                    using (Graphics graphics = Graphics.FromImage(bitmap))
+                    {
+                        graphics.Clear(System.Drawing.Color.White);
+
+                        //Draw Black lines
+
+
+                        //op
+                        graphics.DrawLine(blackPen, 72f, 36f, 200f, 36f);
+
+                        //cliente
+                        graphics.DrawLine(blackPen, 280f, 36f, x - 20, 36f);
+
+                        //peso
+                        graphics.DrawLine(blackPen, 65f, 86f, 200f, 86f);
+
+                        //qtfl
+                        graphics.DrawLine(blackPen, 309f, 86f, 440f, 86f);
+
+                        //tipo papel
+                        graphics.DrawLine(blackPen, 110f, 136f, 225f, 136f);
+
+                        //formato
+                        graphics.DrawLine(blackPen, 314f, 136f, 388f, 136f);
+
+                        //gram
+                        graphics.DrawLine(blackPen, 449f, 136f, 540f, 136f);
+
+                        //data inicio
+                        graphics.DrawLine(blackPen, 110f, 186f, 225f, 186f);
+
+                        //data termino
+                        graphics.DrawLine(blackPen, 355f, 186f, 470f, 186f);
+
+                        //horario inicial
+                        graphics.DrawLine(blackPen, 132f, 236f, 225f, 236f);
+
+                        //horario final
+                        graphics.DrawLine(blackPen, 343f, 236f, 470f, 236f);
+
+                        //operador
+                        graphics.DrawLine(blackPen, 100f, 286f, 340f, 286f);
+
+                        //turno
+                        graphics.DrawLine(blackPen, 404f, 286f, 540f, 286f);
+
+
+
+
+
+                        //op
+                        graphics.DrawString(lbl_op, f1, brush, new PointF(12, 17));
+                        graphics.DrawString(lbl_op_r, f1, brush, new PointF(74, 17));
+                        
+                        //cliente
+                        graphics.DrawString(lbl_cli, f1, brush, new PointF(210, 17));
+                        graphics.DrawString(lbl_cli_r, f1, brush, new PointF(281, 17));
+
+                        //peso
+                        graphics.DrawString(lbl_peso, f1, brush, new PointF(12, 67));
+                        graphics.DrawString(lbl_peso_r, f1, brush, new PointF(65, 67));
+
+                        //qt folhas
+                        graphics.DrawString(lbl_qtfl, f1, brush, new PointF(208, 67));
+                        graphics.DrawString(lbl_qtfl_r, f1, brush, new PointF(308, 67));
+
+                        //tp papel
+                        graphics.DrawString(lbl_tppl, f1, brush, new PointF(12, 117));
+                        graphics.DrawString(lbl_tppl_r, f1, brush, new PointF(112, 117));
+
+                        //formato
+                        graphics.DrawString(lbl_fmt, f1, brush, new PointF(236, 117));
+                        graphics.DrawString(lbl_fmt_r, f1, brush, new PointF(316, 117));
+
+                        //gram
+                        graphics.DrawString(lbl_gr, f1, brush, new PointF(393, 117));
+                        graphics.DrawString(lbl_gr_r, f1, brush, new PointF(450, 117));
+
+                        //data inicio
+                        graphics.DrawString(lbl_dtin, f1, brush, new PointF(12, 167));
+                        graphics.DrawString(lbl_dtin_r, f1, brush, new PointF(112, 167));
+
+                        //data Término
+                        graphics.DrawString(lbl_dtfm, f1, brush, new PointF(236, 167));
+                        graphics.DrawString(lbl_dtfm_r, f1, brush, new PointF(356, 167));
+
+                        //horário inicial
+                        graphics.DrawString(lbl_hrin, f1, brush, new PointF(12, 217));
+                        graphics.DrawString(lbl_hrin_r, f1, brush, new PointF(132, 217));
+
+                        //horário final
+                        graphics.DrawString(lbl_hrfm, f1, brush, new PointF(236, 217));
+                        graphics.DrawString(lbl_hrfm_r, f1, brush, new PointF(346, 217));
+
+                        graphics.DrawString(lbl_opr, f1, brush, new PointF(12, 267));
+                        graphics.DrawString(lbl_opr_r, f1, brush, new PointF(100, 267));
+
+                        graphics.DrawString(lbl_trn, f1, brush, new PointF(346, 267));
+                        graphics.DrawString(lbl_trn_r, f1, brush, new PointF(406, 267));
+
+                        graphics.DrawString(lbl_obs, f1, brush, new PointF(12, 315));
+                        graphics.DrawString(split1, fmn, brush, new PointF(56, 318));
+                        graphics.DrawString(split2, fmn, brush, new PointF(56, 343));
+                        graphics.DrawString(split3, fmn, brush, new PointF(56, 368));
+
+
+                    }
+
+                    ZPLPrintingService prnSvc = new ZPLPrintingService();
+                    //Bitmap bmp = RotateBitmap(bitmap, 90);
+                    zplCode = await prnSvc.GetImageZPLEncoded(bitmap);
+                    zplCode = zplCode.Replace("#barcode#", lbl_op);
+                    //Console.WriteLine(zplCode);
+
+                    PrintDocument documento = new PrintDocument();
+                    PrinterSettings configImpressora = new PrinterSettings();
+                    PageSettings pageSettings = documento.DefaultPageSettings;
+
+                    string[] impressoras = PrinterSettings.InstalledPrinters.Cast<string>().ToArray();
+                    string name = "";
+                    foreach (string item in impressoras)
+                    {
+
+                        if (item == impressora.impressora) { name = impressora.impressora; }
+                    }
+
+                    //bitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                    PrintPopup print = new PrintPopup(bitmap);
+                    print.ShowDialog();
+
+                    if (!string.IsNullOrWhiteSpace(name))
+                    {
+                        configImpressora.PrinterName = name;
+                        documento.PrinterSettings = configImpressora;
+                        documento.DefaultPageSettings.Landscape = true;
+                    }
+
+                    documento.PrintPage += (sender, args) =>
+                    {
+                        args.Graphics.DrawImage(bitmap, 0, 0); // Ajuste a posição conforme necessário
+                    };
+
+                    documento.Print();
+                }
+
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             try
             {
                 // teste();
 
-               // Program.com.ImpressoraPrint(new EtiquetaInfo() {   earn = "123456789122", packCaixa = "88", partNumber = "123456", produtoProduzido = "AB-CA-111011", quantidadePecas = "138", date = Convert.ToString(GetJulianDay(DateTime.Now)) }, 2);
+                ImpressoraPrint(new EtiquetaInfo() { op = "", cliente = "", peso = "", qtd_folhas = "", tipo_papel = "", formato = "", gramatura = "", data_inicio = "", data_termino = "", horario_inicial = "", horario_final = "", operador = "", turno = "", obs = "" }, 2);
             }
             catch (Exception)
             {

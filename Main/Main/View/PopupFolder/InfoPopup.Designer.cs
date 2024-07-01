@@ -50,9 +50,9 @@
             // lblTitulo
             // 
             this.lblTitulo.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitulo.Location = new System.Drawing.Point(70, 12);
+            this.lblTitulo.Location = new System.Drawing.Point(66, 12);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(404, 77);
+            this.lblTitulo.Size = new System.Drawing.Size(396, 77);
             this.lblTitulo.TabIndex = 19;
             this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 

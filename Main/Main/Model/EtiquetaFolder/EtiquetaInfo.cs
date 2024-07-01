@@ -9,12 +9,20 @@ namespace Main.Model.EtiquetaFolder
     public class EtiquetaInfo
     {
 
-        public string quantidadePecas { get; set; }
-        public string produtoProduzido { get; set; }
-        public string packCaixa { get; set; }
-        public string partNumber { get; set; }
-        public string earn { get; set; }
-        public string date { get; set; }
+        public string op { get; set; }
+        public string cliente { get; set; }
+        public string peso { get; set; }
+        public string qtd_folhas { get; set; }
+        public string tipo_papel { get; set; }
+        public string formato { get; set; }
+        public string gramatura { get; set; }
+        public string data_inicio { get; set; }
+        public string data_termino { get; set; }
+        public string horario_inicial { get; set; }
+        public string horario_final { get; set; }
+        public string operador { get; set; }
+        public string turno { get; set; }
+        public string obs { get; set; }
 
     }
 }

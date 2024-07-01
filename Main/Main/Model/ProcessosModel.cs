@@ -51,12 +51,12 @@ namespace Main.Model
 			set { _totalContagem = value; }
 		}
 
-		private double _pesoReferencia;
-		public double PesoReferencia
-		{
-			get { return _pesoReferencia; }
-			set { _pesoReferencia = value; }
-		}
+		//private double _pesoReferencia;
+		//public double PesoReferencia
+		//{
+		//	get { return _pesoReferencia; }
+		//	set { _pesoReferencia = value; }
+		//}
 
 		private double _pesoTotal;
 		public double PesoTotal
@@ -92,5 +92,71 @@ namespace Main.Model
 			get { return _dateupdate; }
 			set { _dateupdate = value; }
 		}
-	}
+
+
+        // Nova Versao
+
+        private string _cliente;
+        public string Cliente
+        {
+            get { return _cliente; }
+            set { _cliente = value; }
+        }
+
+
+        private string _numero;
+        public string Numero
+        {
+            get { return _numero; }
+            set { _numero = value; }
+        }
+
+
+        private string _op;
+        public string Op
+        {
+            get { return _op; }
+            set { _op = value; }
+        }
+
+
+        private string _tipo;
+        public string Tipo
+        {
+            get { return _tipo; }
+            set { _tipo = value; }
+        }
+
+
+        private string _papel;
+        public string Papel
+        {
+            get { return _papel; }
+            set { _papel = value; }
+        }
+
+
+        private string _formato;
+        public string Formato
+        {
+            get { return _formato; }
+            set { _formato = value; }
+        }
+
+
+        private int _quantidade;
+        public int Quantidade
+        {
+            get { return _quantidade; }
+            set { _quantidade = value; }
+        }
+
+
+        private Double _gramatura;
+        public Double Gramatura
+        {
+            get { return _gramatura; }
+            set { _gramatura = value; }
+        }
+    }
 }

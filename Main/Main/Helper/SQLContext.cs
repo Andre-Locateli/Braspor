@@ -381,14 +381,14 @@ namespace Main.Helper
                                             process.TotalContagem = 0;
                                         }
 
-                                        if (dr["Peso_Referencia"] != DBNull.Value)
-                                        {
-                                            process.PesoReferencia = Convert.ToDouble(dr["Peso_Referencia"]);
-                                        }
-                                        else
-                                        {
-                                            process.PesoReferencia = 0;
-                                        }
+                                        //if (dr["Peso_Referencia"] != DBNull.Value)
+                                        //{
+                                        //    process.PesoReferencia = Convert.ToDouble(dr["Peso_Referencia"]);
+                                        //}
+                                        //else
+                                        //{
+                                        //    process.PesoReferencia = 0;
+                                        //}
 
                                         if (dr["Peso_total"] != DBNull.Value)
                                         {
@@ -400,6 +400,23 @@ namespace Main.Helper
                                         }
                                         process.StatusProcesso = Convert.ToInt32(dr["Status_processo"]);
                                         process.dateinsert = Convert.ToDateTime(dr["dateinsert"]);
+
+
+                                        // NOVA VERSAO
+
+                                        process.Cliente = Convert.ToString(dr["Cliente"]);
+                                        process.Numero = Convert.ToString(dr["Numero"]);
+                                        process.Op = Convert.ToString(dr["OP"]);
+                                        process.Tipo = Convert.ToString(dr["Tipo"]);
+                                        process.Papel = Convert.ToString(dr["Papel"]);
+                                        process.Formato = Convert.ToString(dr["Formato"]);
+                                        process.Quantidade = Convert.ToInt32(dr["Quantidade"]);
+
+                                        if (dr["Gramatura"] != DBNull.Value)
+                                        {
+                                            process.Gramatura = Convert.ToDouble(dr["Gramatura"]);
+                                        }
+
                                         list_return.Add(process);
                                     }
                                     else

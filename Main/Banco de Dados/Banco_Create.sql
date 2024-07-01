@@ -151,6 +151,7 @@ CREATE TABLE [dbo].[MateriaPrima] (
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
+/* ANTIGO
 GO
 CREATE TABLE [dbo].[Processos] (
 	[Id]				INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
@@ -164,8 +165,48 @@ CREATE TABLE [dbo].[Processos] (
 	[Status_processo]	INT,
 	[dateinsert]		DATETIME2(7),
 	[dateend]			DATETIME2(7),
-	[dateupdate]		DATETIME2(7)
+	[dateupdate]		DATETIME2(7),
+
+	--EXTRAS
+	[Cliente]			VARCHAR(500) NOT NULL,
+	[Numero]			INT NOT NULL,
+	[OP]				VARCHAR(200) NOT NULL,
+	[Tipo]				VARCHAR(200) NOT NULL,
+	[Papel]				VARCHAR(100) NOT NULL,
+	[Formato]			VARCHAR(100) NOT NULL,
+	[Gramatura]			REAL NOT NULL
 );
+*/
+
+-- NOVO
+GO
+CREATE TABLE [dbo].[Processos] (
+	[Id]				INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	[Id_produto]		INT NOT NULL,
+	[Id_usuario]		INT NOT NULL,
+	[Descricao]			VARCHAR(MAX),
+	[Tempo_execucao]	VARCHAR(20),
+	[Total_contagem]	INT,
+	-- [Peso_Referencia]	REAL,
+	[Peso_total]		REAL,
+	[Status_processo]	INT,
+	[dateinsert]		DATETIME2(7),
+	[dateend]			DATETIME2(7),
+	[dateupdate]		DATETIME2(7),
+
+	--EXTRAS
+	[Cliente]			VARCHAR(500) NOT NULL,
+	[Numero]			INT NOT NULL,
+	[OP]				VARCHAR(200) NOT NULL,
+	[Tipo]				VARCHAR(200) NOT NULL,
+	[Papel]				VARCHAR(100) NOT NULL,
+	[Formato]			VARCHAR(100) NOT NULL,
+	[Quantidade]		INT NOT NULL,
+	[Gramatura]			REAL
+);
+
+DROP TABLE Processos;
+
 
 GO
 CREATE TABLE [dbo].[Log_Processos] (
@@ -188,7 +229,7 @@ CREATE TABLE [dbo].[Historico_Acoes] (
 	[dateupdate]		DATETIME NULL,
 )
 
-~
+-- ~~~ --
 
 insert into Usuario(Nome, login, senha, acesso) values ('Administrador', 'admin', 'admin', 'Administrador')
 insert into Configuracao(porta_arduino, baud_Rate, stop_bit) values ('COM7', '115200', '2')

@@ -1,4 +1,5 @@
-﻿using Main.Service;
+﻿//using Main.Service;
+using Main.Service;
 using Main.View.MainFolder;
 using Main.View.PopupFolder;
 using System;
@@ -87,26 +88,27 @@ namespace Main.View.PagesFolder.ProcessFolder
 
             if (items.Count == 0)
             {
-                dgvDados.Columns["Status"].Visible = false;
+                dgvDados.Columns    ["Status"].         Visible         =   false                   ;
             }
             else
             {
-                dgvDados.Columns["Status"].Visible = true;
+                dgvDados.Columns    ["Status"].         Visible         =   true                    ;
 
-                dgvDados.Columns["Id"].Visible = false;
-                dgvDados.Columns["Id_produto"].Visible = false;
-                dgvDados.Columns["IdUsuario"].Visible = false;
-                dgvDados.Columns["dateend"].Visible = false;
-                dgvDados.Columns["dateupdate"].Visible = false;
-                dgvDados.Columns["StatusProcesso"].Visible = false;
+                dgvDados.Columns    ["Id"].             Visible         =   false                   ;
+                dgvDados.Columns    ["dateend"].        Visible         =   false                   ;
+                dgvDados.Columns    ["IdUsuario"].      Visible         =   false                   ;
+                dgvDados.Columns    ["Id_produto"].     Visible         =   false                   ;
+                dgvDados.Columns    ["dateupdate"].     Visible         =   false                   ;
+                dgvDados.Columns    ["StatusProcesso"]. Visible         =   false                   ;
 
-                dgvDados.Columns["Descricao"].HeaderText = "Descrição";
-                dgvDados.Columns["TempoExecucao"].HeaderText = "Tempo de execução";
-                dgvDados.Columns["TotalContagem"].HeaderText = "Quantidade";
-                dgvDados.Columns["PesoReferencia"].HeaderText = "Peso de referência";
-                dgvDados.Columns["PesoTotal"].HeaderText = "Peso total";
-                dgvDados.Columns["dateinsert"].HeaderText = "Data de inserção";
-                dgvDados.Columns["Status"].DisplayIndex = 10;
+                dgvDados.Columns    ["Op"].             HeaderText      =   "Ordem de Produção"     ;
+                dgvDados.Columns    ["Gramatura"].      HeaderText      =   "Gramatura"             ;
+                dgvDados.Columns    ["Descricao"].      HeaderText      =   "Descrição"             ;
+                dgvDados.Columns    ["PesoTotal"].      HeaderText      =   "Peso total"            ;
+                dgvDados.Columns    ["dateinsert"].     HeaderText      =   "Data de inserção"      ;
+                dgvDados.Columns    ["TempoExecucao"].  HeaderText      =   "Tempo de execução"     ;
+                dgvDados.Columns    ["TotalContagem"].  HeaderText      =   "Quantidade"            ;
+                dgvDados.Columns    ["Status"].         DisplayIndex    =   10                      ;
 
             }
 
@@ -136,24 +138,25 @@ namespace Main.View.PagesFolder.ProcessFolder
 
             if (Processos.Count != 0)
             {
-                dgvDados.Columns["Id"].Visible = false;
-                dgvDados.Columns["Id_produto"].Visible = false;
-                dgvDados.Columns["IdUsuario"].Visible = false;
-                dgvDados.Columns["dateend"].Visible = false;
-                dgvDados.Columns["dateupdate"].Visible = false;
-                dgvDados.Columns["StatusProcesso"].Visible = false;
+                dgvDados.Columns    ["Id"].             Visible         =   false                   ;
+                dgvDados.Columns    ["Id_produto"].     Visible         =   false                   ;
+                dgvDados.Columns    ["IdUsuario"].      Visible         =   false                   ;
+                dgvDados.Columns    ["dateend"].        Visible         =   false                   ;
+                dgvDados.Columns    ["dateupdate"].     Visible         =   false                   ;
+                dgvDados.Columns    ["StatusProcesso"]. Visible         =   false                   ;
 
-                dgvDados.Columns["Descricao"].HeaderText = "Descrição";
-                dgvDados.Columns["TempoExecucao"].HeaderText = "Tempo de execução";
-                dgvDados.Columns["TotalContagem"].HeaderText = "Quantidade";
-                dgvDados.Columns["PesoReferencia"].HeaderText = "Peso de referência";
-                dgvDados.Columns["PesoTotal"].HeaderText = "Peso total";
-                dgvDados.Columns["dateinsert"].HeaderText = "Data de inserção";
-                dgvDados.Columns["Status"].DisplayIndex = 10;
+                dgvDados.Columns    ["Descricao"].      HeaderText      =   "Descrição"             ;
+                dgvDados.Columns    ["TempoExecucao"].  HeaderText      =   "Tempo de execução"     ;
+                dgvDados.Columns    ["TotalContagem"].  HeaderText      =   "Quantidade"            ;
+                dgvDados.Columns    ["Gramatura"].      HeaderText      =   "Gramatura"             ;
+                dgvDados.Columns    ["PesoTotal"].      HeaderText      =   "Peso total"            ;
+                dgvDados.Columns    ["Op"].             HeaderText      =   "Ordem de Produção"     ;
+                dgvDados.Columns    ["dateinsert"].     HeaderText      =   "Data de inserção"      ;
+                dgvDados.Columns    ["Status"].         DisplayIndex    =   10                      ; 
             }
             else
             {
-                dgvDados.Columns["Status"].Visible = false;
+                dgvDados.Columns    ["Status"].         Visible         =   false                   ;
             }
         }
 
@@ -215,11 +218,11 @@ namespace Main.View.PagesFolder.ProcessFolder
                     info.ShowDialog();
                 }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
-        }
 
         private void pcb_return_Click(object sender, EventArgs e)
         {

@@ -35,12 +35,12 @@
             this.pcb_logo = new System.Windows.Forms.PictureBox();
             this.MenuExpand = new System.Windows.Forms.PictureBox();
             this.btnHome = new System.Windows.Forms.Button();
-            this.btnCadastro = new System.Windows.Forms.Button();
             this.btnPesagem = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.btnConfiguração = new System.Windows.Forms.Button();
             this.btnManual = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.btnCadastro = new System.Windows.Forms.Button();
             this.pn_container = new System.Windows.Forms.Panel();
             this.pnSubMenu = new System.Windows.Forms.FlowLayoutPanel();
             this.lbHeader = new System.Windows.Forms.Label();
@@ -103,12 +103,12 @@
             this.sidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(46)))), ((int)(((byte)(84)))));
             this.sidebar.Controls.Add(this.panel1);
             this.sidebar.Controls.Add(this.btnHome);
-            this.sidebar.Controls.Add(this.btnCadastro);
             this.sidebar.Controls.Add(this.btnPesagem);
             this.sidebar.Controls.Add(this.button5);
             this.sidebar.Controls.Add(this.btnConfiguração);
             this.sidebar.Controls.Add(this.btnManual);
             this.sidebar.Controls.Add(this.button1);
+            this.sidebar.Controls.Add(this.btnCadastro);
             this.sidebar.Dock = System.Windows.Forms.DockStyle.Left;
             this.sidebar.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.sidebar.Location = new System.Drawing.Point(0, 0);
@@ -190,28 +190,6 @@
             this.btnHome.UseVisualStyleBackColor = true;
             this.btnHome.Click += new System.EventHandler(this.btnHome_Click_1);
             // 
-            // btnCadastro
-            // 
-            this.btnCadastro.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCadastro.FlatAppearance.BorderSize = 0;
-            this.btnCadastro.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(80)))), ((int)(((byte)(158)))));
-            this.btnCadastro.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(80)))), ((int)(((byte)(158)))));
-            this.btnCadastro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCadastro.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCadastro.ForeColor = System.Drawing.Color.White;
-            this.btnCadastro.Image = global::Main.Properties.Resources.Plus_27px1;
-            this.btnCadastro.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCadastro.Location = new System.Drawing.Point(10, 231);
-            this.btnCadastro.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
-            this.btnCadastro.Name = "btnCadastro";
-            this.btnCadastro.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
-            this.btnCadastro.Size = new System.Drawing.Size(187, 42);
-            this.btnCadastro.TabIndex = 5;
-            this.btnCadastro.Text = "           Cadastro";
-            this.btnCadastro.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCadastro.UseVisualStyleBackColor = true;
-            this.btnCadastro.Click += new System.EventHandler(this.btnCadastro_Click);
-            // 
             // btnPesagem
             // 
             this.btnPesagem.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -223,7 +201,7 @@
             this.btnPesagem.ForeColor = System.Drawing.Color.White;
             this.btnPesagem.Image = ((System.Drawing.Image)(resources.GetObject("btnPesagem.Image")));
             this.btnPesagem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPesagem.Location = new System.Drawing.Point(10, 279);
+            this.btnPesagem.Location = new System.Drawing.Point(10, 231);
             this.btnPesagem.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.btnPesagem.Name = "btnPesagem";
             this.btnPesagem.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
@@ -245,7 +223,7 @@
             this.button5.ForeColor = System.Drawing.Color.White;
             this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
             this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button5.Location = new System.Drawing.Point(10, 327);
+            this.button5.Location = new System.Drawing.Point(10, 279);
             this.button5.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.button5.Name = "button5";
             this.button5.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
@@ -267,7 +245,7 @@
             this.btnConfiguração.ForeColor = System.Drawing.Color.White;
             this.btnConfiguração.Image = ((System.Drawing.Image)(resources.GetObject("btnConfiguração.Image")));
             this.btnConfiguração.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnConfiguração.Location = new System.Drawing.Point(10, 375);
+            this.btnConfiguração.Location = new System.Drawing.Point(10, 327);
             this.btnConfiguração.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.btnConfiguração.Name = "btnConfiguração";
             this.btnConfiguração.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
@@ -289,7 +267,7 @@
             this.btnManual.ForeColor = System.Drawing.Color.White;
             this.btnManual.Image = global::Main.Properties.Resources.document_27px;
             this.btnManual.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnManual.Location = new System.Drawing.Point(10, 423);
+            this.btnManual.Location = new System.Drawing.Point(10, 375);
             this.btnManual.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.btnManual.Name = "btnManual";
             this.btnManual.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
@@ -311,7 +289,7 @@
             this.button1.ForeColor = System.Drawing.Color.White;
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(10, 471);
+            this.button1.Location = new System.Drawing.Point(10, 423);
             this.button1.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.button1.Name = "button1";
             this.button1.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
@@ -320,8 +298,30 @@
             this.button1.Text = "           Sair";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.btnClose_Click_1);
+            // 
+            // btnCadastro
+            // 
+            this.btnCadastro.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCadastro.FlatAppearance.BorderSize = 0;
+            this.btnCadastro.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(80)))), ((int)(((byte)(158)))));
+            this.btnCadastro.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(80)))), ((int)(((byte)(158)))));
+            this.btnCadastro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCadastro.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCadastro.ForeColor = System.Drawing.Color.White;
+            this.btnCadastro.Image = global::Main.Properties.Resources.Plus_27px1;
+            this.btnCadastro.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCadastro.Location = new System.Drawing.Point(10, 471);
+            this.btnCadastro.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
+            this.btnCadastro.Name = "btnCadastro";
+            this.btnCadastro.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
+            this.btnCadastro.Size = new System.Drawing.Size(187, 42);
+            this.btnCadastro.TabIndex = 5;
+            this.btnCadastro.Text = "           Cadastro";
+            this.btnCadastro.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCadastro.UseVisualStyleBackColor = true;
+            this.btnCadastro.Visible = false;
+            this.btnCadastro.Click += new System.EventHandler(this.btnCadastro_Click);
             // 
             // pn_container
             // 

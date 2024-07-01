@@ -1,4 +1,5 @@
 ﻿using Main.Model;
+using Main.Service;
 using Main.View.MainFolder;
 using Main.View.PopupFolder;
 using System;
@@ -8,6 +9,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -23,6 +25,8 @@ namespace Main.View.PagesFolder.ProcessFolder
         string CodSubs = "";
 
         List<object> listaMateriaPrima = new List<object>();
+
+        Regex validadigito = new Regex("^[0-9]+$");
 
         public EscolhaPesagemForms(int id_Usuario, string nome_Usuario)
         {
@@ -44,9 +48,9 @@ namespace Main.View.PagesFolder.ProcessFolder
             //    cb_MateriaPrima.Items.Add(CodDesc);
             //}
 
-            LoadComboBox(cb_MateriaPrima, "SELECT * FROM MateriaPrima", "MateriaPrima", new Dictionary<string, object>(), "Descricao");
+            //LoadComboBox(cb_MateriaPrima, "SELECT * FROM MateriaPrima", "MateriaPrima", new Dictionary<string, object>(), "Descricao");
 
-            cb_MateriaPrima.SelectedIndex = 0;
+            //cb_MateriaPrima.SelectedIndex = 0;
         }
 
         public void LoadComboBox(ComboBox cb, string consulta, string tabela, Dictionary<string, object> parameter, string parameter_name)
@@ -59,8 +63,9 @@ namespace Main.View.PagesFolder.ProcessFolder
                 cb.DisplayMember = parameter_name;
                 cb.SelectedItem = null;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.ToString());
             }
         }
 
@@ -69,78 +74,173 @@ namespace Main.View.PagesFolder.ProcessFolder
             this.Close();
         }
 
-        private async void btn_Confirmar_Click(object sender, EventArgs e)
+        private void btn_Confirmar_Click(object sender, EventArgs e)
         {
-            if (cb_MateriaPrima.SelectedItem == null)
-            {
-                return;
-            }
 
-            if (cb_MateriaPrima.Text == "")
-            {
-                InfoPopup info = new InfoPopup("Erro", "Selecione a Matéria-prima para pesagem!", Properties.Resources.errorIcon);
-                info.ShowDialog();
-            }
-            else
-            {
-                YesOrNo question = new YesOrNo("Tem certeza que deseja iniciar esse processo?");
-                question.ShowDialog();
+            #region =Descartado por Enquanto=
 
-                if(question.RESPOSTA)
+            //if (cb_MateriaPrima.SelectedItem == null)
+            //{
+            //    return;
+            //}
+
+            //if (cb_MateriaPrima.Text == "")
+            //{
+            //    InfoPopup info = new InfoPopup("Erro", "Selecione a Matéria-prima para pesagem!", Properties.Resources.errorIcon);
+            //    info.ShowDialog();
+            //}
+            //else
+            //{
+            //    YesOrNo question = new YesOrNo("Tem certeza que deseja iniciar esse processo?");
+            //    question.ShowDialog();
+
+            //    if(question.RESPOSTA)
+            //    {
+            //        MateriaPrimaClass materia = (MateriaPrimaClass)cb_MateriaPrima.SelectedItem;
+
+            //        int idMateria = 0;
+            //        int qtMinima = 0;
+
+            //        var listaMateriaPrima = Program.SQL.SelectList("SELECT * FROM MateriaPrima WHERE Id = @Id", "MateriaPrima", null,
+            //        new Dictionary<string, object>()
+            //        {
+            //            {"@Id", materia.Id }
+            //        });
+
+
+            //        idMateria = materia.Id;
+            //        qtMinima = materia.Quantidade_minima;
+
+            //        DateTime dataInsertBanco = DateTime.Now;
+
+
+            //        var insertBanco = Program.SQL.CRUDCommand("INSERT INTO Processos (Id_produto, Id_usuario, Descricao, Status_processo, dateinsert) VALUES (@Id_produto, @Id_usuario, @Descricao, @Status_processo, @dateinsert)", "Processos",
+            //        new Dictionary<string, object>()
+            //        {
+            //            {"@Id_produto", idMateria },
+            //            {"@Id_usuario", idUsuario },
+            //            {"@Descricao", txt_Descricao.Text },
+            //            {"@Status_processo", 0 },
+            //            {"@dateinsert", dataInsertBanco}
+            //        });
+
+            //        int idInserido = 0;
+
+            //        await Task.Delay(500);
+
+            //        var selectID = Program.SQL.SelectList("SELECT * FROM Processos WHERE dateinsert = @dateinsert", "Processos", "Id",
+            //        new Dictionary<string, object>()
+            //        {
+            //            {"@dateinsert", dataInsertBanco }
+            //        });
+
+            //        idInserido = (int)selectID.First();
+
+            //        PesoProcessForms proc = new PesoProcessForms(idUsuario, nomeUsuario, idMateria, qtMinima, txt_Descricao.Text, idInserido);
+
+            //        foreach (Form openForm in Application.OpenForms)
+            //        {
+            //            if (openForm is MainForms)
+            //            {
+            //                MainForms mainForm = (MainForms)openForm;
+            //                mainForm.OpenPage(proc);
+            //                this.Close();
+            //                return;
+            //            }
+            //        }
+            //    }
+            //}
+            #endregion
+
+
+            string observacao = "";
+
+            Boolean validanumero = validadigito.IsMatch(txt_numero.Text);
+            Boolean validaquant = validadigito.IsMatch(txt_qtfolhas.Text);
+
+            try
+            {
+                if (txt_Descricao.Text == "")
                 {
-                    MateriaPrimaClass materia = (MateriaPrimaClass)cb_MateriaPrima.SelectedItem;
+                    observacao = "Processo sem observação.";
+                }
+                else
+                {
+                    observacao = txt_Descricao.Text;
+                }
 
-                    int idMateria = 0;
-                    int qtMinima = 0;
-
-                    var listaMateriaPrima = Program.SQL.SelectList("SELECT * FROM MateriaPrima WHERE Id = @Id", "MateriaPrima", null,
-                    new Dictionary<string, object>()
+                if (txt_cliente.Text == "" || txt_numero.Text == "" || txt_tipo.Text == "" || txt_qtfolhas.Text == "" || txt_formato.Text == "" || txt_papel.Text == "" || txt_op.Text == "")
+                {
+                    InfoPopup info = new InfoPopup("Erro", "Preencha todos os campos com '*' para prosseguir!", Properties.Resources.errorIcon);
+                    info.ShowDialog();
+                }
+                else
+                {
+                    if (validanumero == false || validaquant == false)
                     {
-                        {"@Id", materia.Id }
-                    });
-
-
-                    idMateria = materia.Id;
-                    qtMinima = materia.Quantidade_minima;
-
-                    DateTime dataInsertBanco = DateTime.Now;
-
-
-                    var insertBanco = Program.SQL.CRUDCommand("INSERT INTO Processos (Id_produto, Id_usuario, Descricao, Status_processo, dateinsert) VALUES (@Id_produto, @Id_usuario, @Descricao, @Status_processo, @dateinsert)", "Processos",
-                    new Dictionary<string, object>()
+                        InfoPopup info = new InfoPopup("Erro", "Os campos de Número e Quantidade devem ser preenchidos apenas com Digítos!", Properties.Resources.errorIcon);
+                        info.ShowDialog();
+                    }
+                    else
                     {
-                        {"@Id_produto", idMateria },
-                        {"@Id_usuario", idUsuario },
-                        {"@Descricao", txt_Descricao.Text },
-                        {"@Status_processo", 0 },
-                        {"@dateinsert", dataInsertBanco}
-                    });
 
-                    int idInserido = 0;
+                        YesOrNo question = new YesOrNo("Tem certeza que deseja iniciar esse processo?");
+                        question.ShowDialog();
 
-                    await Task.Delay(500);
-
-                    var selectID = Program.SQL.SelectList("SELECT * FROM Processos WHERE dateinsert = @dateinsert", "Processos", "Id",
-                    new Dictionary<string, object>()
-                    {
-                        {"@dateinsert", dataInsertBanco }
-                    });
-
-                    idInserido = (int)selectID.First();
-
-                    PesoProcessForms proc = new PesoProcessForms(idUsuario, nomeUsuario, idMateria, qtMinima, txt_Descricao.Text, idInserido);
-
-                    foreach (Form openForm in Application.OpenForms)
-                    {
-                        if (openForm is MainForms)
+                        if (question.RESPOSTA)
                         {
-                            MainForms mainForm = (MainForms)openForm;
-                            mainForm.OpenPage(proc);
-                            this.Close();
-                            return;
+
+                            DateTime dataInsertBanco = DateTime.Now;
+
+                            var insertBanco = Program.SQL.InsertAndSelectLasRow("INSERT INTO Processos (Id_produto, Id_usuario, Descricao, Status_processo, dateinsert, Cliente, Numero, OP, Tipo, Papel, Formato, Quantidade) VALUES (@Id_produto, @Id_usuario, @Descricao, @Status_processo, @dateinsert, @Cliente, @Numero, @OP, @Tipo, @Papel, @Formato, @Quantidade) SELECT SCOPE_IDENTITY() AS Last_Id;", "Processos",
+                            new Dictionary<string, object>()
+                            {
+                                {"@Id_produto", 0 },
+                                {"@Id_usuario", idUsuario },
+                                {"@Descricao", txt_Descricao.Text },
+                                {"@Status_processo", 0 },
+                                {"@dateinsert", dataInsertBanco},
+                                {"@Cliente", txt_cliente.Text},
+                                {"@Numero", txt_numero.Text},
+                                {"@OP", txt_op.Text},
+                                {"@Tipo", txt_tipo.Text},
+                                {"@Papel", txt_papel.Text},
+                                {"@Formato", txt_formato.Text},
+                                {"@Quantidade", txt_qtfolhas.Text}
+                            });
+
+                            if (insertBanco > 0)
+                            {
+                                if (SerialCommunicationService.SERIALPORT1.IsOpen == true)
+                                {
+                                    PesoProcessForms proc = new PesoProcessForms(idUsuario, nomeUsuario, Convert.ToInt32(txt_qtfolhas.Text), insertBanco);
+
+                                    foreach (Form openForm in Application.OpenForms)
+                                    {
+                                        if (openForm is MainForms)
+                                        {
+                                            MainForms mainForm = (MainForms)openForm;
+                                            mainForm.OpenPage(proc);
+                                            this.Close();
+                                            return;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    this.Close();
+
+                                    InfoPopup info = new InfoPopup("Erro!", "O processo " + txt_op.Text + txt_cliente.Text +  "foi criado, porém, você não está conectado a nenhuma balança. Pressiona a tecla F1 e efetue a configuração antes de iniciar o processo!", Properties.Resources.errorIcon);
+                                    info.ShowDialog();
+                                }
+                            }
                         }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
             }
         }
 
@@ -152,31 +252,18 @@ namespace Main.View.PagesFolder.ProcessFolder
 
         private void cb_MateriaPrima_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cb_MateriaPrima.SelectedItem == null)
-            {
-                return;
-            }
-
-            var listaMateriaPrima = Program.SQL.SelectList("SELECT * FROM MateriaPrima WHERE Codigo = @Codigo", "MateriaPrima", null,
-            new Dictionary<string, object>()
-            {
-                {"@Codigo", CodSubs }
-            });
-
-            MateriaPrimaClass materia = (MateriaPrimaClass)cb_MateriaPrima.SelectedItem;
-
-            //foreach (MateriaPrimaClass materia in listaMateriaPrima)
+            //if (cb_MateriaPrima.SelectedItem == null)
             //{
-
-            lbl_QtMateriaPrima.Text = "Quantidade mínima para referência: " + materia.Quantidade_minima + " un.";
-
+            //    return;
             //}
 
-            lbl_QtMateriaPrima.Visible = true;
-        }
+            //var listaMateriaPrima = Program.SQL.SelectList("SELECT * FROM MateriaPrima WHERE Codigo = @Codigo", "MateriaPrima", null,
+            //new Dictionary<string, object>()
+            //{
+            //    {"@Codigo", CodSubs }
+            //});
 
-        private void panel3_Paint(object sender, PaintEventArgs e)
-        {
+            //MateriaPrimaClass materia = (MateriaPrimaClass)cb_MateriaPrima.SelectedItem;
 
         }
     }

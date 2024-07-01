@@ -15,6 +15,7 @@ namespace Main.View.PagesFolder.ProcessFolder
     public partial class VisualizarLogForms : Form
     {
         int idProcesso = 0;
+
         public VisualizarLogForms(int id_Processo)
         {
             InitializeComponent();

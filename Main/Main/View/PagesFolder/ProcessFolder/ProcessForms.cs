@@ -122,7 +122,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                 lbl_Descricao.Text = proc.Descricao.ToString();
                 tempoExecucao = proc.TempoExecucao;
                 valorTotal = proc.TotalContagem;
-                pesoReferencia = Convert.ToDecimal(proc.PesoReferencia);
+                pesoReferencia = Convert.ToDecimal(proc.Gramatura);
                 valorPesoTotal = Convert.ToDecimal(proc.PesoTotal);
                 tempoContagem = proc.TempoExecucao;
                 statusProcesso = proc.StatusProcesso;
