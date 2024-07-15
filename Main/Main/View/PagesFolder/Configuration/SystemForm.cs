@@ -530,11 +530,11 @@ namespace Main.View.PagesFolder.Configuration
                     }
 
 
-
                     System.Drawing.Font f1 = new System.Drawing.Font("Arial", 18, FontStyle.Regular, GraphicsUnit.Pixel);
                     System.Drawing.Font fmn = new System.Drawing.Font("Arial", 15, FontStyle.Bold, GraphicsUnit.Pixel);
 
                     System.Drawing.Brush brush = System.Drawing.Brushes.Black;
+
 
                     int x = (int)(148 * (96 / 25.4f));
                     int y = (int)(105 * (96 / 25.4f));
@@ -543,6 +543,7 @@ namespace Main.View.PagesFolder.Configuration
 
                     int wid = (int)(35 * 96 / 25.4f);
                     int hei = (int)(12 * 96 / 25.4f);
+
 
                     System.Drawing.Pen blackPen = new System.Drawing.Pen(System.Drawing.Color.Black, 2);
 
@@ -554,102 +555,102 @@ namespace Main.View.PagesFolder.Configuration
 
 
                         //op
-                        graphics.DrawLine(blackPen, 72f, 36f, 200f, 36f);
+                        graphics.DrawLine(blackPen, 72f, 30f, 200f, 30f);
 
                         //cliente
-                        graphics.DrawLine(blackPen, 280f, 36f, x - 20, 36f);
+                        graphics.DrawLine(blackPen, 280f, 30f, 540f, 30f);
 
                         //peso
-                        graphics.DrawLine(blackPen, 65f, 86f, 200f, 86f);
+                        graphics.DrawLine(blackPen, 65f, 80f, 200f, 80f);
 
                         //qtfl
-                        graphics.DrawLine(blackPen, 309f, 86f, 440f, 86f);
+                        graphics.DrawLine(blackPen, 309f, 80f, 440f, 80f);
 
                         //tipo papel
-                        graphics.DrawLine(blackPen, 110f, 136f, 225f, 136f);
+                        graphics.DrawLine(blackPen, 110f, 130f, 225f, 130f);
 
                         //formato
-                        graphics.DrawLine(blackPen, 314f, 136f, 388f, 136f);
+                        graphics.DrawLine(blackPen, 314f, 130f, 388f, 130f);
 
                         //gram
-                        graphics.DrawLine(blackPen, 449f, 136f, 540f, 136f);
+                        graphics.DrawLine(blackPen, 449f, 130f, 540f, 130f);
 
                         //data inicio
-                        graphics.DrawLine(blackPen, 110f, 186f, 225f, 186f);
+                        graphics.DrawLine(blackPen, 110f, 180f, 225f, 180f);
 
                         //data termino
-                        graphics.DrawLine(blackPen, 355f, 186f, 470f, 186f);
+                        graphics.DrawLine(blackPen, 355f, 180f, 470f, 180f);
 
                         //horario inicial
-                        graphics.DrawLine(blackPen, 132f, 236f, 225f, 236f);
+                        graphics.DrawLine(blackPen, 132f, 230f, 225f, 230f);
 
                         //horario final
-                        graphics.DrawLine(blackPen, 343f, 236f, 470f, 236f);
+                        graphics.DrawLine(blackPen, 343f, 230f, 470f, 230f);
 
                         //operador
-                        graphics.DrawLine(blackPen, 100f, 286f, 340f, 286f);
+                        graphics.DrawLine(blackPen, 100f, 280f, 340f, 280f);
 
                         //turno
-                        graphics.DrawLine(blackPen, 404f, 286f, 540f, 286f);
+                        graphics.DrawLine(blackPen, 404f, 280f, 540f, 280f);
 
 
 
 
 
                         //op
-                        graphics.DrawString(lbl_op, f1, brush, new PointF(12, 17));
-                        graphics.DrawString(lbl_op_r, f1, brush, new PointF(74, 17));
+                        graphics.DrawString(lbl_op, f1, brush, new PointF(12, 10));
+                        graphics.DrawString(lbl_op_r, f1, brush, new PointF(74, 10));
                         
                         //cliente
-                        graphics.DrawString(lbl_cli, f1, brush, new PointF(210, 17));
-                        graphics.DrawString(lbl_cli_r, f1, brush, new PointF(281, 17));
+                        graphics.DrawString(lbl_cli, f1, brush, new PointF(210, 10));
+                        graphics.DrawString(lbl_cli_r, f1, brush, new PointF(281, 10));
 
                         //peso
-                        graphics.DrawString(lbl_peso, f1, brush, new PointF(12, 67));
-                        graphics.DrawString(lbl_peso_r, f1, brush, new PointF(65, 67));
+                        graphics.DrawString(lbl_peso, f1, brush, new PointF(12, 60));
+                        graphics.DrawString(lbl_peso_r, f1, brush, new PointF(65, 60));
 
                         //qt folhas
-                        graphics.DrawString(lbl_qtfl, f1, brush, new PointF(208, 67));
-                        graphics.DrawString(lbl_qtfl_r, f1, brush, new PointF(308, 67));
+                        graphics.DrawString(lbl_qtfl, f1, brush, new PointF(208, 60));
+                        graphics.DrawString(lbl_qtfl_r, f1, brush, new PointF(308, 60));
 
                         //tp papel
-                        graphics.DrawString(lbl_tppl, f1, brush, new PointF(12, 117));
-                        graphics.DrawString(lbl_tppl_r, f1, brush, new PointF(112, 117));
+                        graphics.DrawString(lbl_tppl, f1, brush, new PointF(12, 110));
+                        graphics.DrawString(lbl_tppl_r, f1, brush, new PointF(112, 110));
 
                         //formato
-                        graphics.DrawString(lbl_fmt, f1, brush, new PointF(236, 117));
-                        graphics.DrawString(lbl_fmt_r, f1, brush, new PointF(316, 117));
+                        graphics.DrawString(lbl_fmt, f1, brush, new PointF(236, 110));
+                        graphics.DrawString(lbl_fmt_r, f1, brush, new PointF(316, 110));
 
                         //gram
-                        graphics.DrawString(lbl_gr, f1, brush, new PointF(393, 117));
-                        graphics.DrawString(lbl_gr_r, f1, brush, new PointF(450, 117));
+                        graphics.DrawString(lbl_gr, f1, brush, new PointF(393, 110));
+                        graphics.DrawString(lbl_gr_r, f1, brush, new PointF(450, 110));
 
                         //data inicio
-                        graphics.DrawString(lbl_dtin, f1, brush, new PointF(12, 167));
-                        graphics.DrawString(lbl_dtin_r, f1, brush, new PointF(112, 167));
+                        graphics.DrawString(lbl_dtin, f1, brush, new PointF(12, 160));
+                        graphics.DrawString(lbl_dtin_r, f1, brush, new PointF(112, 160));
 
                         //data Término
-                        graphics.DrawString(lbl_dtfm, f1, brush, new PointF(236, 167));
-                        graphics.DrawString(lbl_dtfm_r, f1, brush, new PointF(356, 167));
+                        graphics.DrawString(lbl_dtfm, f1, brush, new PointF(236, 160));
+                        graphics.DrawString(lbl_dtfm_r, f1, brush, new PointF(356, 160));
 
                         //horário inicial
-                        graphics.DrawString(lbl_hrin, f1, brush, new PointF(12, 217));
-                        graphics.DrawString(lbl_hrin_r, f1, brush, new PointF(132, 217));
+                        graphics.DrawString(lbl_hrin, f1, brush, new PointF(12, 210));
+                        graphics.DrawString(lbl_hrin_r, f1, brush, new PointF(132, 210));
 
                         //horário final
-                        graphics.DrawString(lbl_hrfm, f1, brush, new PointF(236, 217));
-                        graphics.DrawString(lbl_hrfm_r, f1, brush, new PointF(346, 217));
+                        graphics.DrawString(lbl_hrfm, f1, brush, new PointF(236, 210));
+                        graphics.DrawString(lbl_hrfm_r, f1, brush, new PointF(346, 210));
 
-                        graphics.DrawString(lbl_opr, f1, brush, new PointF(12, 267));
-                        graphics.DrawString(lbl_opr_r, f1, brush, new PointF(100, 267));
+                        graphics.DrawString(lbl_opr, f1, brush, new PointF(12, 260));
+                        graphics.DrawString(lbl_opr_r, f1, brush, new PointF(100, 260));
 
-                        graphics.DrawString(lbl_trn, f1, brush, new PointF(346, 267));
-                        graphics.DrawString(lbl_trn_r, f1, brush, new PointF(406, 267));
+                        graphics.DrawString(lbl_trn, f1, brush, new PointF(346, 260));
+                        graphics.DrawString(lbl_trn_r, f1, brush, new PointF(406, 260));
 
-                        graphics.DrawString(lbl_obs, f1, brush, new PointF(12, 315));
-                        graphics.DrawString(split1, fmn, brush, new PointF(56, 318));
-                        graphics.DrawString(split2, fmn, brush, new PointF(56, 343));
-                        graphics.DrawString(split3, fmn, brush, new PointF(56, 368));
+                        graphics.DrawString(lbl_obs, f1, brush, new PointF(12, 305));
+                        graphics.DrawString(split1, fmn, brush, new PointF(56, 308));
+                        graphics.DrawString(split2, fmn, brush, new PointF(56, 333));
+                        graphics.DrawString(split3, fmn, brush, new PointF(56, 358));
 
 
                     }

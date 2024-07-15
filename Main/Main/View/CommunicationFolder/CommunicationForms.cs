@@ -240,262 +240,262 @@ namespace Main.View.CommunicationFolder
             _impressoras = Program.SQL.SelectList("select * from Rede where parent = @parent and tipo = 'Impressora'", "Rede", values: parametros);
         }
 
-        public async void ImpressoraPrint(EtiquetaInfo etiqueta, int type)
-        {
-            foreach (RedeClass impressora in _impressoras)
-            {
-                if (Program.Configuracao.id_Impressora == impressora.Id)
-                {
-                    if (Program.Etiqueta != null)
-                    {
-                        //Código para criar etiqueta.
-                        ZXing.BarcodeWriter brcode = new ZXing.BarcodeWriter();
+        //public async void ImpressoraPrint(EtiquetaInfo etiqueta, int type)
+        //{
+        //    foreach (RedeClass impressora in _impressoras)
+        //    {
+        //        if (Program.Configuracao.id_Impressora == impressora.Id)
+        //        {
+        //            if (Program.Etiqueta != null)
+        //            {
+        //                //Código para criar etiqueta.
+        //                ZXing.BarcodeWriter brcode = new ZXing.BarcodeWriter();
 
-                        string lbl_1 = etiqueta.quantidadePecas;
-                        string lbl_2 = etiqueta.date + "W";
-                        string lbl_3 = etiqueta.produtoProduzido;
-                        string lbl_4 = "80 - MADE IN BRAZIL";
-                        string lbl_pack = etiqueta.packCaixa;
-                        string lbl_5 = etiqueta.partNumber;
-                        string lbl_6 = "weight cheked approved";
-                        string lbl_7 = $"^PR7\n\r^BY3,2,56^FT50,107^BER,,Y,N\r\n^FH\\^FD{etiqueta.earn}^FS\r\n^PQ1,0,1,Y";
+        //                string lbl_1 = etiqueta.quantidadePecas;
+        //                string lbl_2 = etiqueta.date + "W";
+        //                string lbl_3 = etiqueta.produtoProduzido;
+        //                string lbl_4 = "80 - MADE IN BRAZIL";
+        //                string lbl_pack = etiqueta.packCaixa;
+        //                string lbl_5 = etiqueta.partNumber;
+        //                string lbl_6 = "weight cheked approved";
+        //                string lbl_7 = $"^PR7\n\r^BY3,2,56^FT50,107^BER,,Y,N\r\n^FH\\^FD{etiqueta.earn}^FS\r\n^PQ1,0,1,Y";
 
-                        System.Drawing.Font fontRegularR = new System.Drawing.Font("SKF Sans", 13, FontStyle.Regular, GraphicsUnit.Pixel);
-                        System.Drawing.Font fontLargeB = new System.Drawing.Font("SKF Sans", 20, FontStyle.Bold, GraphicsUnit.Pixel);
-                        System.Drawing.Font fontMediumB = new System.Drawing.Font("SKF Sans", 17, FontStyle.Bold, GraphicsUnit.Pixel);
-                        System.Drawing.Font fontSmallB = new System.Drawing.Font("SKF Sans", 13, FontStyle.Bold, GraphicsUnit.Pixel);
-                        System.Drawing.Brush brush = System.Drawing.Brushes.Black;
+        //                System.Drawing.Font fontRegularR = new System.Drawing.Font("SKF Sans", 13, FontStyle.Regular, GraphicsUnit.Pixel);
+        //                System.Drawing.Font fontLargeB = new System.Drawing.Font("SKF Sans", 20, FontStyle.Bold, GraphicsUnit.Pixel);
+        //                System.Drawing.Font fontMediumB = new System.Drawing.Font("SKF Sans", 17, FontStyle.Bold, GraphicsUnit.Pixel);
+        //                System.Drawing.Font fontSmallB = new System.Drawing.Font("SKF Sans", 13, FontStyle.Bold, GraphicsUnit.Pixel);
+        //                System.Drawing.Brush brush = System.Drawing.Brushes.Black;
 
-                        int x = (int)(60 * (96 / 25.4f));  //60 mm
-                        int y = (int)(050 * (96 / 25.4f)); //50 mm
+        //                int x = (int)(60 * (96 / 25.4f));  //60 mm
+        //                int y = (int)(050 * (96 / 25.4f)); //50 mm
 
-                        Bitmap bitmap = new Bitmap(x, y);
+        //                Bitmap bitmap = new Bitmap(x, y);
 
-                        //Terminar de arrumar o tamanho da etiqueta.
-                        int wid = (int)(51 * 96 / 25.4f);
-                        int hei = (int)(13 * 96 / 25.4f);
+        //                //Terminar de arrumar o tamanho da etiqueta.
+        //                int wid = (int)(51 * 96 / 25.4f);
+        //                int hei = (int)(13 * 96 / 25.4f);
 
-                        brcode.Format = BarcodeFormat.EAN_13;
-                        brcode.Options = new ZXing.Common.EncodingOptions()
-                        {
-                            Margin = 0,
-                            Height = hei,
-                            Width = wid,
-                            NoPadding = false,
-                        };
+        //                brcode.Format = BarcodeFormat.EAN_13;
+        //                brcode.Options = new ZXing.Common.EncodingOptions()
+        //                {
+        //                    Margin = 0,
+        //                    Height = hei,
+        //                    Width = wid,
+        //                    NoPadding = false,
+        //                };
 
-                        Bitmap barcodeBitmap = new Bitmap(brcode.Write(etiqueta.earn), wid, hei);
+        //                Bitmap barcodeBitmap = new Bitmap(brcode.Write(etiqueta.earn), wid, hei);
 
-                        using (Graphics graphics = Graphics.FromImage(bitmap))
-                        {
-                            graphics.Clear(System.Drawing.Color.White);
+        //                using (Graphics graphics = Graphics.FromImage(bitmap))
+        //                {
+        //                    graphics.Clear(System.Drawing.Color.White);
 
-                            graphics.DrawString(lbl_1, fontLargeB, brush, new PointF(90, 2));
-                            graphics.DrawString(lbl_2, fontRegularR, brush, new PointF(180, 2));
-                            graphics.DrawString(lbl_3, fontMediumB, brush, new PointF(55, 25));
-                            graphics.DrawString(lbl_4, fontSmallB, brush, new PointF(24, 50));
-                            graphics.DrawString(lbl_pack, fontRegularR, brush, new PointF(198, 50));
-                            ////Baixo da linha vermelha
-                            graphics.DrawString(lbl_6, fontSmallB, brush, new PointF(32, 65));
-                            graphics.DrawString(lbl_5, fontRegularR, brush, new PointF(80, 90));
-                            graphics.DrawImage(barcodeBitmap, new PointF(15, 110));
-                        }
+        //                    graphics.DrawString(lbl_1, fontLargeB, brush, new PointF(90, 2));
+        //                    graphics.DrawString(lbl_2, fontRegularR, brush, new PointF(180, 2));
+        //                    graphics.DrawString(lbl_3, fontMediumB, brush, new PointF(55, 25));
+        //                    graphics.DrawString(lbl_4, fontSmallB, brush, new PointF(24, 50));
+        //                    graphics.DrawString(lbl_pack, fontRegularR, brush, new PointF(198, 50));
+        //                    ////Baixo da linha vermelha
+        //                    graphics.DrawString(lbl_6, fontSmallB, brush, new PointF(32, 65));
+        //                    graphics.DrawString(lbl_5, fontRegularR, brush, new PointF(80, 90));
+        //                    graphics.DrawImage(barcodeBitmap, new PointF(15, 110));
+        //                }
 
-                        ZPLPrintingService prnSvc = new ZPLPrintingService();
-                        //Bitmap bmp = RotateBitmap(bitmap, 90);
-                        string zplCode = await prnSvc.GetImageZPLEncoded(bitmap);
-                        zplCode = zplCode.Replace("#barcode#", lbl_7);
-                        //Console.WriteLine(zplCode);
+        //                ZPLPrintingService prnSvc = new ZPLPrintingService();
+        //                //Bitmap bmp = RotateBitmap(bitmap, 90);
+        //                string zplCode = await prnSvc.GetImageZPLEncoded(bitmap);
+        //                zplCode = zplCode.Replace("#barcode#", lbl_7);
+        //                //Console.WriteLine(zplCode);
 
-                        //TCP
-                        if (type == 0)
-                        {
-                            Task task = Task.Run(async () =>
-                            {
-                                string ipAddress = impressora.IP;
-                                int port = impressora.porta;
-                                int timeoutMilliseconds = 1000;
-                                using (TcpClient tcpClient = new TcpClient())
-                                {
-                                    try
-                                    {
-                                        using (CancellationTokenSource cancellationTokenSource = new CancellationTokenSource(timeoutMilliseconds))
-                                        {
-                                            Task connectTask = tcpClient.ConnectAsync(ipAddress, port);
-                                            await Task.WhenAny(connectTask, Task.Delay(Timeout.Infinite, cancellationTokenSource.Token));
-                                            cancellationTokenSource.Token.ThrowIfCancellationRequested();
+        //                //TCP
+        //                if (type == 0)
+        //                {
+        //                    Task task = Task.Run(async () =>
+        //                    {
+        //                        string ipAddress = impressora.IP;
+        //                        int port = impressora.porta;
+        //                        int timeoutMilliseconds = 1000;
+        //                        using (TcpClient tcpClient = new TcpClient())
+        //                        {
+        //                            try
+        //                            {
+        //                                using (CancellationTokenSource cancellationTokenSource = new CancellationTokenSource(timeoutMilliseconds))
+        //                                {
+        //                                    Task connectTask = tcpClient.ConnectAsync(ipAddress, port);
+        //                                    await Task.WhenAny(connectTask, Task.Delay(Timeout.Infinite, cancellationTokenSource.Token));
+        //                                    cancellationTokenSource.Token.ThrowIfCancellationRequested();
 
-                                            Console.WriteLine("Dispositivo conectado com sucesso! {0}", impressora.full_name);
+        //                                    Console.WriteLine("Dispositivo conectado com sucesso! {0}", impressora.full_name);
 
-                                            using (NetworkStream stream = tcpClient.GetStream())
-                                            {
-                                                byte[] bufferWrite = Encoding.UTF8.GetBytes(zplCode);
-                                                stream.Write(bufferWrite, 0, bufferWrite.Length);
-                                                Console.WriteLine($"Dados enviados: {bufferWrite}");
-                                            }
-                                        }
-                                    }
-                                    catch (OperationCanceledException)
-                                    {
-                                        Console.WriteLine("Tempo limite de conexão atingido. {0}", impressora.full_name);
-                                    }
-                                    catch (IOException ex)
-                                    {
-                                        Console.WriteLine($"Erro na escrita dos dados: {ex.Message}" + " {0}", impressora.full_name);
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        Console.WriteLine($"Erro ao tentar conectar: {ex.Message}" + " {0}", impressora.full_name);
-                                    }
-                                }
-                            });
-                        }
-                        //Serial
-                        else if (type == 1)
-                        {
-                            Task taskSerial = Task.Run(() =>
-                            {
+        //                                    using (NetworkStream stream = tcpClient.GetStream())
+        //                                    {
+        //                                        byte[] bufferWrite = Encoding.UTF8.GetBytes(zplCode);
+        //                                        stream.Write(bufferWrite, 0, bufferWrite.Length);
+        //                                        Console.WriteLine($"Dados enviados: {bufferWrite}");
+        //                                    }
+        //                                }
+        //                            }
+        //                            catch (OperationCanceledException)
+        //                            {
+        //                                Console.WriteLine("Tempo limite de conexão atingido. {0}", impressora.full_name);
+        //                            }
+        //                            catch (IOException ex)
+        //                            {
+        //                                Console.WriteLine($"Erro na escrita dos dados: {ex.Message}" + " {0}", impressora.full_name);
+        //                            }
+        //                            catch (Exception ex)
+        //                            {
+        //                                Console.WriteLine($"Erro ao tentar conectar: {ex.Message}" + " {0}", impressora.full_name);
+        //                            }
+        //                        }
+        //                    });
+        //                }
+        //                //Serial
+        //                else if (type == 1)
+        //                {
+        //                    Task taskSerial = Task.Run(() =>
+        //                    {
 
-                                try
-                                {
-                                    if (Program.IMPRESSORAPORT.IsOpen)
-                                    {
-                                        // Program.IMPRESSORAPORT.Open();
-                                        //Console.WriteLine("Dispositivo conectado com sucesso! {0}", impressora.full_name);
+        //                        try
+        //                        {
+        //                            if (Program.IMPRESSORAPORT.IsOpen)
+        //                            {
+        //                                // Program.IMPRESSORAPORT.Open();
+        //                                //Console.WriteLine("Dispositivo conectado com sucesso! {0}", impressora.full_name);
 
-                                        byte[] bufferWrite = Encoding.UTF8.GetBytes(zplCode);
-                                        Program.IMPRESSORAPORT.Write(bufferWrite, 0, bufferWrite.Length);
-                                        //Console.WriteLine($"Dados enviados: {Encoding.UTF8.GetString(bufferWrite)}");
-                                        //MessageBox.Show("Enviado para impressora");
-                                    }
+        //                                byte[] bufferWrite = Encoding.UTF8.GetBytes(zplCode);
+        //                                Program.IMPRESSORAPORT.Write(bufferWrite, 0, bufferWrite.Length);
+        //                                //Console.WriteLine($"Dados enviados: {Encoding.UTF8.GetString(bufferWrite)}");
+        //                                //MessageBox.Show("Enviado para impressora");
+        //                            }
 
-                                }
-                                catch (TimeoutException)
-                                {
-                                    Console.WriteLine("Tempo limite de conexão atingido. {0}", impressora.full_name);
-                                }
-                                catch (UnauthorizedAccessException ex)
-                                {
-                                    Console.WriteLine($"Erro de acesso à porta serial: {ex.Message} {impressora.full_name}");
-                                }
-                                catch (IOException ex)
-                                {
-                                    Console.WriteLine($"Erro na escrita dos dados: {ex.Message} {impressora.full_name}");
-                                }
-                                catch (Exception ex)
-                                {
-                                    Console.WriteLine($"Erro ao tentar conectar: {ex.Message} {impressora.full_name}");
-                                }
-                                finally
-                                {
-                                    //if (Program.IMPRESSORAPORT.IsOpen)
-                                    //    Program.IMPRESSORAPORT.Close();
-                                }
+        //                        }
+        //                        catch (TimeoutException)
+        //                        {
+        //                            Console.WriteLine("Tempo limite de conexão atingido. {0}", impressora.full_name);
+        //                        }
+        //                        catch (UnauthorizedAccessException ex)
+        //                        {
+        //                            Console.WriteLine($"Erro de acesso à porta serial: {ex.Message} {impressora.full_name}");
+        //                        }
+        //                        catch (IOException ex)
+        //                        {
+        //                            Console.WriteLine($"Erro na escrita dos dados: {ex.Message} {impressora.full_name}");
+        //                        }
+        //                        catch (Exception ex)
+        //                        {
+        //                            Console.WriteLine($"Erro ao tentar conectar: {ex.Message} {impressora.full_name}");
+        //                        }
+        //                        finally
+        //                        {
+        //                            //if (Program.IMPRESSORAPORT.IsOpen)
+        //                            //    Program.IMPRESSORAPORT.Close();
+        //                        }
 
-                            });
-                        }
-                        //Impressora normal
-                        else if (type == 2)
-                        {
+        //                    });
+        //                }
+        //                //Impressora normal
+        //                else if (type == 2)
+        //                {
 
-                            PrintDocument documento = new PrintDocument();
-                            PrinterSettings configImpressora = new PrinterSettings();
-                            PageSettings pageSettings = documento.DefaultPageSettings;
+        //                    PrintDocument documento = new PrintDocument();
+        //                    PrinterSettings configImpressora = new PrinterSettings();
+        //                    PageSettings pageSettings = documento.DefaultPageSettings;
 
-                            string[] impressoras = PrinterSettings.InstalledPrinters.Cast<string>().ToArray();
-                            string name = "";
-                            foreach (string item in impressoras)
-                            {
+        //                    string[] impressoras = PrinterSettings.InstalledPrinters.Cast<string>().ToArray();
+        //                    string name = "";
+        //                    foreach (string item in impressoras)
+        //                    {
 
-                                if (item == impressora.impressora) { name = impressora.impressora; }
-                            }
+        //                        if (item == impressora.impressora) { name = impressora.impressora; }
+        //                    }
 
-                            bitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);
-                            PrintPopup print = new PrintPopup(bitmap);
-                            print.ShowDialog();
+        //                    bitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);
+        //                    PrintPopup print = new PrintPopup(bitmap);
+        //                    print.ShowDialog();
 
-                            if (!string.IsNullOrWhiteSpace(name))
-                            {
-                                configImpressora.PrinterName = name;
-                                documento.PrinterSettings = configImpressora;
-                                documento.DefaultPageSettings.Landscape = true;
-                            }
+        //                    if (!string.IsNullOrWhiteSpace(name))
+        //                    {
+        //                        configImpressora.PrinterName = name;
+        //                        documento.PrinterSettings = configImpressora;
+        //                        documento.DefaultPageSettings.Landscape = true;
+        //                    }
 
-                            documento.PrintPage += (sender, args) =>
-                            {
-                                args.Graphics.DrawImage(bitmap, 0, 0); // Ajuste a posição conforme necessário
-                            };
+        //                    documento.PrintPage += (sender, args) =>
+        //                    {
+        //                        args.Graphics.DrawImage(bitmap, 0, 0); // Ajuste a posição conforme necessário
+        //                    };
 
-                            documento.Print();
+        //                    documento.Print();
 
 
-                            //TPrint(etiqueta, barcodeBitmap, impressora);
-                            //PrintDocument documento = new PrintDocument();
-                            //PrinterSettings configImpressora = new PrinterSettings();
-                            //PageSettings pageSettings = documento.DefaultPageSettings;
-                            //if (!string.IsNullOrWhiteSpace(impressora.impressora))
-                            //{
-                            //    configImpressora.PrinterName = impressora.impressora;
-                            //    documento.PrinterSettings = configImpressora;
-                            //    documento.DefaultPageSettings.Landscape = true;
-                            //    //documento.Print();
-                            //    //bitmap.Dispose();
-                            //}
+        //                    //TPrint(etiqueta, barcodeBitmap, impressora);
+        //                    //PrintDocument documento = new PrintDocument();
+        //                    //PrinterSettings configImpressora = new PrinterSettings();
+        //                    //PageSettings pageSettings = documento.DefaultPageSettings;
+        //                    //if (!string.IsNullOrWhiteSpace(impressora.impressora))
+        //                    //{
+        //                    //    configImpressora.PrinterName = impressora.impressora;
+        //                    //    documento.PrinterSettings = configImpressora;
+        //                    //    documento.DefaultPageSettings.Landscape = true;
+        //                    //    //documento.Print();
+        //                    //    //bitmap.Dispose();
+        //                    //}
 
-                            ////PrinterResolution Resolution = new PrinterResolution();
-                            ////Resolution.X = 2000;
-                            ////Resolution.Y = 2000;
-                            ////Resolution.Kind = PrinterResolutionKind.High;
-                            ////pageSettings.PrinterResolution = Resolution;
+        //                    ////PrinterResolution Resolution = new PrinterResolution();
+        //                    ////Resolution.X = 2000;
+        //                    ////Resolution.Y = 2000;
+        //                    ////Resolution.Kind = PrinterResolutionKind.High;
+        //                    ////pageSettings.PrinterResolution = Resolution;
 
-                            //try
-                            //{
-                            //    //System.Drawing.Font fontSmall_ = new System.Drawing.Font("SKF Sans", 10, FontStyle.Regular, GraphicsUnit.Pixel);
-                            //    //System.Drawing.Font font_ = new System.Drawing.Font("SKF Sans", 15, FontStyle.Regular, GraphicsUnit.Pixel);
-                            //    //int conste = 1;
-                            //    ////Graphics GR = Resolution.Kind
-                            //    //Bitmap bitMapImage = new Bitmap(250, 250);
+        //                    //try
+        //                    //{
+        //                    //    //System.Drawing.Font fontSmall_ = new System.Drawing.Font("SKF Sans", 10, FontStyle.Regular, GraphicsUnit.Pixel);
+        //                    //    //System.Drawing.Font font_ = new System.Drawing.Font("SKF Sans", 15, FontStyle.Regular, GraphicsUnit.Pixel);
+        //                    //    //int conste = 1;
+        //                    //    ////Graphics GR = Resolution.Kind
+        //                    //    //Bitmap bitMapImage = new Bitmap(250, 250);
 
-                            //    //using (Graphics graphics = Graphics.FromImage(bitMapImage))
-                            //    //{
-                            //    //    graphics.Clear(System.Drawing.Color.White);
-                            //    //    graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
-                            //    //    graphics.DrawString(lbl_1, font_, brush, new PointF(120 * conste, 79 * conste));
-                            //    //    graphics.DrawString(lbl_2, fontSmall_, brush, new PointF(182 * conste, 80 * conste));
-                            //    //    graphics.DrawString(lbl_3, fontSmall_, brush, new PointF(119 * conste, 95 * conste));
-                            //    //    graphics.DrawString(lbl_4, fontSmall_, brush, new PointF(97 * conste, 110 * conste));
-                            //    //    graphics.DrawString(lbl_pack, fontSmall_, brush, new PointF(192 * conste, 110 * conste));
-                            //    //    ///Baixo da linha vermelha
-                            //    //    graphics.DrawString(lbl_5, fontSmall_, brush, new PointF(119 * conste, 143 * conste));
-                            //    //    graphics.DrawString(lbl_6, fontSmall_, brush, new PointF(96 * conste, 125 * conste));
-                            //    //    graphics.DrawImage(barcodeBitmap, new PointF(60 * conste, 160 * conste));
-                            //    //}
+        //                    //    //using (Graphics graphics = Graphics.FromImage(bitMapImage))
+        //                    //    //{
+        //                    //    //    graphics.Clear(System.Drawing.Color.White);
+        //                    //    //    graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+        //                    //    //    graphics.DrawString(lbl_1, font_, brush, new PointF(120 * conste, 79 * conste));
+        //                    //    //    graphics.DrawString(lbl_2, fontSmall_, brush, new PointF(182 * conste, 80 * conste));
+        //                    //    //    graphics.DrawString(lbl_3, fontSmall_, brush, new PointF(119 * conste, 95 * conste));
+        //                    //    //    graphics.DrawString(lbl_4, fontSmall_, brush, new PointF(97 * conste, 110 * conste));
+        //                    //    //    graphics.DrawString(lbl_pack, fontSmall_, brush, new PointF(192 * conste, 110 * conste));
+        //                    //    //    ///Baixo da linha vermelha
+        //                    //    //    graphics.DrawString(lbl_5, fontSmall_, brush, new PointF(119 * conste, 143 * conste));
+        //                    //    //    graphics.DrawString(lbl_6, fontSmall_, brush, new PointF(96 * conste, 125 * conste));
+        //                    //    //    graphics.DrawImage(barcodeBitmap, new PointF(60 * conste, 160 * conste));
+        //                    //    //}
 
-                            //    //Bitmap fixedBitmap = RotateBitmap(bitMapImage, 180);
-                            //    PrintPopup print = new PrintPopup(bitmap);
-                            //    print.ShowDialog();
+        //                    //    //Bitmap fixedBitmap = RotateBitmap(bitMapImage, 180);
+        //                    //    PrintPopup print = new PrintPopup(bitmap);
+        //                    //    print.ShowDialog();
 
-                            //    documento.PrintPage += (sender, e) =>
-                            //    {
-                            //        ///Imprimir a imagem rotacionada.
-                            //        e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-                            //        e.Graphics.DrawImage(bitmap, 0, 0);
-                            //    };
+        //                    //    documento.PrintPage += (sender, e) =>
+        //                    //    {
+        //                    //        ///Imprimir a imagem rotacionada.
+        //                    //        e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+        //                    //        e.Graphics.DrawImage(bitmap, 0, 0);
+        //                    //    };
 
-                            //    documento.PrinterSettings = configImpressora;
-                            //    documento.Print();
-                            //}
-                            //catch (Exception ex)
-                            //{
-                            //}
+        //                    //    documento.PrinterSettings = configImpressora;
+        //                    //    documento.Print();
+        //                    //}
+        //                    //catch (Exception ex)
+        //                    //{
+        //                    //}
 
-                        }
+        //                }
 
-                    }
-                }
-            }
+        //            }
+        //        }
+        //    }
 
-        }
+        //}
 
         //private void TPrint(EtiquetaInfo etiqueta, Bitmap barcodeBitmap, RedeClass impressora)
         //{

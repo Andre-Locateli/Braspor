@@ -185,7 +185,7 @@ CREATE TABLE [dbo].[Processos] (
 	[Id_produto]		INT NOT NULL,
 	[Id_usuario]		INT NOT NULL,
 	[Descricao]			VARCHAR(MAX),
-	[Tempo_execucao]	VARCHAR(20),
+	[Tempo_execucao]	VARCHAR(50),
 	[Total_contagem]	INT,
 	-- [Peso_Referencia]	REAL,
 	[Peso_total]		REAL,

@@ -301,8 +301,6 @@ namespace Main.View.PagesFolder
                 InitSearch();
                 mtxtDateInicio.Text = $"{fixTime(DateTime.Now.Day)}/{fixTime(DateTime.Now.Month)}/{DateTime.Now.Year} 00:00";
                 mtxtDateFim.Text = $"{fixTime(DateTime.Now.Day)}/{fixTime(DateTime.Now.Month)}/{DateTime.Now.Year} 23:59";
-                LoadComboBox(cbProduto,"SELECT * FROM MateriaPrima", "MateriaPrima", new Dictionary<string, object>() { },
-                    "Descricao");
 
                 LoadComboBox(cbUsuario, "SELECT * FROM Usuario", "Usuario", new Dictionary<string, object>() { },
                     "Nome");
@@ -342,28 +340,6 @@ namespace Main.View.PagesFolder
             }
             catch (Exception)
             {
-            }
-        }
-
-        private void cbProduto_Leave(object sender, EventArgs e)
-        {
-            try
-            {
-                MateriaPrimaClass mtp = (MateriaPrimaClass)Program.SQL.SelectObject("SELECT * FROM MateriaPrima WHERE Descricao = @Descricao", "MateriaPrima",
-                    new Dictionary<string, object>() 
-                    {
-                        {"@Descricao", cbProduto.Text}
-                    });
-
-                if (mtp == null) 
-                {
-                    cbProduto.Text = "";
-                    cbProduto.SelectedItem = null;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
             }
         }
 
@@ -441,7 +417,7 @@ namespace Main.View.PagesFolder
                 question.ShowDialog();
                 if (question.RESPOSTA)
                 {
-                    dgv_dados.DataSource = Program.SQL.SelectDataGrid("SELECT M.Descricao AS 'Matéria Prima', U.Nome AS 'Nome Operador', P.Descricao AS 'Descrição Produto', P.Tempo_execucao AS 'Tempo execução', P.Total_contagem AS 'Contagem total de itens' , P.Peso_total AS 'Peso total do processo', P.dateinsert AS 'Data Inicio', P.dateend AS 'Data Fim' FROM Processos P INNER JOIN Usuario U ON P.Id_usuario = U.Id INNER JOIN MateriaPrima M ON P.Id_produto = M.Id", "Processos");
+                    dgv_dados.DataSource = Program.SQL.SelectDataGrid("SELECT U.Nome AS 'Nome Operador', P.Descricao AS 'Observação do Processo', P.Tempo_execucao AS 'Tempo execução', P.Total_contagem AS 'Contagem total de itens' , P.Peso_total AS 'Peso total do processo', P.dateinsert AS 'Data Inicio', P.dateend AS 'Data Fim' FROM Processos P INNER JOIN Usuario U ON P.Id_usuario = U.Id", "Processos");
                     
                     if (dgv_dados.Rows.Count > 0)
                     {
@@ -498,7 +474,7 @@ namespace Main.View.PagesFolder
                         {"@Id_usuario", idUsuario},
                         {"@Nome_usuario", nomeUsuario},
                         {"@Acao", "Exportação de Relatório"},
-                        {"@Descricao", "Relatório: " + mtxtDateInicio.Text + " - " + mtxtDateFim.Text + " / " + cbProduto.Text },
+                        {"@Descricao", "Relatório: " + mtxtDateInicio.Text + " - " + mtxtDateFim.Text},
                         {"@dateinsert", DateTime.Now}
                     });
                 }
@@ -521,19 +497,17 @@ namespace Main.View.PagesFolder
                 if (mtxtDateInicio.Text.Count(c => ' ' == c) > 1) { label2.ForeColor = System.Drawing.Color.Red;return; }
                 if (mtxtDateFim.Text.Count(c => ' ' == c) > 1) { label7.ForeColor = System.Drawing.Color.Red; return; }
 
-                if (cbProduto.SelectedItem == null) { label4.ForeColor = System.Drawing.Color.Red; return; }
                 if (cbUsuario.SelectedItem == null) { label3.ForeColor = System.Drawing.Color.Red; return; }
 
                 if (mtxtDateInicio.Text.Count(c => ' ' == c) > 1) { label2.ForeColor = System.Drawing.Color.Red;return; }
 
 
                 UsuarioClass USER = (UsuarioClass)cbUsuario.SelectedItem;
-                MateriaPrimaClass MATERIA = (MateriaPrimaClass)cbProduto.SelectedItem;
 
                 //Terminar esse CÓDIGO PARA BUSCAR OS ITENS COM OS PARAMETROS.
-                where_condition = $"P.dateinsert >= '{mtxtDateInicio.Text}' AND P.dateend <= '{mtxtDateFim.Text}' AND P.Id_usuario = {USER.Id} AND P.Id_produto = {MATERIA.Id}";
+                where_condition = $"P.dateinsert >= '{mtxtDateInicio.Text}' AND P.dateend <= '{mtxtDateFim.Text}' AND P.Id_usuario = {USER.Id}";
 
-                dgv_dados.DataSource = Program.SQL.SelectDataGrid($"SELECT M.Descricao AS 'Matéria Prima', U.Nome AS 'Nome Operador', P.Descricao AS 'Descrição Produto', P.Tempo_execucao AS 'Tempo execução', P.Total_contagem AS 'Contagem total de itens' , P.Peso_total AS 'Peso total do processo', P.dateinsert AS 'Data Inicio', P.dateend AS 'Data Fim' FROM Processos P INNER JOIN Usuario U ON P.Id_usuario = U.Id INNER JOIN MateriaPrima M ON P.Id_produto = M.Id WHERE {where_condition}", "Processos");
+                dgv_dados.DataSource = Program.SQL.SelectDataGrid($"SELECT U.Nome AS 'Nome Operador', P.Descricao AS 'Observação do Processo', P.Tempo_execucao AS 'Tempo execução', P.Total_contagem AS 'Contagem total de itens' , P.Peso_total AS 'Peso total do processo', P.dateinsert AS 'Data Inicio', P.dateend AS 'Data Fim' FROM Processos P INNER JOIN Usuario U ON P.Id_usuario = U.Id WHERE {where_condition}", "Processos");
             }
             catch (Exception ex) 
             {
@@ -548,7 +522,6 @@ namespace Main.View.PagesFolder
             {
                 label2.ForeColor = System.Drawing.Color.Black;
                 label7.ForeColor = System.Drawing.Color.Black;
-                label4.ForeColor = System.Drawing.Color.Black;
                 label3.ForeColor = System.Drawing.Color.Black;
                 label2.ForeColor = System.Drawing.Color.Black;
             }

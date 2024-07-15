@@ -325,19 +325,19 @@ namespace Main.View.PagesFolder.ProcessFolder
 
             foreach (DataGridViewRow row in dgvDados.Rows)
             {
-                if (dgvDados.Rows[x].Cells[10].Value.ToString() == "0")
+                if (dgvDados.Rows[x].Cells[9].Value.ToString() == "0")
                 {
                     row.Cells[1].Value = "Sem referência";
                 }
-                else if (dgvDados.Rows[x].Cells[10].Value.ToString() == "1")
+                else if (dgvDados.Rows[x].Cells[9].Value.ToString() == "1")
                 {
                     row.Cells[1].Value = "Referência calculada";
                 }
-                else if (dgvDados.Rows[x].Cells[10].Value.ToString() == "2")
+                else if (dgvDados.Rows[x].Cells[9].Value.ToString() == "2")
                 {
                     row.Cells[1].Value = "Contagem iniciada";
                 }
-                else if (dgvDados.Rows[x].Cells[10].Value.ToString() == "3")
+                else if (dgvDados.Rows[x].Cells[9].Value.ToString() == "3")
                 {
                     row.Cells[1].Value = "Finalizado";
                 }
@@ -355,6 +355,11 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                 x++;
             }
+        }
+
+        private void dgvDados_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

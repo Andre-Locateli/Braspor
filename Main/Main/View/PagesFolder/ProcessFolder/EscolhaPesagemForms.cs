@@ -192,47 +192,56 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                             DateTime dataInsertBanco = DateTime.Now;
 
-                            var insertBanco = Program.SQL.InsertAndSelectLasRow("INSERT INTO Processos (Id_produto, Id_usuario, Descricao, Status_processo, dateinsert, Cliente, Numero, OP, Tipo, Papel, Formato, Quantidade) VALUES (@Id_produto, @Id_usuario, @Descricao, @Status_processo, @dateinsert, @Cliente, @Numero, @OP, @Tipo, @Papel, @Formato, @Quantidade) SELECT SCOPE_IDENTITY() AS Last_Id;", "Processos",
-                            new Dictionary<string, object>()
+                            if (Convert.ToInt32(txt_qtfolhas.Text) < 10)
                             {
-                                {"@Id_produto", 0 },
-                                {"@Id_usuario", idUsuario },
-                                {"@Descricao", txt_Descricao.Text },
-                                {"@Status_processo", 0 },
-                                {"@dateinsert", dataInsertBanco},
-                                {"@Cliente", txt_cliente.Text},
-                                {"@Numero", txt_numero.Text},
-                                {"@OP", txt_op.Text},
-                                {"@Tipo", txt_tipo.Text},
-                                {"@Papel", txt_papel.Text},
-                                {"@Formato", txt_formato.Text},
-                                {"@Quantidade", txt_qtfolhas.Text}
-                            });
 
-                            if (insertBanco > 0)
-                            {
-                                if (SerialCommunicationService.SERIALPORT1.IsOpen == true)
+                                var insertBanco = Program.SQL.InsertAndSelectLasRow("INSERT INTO Processos (Id_produto, Id_usuario, Descricao, Status_processo, dateinsert, Cliente, Numero, OP, Tipo, Papel, Formato, Quantidade) VALUES (@Id_produto, @Id_usuario, @Descricao, @Status_processo, @dateinsert, @Cliente, @Numero, @OP, @Tipo, @Papel, @Formato, @Quantidade) SELECT SCOPE_IDENTITY() AS Last_Id;", "Processos",
+                                new Dictionary<string, object>()
                                 {
-                                    PesoProcessForms proc = new PesoProcessForms(idUsuario, nomeUsuario, Convert.ToInt32(txt_qtfolhas.Text), insertBanco);
+                                    {"@Id_produto", 0 },
+                                    {"@Id_usuario", idUsuario },
+                                    {"@Descricao", observacao },
+                                    {"@Status_processo", 0 },
+                                    {"@dateinsert", dataInsertBanco},
+                                    {"@Cliente", txt_cliente.Text},
+                                    {"@Numero", txt_numero.Text},
+                                    {"@OP", txt_op.Text},
+                                    {"@Tipo", txt_tipo.Text},
+                                    {"@Papel", txt_papel.Text},
+                                    {"@Formato", txt_formato.Text},
+                                    {"@Quantidade", txt_qtfolhas.Text}
+                                });
 
-                                    foreach (Form openForm in Application.OpenForms)
+                                if (insertBanco > 0)
+                                {
+                                    if (SerialCommunicationService.SERIALPORT1.IsOpen == true)
                                     {
-                                        if (openForm is MainForms)
+                                        PesoProcessForms proc = new PesoProcessForms(idUsuario, nomeUsuario, Convert.ToInt32(txt_qtfolhas.Text), insertBanco);
+
+                                        foreach (Form openForm in Application.OpenForms)
                                         {
-                                            MainForms mainForm = (MainForms)openForm;
-                                            mainForm.OpenPage(proc);
-                                            this.Close();
-                                            return;
+                                            if (openForm is MainForms)
+                                            {
+                                                MainForms mainForm = (MainForms)openForm;
+                                                mainForm.OpenPage(proc);
+                                                this.Close();
+                                                return;
+                                            }
                                         }
                                     }
-                                }
-                                else
-                                {
-                                    this.Close();
+                                    else
+                                    {
+                                        this.Close();
 
-                                    InfoPopup info = new InfoPopup("Erro!", "O processo " + txt_op.Text + txt_cliente.Text +  "foi criado, porém, você não está conectado a nenhuma balança. Pressiona a tecla F1 e efetue a configuração antes de iniciar o processo!", Properties.Resources.errorIcon);
-                                    info.ShowDialog();
+                                        InfoPopup info = new InfoPopup("Erro!", "O processo " + txt_op.Text + txt_cliente.Text +  "foi criado, porém, você não está conectado a nenhuma balança. Pressiona a tecla F1 e efetue a configuração antes de iniciar o processo!", Properties.Resources.errorIcon);
+                                        info.ShowDialog();
+                                    }
                                 }
+                            }
+                            else
+                            {
+                                InfoPopup info = new InfoPopup("Erro", "Quantidade não pode ser menor que 10!", Properties.Resources.errorIcon);
+                                info.ShowDialog();
                             }
                         }
                     }
