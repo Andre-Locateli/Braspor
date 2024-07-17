@@ -1042,7 +1042,16 @@ namespace Main.View.PagesFolder.ProcessFolder
                     string lbl_hrfm_r = DateTime.Now.ToString().Substring(11, 8);
 
                     string lbl_opr = "Operador:";
-                    string lbl_opr_r = Program._usuarioLogado.Nome.Substring(0, 22);
+                    string lbl_opr_r = Program._usuarioLogado.Nome;
+
+                    if (lbl_opr_r.Length <= 21)
+                    {
+                        lbl_opr_r = Program._usuarioLogado.Nome.Substring(0, lbl_opr_r.Length);
+                    }
+                    else if (lbl_opr_r.Length >= 22)
+                    {
+                        lbl_opr_r = Program._usuarioLogado.Nome.Substring(0, 22);
+                    }
 
                     string lbl_trn = "Turno:";
                     string lbl_trn_r = "";
@@ -1075,16 +1084,64 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                     foreach (ProcessosModel proc in selectProcessos)
                     {
-                        lbl_peso_r = proc.PesoTotal.ToString().Substring(0, 13);
+                        lbl_peso_r = proc.PesoTotal.ToString();
+                        if (lbl_peso_r.Length <= 12)
+                        {
+                            lbl_peso_r = proc.PesoTotal.ToString().Substring(0, lbl_peso_r.Length);
+                        }
+                        else if (lbl_peso_r.Length >= 13)
+                        {
+                            lbl_peso_r = proc.PesoTotal.ToString().Substring(0, 13);
+                        }
 
-                        lbl_qtfl_r = proc.TotalContagem.ToString();
 
-                        lbl_opr_r = proc.Op.ToString().Substring(0, 12);
-                        lbl_cli_r = proc.Cliente.ToString().Substring(0, 22);
+                        lbl_opr_r = proc.Op;
+                        if (lbl_opr_r.Length <= 21)
+                        {
+                            lbl_opr_r = Program._usuarioLogado.Nome.Substring(0, lbl_opr_r.Length);
+                        }
+                        else if (lbl_opr_r.Length >= 22)
+                        {
+                            lbl_opr_r = Program._usuarioLogado.Nome.Substring(0, 22);
+                        }
+
+
+                        lbl_cli_r = proc.Cliente;
+                        if (lbl_cli_r.Length <= 21)
+                        {
+                            lbl_cli_r = proc.Cliente.ToString().Substring(0, lbl_cli_r.Length);
+                        }
+                        else if (lbl_cli_r.Length >= 22)
+                        {
+                            lbl_cli_r = proc.Cliente.ToString().Substring(0, 22);
+                        }
+
+
+                        lbl_dtin_r = proc.dateinsert.Date.ToString();
+                        if (lbl_dtin_r.Length <= 9)
+                        {
+                            lbl_dtin_r = proc.dateinsert.Date.ToString().Substring(0, lbl_dtin_r.Length);
+                        }
+                        else if (lbl_dtin_r.Length >= 10)
+                        {
+                            lbl_dtin_r = proc.dateinsert.Date.ToString().Substring(0, 10);
+                        }
+
+
+                        lbl_hrin_r = proc.dateinsert.ToString();
+                        if (lbl_hrin_r.Length <= 17)
+                        {
+                            lbl_hrin_r = proc.dateinsert.ToString().Substring(11, 8);
+                        }
+                        else if (lbl_hrin_r.Length >= 18)
+                        {
+                            lbl_hrin_r = proc.dateinsert.ToString().Substring(11, 8);
+                        }
+
+
                         lbl_tppl_r = proc.Tipo.ToString();
                         lbl_fmt_r = proc.Formato.ToString();
-                        lbl_dtin_r = proc.dateinsert.Date.ToString().Substring(0, 10);
-                        lbl_hrin_r = proc.dateinsert.ToString().Substring(11, 8);
+                        lbl_qtfl_r = proc.TotalContagem.ToString();
                     }
 
 
@@ -1250,9 +1307,9 @@ namespace Main.View.PagesFolder.ProcessFolder
 
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                Console.WriteLine(ex.ToString());
             }
         }
     }
