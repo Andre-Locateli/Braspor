@@ -22,18 +22,25 @@ namespace Main.Model
             set { _id_processo = value; }
         }
 
-        private decimal _peso_temporeal;
-        public decimal Peso_temporeal
+        private decimal _qtd_temporeal;
+        public decimal qtd_temporeal
         {
-            get { return _peso_temporeal; }
-            set { _peso_temporeal = value; }
+            get { return _qtd_temporeal; }
+            set { _qtd_temporeal = value; }
         }
 
-        private decimal _peso_total;
-        public decimal Peso_total
+        private decimal _qtd_total;
+        public decimal qtd_total
         {
-            get { return _peso_total; }
-            set { _peso_total = value; }
+            get { return _qtd_total; }
+            set { _qtd_total = value; }
+        }
+
+        private float _peso;
+        public float Peso
+        {
+            get { return _peso; }
+            set { _peso = value; }
         }
 
         private string _tempo_execucao;

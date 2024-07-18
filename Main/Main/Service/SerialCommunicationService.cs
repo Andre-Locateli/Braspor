@@ -162,7 +162,7 @@ namespace Main.Service
                 
                 if (SERIALPORT1.IsOpen && indicador_addr[global_counter].availableStatus == true && global_counter < indicador_addr.Count)
                 {
-                    Console.WriteLine($"Valor do counter: {global_counter}");
+                    //Console.WriteLine($"Valor do counter: {global_counter}");
 
                     byte[] command = new byte[]
                     {

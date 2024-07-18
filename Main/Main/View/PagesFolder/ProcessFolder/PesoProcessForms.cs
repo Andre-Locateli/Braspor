@@ -85,6 +85,9 @@ namespace Main.View.PagesFolder.ProcessFolder
 
         private List<Object> _impressoras = new List<Object>();
 
+        public ProcessosModel processoAtual { get; set; }
+
+        double peso_save = 0;
 
         public PesoProcessForms(int id_Usuario, string nome_Usuario, int qt_Folhas, int id_Processo)
         {
@@ -102,6 +105,14 @@ namespace Main.View.PagesFolder.ProcessFolder
             nomeUsuario = nome_Usuario;
             idProcesso = id_Processo;
             qtMinima = qt_Folhas;
+
+            processoAtual = (ProcessosModel)Program.SQL.SelectObject("SELECT * FROM Processos WHERE id = @id", "Processos",
+                new Dictionary<string, object>() 
+                {
+                    {"@id", id_Processo}
+                });
+
+            processoAtual.GramaturaDigitada = Math.Round(processoAtual.GramaturaDigitada, 3);
         }
 
         public PesoProcessForms(int id_Processo)
@@ -117,6 +128,14 @@ namespace Main.View.PagesFolder.ProcessFolder
             };
 
             idProcesso = id_Processo;
+
+            processoAtual = (ProcessosModel)Program.SQL.SelectObject("SELECT * FROM Processos WHERE id = @id", "Processos",
+                new Dictionary<string, object>()
+                {
+                    {"@id", id_Processo}
+                });
+
+            processoAtual.GramaturaDigitada = Math.Round(processoAtual.GramaturaDigitada, 3);
         }
 
         private async void ProcessForms_Load(object sender, EventArgs e)
@@ -353,8 +372,9 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                             if (btn_IniciarContagem.Text == "FINALIZAR PROCESSO")
                             {
-                                qtContab = Convert.ToDecimal(valorContagem.Text) / Gramatura;
-                                qtContab = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceContador].PS}") / Gramatura;
+                                decimal teste = Convert.ToDecimal(valorContagem.Text) / Math.Round(Gramatura,3) ;
+                                qtContab = Convert.ToDecimal(valorContagem.Text) / Math.Round(Gramatura, 3);
+                                qtContab = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceContador].PS}") / Math.Round(Gramatura, 3);
 
                                 valorSuporte = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceContador].PS}");
 
@@ -452,6 +472,27 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                                             lbl_Status.Text = "";
                                             lbl_Status.Text = "PESO ESTABILIZADO. RETIRE OU ADICIONE MAIS MATÉRIA-PRIMA.";
+                                            //double primeiro = Convert.ToDecimal(valorContagem.Text);
+
+                                            string[] a = valorContagem.Text.Split(new char[] { '.' });
+                                            int decimals = a[1].Length;
+
+                                            if (decimals == 1) 
+                                            {
+                                                peso_save = Convert.ToDouble(valorContagem.Text) * 0.1;
+                                            }
+                                            else if (decimals == 2)
+                                            {
+                                                peso_save = Convert.ToDouble(valorContagem.Text) * 0.01;
+                                            }
+                                            else if (decimals == 3)
+                                            {
+                                                peso_save = Convert.ToDouble(valorContagem.Text) * 0.001;
+                                            }
+                                            else if (decimals == 4)
+                                            {
+                                                peso_save = Convert.ToDouble(valorContagem.Text) * 0.0001;
+                                            }
                                         }));
                                         //
 
@@ -498,6 +539,8 @@ namespace Main.View.PagesFolder.ProcessFolder
                                             lbl_Status.Text = "";
                                             lbl_Status.Text = "PESANDO...";
                                         }));
+
+                                        // peso_save = 0;
                                     }
                                 }
 
@@ -555,21 +598,24 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                                             SerialCommunicationService.SendCommand(Convert.ToInt32(taraContagem.Tag), 0);
 
-                                            var insertLog = Program.SQL.CRUDCommand("INSERT INTO Log_Processos (Id_processo, Peso_temporeal, Peso_total, Tempo_execucao, dateinsert) VALUES (@Id_processo, @Peso_temporeal, @Peso_total, @Tempo_execucao, @dateinsert)", "Log_Processos",
+                                            var insertLog = Program.SQL.CRUDCommand("INSERT INTO Log_Processos (Id_processo, qtd_temporeal, qtd_total, Tempo_execucao, dateinsert, Peso) VALUES (@Id_processo, @qtd_temporeal, @qtd_total, @Tempo_execucao, @dateinsert, @Peso)", "Log_Processos",
                                             new Dictionary<string, object>()
                                             {
                                                 {"@Id_processo", idProcesso },
-                                                {"@Peso_temporeal", Convert.ToInt32(qtContabTotal) },
-                                                {"@Peso_total", valorTotal },
+                                                {"@qtd_temporeal", Convert.ToInt32(qtContabTotal) },
+                                                {"@qtd_total", valorTotal },
+                                                {"@Peso", peso_save },
                                                 {"@Tempo_execucao", tempoexec },
                                                 {"@dateinsert", DateTime.Now}
                                             });
+
+                                            if (insertLog) { peso_save = 0; }
 
                                             //=================================================================================================================//
 
                                             double pesoTotal = valorTotal * Convert.ToDouble(Gramatura);
 
-                                            var UpdateProcesso = Program.SQL.CRUDCommand("UPDATE Processos SET Descricao = @Descricao, Tempo_execucao = @Tempo_execucao, Total_contagem = @Total_contagem, Gramatura = @Gramatura, Peso_total = @Peso_total, Status_processo = @Status_processo WHERE Id = @Id", "Processos",
+                                            var UpdateProcesso = Program.SQL.CRUDCommand("UPDATE Processos SET Descricao = @Descricao, Tempo_execucao = @Tempo_execucao, Total_contagem = @Total_contagem, Gramatura = @Gramatura, Status_processo = @Status_processo WHERE Id = @Id", "Processos",
                                             new Dictionary<string, object>()
                                             {
                                                 {"@Id", idProcesso },
@@ -577,7 +623,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                                                 {"@Tempo_execucao", tempoexec },
                                                 {"@Total_contagem", valorTotal },
                                                 {"@Gramatura", Gramatura },
-                                                {"@Peso_total", pesoTotal },
+                                                //{"@qtd_total",valorTotal },
                                                 {"@Status_processo", statusProcesso },
                                             });
 
@@ -756,8 +802,23 @@ namespace Main.View.PagesFolder.ProcessFolder
                             isTrue = false;
                             TimerRelogio.Stop();
 
-                            double pesoTotal = valorTotal * Convert.ToDouble(Gramatura);
+                            var soma = Program.SQL.SelectList("SELECT SUM(Peso) AS SOMA FROM Log_Processos Where Id_processo = @Id", "Log_Processos", "SOMA", new Dictionary<string, object>()
+                            {
+                                {"@Id", idProcesso }
+                            });
 
+                            double pesoTotal = 0;
+
+                            if (soma.Count > 0)
+                            {
+                                pesoTotal = Math.Round(Convert.ToDouble(soma[0]), 4);
+                            }
+                            else
+                            {
+                                pesoTotal = valorTotal* Convert.ToDouble(Gramatura);
+                            }
+
+                       
 
                             var UpdateProcesso = Program.SQL.CRUDCommand("UPDATE Processos SET Descricao = @Descricao, Tempo_execucao = @Tempo_execucao, Total_contagem = @Total_contagem, Gramatura = @Gramatura, Peso_total = @Peso_total, Status_processo = @Status_processo, dateend = @dateend WHERE Id = @Id", "Processos",
                             new Dictionary<string, object>()
@@ -777,9 +838,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                             InfoPopup info = new InfoPopup("Parabéns!", "Processo e contagem registrados com sucesso!", Properties.Resources._299110_check_sign_icon);
                             info.ShowDialog();
 
-                            ImpressoraPrint(new EtiquetaInfo() { op = "", cliente = "", peso = "", qtd_folhas = "", tipo_papel = "", formato = "", gramatura = "", data_inicio = "", data_termino = "", horario_inicial = "", horario_final = "", operador = "", turno = "", obs = "" }, 2);
-
-
+                            ImpressoraPrint(2);
 
                             MainInfoForms form = new MainInfoForms(idUsuario, nomeUsuario);
 
@@ -793,6 +852,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                                     return;
                                 }
                             }
+                        
                         }
                     }
                 }
@@ -969,7 +1029,7 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                 double pesoTotal = valorTotal * Convert.ToDouble(Gramatura);
 
-                var UpdateProcesso = Program.SQL.CRUDCommand("UPDATE Processos SET Descricao = @Descricao, Tempo_execucao = @Tempo_execucao, Total_contagem = @Total_contagem, Gramatura = @Gramatura, Peso_total = @Peso_total, Status_processo = @Status_processo WHERE Id = @Id", "Processos",
+                var UpdateProcesso = Program.SQL.CRUDCommand("UPDATE Processos SET Descricao = @Descricao, Tempo_execucao = @Tempo_execucao, Total_contagem = @Total_contagem, Gramatura = @Gramatura, qtd_total = @qtd_total, Status_processo = @Status_processo WHERE Id = @Id", "Processos",
                 new Dictionary<string, object>()
                 {
                     {"@Id", idProcesso },
@@ -977,7 +1037,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                     {"@Tempo_execucao", tempoexec },
                     {"@Total_contagem", valorTotal },
                     {"@Gramatura", Gramatura },
-                    {"@Peso_total", pesoTotal },
+                    {"@qtd_total", pesoTotal },
                     {"@Status_processo", statusProcesso },
                 });
             }
@@ -990,16 +1050,17 @@ namespace Main.View.PagesFolder.ProcessFolder
             _impressoras = Program.SQL.SelectList("select * from Rede where parent = @parent and tipo = 'Impressora'", "Rede", values: parametros);
         }
 
-        public async void ImpressoraPrint(EtiquetaInfo etiqueta, int type)
+        public async void ImpressoraPrint(int type)
         {
             try
             {
                 foreach (RedeClass impressora in _impressoras)
                 {
+                    if (Program.Configuracao.id_Impressora != impressora.Id) { return; }
+                    
                     string zplCode = "";
 
                     ZXing.BarcodeWriter brcode = new ZXing.BarcodeWriter();
-
 
                     selectProcessos = Program.SQL.SelectList("SELECT * FROM Processos WHERE Id = @Id", "Processos", null,
                     new Dictionary<string, object>()
@@ -1007,27 +1068,44 @@ namespace Main.View.PagesFolder.ProcessFolder
                         {"@Id", idProcesso }
                     });
 
-
                     string lbl_op = "N° Op:";
-                    string lbl_op_r = "000000000";
+                    string lbl_op_r = processoAtual.Op.ToString();
 
                     string lbl_cli = "Cliente:";
-                    string lbl_cli_r = "Cliente Padrão";
+                    string lbl_cli_r = processoAtual.Cliente.ToString();
 
-                    string lbl_peso = "Peso:";
-                    string lbl_peso_r = lbl_ValorReal.Text;
+                    var soma = Program.SQL.SelectList("SELECT SUM(Peso) AS SOMA FROM Log_Processos Where Id_processo = @Id", "Log_Processos", "SOMA", new Dictionary<string, object>()
+                    {
+                        {"@Id", idProcesso }
+                    });
+                    
+                    string lbl_peso = "";
+                    string lbl_peso_r = "";
+                    float dSoma = 0;
+
+                    if (soma.Count > 0)
+                    {
+                        dSoma = (float)Math.Round(Convert.ToDouble(soma[0]), 4);
+                        lbl_peso = "Peso:";
+                        lbl_peso_r = dSoma.ToString();
+                    }
+                    else 
+                    {
+                        lbl_peso = "Peso:";
+                        lbl_peso_r = "0,00";
+                    }
 
                     string lbl_qtfl = "Qtd Folhas:";
                     string lbl_qtfl_r = lbl_qtMinima.Text;
 
                     string lbl_tppl = "Tipo Papel:";
-                    string lbl_tppl_r = "";
+                    string lbl_tppl_r = processoAtual.Tipo.ToString();
 
                     string lbl_fmt = "Formato:";
-                    string lbl_fmt_r = "";
+                    string lbl_fmt_r = processoAtual.Formato.ToString();
 
                     string lbl_gr = "Gram:";
-                    string lbl_gr_r = Gramatura.ToString();
+                    string lbl_gr_r = processoAtual.GramaturaDigitada.ToString();
 
                     string lbl_dtin = "Data Início:";
                     string lbl_dtin_r = "";
@@ -1084,7 +1162,7 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                     foreach (ProcessosModel proc in selectProcessos)
                     {
-                        lbl_peso_r = proc.PesoTotal.ToString();
+                        //lbl_peso_r = proc.PesoTotal.ToString();
                         if (lbl_peso_r.Length <= 12)
                         {
                             lbl_peso_r = proc.PesoTotal.ToString().Substring(0, lbl_peso_r.Length);
@@ -1144,7 +1222,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                         lbl_qtfl_r = proc.TotalContagem.ToString();
                     }
 
-
+                    System.Drawing.Font f1_small = new System.Drawing.Font("Arial", 10, FontStyle.Regular, GraphicsUnit.Pixel);
                     System.Drawing.Font f1 = new System.Drawing.Font("Arial", 18, FontStyle.Regular, GraphicsUnit.Pixel);
                     System.Drawing.Font fmn = new System.Drawing.Font("Arial", 15, FontStyle.Bold, GraphicsUnit.Pixel);
 
@@ -1215,6 +1293,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                         graphics.DrawString(lbl_op_r, f1, brush, new PointF(74, 10));
 
                         //cliente
+                        graphics.DrawString("Etiqueta não automatizada.", f1_small, brush, new PointF(400, 0));
                         graphics.DrawString(lbl_cli, f1, brush, new PointF(210, 10));
                         graphics.DrawString(lbl_cli_r, f1, brush, new PointF(281, 10));
 

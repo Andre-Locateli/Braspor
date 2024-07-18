@@ -529,7 +529,7 @@ namespace Main.View.PagesFolder.Configuration
                         split3 = lbl_obs_r.Substring(120);
                     }
 
-
+                    System.Drawing.Font f1_small = new System.Drawing.Font("Arial", 10, FontStyle.Regular, GraphicsUnit.Pixel);
                     System.Drawing.Font f1 = new System.Drawing.Font("Arial", 18, FontStyle.Regular, GraphicsUnit.Pixel);
                     System.Drawing.Font fmn = new System.Drawing.Font("Arial", 15, FontStyle.Bold, GraphicsUnit.Pixel);
 
@@ -600,8 +600,9 @@ namespace Main.View.PagesFolder.Configuration
                         //op
                         graphics.DrawString(lbl_op, f1, brush, new PointF(12, 10));
                         graphics.DrawString(lbl_op_r, f1, brush, new PointF(74, 10));
-                        
+
                         //cliente
+                        graphics.DrawString("Etiqueta não automatizada.", f1_small, brush, new PointF(400, 0));
                         graphics.DrawString(lbl_cli, f1, brush, new PointF(210, 10));
                         graphics.DrawString(lbl_cli_r, f1, brush, new PointF(281, 10));
 
