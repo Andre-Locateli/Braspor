@@ -983,6 +983,16 @@ namespace Main.View.PagesFolder.ProcessFolder
             }
         }
 
+        private void lbl_PesoReferencia_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
         public void LoadImpressoras()
         {
             Dictionary<string, object> parametros = new Dictionary<string, object>();

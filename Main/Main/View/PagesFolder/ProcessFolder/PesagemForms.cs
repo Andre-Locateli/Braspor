@@ -37,19 +37,19 @@ namespace Main.View.PagesFolder.ProcessFolder
 
         private void btnExecutar_Click(object sender, EventArgs e)
         {
-            var ProdutoCheck = Program.SQL.SelectList("SELECT * FROM MateriaPrima", "MateriaPrima", null,
-            new Dictionary<string, object>());
+            //var ProdutoCheck = Program.SQL.SelectList("SELECT * FROM MateriaPrima", "MateriaPrima", null,
+            //new Dictionary<string, object>());
 
-            if (ProdutoCheck.Count == 0)
-            {
-                InfoPopup info = new InfoPopup("Erro", "Cadastre uma matéria-prima antes de iniciar um processo!", Properties.Resources.errorIcon);
-                info.ShowDialog();
-            }
-            else
-            {
+            //if (ProdutoCheck.Count == 0)
+            //{
+            //    InfoPopup info = new InfoPopup("Erro", "Cadastre uma matéria-prima antes de iniciar um processo!", Properties.Resources.errorIcon);
+            //    info.ShowDialog();
+            //}
+            //else
+            //{
                 EscolhaPesagemForms escolha = new EscolhaPesagemForms(idUsuario, nomeUsuario);
                 escolha.ShowDialog();
-            }
+            //}
         }
 
         private void PesagemForms_Load(object sender, EventArgs e)

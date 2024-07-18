@@ -815,6 +815,7 @@
             this.lbl_PesoReferencia.TabIndex = 13;
             this.lbl_PesoReferencia.Text = "1 folha ≅";
             this.lbl_PesoReferencia.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.lbl_PesoReferencia.Click += new System.EventHandler(this.lbl_PesoReferencia_Click);
             // 
             // label6
             // 
@@ -859,6 +860,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(247, 10);
             this.panel1.TabIndex = 17;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // button2
             // 
