@@ -155,7 +155,6 @@ namespace Main.View.PagesFolder.ProcessFolder
 
             string observacao = "";
 
-            Boolean validanumero = validadigito.IsMatch(txt_numero.Text);
             Boolean validaquant = validadigito.IsMatch(txt_qtfolhas.Text);
 
             try
@@ -169,14 +168,14 @@ namespace Main.View.PagesFolder.ProcessFolder
                     observacao = txt_Descricao.Text;
                 }
 
-                if (txt_cliente.Text == "" || txt_numero.Text == "" || txt_tipo.Text == "" || txt_qtfolhas.Text == "" || txt_formato.Text == "" || txt_papel.Text == "" || txt_op.Text == "")
+                if (txt_cliente.Text == "" || txt_tipo.Text == "" || txt_qtfolhas.Text == "" || txt_formato.Text == "" || txt_op.Text == "")
                 {
                     InfoPopup info = new InfoPopup("Erro", "Preencha todos os campos com '*' para prosseguir!", Properties.Resources.errorIcon);
                     info.ShowDialog();
                 }
                 else
                 {
-                    if (validanumero == false || validaquant == false)
+                    if (validaquant == false)
                     {
                         InfoPopup info = new InfoPopup("Erro", "Os campos de Número e Quantidade devem ser preenchidos apenas com Digítos!", Properties.Resources.errorIcon);
                         info.ShowDialog();
@@ -192,12 +191,10 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                             DateTime dataInsertBanco = DateTime.Now;
 
-                            int quantidadeFolhas = Convert.ToInt32(txt_qtfolhas.Text);
-
-                            if (quantidadeFolhas > 10)
+                            if (Convert.ToInt32(txt_qtfolhas.Text) >= 5)
                             {
 
-                                var insertBanco = Program.SQL.InsertAndSelectLasRow("INSERT INTO Processos (Id_produto, Id_usuario, Descricao, Status_processo, dateinsert, Cliente, Numero, OP, Tipo, Papel, Formato, Quantidade) VALUES (@Id_produto, @Id_usuario, @Descricao, @Status_processo, @dateinsert, @Cliente, @Numero, @OP, @Tipo, @Papel, @Formato, @Quantidade) SELECT SCOPE_IDENTITY() AS Last_Id;", "Processos",
+                                var insertBanco = Program.SQL.InsertAndSelectLasRow("INSERT INTO Processos (Id_produto, Id_usuario, Descricao, Status_processo, dateinsert, Cliente, Numero, OP, Tipo, Papel, Formato, Quantidade,Gramatura,GramaturaDigitado) VALUES (@Id_produto, @Id_usuario, @Descricao, @Status_processo, @dateinsert, @Cliente, @Numero, @OP, @Tipo, @Papel, @Formato, @Quantidade,@Gramatura, @GramaturaDigitado) SELECT SCOPE_IDENTITY() AS Last_Id;", "Processos",
                                 new Dictionary<string, object>()
                                 {
                                     {"@Id_produto", 0 },
@@ -206,12 +203,14 @@ namespace Main.View.PagesFolder.ProcessFolder
                                     {"@Status_processo", 0 },
                                     {"@dateinsert", dataInsertBanco},
                                     {"@Cliente", txt_cliente.Text},
-                                    {"@Numero", txt_numero.Text},
+                                    {"@Numero", "0"},
                                     {"@OP", txt_op.Text},
                                     {"@Tipo", txt_tipo.Text},
-                                    {"@Papel", txt_papel.Text},
+                                    {"@Papel", "0"},
                                     {"@Formato", txt_formato.Text},
-                                    {"@Quantidade", txt_qtfolhas.Text}
+                                    {"@Quantidade", txt_qtfolhas.Text},
+                                    {"@Gramatura", 0},
+                                    {"@GramaturaDigitado", Convert.ToDouble(txt_gramatura.Text)}
                                 });
 
                                 if (insertBanco > 0)
@@ -255,27 +254,5 @@ namespace Main.View.PagesFolder.ProcessFolder
             }
         }
 
-        private void cb_MateriaPrima_KeyDown(object sender, KeyEventArgs e)
-        {
-            e.Handled = true;
-            e.SuppressKeyPress = true;
-        }
-
-        private void cb_MateriaPrima_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //if (cb_MateriaPrima.SelectedItem == null)
-            //{
-            //    return;
-            //}
-
-            //var listaMateriaPrima = Program.SQL.SelectList("SELECT * FROM MateriaPrima WHERE Codigo = @Codigo", "MateriaPrima", null,
-            //new Dictionary<string, object>()
-            //{
-            //    {"@Codigo", CodSubs }
-            //});
-
-            //MateriaPrimaClass materia = (MateriaPrimaClass)cb_MateriaPrima.SelectedItem;
-
-        }
     }
 }

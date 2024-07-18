@@ -195,25 +195,24 @@ CREATE TABLE [dbo].[Processos] (
 	[dateupdate]		DATETIME2(7),
 
 	--EXTRAS
-	[Cliente]			VARCHAR(500) NOT NULL,
-	[Numero]			INT NOT NULL,
-	[OP]				VARCHAR(200) NOT NULL,
-	[Tipo]				VARCHAR(200) NOT NULL,
-	[Papel]				VARCHAR(100) NOT NULL,
-	[Formato]			VARCHAR(100) NOT NULL,
-	[Quantidade]		INT NOT NULL,
-	[Gramatura]			REAL
+	[Cliente]				VARCHAR(500) NOT NULL,
+	[Numero]				INT NOT NULL,
+	[OP]					VARCHAR(200) NOT NULL,
+	[Tipo]					VARCHAR(200) NOT NULL,
+	[Papel]					VARCHAR(100) NOT NULL,
+	[Formato]				VARCHAR(100) NOT NULL,
+	[Quantidade]			INT NOT NULL,
+	[Gramatura]				REAL NOT NULL,
+	[GramaturaDigitado]		REAL NOT NULL
 );
-
-DROP TABLE Processos;
-
 
 GO
 CREATE TABLE [dbo].[Log_Processos] (
 	[Id]				INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	[Id_processo]		INT NOT NULL,
-	[Peso_temporeal]	REAL NOT NULL,
-	[Peso_total]		REAL NOT NULL,
+	[qtd_temporeal]		REAL NOT NULL,
+	[qtd_total]			REAL NOT NULL,
+	[Peso]				REAL NOT NULL,
 	[Tempo_execucao]	VARCHAR(20),
 	[dateinsert]		DATETIME2(7)
 )

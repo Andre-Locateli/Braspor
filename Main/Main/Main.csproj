@@ -243,18 +243,6 @@
     <Compile Include="View\PagesFolder\MainInfoForms.Designer.cs">
       <DependentUpon>MainInfoForms.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\PagesFolder\PesagemFolder\PesagemList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\PagesFolder\PesagemFolder\PesagemList.Designer.cs">
-      <DependentUpon>PesagemList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\PagesFolder\PesagemFolder\PesagemProcess.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\PagesFolder\PesagemFolder\PesagemProcess.Designer.cs">
-      <DependentUpon>PesagemProcess.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\PagesFolder\ProcessFolder\EscolhaPesagemForms.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -382,12 +370,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\PagesFolder\MainInfoForms.resx">
       <DependentUpon>MainInfoForms.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\PagesFolder\PesagemFolder\PesagemList.resx">
-      <DependentUpon>PesagemList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\PagesFolder\PesagemFolder\PesagemProcess.resx">
-      <DependentUpon>PesagemProcess.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\PagesFolder\ProcessFolder\EscolhaPesagemForms.resx">
       <DependentUpon>EscolhaPesagemForms.cs</DependentUpon>

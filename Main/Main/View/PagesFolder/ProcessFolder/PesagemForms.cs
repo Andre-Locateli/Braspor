@@ -1,4 +1,5 @@
 ﻿//using Main.Service;
+using iTextSharp.xmp;
 using Main.Service;
 using Main.View.MainFolder;
 using Main.View.PopupFolder;
@@ -360,6 +361,36 @@ namespace Main.View.PagesFolder.ProcessFolder
         private void dgvDados_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void excluirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DataGridViewRow linha_selecionada = dgvDados.SelectedRows[0];
+
+                string Status = Convert.ToString(linha_selecionada.Cells["Status"].Value);
+                if (Status != "Finalizado")
+                {
+                    YesOrNo question = new YesOrNo("Tem certeza que deseja remover o processo selecionado ?\n\r O registro será excluido da base de dados e essa ação é irreversível.");
+                    question.ShowDialog();
+                    if (question.RESPOSTA)
+                    {
+                        bool bDeleteCRUD = Program.SQL.CRUDCommand("DELETE FROM Processos WHERE id = @id", "Processos",
+                            new Dictionary<string, object>() { { "@id", linha_selecionada.Cells["Id"].Value.ToString() } });
+
+                        if (bDeleteCRUD)
+                        {
+                            LoadDatabaseInfo();
+                        }
+
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+            }
         }
     }
 }

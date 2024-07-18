@@ -83,6 +83,7 @@ namespace Main.View.CommunicationFolder
                 }
 
                 double peso = 0;
+
                 if ((sts & 0b00001000) == 0x08)
                 {
                     peso = (((peso_a * 65536) + (peso_b * 256) + (peso_c)) * Multiplicador * (-1.0));

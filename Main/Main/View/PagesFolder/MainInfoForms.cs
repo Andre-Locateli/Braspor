@@ -15,7 +15,6 @@ using System.Drawing.Drawing2D;
 using Main.View.MainFolder;
 using Main.Helper;
 using Main.View.PopupFolder;
-using Main.View.PagesFolder.PesagemFolder;
 using Main.View.CadastroFolder;
 using Main.View.PagesFolder.Configuration;
 using Main.View.PagesFolder.ProcessFolder;

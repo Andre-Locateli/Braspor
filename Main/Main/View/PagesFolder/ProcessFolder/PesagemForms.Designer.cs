@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -50,6 +51,8 @@
             this.dgvDados = new System.Windows.Forms.DataGridView();
             this.iconReceita = new System.Windows.Forms.DataGridViewImageColumn();
             this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.metroContextMenu1 = new MetroFramework.Controls.MetroContextMenu(this.components);
+            this.excluirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.pcb_next = new System.Windows.Forms.PictureBox();
             this.pcb_return = new System.Windows.Forms.PictureBox();
@@ -58,6 +61,7 @@
             this.panel3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDados)).BeginInit();
+            this.metroContextMenu1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcb_next)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcb_return)).BeginInit();
             this.SuspendLayout();
@@ -266,6 +270,7 @@
             this.dgvDados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.iconReceita,
             this.Status});
+            this.dgvDados.ContextMenuStrip = this.metroContextMenu1;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(247)))), ((int)(((byte)(248)))));
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -322,6 +327,20 @@
             this.Status.HeaderText = "Status";
             this.Status.Name = "Status";
             this.Status.ReadOnly = true;
+            // 
+            // metroContextMenu1
+            // 
+            this.metroContextMenu1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.excluirToolStripMenuItem});
+            this.metroContextMenu1.Name = "metroContextMenu1";
+            this.metroContextMenu1.Size = new System.Drawing.Size(110, 26);
+            // 
+            // excluirToolStripMenuItem
+            // 
+            this.excluirToolStripMenuItem.Name = "excluirToolStripMenuItem";
+            this.excluirToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
+            this.excluirToolStripMenuItem.Text = "Excluir";
+            this.excluirToolStripMenuItem.Click += new System.EventHandler(this.excluirToolStripMenuItem_Click);
             // 
             // dataGridViewImageColumn1
             // 
@@ -383,6 +402,7 @@
             this.panel3.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDados)).EndInit();
+            this.metroContextMenu1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pcb_next)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcb_return)).EndInit();
             this.ResumeLayout(false);
@@ -410,5 +430,7 @@
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
         private System.Windows.Forms.DataGridViewImageColumn iconReceita;
         private System.Windows.Forms.DataGridViewTextBoxColumn Status;
+        private MetroFramework.Controls.MetroContextMenu metroContextMenu1;
+        private System.Windows.Forms.ToolStripMenuItem excluirToolStripMenuItem;
     }
 }

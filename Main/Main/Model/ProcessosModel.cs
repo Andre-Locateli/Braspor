@@ -158,5 +158,14 @@ namespace Main.Model
             get { return _gramatura; }
             set { _gramatura = value; }
         }
-    }
+
+		private Double _gramaturaDigitada;
+		public Double GramaturaDigitada
+		{
+			get { return _gramaturaDigitada; }
+			set { _gramaturaDigitada = value; }
+		}
+
+
+	}
 }

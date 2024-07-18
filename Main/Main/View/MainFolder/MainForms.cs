@@ -4,7 +4,6 @@ using Main.Service;
 using Main.View.CadastroFolder;
 using Main.View.PagesFolder;
 using Main.View.PagesFolder.Configuration;
-using Main.View.PagesFolder.PesagemFolder;
 using Main.View.PagesFolder.ProcessFolder;
 using Main.View.PopupFolder;
 using System;
@@ -70,9 +69,9 @@ namespace Main.View.MainFolder
 
             if (modo_operacao)
             {
-                PesagemList pList = new PesagemList();
+                //PesagemList pList = new PesagemList();
                 //pList.ItemEditadoTrigger += PList_ItemEditadoTrigger;
-                OpenPage(pList);
+                //OpenPage(pList);
             }
             else
             {

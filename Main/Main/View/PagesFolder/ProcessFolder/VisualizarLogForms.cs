@@ -24,12 +24,28 @@ namespace Main.View.PagesFolder.ProcessFolder
 
         private void VisualizarLogForms_Load(object sender, EventArgs e)
         {
-            var Processos = Program.SQL.SelectList("SELECT * FROM Log_Processos Where Id_processo = @Id AND Peso_temporeal > 0", "Log_Processos", null,
+            var Processos = Program.SQL.SelectList("SELECT * FROM Log_Processos Where Id_processo = @Id AND qtd_temporeal > 0", "Log_Processos", null,
             new Dictionary<string, object>()
             {
                 {"@Id", idProcesso }
             });
 
+            var soma = Program.SQL.SelectList("SELECT SUM(Peso) AS SOMA FROM Log_Processos Where Id_processo = @Id", "Log_Processos", "SOMA", new Dictionary<string, object>() 
+            {
+                {"@Id", idProcesso }
+            });
+
+            if (soma.Count > 0) 
+            {
+                double dSoma = Math.Round(Convert.ToDouble(soma[0]), 4);
+
+                lblTotal.Invoke(new MethodInvoker(delegate 
+                {
+                    lblTotal.Text = $"Peso total do lote: {dSoma}";
+                }));
+            }
+
+            //dgvDados.DataSource = Program.SQL.SelectDataGrid("SELECT * FROM Log_Processos Where Id_processo = @Id AND qtd_temporeal > 0", "Log_Processos");
 
             if (Processos.Count != 0)
             {
@@ -37,8 +53,8 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                 dgvDados.Columns["Id"].Visible = false;
                 dgvDados.Columns["Id_processo"].Visible = false;
-                dgvDados.Columns["Peso_temporeal"].HeaderText = "Quantidade adicionada";
-                dgvDados.Columns["Peso_total"].HeaderText = "Quantidade total";
+                dgvDados.Columns["qtd_temporeal"].Visible = false;
+                dgvDados.Columns["qtd_total"].HeaderText = "Quantidade Total";
                 dgvDados.Columns["Tempo_execucao"].HeaderText = "Tempo de execução";
                 dgvDados.Columns["dateinsert"].HeaderText = "Data de inserção";
             }

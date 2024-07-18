@@ -459,7 +459,7 @@
             this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(125)))), ((int)(((byte)(150)))));
             this.label5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label5.Location = new System.Drawing.Point(0, 108);
+            this.label5.Location = new System.Drawing.Point(0, 129);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(412, 21);
             this.label5.TabIndex = 16;
@@ -469,11 +469,11 @@
             // lbl_ValorReal
             // 
             this.lbl_ValorReal.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lbl_ValorReal.Font = new System.Drawing.Font("Microsoft JhengHei", 39.75F, System.Drawing.FontStyle.Bold);
+            this.lbl_ValorReal.Font = new System.Drawing.Font("Microsoft JhengHei", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_ValorReal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(125)))), ((int)(((byte)(150)))));
             this.lbl_ValorReal.Location = new System.Drawing.Point(0, 22);
             this.lbl_ValorReal.Name = "lbl_ValorReal";
-            this.lbl_ValorReal.Size = new System.Drawing.Size(412, 86);
+            this.lbl_ValorReal.Size = new System.Drawing.Size(412, 107);
             this.lbl_ValorReal.TabIndex = 12;
             this.lbl_ValorReal.Text = "0";
             this.lbl_ValorReal.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -611,7 +611,7 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(125)))), ((int)(((byte)(150)))));
             this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label1.Location = new System.Drawing.Point(0, 108);
+            this.label1.Location = new System.Drawing.Point(0, 129);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(411, 21);
             this.label1.TabIndex = 13;
@@ -621,11 +621,11 @@
             // lbl_QtContab
             // 
             this.lbl_QtContab.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lbl_QtContab.Font = new System.Drawing.Font("Microsoft JhengHei", 39.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_QtContab.Font = new System.Drawing.Font("Microsoft JhengHei", 72F, System.Drawing.FontStyle.Bold);
             this.lbl_QtContab.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(125)))), ((int)(((byte)(150)))));
             this.lbl_QtContab.Location = new System.Drawing.Point(0, 22);
             this.lbl_QtContab.Name = "lbl_QtContab";
-            this.lbl_QtContab.Size = new System.Drawing.Size(411, 86);
+            this.lbl_QtContab.Size = new System.Drawing.Size(411, 107);
             this.lbl_QtContab.TabIndex = 1;
             this.lbl_QtContab.Text = "0";
             this.lbl_QtContab.TextAlign = System.Drawing.ContentAlignment.BottomCenter;

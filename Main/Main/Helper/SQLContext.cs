@@ -1,10 +1,13 @@
 ﻿using Main.Model;
 using Main.View.PopupFolder;
 using Microsoft.VisualBasic;
+using Org.BouncyCastle.Asn1.Cmp;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -419,6 +422,11 @@ namespace Main.Helper
                                             process.Gramatura = Convert.ToDouble(dr["Gramatura"]);
                                         }
 
+                                        if (dr["GramaturaDigitado"] != DBNull.Value)
+                                        {
+                                            process.GramaturaDigitada = Convert.ToDouble(dr["GramaturaDigitado"]);
+                                        }
+
                                         list_return.Add(process);
                                     }
                                     else
@@ -429,14 +437,23 @@ namespace Main.Helper
 
                                 if (tabela == "Log_Processos")
                                 {
-                                    LogProcessosClass logprocessos = new LogProcessosClass();
-                                    logprocessos.Id = Convert.ToInt32(dr["Id"]);
-                                    logprocessos.Id_processo = Convert.ToInt32(dr["Id_processo"]);
-                                    logprocessos.Peso_temporeal = Convert.ToDecimal(dr["Peso_temporeal"]);
-                                    logprocessos.Peso_total = Convert.ToDecimal(dr["Peso_total"]);
-                                    logprocessos.Tempo_execucao = Convert.ToString(dr["Tempo_execucao"]);
-                                    logprocessos.dateinsert = Convert.ToDateTime(dr["dateinsert"]);
-                                    list_return.Add(logprocessos);
+                                    if (coluna_to_return is null)
+                                    {
+                                        LogProcessosClass logprocessos = new LogProcessosClass();
+                                        logprocessos.Id = Convert.ToInt32(dr["Id"]);
+                                        logprocessos.Id_processo = Convert.ToInt32(dr["Id_processo"]);
+                                        logprocessos.qtd_temporeal = Convert.ToDecimal(dr["qtd_temporeal"]);
+                                        logprocessos.qtd_total = Convert.ToDecimal(dr["qtd_total"]);
+                                        logprocessos.Peso = (float)(dr["Peso"]);
+                                        logprocessos.Tempo_execucao = Convert.ToString(dr["Tempo_execucao"]);
+                                        logprocessos.dateinsert = Convert.ToDateTime(dr["dateinsert"]);
+                                        list_return.Add(logprocessos);
+                                    }
+                                    else
+                                    {
+                                        list_return.Add(dr[coluna_to_return]);
+                                    }
+                                    
                                 }
                             }
                         }
@@ -491,6 +508,44 @@ namespace Main.Helper
                                     Usuario.Senha = Convert.ToString(dr["senha"]);
                                     Usuario.Acesso = Convert.ToString(dr["acesso"]);
                                     return Usuario;
+                                }
+
+                                if (tabela == "Processos")
+                                {
+                                    ProcessosModel proc = new ProcessosModel();
+                                    proc.Id = Convert.ToInt32(dr["Id"]);
+                                    proc.Id_Produto = Convert.ToInt32(dr["Id_produto"]);
+                                    proc.IdUsuario = Convert.ToInt32(dr["Id_usuario"]);
+                                    proc.Descricao = Convert.ToString(dr["Descricao"]);
+                                   
+
+                                    if (dr["Tempo_execucao"] != DBNull.Value)
+                                    {
+                                        proc.TempoExecucao = Convert.ToString(dr["Tempo_execucao"]);
+                                    }
+
+                                    if (dr["Total_contagem"] != DBNull.Value)
+                                    {
+                                        proc.TotalContagem = Convert.ToInt32(dr["Total_contagem"]);
+                                    }
+
+                                    if (dr["Peso_total"] != DBNull.Value)
+                                    {
+                                        proc.PesoTotal = Convert.ToInt32(dr["Peso_total"]);
+                                    }
+
+                                  
+                                    proc.StatusProcesso = Convert.ToInt32(dr["Status_processo"]);
+                                    proc.Cliente = Convert.ToString(dr["Cliente"]);
+                                    proc.Numero = Convert.ToString(dr["Numero"]);
+                                    proc.Op = Convert.ToString(dr["OP"]);
+                                    proc.Tipo = Convert.ToString(dr["Tipo"]);
+                                    proc.Papel = Convert.ToString(dr["Papel"]);
+                                    proc.Formato = Convert.ToString(dr["Formato"]);
+                                    proc.Quantidade = Convert.ToInt32(dr["Quantidade"]);
+                                    proc.Gramatura = Convert.ToDouble(dr["Gramatura"]);
+                                    proc.GramaturaDigitada = Convert.ToDouble(dr["GramaturaDigitado"]);
+                                    return proc;
                                 }
 
                                 if (tabela == "MateriaPrima") 
