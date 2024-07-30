@@ -1066,7 +1066,7 @@ namespace Main.View.PagesFolder.ProcessFolder
             {
                 foreach (RedeClass impressora in _impressoras)
                 {
-                    if (Program.Configuracao.id_Impressora != impressora.Id) { return; }
+                    //if (Program.Configuracao.id_Impressora != impressora.Id) { return; }
                     
                     string zplCode = "";
 
@@ -1173,7 +1173,11 @@ namespace Main.View.PagesFolder.ProcessFolder
                     foreach (ProcessosModel proc in selectProcessos)
                     {
                         //lbl_peso_r = proc.PesoTotal.ToString();
-                        if (lbl_peso_r.Length <= 12)
+                        if (proc.PesoTotal.ToString().Length == 1)
+                        {
+                            lbl_peso_r = proc.PesoTotal.ToString();
+                        }
+                        else if (lbl_peso_r.Length <= 12)
                         {
                             lbl_peso_r = proc.PesoTotal.ToString().Substring(0, lbl_peso_r.Length);
                         }

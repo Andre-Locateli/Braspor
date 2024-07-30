@@ -101,8 +101,8 @@ namespace Main
                 xml_estacao.InnerText = Environment.MachineName;
                 root.AppendChild(xml_estacao);
                 XmlElement xml_SQLConnection = xmlDoc.CreateElement("SQLConnection");
-                xml_SQLConnection.InnerText = "Data Source=10.0.0.12\\SQLEXPRESS;Initial Catalog=VC_BRASPOR; User ID=sa; Pwd=AEPH1234*#";
-                // xml_SQLConnection.InnerText = "Data Source=10.1.18.139;Initial Catalog=VC_BRASPOR; User ID=sa; Pwd=Braspor_1234*#";
+                //xml_SQLConnection.InnerText = "Data Source=10.0.0.12\\SQLEXPRESS;Initial Catalog=VC_BRASPOR; User ID=sa; Pwd=AEPH1234*#";
+                xml_SQLConnection.InnerText = "Data Source=10.1.18.139;Initial Catalog=VC_BRASPOR; User ID=sa; Pwd=Braspor_1234*#";
 
                 root.AppendChild(xml_SQLConnection);
 

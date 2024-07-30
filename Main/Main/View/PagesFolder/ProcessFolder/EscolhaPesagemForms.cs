@@ -191,7 +191,7 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                             DateTime dataInsertBanco = DateTime.Now;
 
-                            if (Convert.ToInt32(txt_qtfolhas.Text) >= 5)
+                            if (Convert.ToInt32(txt_qtfolhas.Text) >= 1)
                             {
 
                                 var insertBanco = Program.SQL.InsertAndSelectLasRow("INSERT INTO Processos (Id_produto, Id_usuario, Descricao, Status_processo, dateinsert, Cliente, Numero, OP, Tipo, Papel, Formato, Quantidade,Gramatura,GramaturaDigitado) VALUES (@Id_produto, @Id_usuario, @Descricao, @Status_processo, @dateinsert, @Cliente, @Numero, @OP, @Tipo, @Papel, @Formato, @Quantidade,@Gramatura, @GramaturaDigitado) SELECT SCOPE_IDENTITY() AS Last_Id;", "Processos",

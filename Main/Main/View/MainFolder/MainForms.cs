@@ -774,25 +774,25 @@ namespace Main.View.MainFolder
         {
             try
             {
-                var path = AppDomain.CurrentDomain.BaseDirectory + "Modelo.pdf";
+                //var path = AppDomain.CurrentDomain.BaseDirectory + "Modelo.pdf";
 
-                string chromePath = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
+                //string chromePath = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
 
-                if (System.IO.File.Exists(chromePath))
-                {
-                    Process.Start(new ProcessStartInfo(chromePath, path));
-                    return;
-                }
+                //if (System.IO.File.Exists(chromePath))
+                //{
+                //    Process.Start(new ProcessStartInfo(chromePath, path));
+                //    return;
+                //}
 
-                string internetExplorer = @"C:\Program Files\Internet Explorer\iexplore.exe";
-                if (System.IO.File.Exists(internetExplorer)) 
-                {
-                    Process.Start(new ProcessStartInfo(internetExplorer, path));
-                    return;
-                }
+                //string internetExplorer = @"C:\Program Files\Internet Explorer\iexplore.exe";
+                //if (System.IO.File.Exists(internetExplorer)) 
+                //{
+                //    Process.Start(new ProcessStartInfo(internetExplorer, path));
+                //    return;
+                //}
 
-                InfoPopup info = new InfoPopup("Não foi possível abrir o documento",
-                    "Não foi possível abrir o manual, verifique se o Navegador Google ou Internet Explorer está instalado na maquina.");
+                //InfoPopup info = new InfoPopup("Não foi possível abrir o documento",
+                //    "Não foi possível abrir o manual, verifique se o Navegador Google ou Internet Explorer está instalado na maquina.");
             }
             catch (Exception)
             {
