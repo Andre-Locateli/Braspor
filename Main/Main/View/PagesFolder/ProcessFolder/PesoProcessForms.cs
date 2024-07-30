@@ -287,8 +287,8 @@ namespace Main.View.PagesFolder.ProcessFolder
                     taraReferencia.Tag = Program.Endereco_Referencia;
                     zeroReferencia.Tag = Program.Endereco_Referencia;
 
-                    taraContagem.Tag = Program.Endereco_Referencia + 1;
-                    zeroContagem.Tag = Program.Endereco_Referencia + 1;
+                    taraContagem.Tag = 1;
+                    zeroContagem.Tag = 1;
                 }
 
 
@@ -549,7 +549,9 @@ namespace Main.View.PagesFolder.ProcessFolder
                                 {
                                     valorSuporte = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceContador].PS}");
 
-                                    if (valorSuporte > 0)
+                                    var chkfiltro = Gramatura * 3;
+
+                                    if (valorSuporte > chkfiltro)
                                     {
                                         bloqueiaLoop = 1;
                                         bloqueiaValor = 0;
@@ -581,7 +583,9 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                                 if (stopSup.ElapsedMilliseconds > 3500)
                                 {
-                                    if (valorSuporte <= 0)
+                                    var chkfiltro = Gramatura * 3;
+
+                                    if (valorSuporte <= chkfiltro)
                                     {
                                         try
                                         {
@@ -596,7 +600,7 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                                             string tempoexec = lbl_Horario.Text;
 
-                                            SerialCommunicationService.SendCommand(Convert.ToInt32(taraContagem.Tag), 0);
+                                            SerialCommunicationService.SendCommand(Convert.ToInt32(zeroContagem.Tag), 1);
 
                                             var insertLog = Program.SQL.CRUDCommand("INSERT INTO Log_Processos (Id_processo, qtd_temporeal, qtd_total, Tempo_execucao, dateinsert, Peso) VALUES (@Id_processo, @qtd_temporeal, @qtd_total, @Tempo_execucao, @dateinsert, @Peso)", "Log_Processos",
                                             new Dictionary<string, object>()

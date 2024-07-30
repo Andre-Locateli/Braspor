@@ -15,7 +15,6 @@ using System.Drawing.Drawing2D;
 using Main.View.MainFolder;
 using Main.Helper;
 using Main.View.PopupFolder;
-using Main.View.CadastroFolder;
 using Main.View.PagesFolder.Configuration;
 using Main.View.PagesFolder.ProcessFolder;
 
@@ -110,7 +109,6 @@ namespace Main.View.PagesFolder
                 button1.Enabled = Program._permissaoUsuario.Pesagem_View;
                 button2.Enabled = Program._permissaoUsuario.Relatorio_View;
                 button4.Enabled = Program._permissaoUsuario.Usuario_View;
-                button5.Enabled = Program._permissaoUsuario.Produto_view;
             }
             catch (Exception ex)
             {
@@ -248,11 +246,6 @@ namespace Main.View.PagesFolder
                 if (btn.Tag.ToString() == "Usuario")
                 {
                     QuickButtonPress = new UserForm();
-                }
-
-                if (btn.Tag.ToString() == "Produto")
-                {
-                    QuickButtonPress = new CadastroMateriaPrimaForms(idUsuario, nomeUsuario);
                 }
 
             }

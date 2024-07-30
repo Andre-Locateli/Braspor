@@ -73,6 +73,7 @@
             this.ch_ultimoAcesso.TabIndex = 3;
             this.ch_ultimoAcesso.Text = "Lembrar último acesso";
             this.ch_ultimoAcesso.UseVisualStyleBackColor = true;
+            this.ch_ultimoAcesso.Visible = false;
             // 
             // btnAcessar
             // 

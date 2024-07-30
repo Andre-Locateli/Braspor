@@ -212,42 +212,6 @@ namespace Main.View.PagesFolder.Configuration
                 ch_remove_usuarios.Checked = false;
                 ch_search_consulta.Checked = false;
 
-                ch_view_receita.Checked = false;
-                ch_add_receita.Checked = false;
-                ch_edit_receita.Checked = false;
-                ch_remove_receita.Checked = false;
-                ch_search_receita.Checked = false;
-
-                ch_view_Tiporeceita.Checked = false;
-                ch_add_TipoReceita.Checked = false;
-                ch_edit_Tiporeceita.Checked = false;
-                ch_remove_Tiporeceita.Checked = false;
-                ch_search_Tiporeceita.Checked = false;
-
-                ch_view_Recipiente.Checked = false;
-                ch_add_Recipiente.Checked = false;
-                ch_edit_Recipiente.Checked = false;
-                ch_remove_recipiente.Checked = false;
-                ch_search_Recipiente.Checked = false;
-
-                ch_view_Bandeja.Checked = false;
-                ch_add_Bandeja.Checked = false;
-                ch_edit_Bandeja.Checked = false;
-                ch_remove_bandeja.Checked = false;
-                ch_search_bandeja.Checked = false;
-
-                ch_view_Bandeja.Checked = false;
-                ch_add_Bandeja.Checked = false;
-                ch_edit_Bandeja.Checked = false;
-                ch_remove_bandeja.Checked = false;
-                ch_search_bandeja.Checked = false;
-
-                ch_view_produto.Checked = false;
-                ch_add_produto.Checked = false;
-                ch_edit_produto.Checked = false;
-                ch_remove_produto.Checked = false;
-                ch_search_produto.Checked = false;
-
             }
             catch (Exception)
             {
@@ -264,10 +228,10 @@ namespace Main.View.PagesFolder.Configuration
 
                     if (user != null) 
                     {
-                        PermissaoClass permissao = (PermissaoClass)Program.SQL.SelectObject("SELECT * FROM Acessos WHERE id_usuario = @id_usuario", "Acessos",
+                        PermissaoClass permissao = (PermissaoClass)Program.SQL.SelectObject("SELECT * FROM Acessos WHERE Acesso = @Acesso", "Acessos",
                             new Dictionary<string, object>()
                             {
-                                {"@id_usuario", user.Id}
+                                {"@Acesso", user.Acesso}
                             });
 
                         if (permissao != null) 
@@ -302,44 +266,14 @@ namespace Main.View.PagesFolder.Configuration
                             ch_remove_usuarios.Checked = permissao.Usuario_remove;
                             ch_search_consulta.Checked = permissao.Usuario_search;
 
-                            ch_view_receita.Checked = permissao.receita_view;
-                            ch_add_receita.Checked = permissao.receita_add;
-                            ch_edit_receita.Checked = permissao.receita_edit;
-                            ch_remove_receita.Checked = permissao.receita_remove;
-                            ch_search_receita.Checked = permissao.receita_search;
-
-                            ch_view_Tiporeceita.Checked = permissao.tipoReceita_view;
-                            ch_add_TipoReceita.Checked = permissao.tipoReceita_add;
-                            ch_edit_Tiporeceita.Checked = permissao.tipoReceita_edit;
-                            ch_remove_Tiporeceita.Checked = permissao.tipoReceita_remove;
-                            ch_search_Tiporeceita.Checked = permissao.tipoReceita_search;
-
-                            ch_view_Recipiente.Checked = permissao.Recipiente_view;
-                            ch_add_Recipiente.Checked = permissao.Recipiente_add;
-                            ch_edit_Recipiente.Checked = permissao.Recipiente_edit;
-                            ch_remove_recipiente.Checked = permissao.Recipiente_remove;
-                            ch_search_Recipiente.Checked = permissao.Recipiente_search;
-
-                            ch_view_Bandeja.Checked = permissao.Bandeja_view;
-                            ch_add_Bandeja.Checked = permissao.Bandeja_add;
-                            ch_edit_Bandeja.Checked = permissao.Bandeja_edit;
-                            ch_remove_bandeja.Checked = permissao.Bandeja_remove;
-                            ch_search_bandeja.Checked = permissao.Bandeja_search;
-
-                            ch_view_produto.Checked = permissao.Produto_view;
-                            ch_add_produto.Checked = permissao.Produto_add;
-                            ch_edit_produto.Checked = permissao.Produto_edit;
-                            ch_remove_produto.Checked = permissao.Produto_remove;
-                            ch_search_produto.Checked = permissao.Produto_search;
-
                         }
                         
-                        btnPermissao.Enabled = true;
+                        btnPermissao.Visible = true;
                         btnPermissao.Enabled = true;
                         _user_selecionado = user;
                         txtNomeUser.Text = user.Nome;
                         txtLoginUser.Text = user.Login;
-                        txtSenhaUser.Text = user.Senha;
+                        txtSenhaUser.Text = "";
                         txtAcessoUser.Text = user.Acesso;
                         btnSalvarUser.Visible = false;
                         btnEditarUser.Visible = true;
@@ -414,12 +348,12 @@ namespace Main.View.PagesFolder.Configuration
                     return;
                 }
 
-                if (string.IsNullOrWhiteSpace(txtSenhaUser.Text))
-                {
-                    lblSenha.Text += "*";
-                    lblSenha.ForeColor = Color.Red;
-                    return;
-                }
+                //if (string.IsNullOrWhiteSpace(txtSenhaUser.Text))
+                //{
+                //    lblSenha.Text += "*";
+                //    lblSenha.ForeColor = Color.Red;
+                //    return;
+                //}
 
                 if (string.IsNullOrWhiteSpace(txtAcessoUser.Text))
                 {
@@ -428,16 +362,54 @@ namespace Main.View.PagesFolder.Configuration
                     return;
                 }
 
-                if (Program.SQL.CRUDCommand("UPDATE Usuario SET Nome = @Nome, login = @login, senha = @senha, acesso = @acesso, dateupdate = @dateupdate WHERE Id = @Id", "Usuario", new Dictionary<string, object>()
-                { {"@Nome", txtNomeUser.Text }, {"@login", txtLoginUser.Text }, {"@senha", SecurityContext.ReturnHashMD5(txtSenhaUser.Text) }, {"@acesso", txtAcessoUser.Text }, {"@dateupdate", DateTime.Now}, {"@Id", dgv_users.CurrentRow.Cells["Id"].Value } }))
+                if (txtSenhaUser.Text == "")
                 {
-                    resetLayout();
-                    LoadUserDB();
-                    txtNomeUser.Text = "";
-                    txtLoginUser.Text = "";
-                    txtSenhaUser.Text = "";
-                    txtAcessoUser.Text = "";
+                    if (Program.SQL.CRUDCommand("UPDATE Usuario SET Nome = @Nome, login = @login, acesso = @acesso, dateupdate = @dateupdate WHERE Id = @Id", "Usuario",
+                    new Dictionary<string, object>(){
+                        {"@Nome", txtNomeUser.Text },
+                        {"@login", txtLoginUser.Text },
+                        {"@acesso", txtAcessoUser.Text },
+                        {"@dateupdate", DateTime.Now},
+                        {"@Id", dgv_users.CurrentRow.Cells["Id"].Value }
+                    }))
+                    {
+                        resetLayout();
+                        LoadUserDB();
+                        txtNomeUser.Text = "";
+                        txtLoginUser.Text = "";
+                        txtSenhaUser.Text = "";
+                        txtAcessoUser.Text = "";
+
+                        btnPermissao.Enabled = false;
+                        btnPermissao.Visible = false;
+                    }
                 }
+                else
+                {
+                    if (Program.SQL.CRUDCommand("UPDATE Usuario SET Nome = @Nome, login = @login, senha = @senha, acesso = @acesso, dateupdate = @dateupdate WHERE Id = @Id", "Usuario",
+                    new Dictionary<string, object>(){
+                        {"@Nome", txtNomeUser.Text },
+                        {"@login", txtLoginUser.Text },
+                        {"@senha", SecurityContext.ReturnHashMD5(txtSenhaUser.Text) },
+                        {"@acesso", txtAcessoUser.Text },
+                        {"@dateupdate", DateTime.Now},
+                        {"@Id", dgv_users.CurrentRow.Cells["Id"].Value }
+                    }))
+                    {
+                        resetLayout();
+                        LoadUserDB();
+                        txtNomeUser.Text = "";
+                        txtLoginUser.Text = "";
+                        txtSenhaUser.Text = "";
+                        txtAcessoUser.Text = "";
+
+                        btnPermissao.Enabled = false;
+                        btnPermissao.Visible = false;
+                    }
+                }
+
+
+
             }
             catch (Exception)
             {
@@ -488,10 +460,10 @@ namespace Main.View.PagesFolder.Configuration
                 resetCheckbox();
                 if (pn_permission.Visible)
                 {
-                    PermissaoClass permissao = (PermissaoClass)Program.SQL.SelectObject("SELECT * FROM Acessos WHERE id_usuario = @id_usuario", "Acessos",
+                    PermissaoClass permissao = (PermissaoClass)Program.SQL.SelectObject("SELECT * FROM Acessos WHERE Acesso = @Acesso", "Acessos",
                         new Dictionary<string, object>()
                         {
-                            {"@id_usuario", _user_selecionado.Id}
+                            {"@Acesso", _user_selecionado.Acesso}
                         });
 
                     if (permissao != null)
@@ -528,35 +500,6 @@ namespace Main.View.PagesFolder.Configuration
                         ch_remove_usuarios.Checked = permissao.Usuario_remove;
                         ch_search_consulta.Checked = permissao.Usuario_search;
 
-                        ch_view_receita.Checked = permissao.receita_view;
-                        ch_add_receita.Checked = permissao.receita_add;
-                        ch_edit_receita.Checked = permissao.receita_edit;
-                        ch_remove_receita.Checked = permissao.receita_remove;
-                        ch_search_receita.Checked = permissao.receita_search;
-
-                        ch_view_Tiporeceita.Checked = permissao.tipoReceita_view;
-                        ch_add_TipoReceita.Checked = permissao.tipoReceita_add;
-                        ch_edit_Tiporeceita.Checked = permissao.tipoReceita_edit;
-                        ch_remove_Tiporeceita.Checked = permissao.tipoReceita_remove;
-                        ch_search_Tiporeceita.Checked = permissao.tipoReceita_search;
-
-                        ch_view_Recipiente.Checked = permissao.Recipiente_view;
-                        ch_add_Recipiente.Checked = permissao.Recipiente_add;
-                        ch_edit_Recipiente.Checked = permissao.Recipiente_edit;
-                        ch_remove_recipiente.Checked = permissao.Recipiente_remove;
-                        ch_search_Recipiente.Checked = permissao.Recipiente_search;
-
-                        ch_view_Bandeja.Checked = permissao.Bandeja_view;
-                        ch_add_Bandeja.Checked = permissao.Bandeja_add;
-                        ch_edit_Bandeja.Checked = permissao.Bandeja_edit;
-                        ch_remove_bandeja.Checked = permissao.Bandeja_remove;
-                        ch_search_bandeja.Checked = permissao.Bandeja_search;
-
-                        ch_view_produto.Checked = permissao.Produto_view;
-                        ch_add_produto.Checked = permissao.Produto_add;
-                        ch_edit_produto.Checked = permissao.Produto_edit;
-                        ch_remove_produto.Checked = permissao.Produto_remove;
-                        ch_search_produto.Checked = permissao.Produto_search;
                     }
                 }
             }
@@ -598,32 +541,6 @@ namespace Main.View.PagesFolder.Configuration
                                 "usuario_edit, " +
                                 "usuario_remove, " +
                                 "usuario_search, " +
-                                "receita_view, " +
-                                "receita_add, " +
-                                "receita_edit, " +
-                                "receita_remove, " +
-                                "receita_search, " +
-                                "tipoReceita_view, " +
-                                "tipoReceita_add, " +
-                                "tipoReceita_edit, " +
-                                "tipoReceita_remove, " +
-                                "tipoReceita_search, " +
-                                "Recipiente_view, " +
-                                "Recipiente_add, " +
-                                "Recipiente_edit, " +
-                                "Recipiente_remove, " +
-                                "Recipiente_search, " +
-                                "Bandeja_view, " +
-                                "Bandeja_add, " +
-                                "Bandeja_edit, " +
-                                "Bandeja_remove, " +
-                                "Bandeja_search, " +
-                                "Produto_view, " +
-                                "Produto_add, " +
-                                "Produto_edit, " +
-                                "Produto_remove, " +
-                                "Produto_search, " +
-                                "id_usuario" +
                                 ") " +
                                 "VALUES " +
                                 "(@Acesso," +
@@ -651,35 +568,10 @@ namespace Main.View.PagesFolder.Configuration
                                 "@usuario_add, " +
                                 "@usuario_edit, " +
                                 "@usuario_remove, " +
-                                "@usuario_search, " +
-                                "@receita_view, " +
-                                "@receita_add, " +
-                                "@receita_edit, " +
-                                "@receita_remove, " +
-                                "@receita_search, " +
-                                "@tipoReceita_view, " +
-                                "@tipoReceita_add, " +
-                                "@tipoReceita_edit, " +
-                                "@tipoReceita_remove, " +
-                                "@tipoReceita_search, " +
-                                "@Recipiente_view, " +
-                                "@Recipiente_add, " +
-                                "@Recipiente_edit, " +
-                                "@Recipiente_remove, " +
-                                "@Recipiente_search, " +
-                                "@Bandeja_view, " +
-                                "@Bandeja_add, " +
-                                "@Bandeja_edit, " +
-                                "@Bandeja_remove, " +
-                                "@Bandeja_search, " +
-                                "@Produto_view, " +
-                                "@Produto_add, " +
-                                "@Produto_edit, " +
-                                "@Produto_remove, " +
-                                "@Produto_search, " +
-                                " @id_usuario);SELECT SCOPE_IDENTITY() AS Last_Id;", "Usuario", new Dictionary<string, object>()
+                                "@usuario_search " +
+                                ");SELECT SCOPE_IDENTITY() AS Last_Id;", "Usuario", new Dictionary<string, object>()
                                 {
-                                    {"@Acesso", $"Permissao {_user_selecionado.Nome}"},
+                                    {"@Acesso", _user_selecionado.Acesso},
 
                                     {"@pesagem_view", ch_view_pesagem.Checked},
                                     {"@pesagem_add", ch_add_pesagem.Checked},
@@ -706,37 +598,6 @@ namespace Main.View.PagesFolder.Configuration
                                     {"@usuario_edit", ch_edit_usuarios.Checked},
                                     {"@usuario_remove", ch_remove_usuarios.Checked},
                                     {"@usuario_search", ch_search_consulta.Checked},
-                                    {"@receita_view", ch_view_receita.Checked},
-                                    {"@receita_add", ch_add_receita.Checked},
-
-                                    {"@receita_edit", ch_edit_receita.Checked},
-                                    {"@receita_remove", ch_remove_receita.Checked},
-                                    {"@receita_search", ch_search_receita.Checked},
-                                    {"@tipoReceita_view", ch_view_Tiporeceita.Checked},
-                                    {"@tipoReceita_add", ch_add_TipoReceita.Checked},
-                                    {"@tipoReceita_edit", ch_edit_Tiporeceita.Checked},
-                                    {"@tipoReceita_remove", ch_remove_Tiporeceita.Checked},
-                                    {"@tipoReceita_search", ch_search_Tiporeceita.Checked},
-
-                                    {"@Recipiente_view", ch_view_Recipiente.Checked},
-                                    {"@Recipiente_add", ch_add_Recipiente.Checked},
-                                    {"@Recipiente_edit", ch_edit_Recipiente.Checked},
-                                    {"@Recipiente_remove", ch_remove_recipiente.Checked},
-
-                                    {"@Recipiente_search", ch_search_Recipiente.Checked},
-
-                                    {"@Bandeja_view", ch_view_Bandeja.Checked},
-                                    {"@Bandeja_add", ch_add_Bandeja.Checked},
-                                    {"@Bandeja_edit", ch_edit_Bandeja.Checked},
-                                    {"@Bandeja_remove", ch_remove_bandeja.Checked},
-                                    {"@Bandeja_search", ch_search_bandeja.Checked},
-                                    {"@Produto_view", ch_view_produto.Checked},
-                                    {"@Produto_add", ch_add_produto.Checked},
-                                    {"@Produto_edit", ch_edit_produto.Checked},
-                                    {"@Produto_remove", ch_remove_produto.Checked},
-                                    {"@Produto_search", ch_search_produto.Checked},
-
-                                    {"@id_usuario", _user_selecionado.Id},
                                 });
 
                     if (permission > 0)
@@ -781,35 +642,10 @@ namespace Main.View.PagesFolder.Configuration
                         "usuario_add = @usuario_add, " +
                         "usuario_edit = @usuario_edit, " +
                         "usuario_remove = @usuario_remove, " +
-                        "usuario_search = @usuario_search, " +
-                        "receita_view = @receita_view, " +
-                        "receita_add = @receita_add, " +
-                        "receita_edit = @receita_edit, " +
-                        "receita_remove = @receita_remove, " +
-                        "receita_search = @receita_search, " +
-                        "tipoReceita_view = @tipoReceita_view, " +
-                        "tipoReceita_add = @tipoReceita_add, " +
-                        "tipoReceita_edit = @tipoReceita_edit, " +
-                        "tipoReceita_remove = @tipoReceita_remove, " +
-                        "tipoReceita_search = @tipoReceita_search, " +
-                        "Recipiente_view = @Recipiente_view, " +
-                        "Recipiente_add = @Recipiente_add, " +
-                        "Recipiente_edit = @Recipiente_edit, " +
-                        "Recipiente_remove = @Recipiente_remove, " +
-                        "Recipiente_search = @Recipiente_search, " +
-                        "Bandeja_view = @Bandeja_view, " +
-                        "Bandeja_add = @Bandeja_add, " +
-                        "Bandeja_edit = @Bandeja_edit, " +
-                        "Bandeja_remove = @Bandeja_remove, " +
-                        "Bandeja_search = @Bandeja_search, " +
-                        "Produto_view = @Produto_view, " +
-                        "Produto_add  = @Produto_add, " +
-                        "Produto_edit = @Produto_edit, " +
-                        "Produto_remove = @Produto_remove, " +
-                        "Produto_search = @Produto_search " +
-                        "WHERE id = @id", "Usuario", new Dictionary<string, object>()
+                        "usuario_search = @usuario_search " +
+                        "WHERE Acesso = @Acesso", "Usuario", new Dictionary<string, object>()
                         {
-                            {"@Acesso", $"Permissao {_user_selecionado.Nome}"},
+                            {"@Acesso", _user_selecionado.Acesso},
                             {"@pesagem_view", ch_view_pesagem.Checked},
                             {"@pesagem_add", ch_add_pesagem.Checked},
                             {"@pesagem_edit", ch_edit_pesagem.Checked},
@@ -835,32 +671,6 @@ namespace Main.View.PagesFolder.Configuration
                             {"@usuario_edit", ch_edit_usuarios.Checked},
                             {"@usuario_remove", ch_remove_usuarios.Checked},
                             {"@usuario_search", ch_search_consulta.Checked},
-                            {"@receita_view", ch_view_receita.Checked},
-                            {"@receita_add", ch_add_receita.Checked},
-                            {"@receita_edit", ch_edit_receita.Checked},
-                            {"@receita_remove", ch_remove_receita.Checked},
-                            {"@receita_search", ch_search_receita.Checked},
-                            {"@tipoReceita_view", ch_view_Tiporeceita.Checked},
-                            {"@tipoReceita_add", ch_add_TipoReceita.Checked},
-                            {"@tipoReceita_edit", ch_edit_Tiporeceita.Checked},
-                            {"@tipoReceita_remove", ch_remove_Tiporeceita.Checked},
-                            {"@tipoReceita_search", ch_search_Tiporeceita.Checked},
-                            {"@Recipiente_view", ch_view_Recipiente.Checked},
-                            {"@Recipiente_add", ch_add_Recipiente.Checked},
-                            {"@Recipiente_edit", ch_edit_Recipiente.Checked},
-                            {"@Recipiente_remove", ch_remove_recipiente.Checked},
-                            {"@Recipiente_search", ch_search_Recipiente.Checked},
-                            {"@Bandeja_view", ch_view_Bandeja.Checked},
-                            {"@Bandeja_add", ch_add_Bandeja.Checked},
-                            {"@Bandeja_edit", ch_edit_Bandeja.Checked},
-                            {"@Bandeja_remove", ch_remove_bandeja.Checked},
-                            {"@Bandeja_search", ch_search_bandeja.Checked},
-                            {"@Produto_view", ch_view_produto.Checked},
-                            {"@Produto_add", ch_add_produto.Checked},
-                            {"@Produto_edit", ch_edit_produto.Checked},
-                            {"@Produto_remove", ch_remove_produto.Checked},
-                            {"@Produto_search", ch_search_produto.Checked},
-                            {"@id", _permissao_selecionada.Id},
                         });
                 }
             }

@@ -561,7 +561,6 @@ namespace Main.Helper
                                     return materia;
                                 }
 
-
                                 if (tabela == "Historico_Acoes")
                                 {
                                     HistoricoAcoesModel historico = new HistoricoAcoesModel();
@@ -610,40 +609,18 @@ namespace Main.Helper
                                     per.Usuario_remove = Convert.ToBoolean(dr["usuario_remove"]);
                                     per.Usuario_search = Convert.ToBoolean(dr["usuario_search"]);
 
-                                    per.receita_view= Convert.ToBoolean(dr["receita_view"]);
-                                    per.receita_add = Convert.ToBoolean(dr["receita_add"]);
-                                    per.receita_edit = Convert.ToBoolean(dr["receita_edit"]);
-                                    per.receita_remove = Convert.ToBoolean(dr["receita_remove"]);
-                                    per.receita_search = Convert.ToBoolean(dr["receita_search"]);
-
-                                    per.tipoReceita_view = Convert.ToBoolean(dr["tipoReceita_view"]);
-                                    per.tipoReceita_add = Convert.ToBoolean(dr["tipoReceita_add"]);
-                                    per.tipoReceita_edit = Convert.ToBoolean(dr["tipoReceita_edit"]);
-                                    per.tipoReceita_remove = Convert.ToBoolean(dr["tipoReceita_remove"]);
-                                    per.tipoReceita_search = Convert.ToBoolean(dr["tipoReceita_search"]);
-
-                                    per.Recipiente_view = Convert.ToBoolean(dr["Recipiente_view"]);
-                                    per.Recipiente_add = Convert.ToBoolean(dr["Recipiente_add"]);
-                                    per.Recipiente_edit = Convert.ToBoolean(dr["Recipiente_edit"]);
-                                    per.Recipiente_remove = Convert.ToBoolean(dr["Recipiente_remove"]);
-                                    per.Recipiente_search = Convert.ToBoolean(dr["Recipiente_search"]);
-
-                                    per.Bandeja_view = Convert.ToBoolean(dr["Bandeja_view"]);
-                                    per.Bandeja_add = Convert.ToBoolean(dr["Bandeja_add"]);
-                                    per.Bandeja_edit = Convert.ToBoolean(dr["Bandeja_edit"]);
-                                    per.Bandeja_remove = Convert.ToBoolean(dr["Bandeja_remove"]);
-                                    per.Bandeja_search = Convert.ToBoolean(dr["Bandeja_search"]);
-
-                                    per.Produto_view = Convert.ToBoolean(dr["Produto_view"]);
-                                    per.Produto_add = Convert.ToBoolean(dr["Produto_add"]);
-                                    per.Produto_edit = Convert.ToBoolean(dr["Produto_edit"]);
-                                    per.Produto_remove = Convert.ToBoolean(dr["Produto_remove"]);
-                                    per.Produto_search = Convert.ToBoolean(dr["Produto_search"]);
-
-                                    per.Id_Usuario = Convert.ToInt32(dr["id_usuario"]);
-
                                     return per;
                                 }
+
+                                if (tabela == "Configuracao") 
+                                {
+                                    ConfiguracaoClass config = new ConfiguracaoClass();
+                                    config.id = Convert.ToInt32(dr["id"]);
+                                    config.estacao = Convert.ToString(dr["estacao"]);
+                                    config.id_Impressora = Convert.ToInt32(dr["id_Impressora"]);
+                                    return config;
+                                }
+
                             }
                         }
                         return null;

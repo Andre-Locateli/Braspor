@@ -234,7 +234,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                                     {
                                         this.Close();
 
-                                        InfoPopup info = new InfoPopup("Erro!", "O processo " + txt_op.Text + txt_cliente.Text +  "foi criado, porém, você não está conectado a nenhuma balança. Pressiona a tecla F1 e efetue a configuração antes de iniciar o processo!", Properties.Resources.errorIcon);
+                                        InfoPopup info = new InfoPopup("Erro!", "O processo " + txt_op.Text + " - " + txt_cliente.Text +  " foi criado, porém, você não está conectado a nenhuma balança. Pressiona a tecla F1 e efetue a configuração antes de iniciar o processo!", Properties.Resources.errorIcon);
                                         info.ShowDialog();
                                     }
                                 }

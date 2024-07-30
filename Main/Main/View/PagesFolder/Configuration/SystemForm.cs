@@ -12,6 +12,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using ZPL;
@@ -40,6 +41,10 @@ namespace Main.View.PagesFolder.Configuration
                 ch_producao.Checked = true;
             }
 
+            if(Program.Endereco_Referencia >= 0)
+            {
+                txtEnderecoReferencia.Text = Program.Endereco_Referencia.ToString();
+            }
         }
         //private void LoadImpressoras()
         //{
@@ -474,6 +479,14 @@ namespace Main.View.PagesFolder.Configuration
             {
                 foreach (RedeClass impressora in _impressoras)
                 {
+
+                    ConfiguracaoClass confg = (ConfiguracaoClass)Program.SQL.SelectObject("SELECT * FROM Configuracao WHERE estacao = @estacao", "Configuracao", new Dictionary<string, object>()
+                    {
+                        {"@estacao", Environment.MachineName}
+                    });
+
+                    if (impressora.Id != confg.id_Impressora) { return; }
+                    
                     string zplCode = "";
 
                     //Criar novo layout da etiqueta.
@@ -690,6 +703,8 @@ namespace Main.View.PagesFolder.Configuration
                         args.Graphics.DrawImage(bitmap, 0, 0); // Ajuste a posição conforme necessário
                     };
 
+                    documento.Print();
+                    await Task.Delay(1000);
                     documento.Print();
                 }
 

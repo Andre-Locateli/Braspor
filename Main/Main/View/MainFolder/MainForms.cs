@@ -1,7 +1,6 @@
 ﻿using Main.Helper;
 using Main.Properties;
 using Main.Service;
-using Main.View.CadastroFolder;
 using Main.View.PagesFolder;
 using Main.View.PagesFolder.Configuration;
 using Main.View.PagesFolder.ProcessFolder;
@@ -60,7 +59,6 @@ namespace Main.View.MainFolder
             btnRede.Enabled = Program._permissaoUsuario.Rede_View;
             btnSistema.Enabled = Program._permissaoUsuario.Sistema_View;
             btnUsuario.Enabled = Program._permissaoUsuario.Usuario_View;
-            btnProduto.Enabled = Program._permissaoUsuario.Produto_view;
 
             m_Form.QuickButtonEventClick += M_Form_QuickButtonEventClick;
             //OpenPage(m_Form);
@@ -667,7 +665,7 @@ namespace Main.View.MainFolder
         {
             try
             {
-                OpenPage(new CadastroMateriaPrimaForms(idUsuario, nomeUsuario));
+                //OpenPage(new CadastroMateriaPrimaForms(idUsuario, nomeUsuario));
             }
             catch (Exception)
             {

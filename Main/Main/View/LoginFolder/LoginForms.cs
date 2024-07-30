@@ -102,10 +102,10 @@ namespace Main.View.LoginFolder
                     Program._usuarioLogado = user;
                     //Salvar o ultimo Login
 
-                    PermissaoClass permissao = (PermissaoClass)Program.SQL.SelectObject("SELECT * FROM Acessos WHERE id_usuario = @id_usuario", "Acessos",
+                    PermissaoClass permissao = (PermissaoClass)Program.SQL.SelectObject("SELECT * FROM Acessos WHERE Acesso = @Acesso", "Acessos",
                         new Dictionary<string, object>()
                         {
-                            {"@id_usuario", user.Id}
+                            {"@Acesso", user.Acesso}
                         });
 
                     if (permissao != null)

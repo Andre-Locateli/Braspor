@@ -75,7 +75,6 @@ namespace Main.View.PagesFolder.Configuration
             this.label10 = new System.Windows.Forms.Label();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.cbEstacoes = new Main.View.CustomLayout.CTComboBox();
             this.pnBanco = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label15 = new System.Windows.Forms.Label();
@@ -87,17 +86,18 @@ namespace Main.View.PagesFolder.Configuration
             this.pnImpressora = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.cbCopias = new Main.View.CustomLayout.CTComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.cbEtiqueta = new Main.View.CustomLayout.CTComboBox();
             this.label12 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
             this.label13 = new System.Windows.Forms.Label();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.btnSalvarImpressora = new System.Windows.Forms.Button();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
+            this.cbEstacoes = new Main.View.CustomLayout.CTComboBox();
+            this.cbCopias = new Main.View.CustomLayout.CTComboBox();
+            this.cbEtiqueta = new Main.View.CustomLayout.CTComboBox();
             this.cbImpressora = new Main.View.CustomLayout.CTComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEtiquetas)).BeginInit();
             this.tbMenu.SuspendLayout();
@@ -209,6 +209,7 @@ namespace Main.View.PagesFolder.Configuration
             this.dgvEtiquetas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvEtiquetas.Size = new System.Drawing.Size(821, 261);
             this.dgvEtiquetas.TabIndex = 19;
+            this.dgvEtiquetas.Visible = false;
             this.dgvEtiquetas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEtiquetas_CellContentClick);
             // 
             // Pencil
@@ -262,6 +263,7 @@ namespace Main.View.PagesFolder.Configuration
             this.btnSalvarEtq.TabIndex = 17;
             this.btnSalvarEtq.Text = "Salvar Etiqueta";
             this.btnSalvarEtq.UseVisualStyleBackColor = false;
+            this.btnSalvarEtq.Visible = false;
             this.btnSalvarEtq.Click += new System.EventHandler(this.btnSalvarEtq_Click);
             // 
             // lbTextoArquivo
@@ -275,6 +277,7 @@ namespace Main.View.PagesFolder.Configuration
             this.lbTextoArquivo.Size = new System.Drawing.Size(326, 23);
             this.lbTextoArquivo.TabIndex = 14;
             this.lbTextoArquivo.Text = "Nenhum arquivo...";
+            this.lbTextoArquivo.Visible = false;
             // 
             // btnArquivo
             // 
@@ -290,6 +293,7 @@ namespace Main.View.PagesFolder.Configuration
             this.btnArquivo.TabIndex = 13;
             this.btnArquivo.Text = "Escolha um Arquivo";
             this.btnArquivo.UseVisualStyleBackColor = false;
+            this.btnArquivo.Visible = false;
             this.btnArquivo.Click += new System.EventHandler(this.btnArquivo_Click);
             // 
             // label5
@@ -300,9 +304,9 @@ namespace Main.View.PagesFolder.Configuration
             this.label5.Location = new System.Drawing.Point(27, 120);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(245, 25);
+            this.label5.Size = new System.Drawing.Size(187, 25);
             this.label5.TabIndex = 11;
-            this.label5.Text = "CADASTRO DE ETIQUETAS";
+            this.label5.Text = "TESTE DE ETIQUETA";
             // 
             // label4
             // 
@@ -691,27 +695,6 @@ namespace Main.View.PagesFolder.Configuration
             this.pictureBox6.TabStop = false;
             this.pictureBox6.Click += new System.EventHandler(this.pictureBox6_Click);
             // 
-            // cbEstacoes
-            // 
-            this.cbEstacoes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbEstacoes.BackColor = System.Drawing.Color.White;
-            this.cbEstacoes.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.cbEstacoes.BorderSize = 1;
-            this.cbEstacoes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbEstacoes.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.cbEstacoes.ForeColor = System.Drawing.Color.Black;
-            this.cbEstacoes.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(97)))));
-            this.cbEstacoes.ListBackColor = System.Drawing.Color.White;
-            this.cbEstacoes.ListTextColor = System.Drawing.Color.DimGray;
-            this.cbEstacoes.Location = new System.Drawing.Point(34, 65);
-            this.cbEstacoes.MinimumSize = new System.Drawing.Size(200, 30);
-            this.cbEstacoes.Name = "cbEstacoes";
-            this.cbEstacoes.Padding = new System.Windows.Forms.Padding(1);
-            this.cbEstacoes.Size = new System.Drawing.Size(544, 30);
-            this.cbEstacoes.TabIndex = 1;
-            this.cbEstacoes.Texts = "";
-            // 
             // pnBanco
             // 
             this.pnBanco.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -851,7 +834,7 @@ namespace Main.View.PagesFolder.Configuration
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(319, 501);
+            this.button1.Location = new System.Drawing.Point(281, 116);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(187, 37);
             this.button1.TabIndex = 27;
@@ -871,46 +854,6 @@ namespace Main.View.PagesFolder.Configuration
             this.label2.TabIndex = 26;
             this.label2.Text = "Copias:";
             // 
-            // cbCopias
-            // 
-            this.cbCopias.BackColor = System.Drawing.Color.White;
-            this.cbCopias.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.cbCopias.BorderSize = 1;
-            this.cbCopias.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCopias.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.cbCopias.ForeColor = System.Drawing.Color.Black;
-            this.cbCopias.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(97)))));
-            this.cbCopias.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "16",
-            "17",
-            "18",
-            "19",
-            "20"});
-            this.cbCopias.ListBackColor = System.Drawing.Color.White;
-            this.cbCopias.ListTextColor = System.Drawing.Color.DimGray;
-            this.cbCopias.Location = new System.Drawing.Point(478, 64);
-            this.cbCopias.MinimumSize = new System.Drawing.Size(200, 30);
-            this.cbCopias.Name = "cbCopias";
-            this.cbCopias.Padding = new System.Windows.Forms.Padding(1);
-            this.cbCopias.Size = new System.Drawing.Size(200, 30);
-            this.cbCopias.TabIndex = 25;
-            this.cbCopias.Texts = "1";
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
@@ -919,6 +862,7 @@ namespace Main.View.PagesFolder.Configuration
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(230, 27);
             this.panel1.TabIndex = 22;
+            this.panel1.Visible = false;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // label1
@@ -930,6 +874,7 @@ namespace Main.View.PagesFolder.Configuration
             this.label1.Size = new System.Drawing.Size(114, 21);
             this.label1.TabIndex = 21;
             this.label1.Text = "Editar/Excluir";
+            this.label1.Visible = false;
             // 
             // label14
             // 
@@ -942,25 +887,6 @@ namespace Main.View.PagesFolder.Configuration
             this.label14.Size = new System.Drawing.Size(173, 21);
             this.label14.TabIndex = 12;
             this.label14.Text = "Etiqueta selecionada:";
-            // 
-            // cbEtiqueta
-            // 
-            this.cbEtiqueta.BackColor = System.Drawing.Color.White;
-            this.cbEtiqueta.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.cbEtiqueta.BorderSize = 1;
-            this.cbEtiqueta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbEtiqueta.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.cbEtiqueta.ForeColor = System.Drawing.Color.Black;
-            this.cbEtiqueta.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(97)))));
-            this.cbEtiqueta.ListBackColor = System.Drawing.Color.White;
-            this.cbEtiqueta.ListTextColor = System.Drawing.Color.DimGray;
-            this.cbEtiqueta.Location = new System.Drawing.Point(253, 65);
-            this.cbEtiqueta.MinimumSize = new System.Drawing.Size(200, 30);
-            this.cbEtiqueta.Name = "cbEtiqueta";
-            this.cbEtiqueta.Padding = new System.Windows.Forms.Padding(1);
-            this.cbEtiqueta.Size = new System.Drawing.Size(200, 30);
-            this.cbEtiqueta.TabIndex = 11;
-            this.cbEtiqueta.Texts = "";
             // 
             // label12
             // 
@@ -1035,6 +961,86 @@ namespace Main.View.PagesFolder.Configuration
             this.pictureBox9.TabStop = false;
             this.pictureBox9.Click += new System.EventHandler(this.pictureBox6_Click);
             // 
+            // cbEstacoes
+            // 
+            this.cbEstacoes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbEstacoes.BackColor = System.Drawing.Color.White;
+            this.cbEstacoes.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.cbEstacoes.BorderSize = 1;
+            this.cbEstacoes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEstacoes.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.cbEstacoes.ForeColor = System.Drawing.Color.Black;
+            this.cbEstacoes.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(97)))));
+            this.cbEstacoes.ListBackColor = System.Drawing.Color.White;
+            this.cbEstacoes.ListTextColor = System.Drawing.Color.DimGray;
+            this.cbEstacoes.Location = new System.Drawing.Point(34, 65);
+            this.cbEstacoes.MinimumSize = new System.Drawing.Size(200, 30);
+            this.cbEstacoes.Name = "cbEstacoes";
+            this.cbEstacoes.Padding = new System.Windows.Forms.Padding(1);
+            this.cbEstacoes.Size = new System.Drawing.Size(544, 30);
+            this.cbEstacoes.TabIndex = 1;
+            this.cbEstacoes.Texts = "";
+            // 
+            // cbCopias
+            // 
+            this.cbCopias.BackColor = System.Drawing.Color.White;
+            this.cbCopias.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.cbCopias.BorderSize = 1;
+            this.cbCopias.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCopias.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.cbCopias.ForeColor = System.Drawing.Color.Black;
+            this.cbCopias.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(97)))));
+            this.cbCopias.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20"});
+            this.cbCopias.ListBackColor = System.Drawing.Color.White;
+            this.cbCopias.ListTextColor = System.Drawing.Color.DimGray;
+            this.cbCopias.Location = new System.Drawing.Point(478, 64);
+            this.cbCopias.MinimumSize = new System.Drawing.Size(200, 30);
+            this.cbCopias.Name = "cbCopias";
+            this.cbCopias.Padding = new System.Windows.Forms.Padding(1);
+            this.cbCopias.Size = new System.Drawing.Size(200, 30);
+            this.cbCopias.TabIndex = 25;
+            this.cbCopias.Texts = "1";
+            // 
+            // cbEtiqueta
+            // 
+            this.cbEtiqueta.BackColor = System.Drawing.Color.White;
+            this.cbEtiqueta.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.cbEtiqueta.BorderSize = 1;
+            this.cbEtiqueta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEtiqueta.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.cbEtiqueta.ForeColor = System.Drawing.Color.Black;
+            this.cbEtiqueta.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(97)))));
+            this.cbEtiqueta.ListBackColor = System.Drawing.Color.White;
+            this.cbEtiqueta.ListTextColor = System.Drawing.Color.DimGray;
+            this.cbEtiqueta.Location = new System.Drawing.Point(253, 65);
+            this.cbEtiqueta.MinimumSize = new System.Drawing.Size(200, 30);
+            this.cbEtiqueta.Name = "cbEtiqueta";
+            this.cbEtiqueta.Padding = new System.Windows.Forms.Padding(1);
+            this.cbEtiqueta.Size = new System.Drawing.Size(200, 30);
+            this.cbEtiqueta.TabIndex = 11;
+            this.cbEtiqueta.Texts = "";
+            // 
             // cbImpressora
             // 
             this.cbImpressora.BackColor = System.Drawing.Color.White;
@@ -1060,8 +1066,8 @@ namespace Main.View.PagesFolder.Configuration
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(247)))), ((int)(((byte)(248)))));
             this.ClientSize = new System.Drawing.Size(964, 620);
-            this.Controls.Add(this.tbMenu);
             this.Controls.Add(this.pnImpressora);
+            this.Controls.Add(this.tbMenu);
             this.Controls.Add(this.pnEstacao);
             this.Controls.Add(this.pnBanco);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
