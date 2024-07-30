@@ -451,7 +451,14 @@ namespace Main.Helper
                                     }
                                     else
                                     {
-                                        list_return.Add(dr[coluna_to_return]);
+                                        if (dr["Total_contagem"] != DBNull.Value)
+                                        {
+                                            list_return.Add(dr[coluna_to_return]);
+                                        }
+                                        else
+                                        {
+                                            list_return.Add(0);
+                                        }
                                     }
                                     
                                 }
