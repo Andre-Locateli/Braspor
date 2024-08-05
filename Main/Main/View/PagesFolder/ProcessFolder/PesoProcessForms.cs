@@ -287,8 +287,19 @@ namespace Main.View.PagesFolder.ProcessFolder
                     taraReferencia.Tag = Program.Endereco_Referencia;
                     zeroReferencia.Tag = Program.Endereco_Referencia;
 
-                    taraContagem.Tag = 1;
-                    zeroContagem.Tag = 1;
+                    var slctContagem = Program.SQL.SelectList("SELECT * FROM Rede WHERE Tipo = 'Balança' AND parent = @parent AND addr <> @addr", "Rede", null,
+                    new Dictionary<string, object>()
+                    {
+                        {"@parent", Program.CFG.Estação },
+                        {"@addr", Program.Endereco_Referencia }
+                    });
+
+                    foreach(RedeClass rd in slctContagem)
+                    {
+                        taraContagem.Tag = rd.addr;
+                        zeroContagem.Tag = rd.addr;
+                    }
+
                 }
 
 
@@ -1071,7 +1082,14 @@ namespace Main.View.PagesFolder.ProcessFolder
                 foreach (RedeClass impressora in _impressoras)
                 {
                     //if (Program.Configuracao.id_Impressora != impressora.Id) { return; }
-                    
+
+                    ConfiguracaoClass confg = (ConfiguracaoClass)Program.SQL.SelectObject("SELECT * FROM Configuracao WHERE estacao = @estacao", "Configuracao", new Dictionary<string, object>()
+                    {
+                        {"@estacao", Environment.MachineName}
+                    });
+
+                    if (impressora.Id != confg.id_Impressora) { return; }
+
                     string zplCode = "";
 
                     ZXing.BarcodeWriter brcode = new ZXing.BarcodeWriter();
@@ -1102,6 +1120,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                         dSoma = (float)Math.Round(Convert.ToDouble(soma[0]), 4);
                         lbl_peso = "Peso:";
                         lbl_peso_r = dSoma.ToString();
+                        //lbl_peso_r = dSoma.ToString().Substring(0, 7);
                     }
                     else 
                     {
@@ -1177,18 +1196,18 @@ namespace Main.View.PagesFolder.ProcessFolder
                     foreach (ProcessosModel proc in selectProcessos)
                     {
                         //lbl_peso_r = proc.PesoTotal.ToString();
-                        if (proc.PesoTotal.ToString().Length == 1)
-                        {
-                            lbl_peso_r = proc.PesoTotal.ToString();
-                        }
-                        else if (lbl_peso_r.Length <= 12)
-                        {
-                            lbl_peso_r = proc.PesoTotal.ToString().Substring(0, lbl_peso_r.Length);
-                        }
-                        else if (lbl_peso_r.Length >= 13)
-                        {
-                            lbl_peso_r = proc.PesoTotal.ToString().Substring(0, 13);
-                        }
+                        //if (proc.PesoTotal.ToString().Length == 1)
+                        //{
+                        //    lbl_peso_r = proc.PesoTotal.ToString();
+                        //}
+                        //else if (lbl_peso_r.Length <= 12)
+                        //{
+                        //    lbl_peso_r = proc.PesoTotal.ToString().Substring(0, lbl_peso_r.Length);
+                        //}
+                        //else if (lbl_peso_r.Length >= 13)
+                        //{
+                        //    lbl_peso_r = proc.PesoTotal.ToString().Substring(0, 13);
+                        //}
 
 
                         lbl_opr_r = proc.Op;
@@ -1399,6 +1418,8 @@ namespace Main.View.PagesFolder.ProcessFolder
                         args.Graphics.DrawImage(bitmap, 0, 0); // Ajuste a posição conforme necessário
                     };
 
+                    documento.Print();
+                    await Task.Delay(1000);
                     documento.Print();
                 }
 

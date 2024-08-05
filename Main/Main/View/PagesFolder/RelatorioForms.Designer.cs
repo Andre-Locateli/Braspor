@@ -218,6 +218,7 @@
             this.mtxtDateInicio.Size = new System.Drawing.Size(244, 27);
             this.mtxtDateInicio.TabIndex = 46;
             this.mtxtDateInicio.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.mtxtDateInicio.ValidatingType = typeof(System.DateTime);
             this.mtxtDateInicio.Leave += new System.EventHandler(this.mtxtDate_LeaveEvent);
             // 
             // panel3
@@ -244,6 +245,7 @@
             this.mtxtDateFim.Size = new System.Drawing.Size(244, 27);
             this.mtxtDateFim.TabIndex = 47;
             this.mtxtDateFim.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.mtxtDateFim.ValidatingType = typeof(System.DateTime);
             this.mtxtDateFim.Leave += new System.EventHandler(this.mtxtDate_LeaveEvent);
             // 
             // label7

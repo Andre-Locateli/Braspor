@@ -451,7 +451,7 @@ namespace Main.Helper
                                     }
                                     else
                                     {
-                                        if (dr["Total_contagem"] != DBNull.Value)
+                                        if (dr["SOMA"] != DBNull.Value)
                                         {
                                             list_return.Add(dr[coluna_to_return]);
                                         }

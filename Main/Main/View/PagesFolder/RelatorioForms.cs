@@ -505,9 +505,9 @@ namespace Main.View.PagesFolder
                 UsuarioClass USER = (UsuarioClass)cbUsuario.SelectedItem;
 
                 //Terminar esse CÓDIGO PARA BUSCAR OS ITENS COM OS PARAMETROS.
-                where_condition = $"P.dateinsert >= '{mtxtDateInicio.Text}' AND P.dateend <= '{mtxtDateFim.Text}' AND P.Id_usuario = {USER.Id}";
+                //where_condition = $"P.dateinsert >= '{mtxtDateInicio.Text}' AND P.dateend <= '{mtxtDateFim.Text}' AND P.Id_usuario = {USER.Id}";
 
-                dgv_dados.DataSource = Program.SQL.SelectDataGrid($"SELECT U.Nome AS 'Nome Operador', P.Descricao AS 'Observação do Processo', P.Tempo_execucao AS 'Tempo execução', P.Total_contagem AS 'Contagem total de itens' , P.Peso_total AS 'Peso total do processo', P.dateinsert AS 'Data Inicio', P.dateend AS 'Data Fim' FROM Processos P INNER JOIN Usuario U ON P.Id_usuario = U.Id WHERE {where_condition}", "Processos");
+                dgv_dados.DataSource = Program.SQL.SelectDataGrid($"SELECT U.Nome AS 'Nome Operador', P.Id_usuario AS 'ID', P.Descricao AS 'Observação do Processo', P.Tempo_execucao AS 'Tempo execução', P.Total_contagem AS 'Contagem total de itens' , P.Peso_total AS 'Peso total do processo', P.dateinsert AS 'Data Inicio', P.dateend AS 'Data Fim' FROM Processos P INNER JOIN Usuario U ON P.Id_usuario = U.Id WHERE P.dateinsert >= CONVERT(VARCHAR, CAST(CONVERT(DATETIME, '{mtxtDateInicio.Text}', 103) AS DATETIME), 120) AND P.dateend <= CONVERT(VARCHAR, CAST(CONVERT(DATETIME, '{mtxtDateFim.Text}', 103) AS DATETIME), 120) AND P.Id_usuario = {USER.Id}", "Processos");
             }
             catch (Exception ex) 
             {

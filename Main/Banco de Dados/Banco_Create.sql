@@ -96,37 +96,6 @@ CREATE TABLE [dbo].[Acessos] (
 	[usuario_remove]				BIT			NULL DEFAULT 0,
 	[usuario_search]				BIT			NULL DEFAULT 0,
 
-	[receita_view]					BIT			NULL DEFAULT 0,
-	[receita_add]					BIT			NULL DEFAULT 0,
-	[receita_edit]					BIT			NULL DEFAULT 0,
-	[receita_remove]				BIT			NULL DEFAULT 0,
-	[receita_search]				BIT			NULL DEFAULT 0,
-
-	[tipoReceita_view]				BIT			NULL DEFAULT 0,
-	[tipoReceita_add]				BIT			NULL DEFAULT 0,
-	[tipoReceita_edit]				BIT			NULL DEFAULT 0,
-	[tipoReceita_remove]			BIT			NULL DEFAULT 0,
-	[tipoReceita_search]			BIT			NULL DEFAULT 0,
-
-	[Recipiente_view]				BIT			NULL DEFAULT 0,
-	[Recipiente_add]				BIT			NULL DEFAULT 0,
-	[Recipiente_edit]				BIT			NULL DEFAULT 0,
-	[Recipiente_remove]				BIT			NULL DEFAULT 0,
-	[Recipiente_search]				BIT			NULL DEFAULT 0,
-
-	[Bandeja_view]					BIT			NULL DEFAULT 0,
-	[Bandeja_add]					BIT			NULL DEFAULT 0,
-	[Bandeja_edit]					BIT			NULL DEFAULT 0,
-	[Bandeja_remove]				BIT			NULL DEFAULT 0,
-	[Bandeja_search]				BIT			NULL DEFAULT 0,
-
-	[Produto_view]					BIT			NULL DEFAULT 0,
-	[Produto_add]					BIT			NULL DEFAULT 0,
-	[Produto_edit]					BIT			NULL DEFAULT 0,
-	[Produto_remove]				BIT			NULL DEFAULT 0,
-	[Produto_search]				BIT			NULL DEFAULT 0,
-
-	id_usuario						INT			NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
