@@ -15,7 +15,20 @@ namespace Main.View.PopupFolder
         public PrintPopup(Bitmap bmp)
         {
             InitializeComponent();
+            this.Size = bmp.Size;
             pictureBox1.Image = bmp;
+        }
+
+        private async void PrintPopup_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                await Task.Delay(3000);
+                this.Close();
+            }
+            catch (Exception)
+            {
+            }
         }
     }
 }

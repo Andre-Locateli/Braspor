@@ -90,9 +90,23 @@ namespace Main.View.PagesFolder.Configuration
 
         public void LoadImpressoras()
         {
-            Dictionary<string, object> parametros = new Dictionary<string, object>();
-            parametros.Add("@parent", "-");
-            _impressoras = Program.SQL.SelectList("select * from Rede where parent = @parent and tipo = 'Impressora'", "Rede", values: parametros);
+            try
+            {
+                Dictionary<string, object> parametros = new Dictionary<string, object>();
+                parametros.Add("@parent", "-");
+                _impressoras = Program.SQL.SelectList("select * from Rede where parent = @parent and tipo = 'Impressora'", "Rede", values: parametros);
+
+                if (_impressoras.Count > 0)
+                {
+                    foreach (RedeClass item in _impressoras)
+                    {
+                        cbImpressora.Items.Add(item.full_name);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
         }
         private void LoadEtiquetas()
         {
