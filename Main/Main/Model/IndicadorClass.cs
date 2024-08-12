@@ -30,6 +30,13 @@ namespace Main.Model
             set { _PL = value; }
         }
 
+        private bool _estavel;
+        public bool Estavel
+        {
+            get { return _estavel; }
+            set { _estavel = value; }
+        }
+
 
         private double _T = 0;
         public double T

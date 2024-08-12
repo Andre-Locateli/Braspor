@@ -241,8 +241,10 @@ namespace Main.Service
                         {
                             indicador_addr[global_counter].PS = CommunicationFormsHelper.PesoConverted(bruto[3], bruto[4], bruto[5], bruto[6]);
                             indicador_addr[global_counter].PB = Convert.ToDouble(indicador_addr[global_counter].PS);
-
-                            //Console.WriteLine($"Endereço: {indicador_addr[global_counter].indicador.addr}\nPeso: {indicador_addr[global_counter].PS}");
+                            
+                            var estavel = bruto[3] & 0b00010000;
+                            if (estavel == 0x00) { indicador_addr[global_counter].Estavel = false; }
+                            else { indicador_addr[global_counter].Estavel = true; }
 
                             indicador_addr[global_counter].availableStatus = true;
                             if (global_counter + 1 > indicador_addr.Count) 
