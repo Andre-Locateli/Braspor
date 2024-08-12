@@ -25,6 +25,12 @@ namespace Main.View.PagesFolder.ProcessFolder
         int indiceContador = 0;
         double Gramatura = 0;
 
+        double Peso = 0;
+        double Peso_Salvo = 0;
+
+        int folhasRegistradas = 0;
+
+
         int statusProcesso = 0;
         Image[] imgs_peso;
 
@@ -253,23 +259,86 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                 if (contagemAtiva) 
                 {
+                    Peso = Convert.ToDouble($"{SerialCommunicationService.indicador_addr[indiceContador].PS}");
+
+                    if (Peso > 0)
+                    {
+                        Peso_Salvo = Peso;
+                        statusProcesso = 1;
+                    }
+                    else
+                    {
+                        statusProcesso = 0;
+                    }
+
+                    Peso = Convert.ToDouble($"{SerialCommunicationService.indicador_addr[indiceContador].PS}");
+
+                    valorSecSup = valorSuporte;
+
                     switch (statusProcesso)
                     {
                         //Aguardando referencia
+
                         case 0:
+                            if (folhasRegistradas == 0)
+                            {                            
+                                //Referencia registrada, aguardando Matéria Prima
+                                this.Invoke(new MethodInvoker(() => {
+                                    pict_Status.BackColor = Color.FromArgb(41, 46, 84);
+                                    panel12.BackColor = Color.FromArgb(41, 46, 84);
+                                    panel20.BackColor = Color.FromArgb(41, 46, 84);
+                                    lbl_Status.BackColor = Color.FromArgb(41, 46, 84);
+                                    lbl_Status.Text = "";
+                                    lbl_Status.Text = "AGUARDANDO MATÉRIA-PRIMA...";
+                                }));
+                            }
+                            else
+                            {
+                                //Peso registrado, aguardando matéria Prima
+                                this.Invoke(new MethodInvoker(() =>  {
+                                    pict_Status.BackColor = Color.SeaGreen;
+                                    panel12.BackColor = Color.SeaGreen;
+                                    panel20.BackColor = Color.SeaGreen;
+                                    lbl_Status.BackColor = Color.SeaGreen;
+                                    pict_Status.Image = imgs_peso[2];
+                                    lbl_Status.Text = "";
+                                    lbl_Status.Text = "PESO REGISTRADO. AGUARDANDO MATÉRIA-PRIMA...";
+                                }));
+                            }
                             break;
 
-                            //Referencia registrada, aguardando Matéria Prima
+
+                        //Pesando
                         case 1:
+
+                            //stopValor.Start();
+
+                            //STATUS
+                            lbl_Status.Invoke(new MethodInvoker(() =>
+                            {
+                                pict_Status.Image = imgs_peso[0];
+
+                                pict_Status.BackColor = Color.DarkOrange;
+                                panel12.BackColor = Color.DarkOrange;
+                                panel20.BackColor = Color.DarkOrange;
+                                lbl_Status.BackColor = Color.DarkOrange;
+
+                                lbl_Status.Text = "";
+                                lbl_Status.Text = "PESANDO...";
+                            }));
+
                             break;
 
-                            //Pesando
+
+                        //Registrando Peso, aguarde.                            
                         case 2:
                             break;
 
-                        //Registrando Peso, aguarde.
+
+                        //Peso estabilizado, retire ou adicione materia prima
                         case 3:
                             break;
+
 
                         //Peso registrado, aguardando matéria Prima
                         case 4:
@@ -281,7 +350,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                     }
                 }
 
-                if (executation_time.Elapsed.Seconds > 30) 
+                if (executation_time.Elapsed.Seconds > 5) 
                 {
                     bool updateTime = Program.SQL.CRUDCommand("UPDATE Processos SET Tempo_execucao = @temp, Status_processo = @Status_processo  WHERE id = @id", "Processos",
                         new Dictionary<string, object>()
