@@ -38,19 +38,8 @@ namespace Main.View.PagesFolder.ProcessFolder
 
         private void btnExecutar_Click(object sender, EventArgs e)
         {
-            //var ProdutoCheck = Program.SQL.SelectList("SELECT * FROM MateriaPrima", "MateriaPrima", null,
-            //new Dictionary<string, object>());
-
-            //if (ProdutoCheck.Count == 0)
-            //{
-            //    InfoPopup info = new InfoPopup("Erro", "Cadastre uma matéria-prima antes de iniciar um processo!", Properties.Resources.errorIcon);
-            //    info.ShowDialog();
-            //}
-            //else
-            //{
-                EscolhaPesagemForms escolha = new EscolhaPesagemForms(idUsuario, nomeUsuario);
-                escolha.ShowDialog();
-            //}
+            EscolhaPesagemForms escolha = new EscolhaPesagemForms(idUsuario, nomeUsuario);
+            escolha.ShowDialog();
         }
 
         private void PesagemForms_Load(object sender, EventArgs e)
@@ -87,30 +76,27 @@ namespace Main.View.PagesFolder.ProcessFolder
             dgvDados.DataSource = items;
 
 
-            if (items.Count == 0)
+            if (Processos.Count != 0)
             {
-                dgvDados.Columns    ["Status"].         Visible         =   false                   ;
+                dgvDados.Columns["Id"].Visible = false;
+                dgvDados.Columns["Id_produto"].Visible = false;
+                dgvDados.Columns["IdUsuario"].Visible = false;
+                dgvDados.Columns["dateend"].Visible = false;
+                dgvDados.Columns["dateupdate"].Visible = false;
+                dgvDados.Columns["StatusProcesso"].Visible = false;
+
+                dgvDados.Columns["Descricao"].HeaderText = "Descrição";
+                dgvDados.Columns["TempoExecucao"].HeaderText = "Tempo de execução";
+                dgvDados.Columns["TotalContagem"].HeaderText = "Quantidade";
+                dgvDados.Columns["Gramatura"].HeaderText = "Gramatura";
+                dgvDados.Columns["PesoTotal"].HeaderText = "Peso total";
+                dgvDados.Columns["Op"].HeaderText = "Ordem de Produção";
+                dgvDados.Columns["dateinsert"].HeaderText = "Data de inserção";
+                dgvDados.Columns["Status"].DisplayIndex = 10;
             }
             else
             {
-                dgvDados.Columns    ["Status"].         Visible         =   true                    ;
-
-                dgvDados.Columns    ["Id"].             Visible         =   false                   ;
-                dgvDados.Columns    ["dateend"].        Visible         =   false                   ;
-                dgvDados.Columns    ["IdUsuario"].      Visible         =   false                   ;
-                dgvDados.Columns    ["Id_produto"].     Visible         =   false                   ;
-                dgvDados.Columns    ["dateupdate"].     Visible         =   false                   ;
-                dgvDados.Columns    ["StatusProcesso"]. Visible         =   false                   ;
-
-                dgvDados.Columns    ["Op"].             HeaderText      =   "Ordem de Produção"     ;
-                dgvDados.Columns    ["Gramatura"].      HeaderText      =   "Gramatura"             ;
-                dgvDados.Columns    ["Descricao"].      HeaderText      =   "Descrição"             ;
-                dgvDados.Columns    ["PesoTotal"].      HeaderText      =   "Peso total"            ;
-                dgvDados.Columns    ["dateinsert"].     HeaderText      =   "Data de inserção"      ;
-                dgvDados.Columns    ["TempoExecucao"].  HeaderText      =   "Tempo de execução"     ;
-                dgvDados.Columns    ["TotalContagem"].  HeaderText      =   "Quantidade"            ;
-                dgvDados.Columns    ["Status"].         DisplayIndex    =   10                      ;
-
+                dgvDados.Columns["Status"].Visible = false;
             }
 
             ReorderButtons();
