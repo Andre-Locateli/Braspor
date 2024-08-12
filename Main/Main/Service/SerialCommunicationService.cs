@@ -29,6 +29,8 @@ namespace Main.Service
 
     public static class SerialCommunicationService
     {
+        private static List<Object> _impressoras = new List<Object>();
+
         public static SerialPort SERIALPORT1 = new SerialPort();
 
         public static SerialPort teste = new SerialPort();
@@ -592,6 +594,348 @@ namespace Main.Service
             catch (Exception)
             {
                 return s;
+            }
+        }
+
+        public static void LoadImpressoras()
+        {
+            Dictionary<string, object> parametros = new Dictionary<string, object>();
+            parametros.Add("@parent", "-");
+            _impressoras = Program.SQL.SelectList("select * from Rede where parent = @parent and tipo = 'Impressora'", "Rede", values: parametros);
+        }
+
+        public static async void ImpressoraPrint(ProcessosModel processoAtual)
+        {
+            try
+            {
+                foreach (RedeClass impressora in _impressoras)
+                {
+                    //if (Program.Configuracao.id_Impressora != impressora.Id) { return; }
+
+                    ConfiguracaoClass confg = (ConfiguracaoClass)Program.SQL.SelectObject("SELECT * FROM Configuracao WHERE estacao = @estacao", "Configuracao", new Dictionary<string, object>()
+                    {
+                        {"@estacao", Environment.MachineName}
+                    });
+
+                    if (impressora.Id != confg.id_Impressora)
+                    { }
+                    else
+                    {
+
+                    }
+
+                    string zplCode = "";
+
+                    ZXing.BarcodeWriter brcode = new ZXing.BarcodeWriter();
+
+                    string lbl_op = "N° Op:";
+                    string lbl_op_r = processoAtual.Op.ToString();
+
+                    string lbl_cli = "Cliente:";
+                    string lbl_cli_r = processoAtual.Cliente.ToString();
+
+                    var soma = Program.SQL.SelectList("SELECT SUM(Peso) AS SOMA FROM Log_Processos Where Id_processo = @Id", "Log_Processos", "SOMA", new Dictionary<string, object>()
+                    {
+                        {"@Id", processoAtual.Id }
+                    });
+
+                    string lbl_peso = "";
+                    string lbl_peso_r = "";
+                    float dSoma = 0;
+
+                    if (soma.Count > 0)
+                    {
+                        dSoma = (float)Math.Round(Convert.ToDouble(soma[0]), 4);
+                        lbl_peso = "Peso:";
+                        lbl_peso_r = dSoma.ToString();
+                        //lbl_peso_r = dSoma.ToString().Substring(0, 7);
+                    }
+                    else
+                    {
+                        lbl_peso = "Peso:";
+                        lbl_peso_r = "0,00";
+                    }
+
+                    string lbl_qtfl = "Qtd Folhas:";
+                    string lbl_qtfl_r = processoAtual.Quantidade.ToString();
+
+                    string lbl_tppl = "Tipo Papel:";
+                    string lbl_tppl_r = processoAtual.Tipo.ToString();
+
+                    string lbl_fmt = "Formato:";
+                    string lbl_fmt_r = processoAtual.Formato.ToString();
+
+                    string lbl_gr = "Gram:";
+                    string lbl_gr_r = processoAtual.GramaturaDigitada.ToString();
+
+                    string lbl_dtin = "Data Início:";
+                    string lbl_dtin_r = "";
+
+                    string lbl_dtfm = "Data Término:";
+                    string lbl_dtfm_r = DateTime.Now.Date.ToString().Substring(0, 10);
+
+                    string lbl_hrin = "Horário inicial:";
+                    string lbl_hrin_r = "";
+
+                    string lbl_hrfm = "Horário final:";
+                    string lbl_hrfm_r = DateTime.Now.ToString().Substring(11, 8);
+
+                    string lbl_opr = "Operador:";
+                    string lbl_opr_r = Program._usuarioLogado.Nome;
+
+                    if (lbl_opr_r.Length <= 21)
+                    {
+                        lbl_opr_r = Program._usuarioLogado.Nome.Substring(0, lbl_opr_r.Length);
+                    }
+                    else if (lbl_opr_r.Length >= 22)
+                    {
+                        lbl_opr_r = Program._usuarioLogado.Nome.Substring(0, 22);
+                    }
+
+                    string lbl_trn = "Turno:";
+                    string lbl_trn_r = "";
+                    if (DateTime.Now.Hour <= 12) { lbl_trn_r = "Matutino"; } else if (DateTime.Now.Hour > 12) { lbl_trn_r = "Vespertino"; }
+
+                    string lbl_obs = "Obs:";
+                    string lbl_obs_r = processoAtual.Descricao;
+
+                    string split1 = "";
+                    string split2 = "";
+                    string split3 = "";
+
+                    if (lbl_obs_r.Length <= 60)
+                    {
+                        split1 = lbl_obs_r;
+                    }
+                    else if (lbl_obs_r.Length > 60 & lbl_obs_r.Length < 120)
+                    {
+                        split1 = lbl_obs_r.Substring(0, 60);
+                        split2 = lbl_obs_r.Substring(60, lbl_obs_r.Length - 60);
+                    }
+                    else if (lbl_obs_r.Length > 60)
+                    {
+                        split1 = lbl_obs_r.Substring(0, 60);
+                        split2 = lbl_obs_r.Substring(60, 60);
+                        split3 = lbl_obs_r.Substring(120);
+                    }
+
+
+
+                    lbl_opr_r = processoAtual.Op;
+                    if (lbl_opr_r.Length <= 21)
+                    {
+                        lbl_opr_r = Program._usuarioLogado.Nome.Substring(0, lbl_opr_r.Length);
+                    }
+                    else if (lbl_opr_r.Length >= 22)
+                    {
+                        lbl_opr_r = Program._usuarioLogado.Nome.Substring(0, 22);
+                    }
+
+
+                    lbl_cli_r = processoAtual.Cliente;
+                    if (lbl_cli_r.Length <= 21)
+                    {
+                        lbl_cli_r = processoAtual.Cliente.ToString().Substring(0, lbl_cli_r.Length);
+                    }
+                    else if (lbl_cli_r.Length >= 22)
+                    {
+                        lbl_cli_r = processoAtual.Cliente.ToString().Substring(0, 22);
+                    }
+
+
+                    lbl_dtin_r = processoAtual.dateinsert.Date.ToString();
+                    if (lbl_dtin_r.Length <= 9)
+                    {
+                        lbl_dtin_r = processoAtual.dateinsert.Date.ToString().Substring(0, lbl_dtin_r.Length);
+                    }
+                    else if (lbl_dtin_r.Length >= 10)
+                    {
+                        lbl_dtin_r = processoAtual.dateinsert.Date.ToString().Substring(0, 10);
+                    }
+
+
+                    lbl_hrin_r = processoAtual.dateinsert.ToString();
+                    if (lbl_hrin_r.Length <= 17)
+                    {
+                        lbl_hrin_r = processoAtual.dateinsert.ToString().Substring(11, 8);
+                    }
+                    else if (lbl_hrin_r.Length >= 18)
+                    {
+                        lbl_hrin_r = processoAtual.dateinsert.ToString().Substring(11, 8);
+                    }
+
+
+                    lbl_tppl_r = processoAtual.Tipo.ToString();
+                    lbl_fmt_r = processoAtual.Formato.ToString();
+                    lbl_qtfl_r = processoAtual.TotalContagem.ToString();
+
+
+                    System.Drawing.Font f1_small = new System.Drawing.Font("Arial", 10, System.Drawing.FontStyle.Regular, GraphicsUnit.Pixel);
+                    System.Drawing.Font f1 = new System.Drawing.Font("Arial", 18, System.Drawing.FontStyle.Regular, GraphicsUnit.Pixel);
+                    System.Drawing.Font fmn = new System.Drawing.Font("Arial", 15, System.Drawing.FontStyle.Bold, GraphicsUnit.Pixel);
+
+                    System.Drawing.Brush brush = System.Drawing.Brushes.Black;
+
+                    int x = (int)(148 * (96 / 25.4f));
+                    int y = (int)(105 * (96 / 25.4f));
+
+                    Bitmap bitmap = new Bitmap(x, y);
+
+                    int wid = (int)(35 * 96 / 25.4f);
+                    int hei = (int)(12 * 96 / 25.4f);
+
+                    System.Drawing.Pen blackPen = new System.Drawing.Pen(System.Drawing.Color.Black, 2);
+
+                    using (Graphics graphics = Graphics.FromImage(bitmap))
+                    {
+                        graphics.Clear(System.Drawing.Color.White);
+
+                        //Draw Black lines
+
+
+                        //op
+                        graphics.DrawLine(blackPen, 72f, 30f, 200f, 30f);
+
+                        //cliente
+                        graphics.DrawLine(blackPen, 280f, 30f, 540f, 30f);
+
+                        //peso
+                        graphics.DrawLine(blackPen, 65f, 80f, 200f, 80f);
+
+                        //qtfl
+                        graphics.DrawLine(blackPen, 309f, 80f, 440f, 80f);
+
+                        //tipo papel
+                        graphics.DrawLine(blackPen, 110f, 130f, 225f, 130f);
+
+                        //formato
+                        graphics.DrawLine(blackPen, 314f, 130f, 388f, 130f);
+
+                        //gram
+                        graphics.DrawLine(blackPen, 449f, 130f, 540f, 130f);
+
+                        //data inicio
+                        graphics.DrawLine(blackPen, 110f, 180f, 225f, 180f);
+
+                        //data termino
+                        graphics.DrawLine(blackPen, 355f, 180f, 470f, 180f);
+
+                        //horario inicial
+                        graphics.DrawLine(blackPen, 132f, 230f, 225f, 230f);
+
+                        //horario final
+                        graphics.DrawLine(blackPen, 343f, 230f, 470f, 230f);
+
+                        //operador
+                        graphics.DrawLine(blackPen, 100f, 280f, 340f, 280f);
+
+                        //turno
+                        graphics.DrawLine(blackPen, 404f, 280f, 540f, 280f);
+
+                        //op
+                        graphics.DrawString(lbl_op, f1, brush, new PointF(12, 10));
+                        graphics.DrawString(lbl_op_r, f1, brush, new PointF(74, 10));
+
+                        //cliente
+                        graphics.DrawString("Etiqueta não automatizada.", f1_small, brush, new PointF(400, 0));
+                        graphics.DrawString(lbl_cli, f1, brush, new PointF(210, 10));
+                        graphics.DrawString(lbl_cli_r, f1, brush, new PointF(281, 10));
+
+                        //peso
+                        graphics.DrawString(lbl_peso, f1, brush, new PointF(12, 60));
+                        graphics.DrawString(lbl_peso_r, f1, brush, new PointF(65, 60));
+
+                        //qt folhas
+                        graphics.DrawString(lbl_qtfl, f1, brush, new PointF(208, 60));
+                        graphics.DrawString(lbl_qtfl_r, f1, brush, new PointF(308, 60));
+
+                        //tp papel
+                        graphics.DrawString(lbl_tppl, f1, brush, new PointF(12, 110));
+                        graphics.DrawString(lbl_tppl_r, f1, brush, new PointF(112, 110));
+
+                        //formato
+                        graphics.DrawString(lbl_fmt, f1, brush, new PointF(236, 110));
+                        graphics.DrawString(lbl_fmt_r, f1, brush, new PointF(316, 110));
+
+                        //gram
+                        graphics.DrawString(lbl_gr, f1, brush, new PointF(393, 110));
+                        graphics.DrawString(lbl_gr_r, f1, brush, new PointF(450, 110));
+
+                        //data inicio
+                        graphics.DrawString(lbl_dtin, f1, brush, new PointF(12, 160));
+                        graphics.DrawString(lbl_dtin_r, f1, brush, new PointF(112, 160));
+
+                        //data Término
+                        graphics.DrawString(lbl_dtfm, f1, brush, new PointF(236, 160));
+                        graphics.DrawString(lbl_dtfm_r, f1, brush, new PointF(356, 160));
+
+                        //horário inicial
+                        graphics.DrawString(lbl_hrin, f1, brush, new PointF(12, 210));
+                        graphics.DrawString(lbl_hrin_r, f1, brush, new PointF(132, 210));
+
+                        //horário final
+                        graphics.DrawString(lbl_hrfm, f1, brush, new PointF(236, 210));
+                        graphics.DrawString(lbl_hrfm_r, f1, brush, new PointF(346, 210));
+
+                        graphics.DrawString(lbl_opr, f1, brush, new PointF(12, 260));
+                        graphics.DrawString(lbl_opr_r, f1, brush, new PointF(100, 260));
+
+                        graphics.DrawString(lbl_trn, f1, brush, new PointF(346, 260));
+                        graphics.DrawString(lbl_trn_r, f1, brush, new PointF(406, 260));
+
+                        graphics.DrawString(lbl_obs, f1, brush, new PointF(12, 305));
+                        graphics.DrawString(split1, fmn, brush, new PointF(56, 308));
+                        graphics.DrawString(split2, fmn, brush, new PointF(56, 333));
+                        graphics.DrawString(split3, fmn, brush, new PointF(56, 358));
+
+
+                    }
+
+                    ZPLPrintingService prnSvc = new ZPLPrintingService();
+                    zplCode = await prnSvc.GetImageZPLEncoded(bitmap);
+                    zplCode = zplCode.Replace("#barcode#", lbl_op);
+
+                    PrintDocument documento = new PrintDocument();
+                    PrinterSettings configImpressora = new PrinterSettings();
+                    PageSettings pageSettings = documento.DefaultPageSettings;
+
+                    string[] impressoras = PrinterSettings.InstalledPrinters.Cast<string>().ToArray();
+                    string name = "";
+                    foreach (string item in impressoras)
+                    {
+
+                        if (item == impressora.impressora) { name = impressora.impressora; }
+                    }
+
+                    //bitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                    PrintPopup print = new PrintPopup(bitmap);
+                    print.ShowDialog();
+
+                    if (!string.IsNullOrWhiteSpace(name))
+                    {
+                        configImpressora.PrinterName = name;
+                        documento.PrinterSettings = configImpressora;
+                        documento.DefaultPageSettings.Landscape = true;
+                    }
+
+                    documento.PrintPage += (sender, args) =>
+                    {
+                        args.Graphics.DrawImage(bitmap, 0, 0);
+                    };
+
+                    try
+                    {
+                        documento.Print();
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
             }
         }
 

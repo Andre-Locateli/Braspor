@@ -404,10 +404,10 @@ namespace Main.View.PagesFolder.Configuration
                     //}
                 }
 
-                if (Program.com != null) 
-                {
-                    //Program.com.TryAgainCommunication();
-                }
+                //if (Program.com != null) 
+                //{
+                //    //Program.com.TryAgainCommunication();
+                //}
                 
             }
             catch (Exception ex)

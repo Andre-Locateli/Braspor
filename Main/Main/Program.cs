@@ -56,7 +56,6 @@ namespace Main
         //public static bool _autoconnect_3 = false;
         public static TimeSpan _time_global;
         public static string software_version = "1.0.0.1";
-        public static CommunicationForms com { get; set; }
 
 
         public static string COMNAME_01 = "";

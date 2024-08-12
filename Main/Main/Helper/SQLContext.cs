@@ -395,6 +395,11 @@ namespace Main.Helper
                                         //    process.PesoReferencia = 0;
                                         //}
 
+                                        if (dr["dateinsert"] != DBNull.Value)
+                                        {
+                                            process.dateinsert = Convert.ToDateTime(dr["dateinsert"]);
+                                        }
+
                                         if (dr["Peso_total"] != DBNull.Value)
                                         {
                                             process.PesoTotal = Convert.ToDouble(dr["Peso_total"]);
@@ -541,7 +546,12 @@ namespace Main.Helper
                                         proc.PesoTotal = Convert.ToInt32(dr["Peso_total"]);
                                     }
 
-                                  
+                                    if (dr["dateinsert"] != DBNull.Value)
+                                    {
+                                        proc.dateinsert = Convert.ToDateTime(dr["dateinsert"]);
+                                    }
+
+
                                     proc.StatusProcesso = Convert.ToInt32(dr["Status_processo"]);
                                     proc.Cliente = Convert.ToString(dr["Cliente"]);
                                     proc.Numero = Convert.ToString(dr["Numero"]);

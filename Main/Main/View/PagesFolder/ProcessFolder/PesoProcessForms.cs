@@ -257,7 +257,6 @@ namespace Main.View.PagesFolder.ProcessFolder
                     btn_IniciarContagem.Text = "RETOMAR PROCESSO";
                 }
 
-
                 int i = 0;
 
 
@@ -325,8 +324,6 @@ namespace Main.View.PagesFolder.ProcessFolder
                 {
                     Console.WriteLine(ex.Message);
                 }
-
-
 
                 Task.Run(async () =>
                 {

@@ -672,7 +672,7 @@ namespace Main.View.PagesFolder.Configuration
                 List<object> _rede = Program.SQL.SelectList("SELECT * FROM Rede WHERE parent = @parent", "Rede", null, new Dictionary<string, object>() { { "@parent", Environment.MachineName.Trim() } });
                 Program.REDE = _rede.Cast<RedeClass>().ToList();
 
-                CommunicationForms communication = Application.OpenForms.OfType<CommunicationForms>().FirstOrDefault();
+                //CommunicationForms communication = Application.OpenForms.OfType<CommunicationForms>().FirstOrDefault();
                 //communication.LoadAll();
             }
             catch (Exception)

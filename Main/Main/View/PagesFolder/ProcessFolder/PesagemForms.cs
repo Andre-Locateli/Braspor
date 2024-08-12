@@ -198,7 +198,7 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                         if (question.RESPOSTA)
                         {
-                            PesoProcessForms proc = new PesoProcessForms(id);
+                            ContagemPage proc = new ContagemPage(id);
 
                             foreach (Form openForm in Application.OpenForms)
                             {

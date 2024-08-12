@@ -179,12 +179,6 @@
     <Compile Include="Service\LibPrinting\ZPLPrintingService.cs" />
     <Compile Include="Service\SerialCommunicationService.cs" />
     <Compile Include="Service\UIHelper.cs" />
-    <Compile Include="View\CommunicationFolder\CommunicationForms.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\CommunicationFolder\CommunicationForms.Designer.cs">
-      <DependentUpon>CommunicationForms.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\CommunicationFolder\CommunicationFormsHelper.cs" />
     <Compile Include="View\CustomLayout\CTComboBox.cs">
       <SubType>UserControl</SubType>
@@ -230,6 +224,12 @@
     </Compile>
     <Compile Include="View\PagesFolder\MainInfoForms.Designer.cs">
       <DependentUpon>MainInfoForms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PagesFolder\ProcessFolder\ContagemPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PagesFolder\ProcessFolder\ContagemPage.Designer.cs">
+      <DependentUpon>ContagemPage.cs</DependentUpon>
     </Compile>
     <Compile Include="View\PagesFolder\ProcessFolder\EscolhaPesagemForms.cs">
       <SubType>Form</SubType>
@@ -325,9 +325,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="View\CommunicationFolder\CommunicationForms.resx">
-      <DependentUpon>CommunicationForms.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\CustomLayout\CTComboBox.resx">
       <DependentUpon>CTComboBox.cs</DependentUpon>
     </EmbeddedResource>
@@ -352,6 +349,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\PagesFolder\MainInfoForms.resx">
       <DependentUpon>MainInfoForms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PagesFolder\ProcessFolder\ContagemPage.resx">
+      <DependentUpon>ContagemPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\PagesFolder\ProcessFolder\EscolhaPesagemForms.resx">
       <DependentUpon>EscolhaPesagemForms.cs</DependentUpon>

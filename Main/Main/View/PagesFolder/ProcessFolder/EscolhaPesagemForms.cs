@@ -217,8 +217,8 @@ namespace Main.View.PagesFolder.ProcessFolder
                                 {
                                     if (SerialCommunicationService.SERIALPORT1.IsOpen == true)
                                     {
-                                        PesoProcessForms proc = new PesoProcessForms(idUsuario, nomeUsuario, Convert.ToInt32(txt_qtfolhas.Text), insertBanco);
-
+                                        //PesoProcessForms proc = new PesoProcessForms(idUsuario, nomeUsuario, Convert.ToInt32(txt_qtfolhas.Text), insertBanco);
+                                        ContagemPage proc = new ContagemPage(insertBanco);
                                         foreach (Form openForm in Application.OpenForms)
                                         {
                                             if (openForm is MainForms)
