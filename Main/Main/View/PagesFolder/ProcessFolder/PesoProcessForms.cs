@@ -896,27 +896,34 @@ namespace Main.View.PagesFolder.ProcessFolder
 
         private void TimerRelogio_Tick_1(object sender, EventArgs e)
         {
-            if (tmpExectAtivo)
+            try
             {
-                timeSec++;
-
-                if (timeSec > 59)
+                if (tmpExectAtivo)
                 {
-                    timeMin++;
-                    timeSec = 0;
+                    timeSec++;
 
-                    if (timeMin > 59)
+                    if (timeSec > 59)
                     {
-                        timeH++;
-                        timeMin = 0;
+                        timeMin++;
+                        timeSec = 0;
+
+                        if (timeMin > 59)
+                        {
+                            timeH++;
+                            timeMin = 0;
+                        }
                     }
                 }
-            }
 
-            lbl_Horario.Invoke(new MethodInvoker(() =>
+                lbl_Horario.Invoke(new MethodInvoker(() =>
+                {
+                    lbl_Horario.Text = (String.Format("{0:00}", timeH)) + ":" + (String.Format("{0:00}", timeMin)) + ":" + (String.Format("{0:00}", timeSec));
+                }));
+            }
+            catch (Exception ex)
             {
-                lbl_Horario.Text = (String.Format("{0:00}", timeH)) + ":" + (String.Format("{0:00}", timeMin)) + ":" + (String.Format("{0:00}", timeSec));
-            }));
+
+            }
         }
 
         private void btn_SalvarReferencia_Click(object sender, EventArgs e)
@@ -1036,17 +1043,19 @@ namespace Main.View.PagesFolder.ProcessFolder
 
         private void PesoProcessForms_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (btn_IniciarContagem.Text == "FINALIZAR PROCESSO")
+            try
             {
-                string tempoexec = lbl_Horario.Text;
-
-                //=================================================================================================================//
-
-                double pesoTotal = valorTotal * Convert.ToDouble(Gramatura);
-
-                var UpdateProcesso = Program.SQL.CRUDCommand("UPDATE Processos SET Descricao = @Descricao, Tempo_execucao = @Tempo_execucao, Total_contagem = @Total_contagem, Gramatura = @Gramatura, qtd_total = @qtd_total, Status_processo = @Status_processo WHERE Id = @Id", "Processos",
-                new Dictionary<string, object>()
+                if (btn_IniciarContagem.Text == "FINALIZAR PROCESSO")
                 {
+                    string tempoexec = lbl_Horario.Text;
+
+                    //=================================================================================================================//
+
+                    double pesoTotal = valorTotal * Convert.ToDouble(Gramatura);
+
+                    var UpdateProcesso = Program.SQL.CRUDCommand("UPDATE Processos SET Descricao = @Descricao, Tempo_execucao = @Tempo_execucao, Total_contagem = @Total_contagem, Gramatura = @Gramatura, qtd_total = @qtd_total, Status_processo = @Status_processo WHERE Id = @Id", "Processos",
+                    new Dictionary<string, object>()
+                    {
                     {"@Id", idProcesso },
                     {"@Descricao", descProcesso },
                     {"@Tempo_execucao", tempoexec },
@@ -1054,7 +1063,12 @@ namespace Main.View.PagesFolder.ProcessFolder
                     {"@Gramatura", Gramatura },
                     {"@qtd_total", pesoTotal },
                     {"@Status_processo", statusProcesso },
-                });
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+
             }
         }
 
@@ -1088,7 +1102,12 @@ namespace Main.View.PagesFolder.ProcessFolder
                         {"@estacao", Environment.MachineName}
                     });
 
-                    if (impressora.Id != confg.id_Impressora) { return; }
+                    if (impressora.Id != confg.id_Impressora) 
+                    { }
+                    else
+                    {
+
+                    }
 
                     string zplCode = "";
 
@@ -1418,9 +1437,14 @@ namespace Main.View.PagesFolder.ProcessFolder
                         args.Graphics.DrawImage(bitmap, 0, 0); // Ajuste a posição conforme necessário
                     };
 
-                    documento.Print();
-                    await Task.Delay(1000);
-                    documento.Print();
+                    try
+                    {
+                        documento.Print();
+                    }
+                    catch (Exception ex) 
+                    {
+                        
+                    }
                 }
 
 

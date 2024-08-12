@@ -499,7 +499,12 @@ namespace Main.View.PagesFolder.Configuration
                         {"@estacao", Environment.MachineName}
                     });
 
-                    if (impressora.Id != confg.id_Impressora) { return; }
+                    if (impressora.Id != confg.id_Impressora) 
+                    { }
+                    else
+                    {
+
+                    }
                     
                     string zplCode = "";
 
