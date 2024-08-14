@@ -325,7 +325,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                     Console.WriteLine(ex.Message);
                 }
 
-                Task.Run(async () =>
+                _ = Task.Run(async () =>
                 {
                     try
                     {
@@ -919,7 +919,7 @@ namespace Main.View.PagesFolder.ProcessFolder
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.ToString());
             }
         }
 
@@ -1065,7 +1065,7 @@ namespace Main.View.PagesFolder.ProcessFolder
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.ToString());
             }
         }
 
@@ -1286,8 +1286,8 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                     Bitmap bitmap = new Bitmap(x, y);
 
-                    int wid = (int)(35 * 96 / 25.4f);
-                    int hei = (int)(12 * 96 / 25.4f);
+                    //int wid = (int)(35 * 96 / 25.4f);
+                    //int hei = (int)(12 * 96 / 25.4f);
 
                     System.Drawing.Pen blackPen = new System.Drawing.Pen(System.Drawing.Color.Black, 2);
 
@@ -1440,7 +1440,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                     }
                     catch (Exception ex) 
                     {
-                        
+                        Console.WriteLine(ex.ToString());
                     }
                 }
 

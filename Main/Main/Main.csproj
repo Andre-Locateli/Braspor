@@ -249,12 +249,6 @@
     <Compile Include="View\PagesFolder\ProcessFolder\PesoProcessForms.Designer.cs">
       <DependentUpon>PesoProcessForms.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\PagesFolder\ProcessFolder\ProcessForms.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\PagesFolder\ProcessFolder\ProcessForms.Designer.cs">
-      <DependentUpon>ProcessForms.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\PagesFolder\ProcessFolder\VisualizarLogForms.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -361,9 +355,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\PagesFolder\ProcessFolder\PesoProcessForms.resx">
       <DependentUpon>PesoProcessForms.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\PagesFolder\ProcessFolder\ProcessForms.resx">
-      <DependentUpon>ProcessForms.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\PagesFolder\ProcessFolder\VisualizarLogForms.resx">
       <DependentUpon>VisualizarLogForms.cs</DependentUpon>
@@ -554,6 +545,8 @@
     <None Include="Resources\industrial_scales_connecting_99px.png" />
     <None Include="Resources\industrial_scales_connected_filled_99px %281%29.png" />
     <None Include="Resources\await.png" />
+    <None Include="Resources\zero %281%29.png" />
+    <None Include="Resources\Tara %281%29.png" />
     <Content Include="[MKT] Software Vision Control - Icone %282018%29 [MAIOR].ico" />
   </ItemGroup>
   <ItemGroup>

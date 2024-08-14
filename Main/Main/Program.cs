@@ -65,7 +65,7 @@ namespace Main
 
         [STAThread]
         static void Main()
-        {
+       {
             millis.Start();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

@@ -156,6 +156,11 @@ namespace Main.Helper
                                     {
                                         cmd.Parameters.Add(new SqlParameter(item.Key, Convert.ToDateTime(item.Value)));
                                     }
+
+                                    if (item.Value is Int64)
+                                    {
+                                        cmd.Parameters.Add(new SqlParameter(item.Key, Convert.ToInt64(item.Value)));
+                                    }
                                 }
 
                             }

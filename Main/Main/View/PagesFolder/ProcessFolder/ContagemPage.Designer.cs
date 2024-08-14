@@ -149,7 +149,7 @@
             this.panel17.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel17.Location = new System.Drawing.Point(874, 9);
             this.panel17.Name = "panel17";
-            this.panel17.Size = new System.Drawing.Size(253, 179);
+            this.panel17.Size = new System.Drawing.Size(253, 178);
             this.panel17.TabIndex = 1;
             // 
             // panel3
@@ -161,7 +161,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(253, 179);
+            this.panel3.Size = new System.Drawing.Size(253, 178);
             this.panel3.TabIndex = 12;
             // 
             // panel12
@@ -176,7 +176,7 @@
             this.panel12.ForeColor = System.Drawing.Color.White;
             this.panel12.Location = new System.Drawing.Point(0, 27);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(251, 150);
+            this.panel12.Size = new System.Drawing.Size(251, 149);
             this.panel12.TabIndex = 13;
             // 
             // pict_Status
@@ -186,7 +186,7 @@
             this.pict_Status.Image = global::Main.Properties.Resources.await;
             this.pict_Status.Location = new System.Drawing.Point(0, 15);
             this.pict_Status.Name = "pict_Status";
-            this.pict_Status.Size = new System.Drawing.Size(249, 77);
+            this.pict_Status.Size = new System.Drawing.Size(249, 67);
             this.pict_Status.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pict_Status.TabIndex = 10;
             this.pict_Status.TabStop = false;
@@ -195,9 +195,9 @@
             // 
             this.panel20.BackColor = System.Drawing.Color.Transparent;
             this.panel20.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel20.Location = new System.Drawing.Point(0, 92);
+            this.panel20.Location = new System.Drawing.Point(0, 82);
             this.panel20.Name = "panel20";
-            this.panel20.Size = new System.Drawing.Size(249, 10);
+            this.panel20.Size = new System.Drawing.Size(249, 11);
             this.panel20.TabIndex = 11;
             // 
             // lbl_Status
@@ -206,9 +206,9 @@
             this.lbl_Status.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lbl_Status.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Status.ForeColor = System.Drawing.Color.White;
-            this.lbl_Status.Location = new System.Drawing.Point(0, 102);
+            this.lbl_Status.Location = new System.Drawing.Point(0, 93);
             this.lbl_Status.Name = "lbl_Status";
-            this.lbl_Status.Size = new System.Drawing.Size(249, 46);
+            this.lbl_Status.Size = new System.Drawing.Size(249, 54);
             this.lbl_Status.TabIndex = 9;
             this.lbl_Status.Text = "AGUARDANDO REGISTRO DE REFERÊNCIA...";
             this.lbl_Status.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -239,7 +239,7 @@
             this.panel18.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel18.Location = new System.Drawing.Point(9, 9);
             this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(859, 179);
+            this.panel18.Size = new System.Drawing.Size(859, 178);
             this.panel18.TabIndex = 2;
             // 
             // panel2
@@ -250,7 +250,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(859, 179);
+            this.panel2.Size = new System.Drawing.Size(859, 178);
             this.panel2.TabIndex = 11;
             // 
             // tableLayoutPanel3
@@ -265,7 +265,7 @@
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.00492F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 66.99507F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(857, 177);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(857, 176);
             this.tableLayoutPanel3.TabIndex = 16;
             // 
             // tableLayoutPanel4
@@ -327,7 +327,7 @@
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(851, 113);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(851, 112);
             this.tableLayoutPanel5.TabIndex = 1;
             // 
             // label2
@@ -347,7 +347,7 @@
             this.lbl_Descricao.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Descricao.Location = new System.Drawing.Point(258, 67);
             this.lbl_Descricao.Name = "lbl_Descricao";
-            this.lbl_Descricao.Size = new System.Drawing.Size(589, 45);
+            this.lbl_Descricao.Size = new System.Drawing.Size(589, 44);
             this.lbl_Descricao.TabIndex = 11;
             this.lbl_Descricao.Text = "Processo sem descrição.";
             // 
@@ -412,7 +412,7 @@
             this.label10.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.Location = new System.Drawing.Point(4, 67);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(247, 45);
+            this.label10.Size = new System.Drawing.Size(247, 44);
             this.label10.TabIndex = 10;
             this.label10.Text = "Observação do Processo:";
             // 
@@ -427,13 +427,13 @@
             this.tableLayoutPanel2.Controls.Add(this.panel9, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.panel5, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(9, 194);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(9, 193);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 3;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(859, 447);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(859, 448);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
             // panel8
@@ -447,7 +447,7 @@
             this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel8.Location = new System.Drawing.Point(437, 275);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(419, 169);
+            this.panel8.Size = new System.Drawing.Size(419, 170);
             this.panel8.TabIndex = 18;
             // 
             // label5
@@ -460,7 +460,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(417, 21);
             this.label5.TabIndex = 16;
-            this.label5.Text = "folhas";
+            this.label5.Text = "folhas  ";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbl_ValorReal
@@ -537,6 +537,7 @@
             this.valorContagem.TabIndex = 1;
             this.valorContagem.Text = "0.000";
             this.valorContagem.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.valorContagem.TextChanged += new System.EventHandler(this.valorContagem_TextChanged);
             // 
             // panel11
             // 
@@ -552,24 +553,28 @@
             this.taraContagem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.taraContagem.BackColor = System.Drawing.Color.Transparent;
             this.taraContagem.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.taraContagem.Image = global::Main.Properties.Resources.Tara__1_;
             this.taraContagem.Location = new System.Drawing.Point(12, 204);
             this.taraContagem.Name = "taraContagem";
             this.taraContagem.Size = new System.Drawing.Size(76, 43);
             this.taraContagem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.taraContagem.TabIndex = 5;
             this.taraContagem.TabStop = false;
+            this.taraContagem.Click += new System.EventHandler(this.CommandButtonEventClick);
             // 
             // zeroContagem
             // 
             this.zeroContagem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.zeroContagem.BackColor = System.Drawing.Color.Transparent;
             this.zeroContagem.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.zeroContagem.Image = global::Main.Properties.Resources.zero__1_;
             this.zeroContagem.Location = new System.Drawing.Point(95, 204);
             this.zeroContagem.Name = "zeroContagem";
             this.zeroContagem.Size = new System.Drawing.Size(76, 43);
             this.zeroContagem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.zeroContagem.TabIndex = 6;
             this.zeroContagem.TabStop = false;
+            this.zeroContagem.Click += new System.EventHandler(this.CommandButtonEventClick);
             // 
             // label13
             // 
@@ -594,7 +599,7 @@
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel9.Location = new System.Drawing.Point(3, 275);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(418, 169);
+            this.panel9.Size = new System.Drawing.Size(418, 170);
             this.panel9.TabIndex = 17;
             // 
             // label1
@@ -607,7 +612,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(416, 21);
             this.label1.TabIndex = 13;
-            this.label1.Text = "folhas";
+            this.label1.Text = "folhas  ";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbl_QtContab
@@ -734,24 +739,28 @@
             this.zeroReferencia.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.zeroReferencia.BackColor = System.Drawing.Color.Transparent;
             this.zeroReferencia.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.zeroReferencia.Image = global::Main.Properties.Resources.zero__1_;
             this.zeroReferencia.Location = new System.Drawing.Point(95, 204);
             this.zeroReferencia.Name = "zeroReferencia";
             this.zeroReferencia.Size = new System.Drawing.Size(76, 43);
             this.zeroReferencia.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.zeroReferencia.TabIndex = 4;
             this.zeroReferencia.TabStop = false;
+            this.zeroReferencia.Click += new System.EventHandler(this.CommandButtonEventClick);
             // 
             // taraReferencia
             // 
             this.taraReferencia.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.taraReferencia.BackColor = System.Drawing.Color.Transparent;
             this.taraReferencia.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.taraReferencia.Image = global::Main.Properties.Resources.Tara__1_;
             this.taraReferencia.Location = new System.Drawing.Point(11, 204);
             this.taraReferencia.Name = "taraReferencia";
             this.taraReferencia.Size = new System.Drawing.Size(76, 43);
             this.taraReferencia.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.taraReferencia.TabIndex = 3;
             this.taraReferencia.TabStop = false;
+            this.taraReferencia.Click += new System.EventHandler(this.CommandButtonEventClick);
             // 
             // panel16
             // 
@@ -762,10 +771,10 @@
             this.panel16.Controls.Add(this.panel1);
             this.panel16.Controls.Add(this.button2);
             this.panel16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel16.Location = new System.Drawing.Point(874, 194);
+            this.panel16.Location = new System.Drawing.Point(874, 193);
             this.panel16.Name = "panel16";
             this.panel16.Padding = new System.Windows.Forms.Padding(3);
-            this.panel16.Size = new System.Drawing.Size(253, 447);
+            this.panel16.Size = new System.Drawing.Size(253, 448);
             this.panel16.TabIndex = 0;
             // 
             // panel4
@@ -779,7 +788,7 @@
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
             this.panel4.Padding = new System.Windows.Forms.Padding(5);
-            this.panel4.Size = new System.Drawing.Size(247, 272);
+            this.panel4.Size = new System.Drawing.Size(247, 273);
             this.panel4.TabIndex = 13;
             // 
             // lbl_qtMinima
@@ -788,7 +797,7 @@
             this.lbl_qtMinima.Font = new System.Drawing.Font("Segoe UI", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_qtMinima.Location = new System.Drawing.Point(5, 70);
             this.lbl_qtMinima.Name = "lbl_qtMinima";
-            this.lbl_qtMinima.Size = new System.Drawing.Size(235, 129);
+            this.lbl_qtMinima.Size = new System.Drawing.Size(235, 130);
             this.lbl_qtMinima.TabIndex = 8;
             this.lbl_qtMinima.Text = "0";
             this.lbl_qtMinima.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -797,7 +806,7 @@
             // 
             this.lbl_PesoReferencia.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lbl_PesoReferencia.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_PesoReferencia.Location = new System.Drawing.Point(5, 199);
+            this.lbl_PesoReferencia.Location = new System.Drawing.Point(5, 200);
             this.lbl_PesoReferencia.Name = "lbl_PesoReferencia";
             this.lbl_PesoReferencia.Size = new System.Drawing.Size(235, 66);
             this.lbl_PesoReferencia.TabIndex = 13;
@@ -818,7 +827,7 @@
             // panel19
             // 
             this.panel19.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel19.Location = new System.Drawing.Point(3, 275);
+            this.panel19.Location = new System.Drawing.Point(3, 276);
             this.panel19.Name = "panel19";
             this.panel19.Size = new System.Drawing.Size(247, 17);
             this.panel19.TabIndex = 18;
@@ -832,7 +841,7 @@
             this.btn_IniciarContagem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_IniciarContagem.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.btn_IniciarContagem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btn_IniciarContagem.Location = new System.Drawing.Point(3, 292);
+            this.btn_IniciarContagem.Location = new System.Drawing.Point(3, 293);
             this.btn_IniciarContagem.Name = "btn_IniciarContagem";
             this.btn_IniciarContagem.Size = new System.Drawing.Size(247, 71);
             this.btn_IniciarContagem.TabIndex = 8;
@@ -843,7 +852,7 @@
             // panel1
             // 
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(3, 363);
+            this.panel1.Location = new System.Drawing.Point(3, 364);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(247, 10);
             this.panel1.TabIndex = 17;
@@ -857,12 +866,13 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(3, 373);
+            this.button2.Location = new System.Drawing.Point(3, 374);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(247, 71);
             this.button2.TabIndex = 16;
             this.button2.Text = "VISUALIZAR PESAGENS";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // ContagemPage
             // 

@@ -933,6 +933,16 @@ namespace Main.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Tara__1_ {
+            get {
+                object obj = ResourceManager.GetObject("Tara (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap trash_icon {
             get {
                 object obj = ResourceManager.GetObject("trash_icon", resourceCulture);
@@ -1026,6 +1036,16 @@ namespace Main.Properties {
         internal static System.Drawing.Bitmap warningImage {
             get {
                 object obj = ResourceManager.GetObject("warningImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap zero__1_ {
+            get {
+                object obj = ResourceManager.GetObject("zero (1)", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
