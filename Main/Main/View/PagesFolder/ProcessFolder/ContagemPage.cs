@@ -35,7 +35,7 @@ namespace Main.View.PagesFolder.ProcessFolder
         double pesoTotal = 0;
         double Peso_Salvo = 0;
 
-        int inseriu = 0;
+        int retorno0 = 0;
         int statusProcesso = 0;
         int folhasRegistradas = 0;
 
@@ -44,6 +44,7 @@ namespace Main.View.PagesFolder.ProcessFolder
         Boolean contagemAtiva = false;
 
         long tempo_salvo = new long();
+        long tempo_salvo_retorno = new long();
 
         Image[] imgs_peso = new Image[0];
         Stopwatch executation_time = new Stopwatch();
@@ -234,7 +235,7 @@ namespace Main.View.PagesFolder.ProcessFolder
         }
 
 
-        private void Tm_process_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        private async void Tm_process_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             try
             {
@@ -313,7 +314,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                     Estado = Convert.ToBoolean($"{SerialCommunicationService.indicador_addr[indiceContador].Estavel}");
 
                     var chk3folhas = Gramatura * 3;
-                    double gram_formatada = Peso / Math.Round(Gramatura, 5);
+                    double gram_formatada = Peso / Math.Round(Gramatura, 4);
 
                     if (gram_formatada != 0)
                     {
@@ -340,29 +341,53 @@ namespace Main.View.PagesFolder.ProcessFolder
                             {
                                 if (Peso != Peso_Salvo)
                                 {
-                                    if(Peso > chk3folhas)
+
+                                    if (Peso > chk3folhas && Estabilizou == true)
                                     {
-                                        Estabilizou = false;
+                                        await Task.Delay(3000);
+                                        if (Peso > chk3folhas)
+                                        {
+                                            lbl_Status.Invoke(new MethodInvoker(() =>
+                                            {
+                                                pict_Status.Image = imgs_peso[0];
+
+                                                pict_Status.BackColor = Color.DarkOrange;
+                                                panel12.BackColor = Color.DarkOrange;
+                                                panel20.BackColor = Color.DarkOrange;
+                                                lbl_Status.BackColor = Color.DarkOrange;
+
+                                                lbl_Status.Text = "";
+                                                lbl_Status.Text = "PESANDO...";
+                                            }));
+
+                                            salvarEstabilizacao = 0;
+                                        }
+                                        else
+                                        {
+                                            pict_Status.BackColor = Color.FromArgb(41, 46, 84);
+                                            panel12.BackColor = Color.FromArgb(41, 46, 84);
+                                            panel20.BackColor = Color.FromArgb(41, 46, 84);
+                                            lbl_Status.BackColor = Color.FromArgb(41, 46, 84);
+
+                                            pict_Status.Image = imgs_peso[1];
+
+                                            lbl_Status.Invoke(new MethodInvoker(() =>
+                                            {
+                                                lbl_Status.Text = "";
+                                                lbl_Status.Text = "PESO ESTABILIZADO. RETIRE OU ADICIONE MAIS MATÉRIA-PRIMA.";
+                                            }));
+
+                                            Estabilizou = true;
+                                            salvarEstabilizacao = 1;
+                                        }
                                     }
-
-                                    lbl_Status.Invoke(new MethodInvoker(() =>
-                                    {
-                                        pict_Status.Image = imgs_peso[0];
-
-                                        pict_Status.BackColor = Color.DarkOrange;
-                                        panel12.BackColor = Color.DarkOrange;
-                                        panel20.BackColor = Color.DarkOrange;
-                                        lbl_Status.BackColor = Color.DarkOrange;
-
-                                        lbl_Status.Text = "";
-                                        lbl_Status.Text = "PESANDO...";
-                                    }));
                                 }
 
                                 if (salvarEstabilizacao == 0)
                                 {
                                     tempo_salvo = executation_time.ElapsedMilliseconds;
                                     Peso_Salvo = Peso;
+                                    Estabilizou = false;
                                     salvarEstabilizacao = 1;
                                 }
 
@@ -392,10 +417,8 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                                                             lbl_Status.Invoke(new MethodInvoker(() =>
                                                             {
-
                                                                 lbl_Status.Text = "";
                                                                 lbl_Status.Text = "PESO ESTABILIZADO. RETIRE OU ADICIONE MAIS MATÉRIA-PRIMA.";
-
                                                             }));
 
                                                             if (Peso == Peso_Salvo)
@@ -404,17 +427,14 @@ namespace Main.View.PagesFolder.ProcessFolder
                                                             }
                                                             else
                                                             {
-                                                                tempo_salvo = executation_time.ElapsedMilliseconds;
                                                                 Peso_Salvo = Peso;
                                                                 salvarEstabilizacao = 0;
                                                             }
                                                         }
                                                         else
                                                         {
-                                                            tempo_salvo = executation_time.ElapsedMilliseconds;
                                                             Peso_Salvo = Peso;
                                                             salvarEstabilizacao = 0;
-                                                            Estabilizou = false;
 
                                                             lbl_Status.Invoke(new MethodInvoker(() =>
                                                             {
@@ -428,15 +448,15 @@ namespace Main.View.PagesFolder.ProcessFolder
                                                                 lbl_Status.Text = "";
                                                                 lbl_Status.Text = "PESANDO...";
                                                             }));
+
+                                                            salvarfolhas = 0;
                                                         }
                                                     }
                                                 }
                                                 else
                                                 {
-                                                    tempo_salvo = executation_time.ElapsedMilliseconds;
                                                     Peso_Salvo = Peso;
                                                     salvarEstabilizacao = 0;
-                                                    Estabilizou = false;
 
                                                     lbl_Status.Invoke(new MethodInvoker(() =>
                                                     {
@@ -450,15 +470,15 @@ namespace Main.View.PagesFolder.ProcessFolder
                                                         lbl_Status.Text = "";
                                                         lbl_Status.Text = "PESANDO...";
                                                     }));
+
+                                                    salvarfolhas = 0;
                                                 }
                                             }
                                         }
                                         else
                                         {
-                                            tempo_salvo = executation_time.ElapsedMilliseconds;
                                             Peso_Salvo = Peso;
                                             salvarEstabilizacao = 0;
-                                            Estabilizou = false;
 
                                             lbl_Status.Invoke(new MethodInvoker(() =>
                                             {
@@ -472,6 +492,8 @@ namespace Main.View.PagesFolder.ProcessFolder
                                                 lbl_Status.Text = "";
                                                 lbl_Status.Text = "PESANDO...";
                                             }));
+
+                                            salvarfolhas = 0;
                                         }
                                     }
                                 }
@@ -491,7 +513,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                                     lbl_Status.Text = "PESANDO...";
                                 }));
 
-                                Estabilizou = false;
+                                salvarfolhas = 0;
                             }
                         }
                         catch (Exception ex)
@@ -545,7 +567,6 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                                     }));
 
-                                    Estabilizou = false;
                                     salvarEstabilizacao = 0;
 
                                     var insertLog = Program.SQL.CRUDCommand("INSERT INTO Log_Processos (Id_processo, qtd_temporeal, qtd_total, Tempo_execucao, dateinsert, Peso) VALUES (@Id_processo, @qtd_temporeal, @qtd_total, @Tempo_execucao, @dateinsert, @Peso)", "Log_Processos",
@@ -578,7 +599,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                                     });
 
                                     Peso_Salvo = Peso;
-
+                                    salvarfolhas = 0;
                                 }
                             }
                         }
