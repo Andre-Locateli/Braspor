@@ -73,6 +73,9 @@ namespace Main.View.LoginFolder
             try
             {
                 Logar();
+
+                //DesvioPadrao desvio = new DesvioPadrao();
+                //desvio.Show();
             }
             catch (Exception ex)
             {

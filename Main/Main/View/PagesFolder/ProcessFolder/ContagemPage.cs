@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Numerics;
+using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -30,10 +31,10 @@ namespace Main.View.PagesFolder.ProcessFolder
         int indiceReferencia = 0;
         int salvarEstabilizacao = 0;
 
-        double Peso = 0;
-        double Gramatura = 0;
-        double pesoTotal = 0;
-        double Peso_Salvo = 0;
+        decimal Peso = 0;
+        decimal Gramatura = 0;
+        decimal pesoTotal = 0;
+        decimal Peso_Salvo = 0;
 
         int retorno0 = 0;
         int statusProcesso = 0;
@@ -50,6 +51,11 @@ namespace Main.View.PagesFolder.ProcessFolder
         Stopwatch executation_time = new Stopwatch();
         System.Timers.Timer tm_process = new System.Timers.Timer();
 
+        
+        
+        
+        public List<decimal> lista_valores = new List<decimal>();
+
 
         public ContagemPage(int id_Processo)
         {
@@ -63,7 +69,7 @@ namespace Main.View.PagesFolder.ProcessFolder
 
 
             contagemTotal = processo_atual.TotalContagem;
-            pesoTotal = processo_atual.PesoTotal;
+            pesoTotal = Convert.ToDecimal(processo_atual.PesoTotal);
 
 
             imgs_peso = new Image[]
@@ -73,7 +79,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                 Properties.Resources.industrial_scales_connected_filled_99px__1_
             };
 
-            tm_process.Interval = 250;
+            tm_process.Interval = 1000;
             tm_process.Elapsed += Tm_process_Elapsed;
 
             //processo_atual.GramaturaDigitada = Math.Round(processo_atual.GramaturaDigitada, 3);
@@ -85,7 +91,7 @@ namespace Main.View.PagesFolder.ProcessFolder
             try
             {
                 statusProcesso = processo_atual.StatusProcesso;
-                Gramatura = Convert.ToDouble(processo_atual.Gramatura);
+                Gramatura = Convert.ToDecimal(processo_atual.Gramatura);
                 lbl_DataInsert.Text = Convert.ToString(processo_atual.dateinsert);
 
                 lbl_Horario.Text = ConvertMillisecondsToTime(Convert.ToInt64(processo_atual.TempoExecucao));
@@ -95,7 +101,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                 infosprocesso_txt.Text = processo_atual.Cliente + " - " + processo_atual.Op;
                 lbl_DataInsert.Text = processo_atual.dateinsert.ToString();
 
-                lbl_PesoReferencia.Text = "1 folha ≅ " + Convert.ToString(Math.Round(Gramatura, 4));
+                lbl_PesoReferencia.Text = "1 folha ≅ " + Convert.ToString(Math.Round(Gramatura, 6));
 
                 if (statusProcesso == 0)
                 {
@@ -234,7 +240,7 @@ namespace Main.View.PagesFolder.ProcessFolder
             return timeSpan.ToString(@"hh\:mm\:ss");
         }
 
-
+        long l_currentMillis_00 = 0; 
         private async void Tm_process_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             try
@@ -242,6 +248,26 @@ namespace Main.View.PagesFolder.ProcessFolder
                 string referencia = $"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}";
                 string contador = $"{SerialCommunicationService.indicador_addr[indiceContador].PS}";
                 tickCount++;
+
+
+
+
+                //Posso tentar aumentar 
+
+                //Auemntar o tempo de leitura para tentar pegar um falor maior.
+
+                if (executation_time.ElapsedMilliseconds - l_currentMillis_00 > 2000) 
+                {
+                    if (Convert.ToDecimal(SerialCommunicationService.indicador_addr[indiceContador].PS) < 0) 
+                    {
+                        tm_process.Stop();
+                        
+                        SerialCommunicationService.SendCommand(1, 0);
+
+                        tm_process.Start();
+                    }
+                    l_currentMillis_00 = executation_time.ElapsedMilliseconds;
+                }
 
                 valorReferencia.Invoke(new MethodInvoker(delegate 
                 {
@@ -310,17 +336,63 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                 if (contagemAtiva) 
                 {
-                    Peso = Convert.ToDouble($"{SerialCommunicationService.indicador_addr[indiceContador].PS}");
+                    Peso = SerialCommunicationService.indicador_addr[indiceContador].PESO_CALCULO;
                     Estado = Convert.ToBoolean($"{SerialCommunicationService.indicador_addr[indiceContador].Estavel}");
 
                     var chk3folhas = Gramatura * 3;
-                    double gram_formatada = Peso / Math.Round(Gramatura, 4);
+                    decimal gram_formatada = Peso / Convert.ToDecimal(Math.Round(Gramatura, 6));
 
+
+                    //Lógica de Pesagem para correção da quantidade de folhas.
+
+                    lista_valores.Clear();
+
+                    //Trocar lista padrão por lista com o calculo estimado de uma folha.
+                    for (int i = 0; i < Convert.ToInt32(30); i++)
+                    {
+                        decimal gram_calculada = SerialCommunicationService.indicador_addr[indiceContador].PESO_CALCULO / Convert.ToDecimal(Math.Round(Gramatura, 6));
+                        lista_valores.Add(gram_calculada);
+                        //Console.WriteLine($"Amostra {i + 1}: {SerialCommunicationService.indicador_addr[indiceContador].PESO_CALCULO}");
+                        //await Task.Delay(300);
+                        await Task.Delay(100);
+                    }
+
+                    decimal valor = 0;
+                    decimal dp = 0;
+                    decimal media = 0;
+
+                    foreach (decimal indice in lista_valores)
+                    {
+                        media += indice;
+                    }
+
+                    media = media / lista_valores.Count;
+
+                    foreach (decimal individual in lista_valores)
+                    {
+                        valor += ((individual - media) * (individual - media)) / lista_valores.Count;
+                    }
+
+
+                    dp = Sqrt(valor);
+
+                    decimal x_value = media * (dp / 1000);
+
+                    //decimal valor_final = Math.Round(media + x_value);
+
+                    decimal valor_final = media + x_value;
+
+                    Console.WriteLine($"X Value: {x_value}");
+                    Console.WriteLine($"Media: {media}");
+                    Console.WriteLine($"Contagem Final: {valor_final}");
+                    
+                    //Fim da lógica de pesagem para correção das folhas.
                     if (gram_formatada != 0)
                     {
                         this.Invoke(new MethodInvoker(() =>
                         {
-                            lbl_QtContab.Text = Convert.ToInt32(gram_formatada).ToString();
+                            lbl_QtContab.Text = Convert.ToInt32(valor_final).ToString();
+                            //lbl_QtContab.Text = Convert.ToInt32(media).ToString();
                         }));
                     }
                     else
@@ -342,9 +414,9 @@ namespace Main.View.PagesFolder.ProcessFolder
                                 if (Peso != Peso_Salvo)
                                 {
 
-                                    if (Peso > chk3folhas && Estabilizou == true)
+                                    if (Peso > chk3folhas && Estabilizou == true && (Peso < Peso_Salvo - chk3folhas || Peso > Peso_Salvo + chk3folhas))
                                     {
-                                        await Task.Delay(3000);
+                                        await Task.Delay(10000);
                                         if (Peso > chk3folhas)
                                         {
                                             lbl_Status.Invoke(new MethodInvoker(() =>
@@ -393,20 +465,20 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                                 if (Estabilizou == false)
                                 {
-
-                                    if (executation_time.ElapsedMilliseconds > (tempo_salvo + 1000))
+                                    long lTeste = 0;
+                                    if (executation_time.ElapsedMilliseconds > (tempo_salvo + 1000 + lTeste))
                                     {
                                         if (Estado == true && Peso_Salvo == Peso)
                                         {
-                                            if (executation_time.ElapsedMilliseconds > (tempo_salvo + 2000))
+                                            if (executation_time.ElapsedMilliseconds > (tempo_salvo + 2000 + lTeste))
                                             {
                                                 if (Estado == true)
                                                 {
-                                                    if (executation_time.ElapsedMilliseconds > (tempo_salvo + 3000))
+                                                    if (executation_time.ElapsedMilliseconds > (tempo_salvo + 3000 + lTeste))
                                                     {
                                                         if (Estado == true)
                                                         {
-                                                            Peso = Convert.ToDouble($"{SerialCommunicationService.indicador_addr[indiceContador].PS}");
+                                                            Peso = SerialCommunicationService.indicador_addr[indiceContador].PESO_CALCULO;
 
                                                             pict_Status.BackColor = Color.FromArgb(41, 46, 84);
                                                             panel12.BackColor = Color.FromArgb(41, 46, 84);
@@ -547,7 +619,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                             {
                                 if(executation_time.ElapsedMilliseconds > (tempo_salvo + 2000))
                                 {
-                                    folhasRegistradas = Convert.ToInt32(Peso_Salvo / Math.Round(Gramatura, 5));
+                                    folhasRegistradas = Convert.ToInt32(Peso_Salvo / Convert.ToDecimal(Math.Round(Gramatura, 5)));
 
                                     this.Invoke(new MethodInvoker(() =>
                                     {
@@ -561,7 +633,7 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                                     this.Invoke(new MethodInvoker(() =>
                                     {
-                                        pesoTotal += (folhasRegistradas * Convert.ToDouble(Gramatura));
+                                        pesoTotal += (folhasRegistradas * Convert.ToDecimal(Gramatura));
                                         contagemTotal = contagemTotal + folhasRegistradas;
                                         lbl_ValorReal.Text = contagemTotal.ToString();
 
@@ -657,6 +729,23 @@ namespace Main.View.PagesFolder.ProcessFolder
             }
         }
 
+
+        public static decimal Sqrt(decimal x, decimal epsilon = 0.0M)
+        {
+            if (x < 0) throw new OverflowException("Cannot calculate square root from a negative number");
+
+            decimal current = (decimal)Math.Sqrt((double)x), previous;
+            do
+            {
+                previous = current;
+                if (previous == 0.0M) return 0;
+                current = (previous + x / previous) / 2;
+            }
+            while (Math.Abs(previous - current) > epsilon);
+            return current;
+        }
+
+
         private void btn_SalvarReferencia_Click(object sender, EventArgs e)
         {
             try
@@ -672,7 +761,10 @@ namespace Main.View.PagesFolder.ProcessFolder
                     {
                         pict_Status.Image = imgs_peso[1];
                         statusProcesso = 1;
-                        Gramatura = Convert.ToDouble($"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}") / Convert.ToDouble(lbl_qtMinima.Text);
+
+                        //Gramatura = Convert.ToDecimal($"{SerialCommunicationService.indicador_addr[indiceReferencia].PS}") / Convert.ToDouble(lbl_qtMinima.Text);
+
+                        Gramatura = SerialCommunicationService.indicador_addr[indiceReferencia].PESO_CALCULO / Convert.ToDecimal(lbl_qtMinima.Text);
 
                         lbl_Status.Text = "";
                         lbl_Status.Text = "REFERÊNCIA REGISTRADA. INICIE A CONTAGEM.";
@@ -690,7 +782,7 @@ namespace Main.View.PagesFolder.ProcessFolder
                         zeroReferencia.Enabled = false;
                         taraReferencia.Enabled = false;
 
-                        lbl_PesoReferencia.Text = "1 folha ≅ " + Math.Round(Gramatura, 4).ToString();
+                        lbl_PesoReferencia.Text = "1 folha ≅ " + Math.Round(Gramatura, 6).ToString();
 
                         lbl_PesoReferencia.Refresh();
 
@@ -739,7 +831,6 @@ namespace Main.View.PagesFolder.ProcessFolder
                             btn_SalvarReferencia.ForeColor = Color.FromArgb(64, 64, 64);
                             btn_SalvarReferencia.BackColor = Color.Silver;
                         }));
-
 
                         btn_SalvarReferencia.Refresh();
                         btn_SalvarReferencia.Enabled = false;

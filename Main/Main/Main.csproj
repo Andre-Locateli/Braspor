@@ -149,6 +149,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DesvioPadrao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DesvioPadrao.Designer.cs">
+      <DependentUpon>DesvioPadrao.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helper\CFGContext.cs" />
     <Compile Include="Helper\GeralClass.cs" />
     <Compile Include="Helper\HttpContext.cs" />
@@ -309,6 +315,9 @@
     <Compile Include="View\PopupFolder\YesOrNo.Designer.cs">
       <DependentUpon>YesOrNo.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="DesvioPadrao.resx">
+      <DependentUpon>DesvioPadrao.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

@@ -120,6 +120,67 @@ namespace Main.View.CommunicationFolder
 
         }
 
+        public static decimal PesoCalculo(byte sts, byte peso_a, byte peso_b, byte peso_c)
+        {
+            double Multiplicador;
+            int Decimal = 0;
+
+            try
+            {
+                switch (sts & 0b00000111)
+                {
+                    case 0:
+                        Multiplicador = 1.0;
+                        Decimal = 0;
+                        break;
+
+                    case 1:
+                        Multiplicador = 0.1;
+                        Decimal = 1;
+                        break;
+
+                    case 2:
+                        Multiplicador = 0.01;
+                        Decimal = 2;
+                        break;
+
+                    case 3:
+                        Multiplicador = 0.001;
+                        Decimal = 3;
+                        break;
+
+                    case 4:
+                        Multiplicador = 0.0001;
+                        Decimal = 4;
+                        break;
+
+                    default:
+                        Multiplicador = 1.0;
+                        Decimal = 0;
+                        break;
+                }
+
+                double peso = 0;
+
+                if ((sts & 0b00001000) == 0x08)
+                {
+                    return Convert.ToDecimal(Math.Round((((peso_a * 65536) + (peso_b * 256) + (peso_c)) * Multiplicador * (-1.0)), 5));
+                }
+
+                if ((sts & 0b00001000) == 0)
+                {
+                    return Convert.ToDecimal(Math.Round((((peso_a * 65536) + (peso_b * 256) + (peso_c)) * Multiplicador * (1.0)), 5));
+                }
+
+                return Convert.ToDecimal(peso);
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+
         public static int get_HIGH_byte(int valor)
         {
             int HIGH = (int)Math.Floor((double)valor / 256);

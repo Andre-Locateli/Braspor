@@ -54,6 +54,15 @@ namespace Main.Model
         }
 
 
+        private decimal _PESO_CALCULO;
+        public decimal PESO_CALCULO
+        {
+            get { return _PESO_CALCULO; }
+            set { _PESO_CALCULO = value; }
+        }
+
+
+
         public RedeClass indicador { get; set; }
 
         public SerialPort SERIALPORTContext { get; set; }

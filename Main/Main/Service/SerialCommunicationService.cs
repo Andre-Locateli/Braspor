@@ -241,7 +241,9 @@ namespace Main.Service
                         {
                             indicador_addr[global_counter].PS = CommunicationFormsHelper.PesoConverted(bruto[3], bruto[4], bruto[5], bruto[6]);
                             indicador_addr[global_counter].PB = Convert.ToDouble(indicador_addr[global_counter].PS);
-                            
+                            indicador_addr[global_counter].PESO_CALCULO = CommunicationFormsHelper.PesoCalculo(bruto[3], bruto[4], bruto[5], bruto[6]);
+
+
                             var estavel = bruto[3] & 0b00010000;
                             if (estavel == 0x00) { indicador_addr[global_counter].Estavel = false; }
                             else { indicador_addr[global_counter].Estavel = true; }
@@ -301,7 +303,7 @@ namespace Main.Service
                         Convert.ToByte(addr),
                         0x06,
                         0x00,
-                        0x04,
+                        0x02,
                         0x00,
                         0x01,
                         0x00,
