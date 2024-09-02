@@ -261,8 +261,8 @@ namespace Main.View.PagesFolder.ProcessFolder
                     if (Convert.ToDecimal(SerialCommunicationService.indicador_addr[indiceContador].PS) < 0) 
                     {
                         tm_process.Stop();
-                        
-                        SerialCommunicationService.SendCommandEGEO(1, 0);
+
+                        SerialCommunicationService.SendCommandEGEO(SerialCommunicationService.indicador_addr[indiceContador].indicador.addr, 0);
 
                         tm_process.Start();
                     }
