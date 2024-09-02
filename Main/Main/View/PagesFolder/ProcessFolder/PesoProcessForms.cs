@@ -312,12 +312,14 @@ namespace Main.View.PagesFolder.ProcessFolder
                 {
                     if (question.RESPOSTA)
                     {
-                        SerialCommunicationService.SendCommand(Convert.ToInt32(taraContagem.Tag), 0);
+                        SerialCommunicationService.SendCommandEGEO(Convert.ToInt32(taraContagem.Tag), 0);
 
                         await Task.Delay(250);
 
-                        SerialCommunicationService.SendCommand(Convert.ToInt32(taraReferencia.Tag), 0);
+                        SerialCommunicationService.SendCommandefault(Convert.ToInt32(taraReferencia.Tag), 0);
                     }
+
+
 
                 }
                 catch (Exception ex)
@@ -608,7 +610,7 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                                             string tempoexec = lbl_Horario.Text;
 
-                                            SerialCommunicationService.SendCommand(Convert.ToInt32(zeroContagem.Tag), 1);
+                                            SerialCommunicationService.SendCommandEGEO(Convert.ToInt32(zeroContagem.Tag), 1);
 
                                             var insertLog = Program.SQL.CRUDCommand("INSERT INTO Log_Processos (Id_processo, qtd_temporeal, qtd_total, Tempo_execucao, dateinsert, Peso) VALUES (@Id_processo, @qtd_temporeal, @qtd_total, @Tempo_execucao, @dateinsert, @Peso)", "Log_Processos",
                                             new Dictionary<string, object>()
@@ -695,11 +697,25 @@ namespace Main.View.PagesFolder.ProcessFolder
 
                 if (piCommand.Name.Contains("tara"))
                 {
-                    SerialCommunicationService.SendCommand(Convert.ToInt32(piCommand.Tag), 0);
+                    if (Convert.ToInt32(piCommand.Tag) == Program.Endereco_Referencia)
+                    {
+                        SerialCommunicationService.SendCommandefault(Convert.ToInt32(piCommand.Tag), 0);
+                    }
+                    else
+                    {
+                        SerialCommunicationService.SendCommandEGEO(Convert.ToInt32(piCommand.Tag), 0);
+                    }
                 }
                 else if (piCommand.Name.Contains("zero"))
                 {
-                    SerialCommunicationService.SendCommand(Convert.ToInt32(piCommand.Tag), 1);
+                    if (Convert.ToInt32(piCommand.Tag) == Program.Endereco_Referencia)
+                    {
+                        SerialCommunicationService.SendCommandefault(Convert.ToInt32(piCommand.Tag), 1);
+                    }
+                    else
+                    {
+                        SerialCommunicationService.SendCommandEGEO(Convert.ToInt32(piCommand.Tag), 1);
+                    }
                 }
 
             }

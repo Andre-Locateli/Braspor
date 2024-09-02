@@ -284,7 +284,70 @@ namespace Main.Service
         }
 
 
-        public async static void SendCommand(int addr, int typeSend)
+        public async static void SendCommandEGEO(int addr, int typeSend)
+        {
+            try
+            {
+                //Para comunicação de peso.
+                canSend = false;
+                await Task.Delay(100);
+                tmRead.Stop();
+
+                await Task.Delay(100);
+
+                //Tara Command
+                if (typeSend == 0)
+                {
+                    byte[] command = new byte[]
+                    {
+                        Convert.ToByte(addr),
+                        0x06,
+                        0x00,
+                        0x04,
+                        0x00,
+                        0x01,
+                        0x00,
+                        0x00
+                    };
+                    byte[] crc_calc = CommunicationFormsHelper.CRC(command);
+                    command[6] = crc_calc[0];
+                    command[7] = crc_calc[1];
+                    SERIALPORT1.Write(command, 0, command.Length);
+                }
+
+                //Zero Command
+                else if (typeSend == 1) 
+                {
+                    byte[] command = new byte[]
+                    {
+                        Convert.ToByte(addr),
+                        0x06,
+                        0x00,
+                        0x04,
+                        0x00,
+                        0x02,
+                        0x00,
+                        0x00
+                    };
+
+                    byte[] crc_calc = CommunicationFormsHelper.CRC(command);
+                    command[6] = crc_calc[0];
+                    command[7] = crc_calc[1];
+                    SERIALPORT1.Write(command, 0, command.Length);
+                }
+
+                //Retoma a comunicação de peso.
+
+                canSend = true;
+                await Task.Delay(100);
+                tmRead.Start();
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        public async static void SendCommandefault(int addr, int typeSend)
         {
             try
             {
@@ -316,14 +379,14 @@ namespace Main.Service
                 }
 
                 //Zero Command
-                else if (typeSend == 1) 
+                else if (typeSend == 1)
                 {
                     byte[] command = new byte[]
                     {
                         Convert.ToByte(addr),
                         0x06,
                         0x00,
-                        0x04,
+                        0x02,
                         0x00,
                         0x02,
                         0x00,
@@ -924,8 +987,19 @@ namespace Main.Service
 
                     documento.PrintPage += (sender, args) =>
                     {
-                        args.Graphics.DrawImage(bitmap, 0, 0);
+                        args.Graphics.DrawImage(bitmap, 0, 5);
                     };
+
+                    try
+                    {
+                        documento.Print();
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+
+                    await Task.Delay(1000);
 
                     try
                     {
