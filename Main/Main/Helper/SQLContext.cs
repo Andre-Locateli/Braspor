@@ -38,8 +38,8 @@ namespace Main.Helper
             try
             {
                 //string t = "Data Source=10.0.0.12\\SQLEXPRESS;Initial Catalog=PROTHEUS; User ID=sa; Pwd=AEPH1234*#";
-                string t = "Data Source=.\\SQLEXPRESS;Initial Catalog=VC_BRASPOR;Integrated Security=True;Encrypt=False;TrustServerCertificate=False;";
-                TIPO = t;
+                //string t = "Data Source=.\\SQLEXPRESS;Initial Catalog=VC_BRASPOR;Integrated Security=True;Encrypt=False;TrustServerCertificate=False;";
+                //TIPO = t;
                 SqlConnection con = new SqlConnection(TIPO);
                 con.Open();
                 con.Close();

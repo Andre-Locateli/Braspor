@@ -834,7 +834,7 @@ namespace Main.Service
 
                     lbl_tppl_r = processoAtual.Tipo.ToString();
                     lbl_fmt_r = processoAtual.Formato.ToString();
-                    lbl_qtfl_r = processoAtual.TotalContagem.ToString();
+                    lbl_qtfl_r = processoAtual.Quantidade.ToString();
 
 
                     System.Drawing.Font f1_small = new System.Drawing.Font("Arial", 10, System.Drawing.FontStyle.Regular, GraphicsUnit.Pixel);

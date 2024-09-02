@@ -967,7 +967,11 @@ namespace Main.View.PagesFolder.ProcessFolder
                             InfoPopup info = new InfoPopup("Parabéns!", "Processo e contagem registrados com sucesso!", Properties.Resources._299110_check_sign_icon);
                             info.ShowDialog();
 
+
                             SerialCommunicationService.LoadImpressoras();
+
+                            processo_atual.Quantidade = Convert.ToInt32(lbl_ValorReal.Text);
+
                             SerialCommunicationService.ImpressoraPrint(processo_atual);
                             await Task.Delay(1000);
                             SerialCommunicationService.ImpressoraPrint(processo_atual);
