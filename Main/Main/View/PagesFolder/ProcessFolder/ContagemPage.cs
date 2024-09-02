@@ -848,7 +848,7 @@ namespace Main.View.PagesFolder.ProcessFolder
             }
         }
 
-        private void btn_IniciarContagem_Click(object sender, EventArgs e)
+        private async void btn_IniciarContagem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -968,6 +968,8 @@ namespace Main.View.PagesFolder.ProcessFolder
                             info.ShowDialog();
 
                             SerialCommunicationService.LoadImpressoras();
+                            SerialCommunicationService.ImpressoraPrint(processo_atual);
+                            await Task.Delay(1000);
                             SerialCommunicationService.ImpressoraPrint(processo_atual);
                             //ImpressoraPrint();
 

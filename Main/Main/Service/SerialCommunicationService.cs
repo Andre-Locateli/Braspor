@@ -999,16 +999,7 @@ namespace Main.Service
 
                     }
 
-                    await Task.Delay(1000);
-
-                    try
-                    {
-                        documento.Print();
-                    }
-                    catch (Exception ex)
-                    {
-
-                    }
+            
                 }
             }
             catch (Exception ex)
